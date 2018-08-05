@@ -1,7 +1,7 @@
 {
-  "name": "TODO",
-  "description": "TODO",
-  "version": "0.0.1",
+  "name": "layercake-examples",
+  "description": "layercake-examples",
+  "version": "0.1.0",
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build",
@@ -24,5 +24,17 @@
     "svelte": "^2.0.0",
     "svelte-loader": "^2.9.0",
     "webpack": "^4.7.0"
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhkeller/layercake-examples.git"
+  },
+  "keywords": [],
+  "author": "Michael Keller",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mhkeller/layercake-examples/issues"
+  },
+  "homepage": "https://github.com/mhkeller/layercake-examples#readme"
 }
