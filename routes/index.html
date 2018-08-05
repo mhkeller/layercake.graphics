@@ -1,0 +1,32 @@
+<svelte:head>
+	<title>LayerCake Sapper</title>
+</svelte:head>
+
+<div id="gallery">
+	{#each examples as example}
+		<div class="title">{example.title}</div>
+		<svelte:component this="{example.component}"/>
+	{/each}
+</div>
+
+<style>
+	:global(#gallery .chart-container) {
+		display: inline-block;
+		width: 300px;
+		height: 100px;
+	}
+</style>
+
+<script>
+import Line from '../components/examples/Line.html';
+
+export default {
+	data () {
+		return {
+			examples: [
+				{ title: 'Line', component: Line }
+			]
+		}
+	}
+}
+</script>

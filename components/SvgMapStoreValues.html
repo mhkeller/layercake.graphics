@@ -1,0 +1,23 @@
+{#each $data.features as feature}
+	<path class="feature-path" fill="{fillRandom(Math.random())}" d="{$geoPath(feature)}"></path>
+{/each}
+
+<style>
+	.feature-path {
+		stroke: #333;
+		stroke-width: 1px;
+	}
+</style>
+
+<script>
+export default {
+	namespace: 'svg',
+	helpers: {
+		fillRandom: (random) => {
+			var colors = ['#fc0', '#cf0', '#f0c', '#0cf', '#c0f', '#0fc'];
+			var index = Math.round(random * (colors.length - 1));
+			return colors[index];
+		}
+	}
+};
+</script>

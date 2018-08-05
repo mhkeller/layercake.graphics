@@ -1,0 +1,25 @@
+<path class='path-line' d='{path}'></path>
+<style>
+	.path-line {
+		fill: none;
+		stroke: rgb(0,100,100);
+		stroke-linejoin: round;
+		stroke-linecap: round;
+		stroke-width: 2;
+	}
+</style>
+
+<script>
+export default {
+	namespace: 'svg',
+	computed: {
+		path: ({ $data, $xScale, $yScale, $x, $y }) => {
+			return 'M' + $data
+				.map(function (d, i) {
+					return $xScale($x(d)) + ',' + $yScale($y(d));
+				})
+				.join('L');
+		}
+	}
+};
+</script>

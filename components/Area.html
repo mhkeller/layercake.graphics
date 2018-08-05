@@ -1,0 +1,28 @@
+<path class='path-area' d='{area}'></path>
+<style>
+	.path-area {
+		fill: rgba(0,100,100,0.2);
+	}
+</style>
+<script>
+export default {
+	namespace: 'svg',
+	computed: {
+		area: ({ $xScale, $domains, $yScale, path }) => {
+			const yRange = $yScale.range();
+			return path + (
+				'L' + $xScale($domains.x[1]) + ',' + yRange[0] +
+				'L' + $xScale($domains.x[0]) + ',' + yRange[0] +
+				'Z'
+			);
+		},
+		path: ({ $data, $xScale, $yScale, $x, $y }) => {
+			return 'M' + $data
+				.map(function (d, i) {
+					return $xScale($x(d)) + ',' + $yScale($y(d));
+				})
+				.join('L');
+		}
+	}
+};
+</script>

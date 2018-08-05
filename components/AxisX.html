@@ -1,0 +1,39 @@
+<g class='axis x-axis'>
+	{#each $xScale.ticks() as tick}
+		<g class='tick tick-{ tick }' transform='translate({$xScale(tick)},{$yScale.range()[0]})'>
+			<line y1='{$height * -1}' y2='0' x1='0' x2='0'></line>
+			<text y='16'>{$width > 380 ? tick : tick}</text>
+		</g>
+	{/each}
+</g>
+
+<style>
+	.tick {
+		font-size: .725em;
+		font-weight: 200;
+	}
+
+	.tick line {
+		stroke: #aaa;
+		stroke-dasharray: 2;
+	}
+
+	.tick text {
+		fill: #666;
+		text-anchor: start;
+	}
+
+	.tick.tick-0 line {
+		stroke-dasharray: 0;
+	}
+
+	.x-axis .tick text {
+		text-anchor: middle;
+	}
+</style>
+
+<script>
+export default {
+	namespace: 'svg'
+};
+</script>
