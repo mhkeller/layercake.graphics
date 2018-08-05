@@ -4,6 +4,7 @@ function cleanMain (example) {
   return example.split('export')[1]
     .replace(/(}\n}\n<\/script>| default.*|oncreate.*|^\s{2})/gm, '')
     .replace(/\t/g, '  ')
+    .replace('this.refs.chart', 'document.getElementById(\'my-chart\')')
     .trim();
 }
 
