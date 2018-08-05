@@ -1,6 +1,14 @@
 <nav>
 	<ul>
 		<li><a class='{segment === undefined ? "selected" : ""}' href='.'>gallery</a></li>
+		<li>
+			<select on:change="loadPage()" bind:value=page>
+				<option selected="{segment === undefined}" value="/">All...</option>
+				{#each examples as example}
+					<option value="examples/{example}" selected="{params.slug === example}">{example}</option>
+				{/each}
+			</select>
+		</li>
 		<!-- <li><a class='{segment === "blog" ? "selected" : ""}' href='blog'>blog</a></li> -->
 	</ul>
 </nav>
@@ -27,6 +35,7 @@
 	li {
 		display: block;
 		float: left;
+		padding: 1em 0.5em;
 	}
 
 	.selected {
@@ -46,7 +55,22 @@
 
 	a {
 		text-decoration: none;
-		padding: 1em 0.5em;
 		display: block;
 	}
 </style>
+
+<script>
+export default {
+	data () {
+		return {
+			examples: ['Area', 'Line']
+		}
+	},
+	methods: {
+		loadPage () {
+			const { page } = this.get();
+			window.location = page;
+		}
+	}
+}
+</script>
