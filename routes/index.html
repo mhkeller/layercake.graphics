@@ -10,7 +10,7 @@
 
 <div id="gallery">
 	{#each examples as example}
-		<a class="gallery-item" rel=prefetch href="examples/{example.slug}">
+		<a class="gallery-item" rel=prefetch href="examples/{example.slug}" on:click="set({page: example.slug})">
 			<h4 class="title">{example.title}</h4>
 			<svelte:component this="{example.component}"/>
 		</a>

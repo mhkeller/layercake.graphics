@@ -1,7 +1,7 @@
-<Nav segment="{child.segment}" {params}/>
+<Nav segment="{child.segment}" {params} bind:page/>
 
 <main>
-	<svelte:component this={child.component} {...child.props}/>
+	<svelte:component this={child.component} {...child.props} bind:page/>
 </main>
 
 <style>
