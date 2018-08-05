@@ -1,5 +1,6 @@
 <svelte:head>
 	<title>{params.slug}</title>
+	<link rel='stylesheet' href='hljs.css'>
 </svelte:head>
 
 <h1>{params.slug}</h1>
@@ -15,7 +16,7 @@
 	<div id="contents-container">
 		{#each data.pages as page}
 			<div class="contents" style="display: {active === page.title ? 'block' : 'none'};">
-				<pre>{page.contents}</pre>
+				<pre>{@html highlight(page.contents, page.title)}</pre>
 			</div>
 		{/each}
 	</div>
@@ -28,6 +29,16 @@
   }
   #pages {
   	margin-top: 35px;
+  }
+  #contents-container {
+  	border: 2px solid #ccc;
+  	margin-top: 7px;
+  }
+  pre {
+  	margin: 0;
+  	padding: 10px;
+  	
+  	overflow: scroll;
   }
   #page-nav {
   	margin: 0;
@@ -53,6 +64,7 @@
 </style>
 
 <script>
+import hljs from 'highlight.js';
 import Line from '../../components/examples/Line';
 
 export default {
@@ -62,6 +74,11 @@ export default {
 			components: {
 				Line
 			}
+		}
+	},
+	helpers: {
+		highlight: (str, title) => {
+			return hljs.highlight(title === 'main.js' ? 'js' : 'html', str).value;
 		}
 	},
 	async preload({ params, query }) {
