@@ -3,5 +3,5 @@ import ScatterCanvas from '../components/examples/ScatterCanvas.html';
 
 export default [
 	{ title: 'Line + area', slug: 'Line', component: Line },
-	{ title: 'Scatter (canvas)', slug: 'ScatterCanvas', component: ScatterCanvas },
+	{ title: 'Scatter (svg + canvas)', slug: 'ScatterCanvas', component: ScatterCanvas },
 ];
