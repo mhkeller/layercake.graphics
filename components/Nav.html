@@ -1,15 +1,15 @@
 <nav>
 	<ul>
-		<li><a class='{segment === undefined ? "selected" : ""}' href='.'>gallery</a></li>
+		<li class="hero"><a href="/" rel=prefetch on:click="set({page: '/'})">LayerCake Examples</a></li>
+		<li>View...</li>
 		<li>
 			<select on:change="loadPage()" bind:value=page>
-				<option selected="{segment === undefined}" value="/">All...</option>
+				<option selected="{segment === undefined}" value="/">All</option>
 				{#each examples as example}
-					<option value="examples/{example}" selected="{params.slug === example}">{example}</option>
+					<option value="examples/{example.slug}" selected="{params.slug === example.slug}">{example.title}</option>
 				{/each}
 			</select>
 		</li>
-		<!-- <li><a class='{segment === "blog" ? "selected" : ""}' href='blog'>blog</a></li> -->
 	</ul>
 </nav>
 
@@ -38,32 +38,26 @@
 		padding: 1em 0.5em;
 	}
 
-	.selected {
-		position: relative;
-		display: inline-block;
-	}
-
-	.selected::after {
-		position: absolute;
-		content: '';
-		width: calc(100% - 1em);
-		height: 2px;
-		background-color: rgb(170,30,30);
-		display: block;
-		bottom: -1px;
+	.hero {
+		font-weight: bold;
 	}
 
 	a {
 		text-decoration: none;
-		display: block;
+	}
+
+	a:hover {
+		text-decoration: underline;
 	}
 </style>
 
 <script>
+import examples from '../routes/_examples.js';
+
 export default {
 	data () {
 		return {
-			examples: ['Area', 'Line']
+			examples
 		}
 	},
 	methods: {

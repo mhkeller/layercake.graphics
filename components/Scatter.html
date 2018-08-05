@@ -7,7 +7,7 @@ export default {
 	 * the store update fires
 	 */
 	onstate () {
-		const { canvas, ctx } = this.get();
+		const { canvas, ctx, opts } = this.get();
 		const { width, height, xScale, yScale, x, y, data, custom } = this.store.get();
 
 		/* --------------------------------------------
@@ -25,7 +25,7 @@ export default {
 		data.forEach(d => {
 			ctx.beginPath();
 			ctx.arc(xScale(x(d)), yScale(y(d)), custom.r, 0, 2 * Math.PI, false);
-			ctx.fillStyle = '#000';
+			ctx.fillStyle = opts.color;
 			ctx.fill();
 		});
 	}
