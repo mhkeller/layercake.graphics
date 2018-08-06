@@ -5,7 +5,7 @@ LayerCake Examples
 
 _Looking for the library? See [here](https://github.com/mhkeller/LayerCake)!_
 
-### [See the examples](https://mhkeller.github.io/layercake-examples)
+### [See the examples](https://mhkeller.github.io/LayerCake)
 
 ## Dev
 

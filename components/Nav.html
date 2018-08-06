@@ -1,6 +1,6 @@
 <nav>
 	<ul>
-		<li class="hero"><a href="/layercake-examples" rel=prefetch on:click="set({page: '/layercake-examples'})">LayerCake Examples</a></li>
+		<li class="hero"><a href="{basePath}" rel=prefetch on:click="set({page: basePath})">LayerCake Examples</a></li>
 		<li>View...</li>
 		<li>
 			<select on:change="loadPage()" bind:value=page>
@@ -57,6 +57,7 @@ import examples from '../routes/_examples.js';
 export default {
 	data () {
 		return {
+			basePath: '/LayerCake',
 			examples
 		}
 	},
