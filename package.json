@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build",
-    "export": "sapper export --basepath 'LayerCake'",
+    "export": "sapper export --basepath 'layercake'",
     "start": "node build",
     "cy:run": "cypress run",
     "cy:open": "cypress open",
