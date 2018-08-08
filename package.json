@@ -10,13 +10,14 @@
     "cy:run": "cypress run",
     "cy:open": "cypress open",
     "test": "run-p --race dev cy:run",
-    "deploy": "./deploy.sh"
+    "deploy": "./deploy.sh",
+    "predeploy": "npm run export"
   },
   "dependencies": {
     "compression": "^1.7.1",
     "highlight.js": "^9.12.0",
     "polka": "^0.4.0",
-    "sapper": "^0.15.0",
+    "sapper": "^0.15.6",
     "sirv": "^0.1.1"
   },
   "devDependencies": {

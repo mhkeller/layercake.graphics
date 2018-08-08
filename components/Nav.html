@@ -52,6 +52,7 @@
 </style>
 
 <script>
+import { goto } from 'sapper/runtime.js';
 import examples from '../routes/_examples.js';
 
 export default {
@@ -64,7 +65,7 @@ export default {
 	methods: {
 		loadPage () {
 			const { page } = this.get();
-			window.location = page;
+			goto(page);
 		}
 	}
 }
