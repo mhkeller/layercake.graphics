@@ -2,7 +2,7 @@
 	<ul>
 		<li class="hero"><a href="{basePath}" rel=prefetch on:click="set({page: basePath})">LayerCake</a></li>
 		<li>View...</li>
-		<li>
+		<li id="dropdown">
 			<select on:change="loadPage()" bind:value=page>
 				<option selected="{segment === undefined}" value="">All</option>
 				{#each examples as example}
@@ -36,6 +36,11 @@
 		display: block;
 		float: left;
 		padding: 1em 0.5em;
+	}
+	@media (max-width: 338px) {
+		#dropdown {
+			padding-top: 0em;
+		}
 	}
 
 	.hero {
