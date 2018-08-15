@@ -7,6 +7,27 @@ import Column from '../Column.html';
 import { scaleBand } from 'd3-scale';
 import AxisX from '../AxisXScaleBand.html';
 import AxisY from '../AxisY.html';
+import Annotation from '../Annotation.html';
+
+const annos = [
+	{
+		text: 'Example text...',
+		top: '18%',
+		left: '30%',
+		arrow: {
+			clockwise: false,
+			source: {
+				anchor: 'left-bottom',
+				dy: 3,
+				dx: 20
+			},
+			target: {
+				x: '49%',
+				y: '74%'
+			}
+		}
+	}
+];
 
 export default {
 	oncreate () {
@@ -24,7 +45,10 @@ export default {
 				{ component: AxisX, opts: { gridlines: false } },
 				{ component: AxisY, opts: { gridlines: false, ticks: 3} },
 				{ component: Column, opts: {} },
-			]);
+			])
+			.htmlLayers([
+				{ component: Annotation, opts: { annos } }
+			])
 
 		myCake.render();
 	}

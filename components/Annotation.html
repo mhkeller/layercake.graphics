@@ -1,0 +1,28 @@
+{#each opts.annos as d}
+  <div class="annotation" style="{fillStyle(d)}">{d.text}</div>
+{/each}
+
+<style>
+  .annotation {
+    position: absolute;
+  }
+</style>
+
+<script>
+const vals = ['top', 'right', 'bottom', 'left'];
+export default {
+  computed: {
+    fillStyle: ({ $width, $height }) => {
+      return d => {
+        let style = '';
+        vals.forEach(val => {
+          if (d[val]) {
+            style += `${val}:${d[val]};`;
+          }
+        });
+        return style;
+      }
+    }
+  }
+};
+</script>

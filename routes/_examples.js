@@ -7,5 +7,5 @@ export default [
 	{ title: 'Line + area', slug: 'Line', component: Line },
   { title: 'Scatter (svg + canvas)', slug: 'ScatterCanvas', component: ScatterCanvas },
   { title: 'Map (svg)', slug: 'MapSvg', component: MapSvg },
-	{ title: 'Column', slug: 'Column', component: Column },
+	{ title: 'Column (with annotation)', slug: 'Column', component: Column },
 ];
