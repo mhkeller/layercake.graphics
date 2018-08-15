@@ -1,8 +1,10 @@
 <g class='axis y-axis' transform='translate(-{$padding.left}, 0)'>
 	{#each $yScale.ticks(5) as tick}
 		<g class='tick tick-{tick}' transform='translate(0, {$yScale(tick)})'>
-			<line x2='100%'></line>
-			<text y='-4'>{tick} {tick === 8 ? ' million sq km' : ''}</text>
+			{#if opts.gridlines !== false}
+				<line x2='100%'></line>
+			{/if}
+			<text y='-4'>{tick}</text>
 		</g>
 	{/each}
 </g>
