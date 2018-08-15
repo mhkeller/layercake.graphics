@@ -1,8 +1,8 @@
 <g class='axis x-axis'>
-	{#each $xScale.ticks() as tick}
+	{#each $xScale.domain() as tick}
 		<g class='tick tick-{ tick }' transform='translate({$xScale(tick)},{$yScale.range()[0]})'>
 			<line y1='{$height * -1}' y2='0' x1='0' x2='0'></line>
-			<text y='16'>{tick}</text>
+			<text y='16' x="{$xScale.bandwidth() / 2}">{tick}</text>
 		</g>
 	{/each}
 </g>
