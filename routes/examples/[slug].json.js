@@ -4,7 +4,10 @@ function cleanMain (example) {
 	const js = example.split('<script>')[1];
 	const parts = js.split('export');
 
-	const imports = parts[0].trim();
+	const imports = parts[0]
+		.replace(/\t/g, '  ')
+		.trim();
+
 	const oncreate = parts[1].trim()
 		.replace(/(}\n};\n<\/script>|default {.*|oncreate.*)/g, '')
 		.replace('this.refs.chart', 'document.getElementById(\'my-chart\')')

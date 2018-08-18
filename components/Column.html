@@ -11,14 +11,14 @@
 export default {
 	namespace: 'svg',
 	computed: {
-		x: ({ $xScale, $x }) => {
+		x: ({ $xGet }) => {
 			return (d) => {
-				return $xScale($x(d));
+				return $xGet(d);
 			};
 		},
-		y: ({ $yScale, $y }) => {
+		y: ({ $yGet }) => {
 			return (d) => {
-				return $yScale($y(d));
+				return $yGet(d);
 			};
 		},
 		width: ({ $xScale }) => {
