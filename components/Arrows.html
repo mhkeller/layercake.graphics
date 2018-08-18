@@ -1,26 +1,26 @@
 {#if opts.annotations}
-  <g class="swoops">
-    {#each opts.annotations as anno}
-      {#each (anno.arrows || []) as arrow}
-        <path marker-end='url(#arrow)' d='{d}'></path>
-      {/each}
-    {/each}
-  </g>
+	<g class="swoops">
+		{#each opts.annotations as anno}
+			{#each (anno.arrows || []) as arrow}
+				<path marker-end='url(#arrow)' d='{d}'></path>
+			{/each}
+		{/each}
+	</g>
 {/if}
 <style>
-  .swoop {
-    position: absolute;
-    max-width: 200px;
-    line-height: 14px;
-  }
-  .swoop path {
-    fill: none;
-    stroke: #000;
-    stroke-width: 1;
-  }
-  span {
-    font-weight: bold;
-  }
+	.swoop {
+		position: absolute;
+		max-width: 200px;
+		line-height: 14px;
+	}
+	.swoop path {
+		fill: none;
+		stroke: #000;
+		stroke-width: 1;
+	}
+	span {
+		font-weight: bold;
+	}
 </style>
 
 <script>
@@ -31,61 +31,61 @@ const iToDim = ['width', 'height'];
 const iToStart = ['left', 'top'];
 
 function parseVal (d, i, width, height) {
-  if (!d) return 0;
-  if (typeof d === 'number') {
-    return d;
-  }
-  if (d.indexOf('%') > -1) {
-    return ((+d.replace('%', '')) / 100) * (i ? height : width);
-  }
-  return +d.replace('px', '');
+	if (!d) return 0;
+	if (typeof d === 'number') {
+		return d;
+	}
+	if (d.indexOf('%') > -1) {
+		return ((+d.replace('%', '')) / 100) * (i ? height : width);
+	}
+	return +d.replace('px', '');
 }
 
 export default {
-  namespace: 'svg',
+	namespace: 'svg',
 
-  data () {
-    return {
-      d: ''
-    };
-  },
+	data () {
+		return {
+			d: ''
+		};
+	},
 
-  oncreate () {
-    this.drawArrow();
-    this.store.on('update', ({changed, current, previous}) => {
-      this.drawArrow();
-    });
-  },
-  methods: {
-    drawArrow () {
-      const { opts } = this.get();
-      if (opts.annotations) {
-        const {width, height} = this.store.get();
-        opts.annotations.forEach((anno, i) => {
-          const { arrows } = anno;
-          if (!arrows) return;
+	oncreate () {
+		this.drawArrow();
+		this.store.on('update', ({changed, current, previous}) => {
+			this.drawArrow();
+		});
+	},
+	methods: {
+		drawArrow () {
+			const { opts } = this.get();
+			if (opts.annotations) {
+				const {width, height} = this.store.get();
+				opts.annotations.forEach((anno, i) => {
+					const { arrows } = anno;
+					if (!arrows) return;
 
-          const arrowSource = document.querySelector(`.layercake-annotation[data-id="${i}"]`);
-          const sourceCoords = arrow.source.anchor.split('-').map((d, i) => {
-            const point = d === 'middle' ? arrowSource[iToStart[i]] + (arrowSource[iToDim[i]] / 2) : arrowSource[d];
-            return point + (parseVal(arrow.source[`d${posToXY[i]}`], i, arrowSource.width, arrowSource.height));
-          });
-          const clockwise = typeof arrow.clockwise === 'undefined' ? true : arrow.clockwise;
-          const targetCoords = [arrow.target.x, arrow.target.y].map((d, i) => {
-            return parseVal(d, i, width, height);
-          });
+					const arrowSource = document.querySelector(`.layercake-annotation[data-id="${i}"]`);
+					const sourceCoords = arrow.source.anchor.split('-').map((d, i) => {
+						const point = d === 'middle' ? arrowSource[iToStart[i]] + (arrowSource[iToDim[i]] / 2) : arrowSource[d];
+						return point + (parseVal(arrow.source[`d${posToXY[i]}`], i, arrowSource.width, arrowSource.height));
+					});
+					const clockwise = typeof arrow.clockwise === 'undefined' ? true : arrow.clockwise;
+					const targetCoords = [arrow.target.x, arrow.target.y].map((d, i) => {
+						return parseVal(d, i, width, height);
+					});
 
-          const myArrow = swoopyArrow()
-            .angle(Math.PI / 2)
-            .clockwise(clockwise)
-            .x(d => d[0])
-            .y(d => d[1]);
+					const myArrow = swoopyArrow()
+						.angle(Math.PI / 2)
+						.clockwise(clockwise)
+						.x(d => d[0])
+						.y(d => d[1]);
 
-          const d = myArrow.call(this, [sourceCoords, targetCoords]);
-          this.set({ d });
-        });
-      }
-    }
-  }
+					const d = myArrow.call(this, [sourceCoords, targetCoords]);
+					this.set({ d });
+				});
+			}
+		}
+	}
 };
 </script>

@@ -11,15 +11,15 @@
 export default {
 	namespace: 'svg',
 	computed: {
-		x: ({  $xScale, $x }) => {
+		x: ({ $xScale, $x }) => {
 			return (d) => {
 				return $xScale($x(d));
-			}
+			};
 		},
-		y: ({  $yScale, $y }) => {
+		y: ({ $yScale, $y }) => {
 			return (d) => {
 				return $yScale($y(d));
-			}
+			};
 		},
 		width: ({ $xScale }) => {
 			return $xScale.bandwidth();
@@ -27,7 +27,7 @@ export default {
 		height: ({ $height, $xScale, y }) => {
 			return function (d) {
 				return $height - y(d);
-			}
+			};
 		}
 	}
 };
