@@ -8,7 +8,8 @@ function cleanMain (example) {
 	const oncreate = parts[1].trim()
 		.replace(/(}\n};\n<\/script>|default {.*|oncreate.*)/g, '')
 		.replace('this.refs.chart', 'document.getElementById(\'my-chart\')')
-		.split('\n').map(d => d.replace(/^\t\t/m, '').replace(/\t/g, '  ')).join('\n')
+		.replace(/^\t\t/gm, '')
+		.replace(/\t/g, '  ')
 		.trim();
 	return [imports, oncreate].join('\n\n');
 }
