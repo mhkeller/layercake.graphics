@@ -8,13 +8,14 @@ import { scaleBand } from 'd3-scale';
 import AxisX from '../AxisXScaleBand.html';
 import AxisY from '../AxisY.html';
 import Annotation from '../Annotation.html';
+import Arrows from '../Arrows.html';
 
 const annos = [
 	{
 		text: 'Example text...',
 		top: '18%',
 		left: '30%',
-		arrow: {
+		arrows: [{
 			clockwise: false,
 			source: {
 				anchor: 'left-bottom',
@@ -25,7 +26,7 @@ const annos = [
 				x: '49%',
 				y: '74%'
 			}
-		}
+		}]
 	}
 ];
 
@@ -35,7 +36,7 @@ export default {
 			padding: { top: 0, right: 0, bottom: 20, left: 20 },
 			x: 'year',
 			y: 'value',
-			xScale: scaleBand().paddingInner([.02]),
+			xScale: scaleBand().paddingInner([0.02]),
 			xDomain: ['1979', '1980', '1981', '1982', '1983'],
 			yDomain: [0, null],
 			data: groups,
@@ -43,14 +44,17 @@ export default {
 		})
 			.svgLayers([
 				{ component: AxisX, opts: { gridlines: false } },
-				{ component: AxisY, opts: { gridlines: false, ticks: 3} },
-				{ component: Column, opts: {} },
+				{ component: AxisY, opts: { gridlines: false, ticks: 3 } },
+				{ component: Column, opts: {} }
 			])
 			.htmlLayers([
 				{ component: Annotation, opts: { annos } }
 			])
+			.svgLayers([
+				{ component: Arrows, opts: { annos } }
+			]);
 
 		myCake.render();
 	}
-}
+};
 </script>

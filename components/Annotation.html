@@ -1,9 +1,9 @@
-{#each opts.annos as d}
-  <div class="annotation" style="{fillStyle(d)}">{d.text}</div>
+{#each opts.annos as d, i}
+  <div class="layercake-annotation" data-id="{i}" style="{fillStyle(d)}">{d.text}</div>
 {/each}
 
 <style>
-  .annotation {
+  .layercake-annotation {
     position: absolute;
   }
 </style>
