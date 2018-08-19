@@ -17,23 +17,25 @@ const annotations = [
 		top: '18%',
 		left: '30%',
 		arrows: [{
+			clockwise: false, // true or false, defaults to true
+			source: {
+				anchor: 'left-bottom', // can be `{left, middle, right},{top-middle-bottom}`
+				dx: -2,
+				dy: -7
+			},
+			target: {
+				x: '28%',
+				y: '75%'
+			}
+		},
+		{
 			source: {
 				anchor: 'right-bottom',
-				dy: 0,
-				dx: -10
+				dy: -7,
+				dx: 5
 			},
 			target: {
 				x: '49%',
-				y: '55%'
-			}
-		}, {
-			clockwise: false,
-			source: {
-				anchor: 'left-middle',
-				dx: -2
-			},
-			target: {
-				x: '30%',
 				y: '65%'
 			}
 		}]
