@@ -1,5 +1,5 @@
-{#each $data as d}
-	<rect class='group-rect' x="{x(d)}" y="{y(d)}" {width} height="{height(d)}"></rect>
+{#each $data as d, i}
+	<rect class='group-rect' data-id="{i}" x="{x(d)}" y="{y(d)}" {width} height="{height(d)}"></rect>
 {/each}
 <style>
 	.group-rect {
@@ -25,7 +25,7 @@ export default {
 			return $xScale.bandwidth();
 		},
 		height: ({ $height, $xScale, y }) => {
-			return function (d) {
+			return (d) => {
 				return $height - y(d);
 			};
 		}
