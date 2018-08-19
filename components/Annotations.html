@@ -1,4 +1,4 @@
-{#each opts.annos as d, i}
+{#each opts.annotations as d, i}
 	<div class="layercake-annotation" data-id="{i}" style="{fillStyle(d)}">{d.text}</div>
 {/each}
 
@@ -11,6 +11,9 @@
 <script>
 const vals = ['top', 'right', 'bottom', 'left'];
 export default {
+	onupdate () {
+		this.store.set({ annotationEls: document.querySelectorAll('.layercake-annotation') });
+	},
 	computed: {
 		fillStyle: ({ $width, $height }) => {
 			return d => {

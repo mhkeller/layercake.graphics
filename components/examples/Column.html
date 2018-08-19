@@ -7,24 +7,34 @@ import Column from '../Column.html';
 import { scaleBand } from 'd3-scale';
 import AxisX from '../AxisXScaleBand.html';
 import AxisY from '../AxisY.html';
-import Annotation from '../Annotation.html';
+import Annotations from '../Annotations.html';
 import Arrows from '../Arrows.html';
+import DefArrowhead from '../DefArrowhead.html';
 
-const annos = [
+const annotations = [
 	{
 		text: 'Example text...',
 		top: '18%',
 		left: '30%',
 		arrows: [{
-			clockwise: false,
 			source: {
-				anchor: 'left-bottom',
-				dy: 3,
-				dx: 20
+				anchor: 'right-bottom',
+				dy: 0,
+				dx: -10
 			},
 			target: {
 				x: '49%',
-				y: '74%'
+				y: '55%'
+			}
+		}, {
+			clockwise: false,
+			source: {
+				anchor: 'left-middle',
+				dx: -2
+			},
+			target: {
+				x: '30%',
+				y: '65%'
 			}
 		}]
 	}
@@ -48,11 +58,11 @@ export default {
 				{ component: Column, opts: {} }
 			])
 			.htmlLayers([
-				{ component: Annotation, opts: { annos } }
+				{ component: Annotations, opts: { annotations } }
 			])
 			.svgLayers([
-				{ component: Arrows, opts: { annos } }
-			]);
+				{ component: Arrows, opts: { annotations } }
+			], { defs: DefArrowhead });
 
 		myCake.render();
 	}
