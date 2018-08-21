@@ -1,0 +1,32 @@
+{#each $data as d, i}
+	<path class='path-area' d='{drawArea(d)}' fill="{fill(i)}"></path>
+{/each}
+
+<style>
+	.path-area {
+		fill-opacity: 0.7;
+	}
+</style>
+<script>
+import { area } from 'd3-shape';
+
+export default {
+	namespace: 'svg',
+	computed: {
+		area: ({ $xScale, $yScale }) => {
+			return area()
+				.x(d => $xScale(d.data.month))
+				.y0(d => $yScale(d[0]))
+				.y1(d => $yScale(d[1]));
+		},
+		drawArea: ({ area }) => {
+			return d => area(d);
+		},
+		fill: ({ $width }) => {
+			// TODO, make an actual scale
+			const colors = ['#0fc', '#f0c', '#0cf', '#c0f'];
+			return i => colors[i];
+		}
+	}
+};
+</script>

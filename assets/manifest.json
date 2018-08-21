@@ -7,12 +7,12 @@
 	"start_url": "/layercake",
 	"icons": [
 		{
-			"src": "layercake-logo-192.png",
+			"src": "layercake-logo-192_2.png",
 			"sizes": "192x192",
 			"type": "image/png"
 		},
 		{
-			"src": "layercake-logo-512.png",
+			"src": "layercake-logo-512_2.png",
 			"sizes": "512x512",
 			"type": "image/png"
 		}

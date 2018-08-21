@@ -1,0 +1,51 @@
+<div class="chart-container" ref:chart></div>
+
+<script>
+import { default as LayerCake, flatten } from 'layercake';
+import { stack } from 'd3-shape';
+import fruit from '../../data/fruit.js';
+import AreaStacked from '../AreaStacked.html';
+import AxisX from '../AxisX.html';
+import AxisY from '../AxisY.html';
+
+const seriesNames = Object.keys(fruit[0]).filter(d => d !== 'month');
+
+const stackData = stack()
+	.keys(seriesNames);
+
+const series = stackData(fruit);
+const monthNames = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
+
+function formatXTick (d) {
+	const date = new Date(d);
+	return `${monthNames[date.getMonth()]} ${date.getDate()}`;
+}
+
+function formatYTick (d) {
+	if (d > 999) {
+		return `${d / 1000}k`;
+	}
+	return d;
+}
+
+export default {
+	oncreate () {
+		const myCake = new LayerCake({
+			padding: { top: 0, right: 0, bottom: 20, left: 15 },
+			x: d => d.data.month,
+			y: 1,
+			yDomain: [0, null],
+			flatten,
+			data: series,
+			target: this.refs.chart
+		})
+			.svgLayers([
+				{ component: AxisX, opts: { formatTick: formatXTick, tickNumber: 3 } },
+				{ component: AxisY, opts: { formatTick: formatYTick } },
+				{ component: AreaStacked, opts: {} }
+			]);
+
+		myCake.render();
+	}
+};
+</script>

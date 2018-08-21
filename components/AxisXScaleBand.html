@@ -4,7 +4,7 @@
 			{#if opts.gridlines !== false}
 				<line y1='{$height * -1}' y2='0' x1='0' x2='0'></line>
 			{/if}
-			<text y='16' x="{$xScale.bandwidth() / 2}">{tick}</text>
+			<text y='16' x="{$xScale.bandwidth() / 2}">{opts.formatTick ? opts.formatTick(tick) : tick}</text>
 		</g>
 	{/each}
 </g>
