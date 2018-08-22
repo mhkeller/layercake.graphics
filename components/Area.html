@@ -16,10 +16,10 @@ export default {
 				'Z'
 			);
 		},
-		path: ({ $data, $xScale, $yScale, $x, $y }) => {
+		path: ({ $data, $xGet, $yGet }) => {
 			return 'M' + $data
 				.map(function (d, i) {
-					return $xScale($x(d)) + ',' + $yScale($y(d));
+					return $xGet(d) + ',' + $yGet(d);
 				})
 				.join('L');
 		}

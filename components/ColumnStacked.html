@@ -1,0 +1,40 @@
+{#each $data as series, i}
+	{#each series as d}
+		<rect class='group-rect' data-id="{i}" x="{x(d)}" y="{y(d)[1]}" {width} height="{height(d)}"fill={fill(i)}></rect>
+	{/each}
+	}
+{/each}
+
+<script>
+export default {
+	namespace: 'svg',
+	data () {
+		// TODO, make an actual scale
+		const colors = ['#0fc', '#f0c', '#0cf', '#c0f'];
+		return {
+			fill: i => colors[i]
+		};
+	},
+	computed: {
+		x: ({ $xGet }) => {
+			return (d) => {
+				return $xGet(d);
+			};
+		},
+		y: ({ $yGet }) => {
+			return (d) => {
+				return $yGet(d);
+			};
+		},
+		width: ({ $xScale }) => {
+			return $xScale.bandwidth();
+		},
+		height: ({ $height, $xScale, y }) => {
+			return (d) => {
+				const yVals = y(d);
+				return yVals[0] - yVals[1];
+			};
+		}
+	}
+};
+</script>

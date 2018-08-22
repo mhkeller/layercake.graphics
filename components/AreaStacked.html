@@ -12,6 +12,13 @@ import { area } from 'd3-shape';
 
 export default {
 	namespace: 'svg',
+	data () {
+		// TODO, make an actual scale
+		const colors = ['#0fc', '#f0c', '#0cf', '#c0f'];
+		return {
+			fill: i => colors[i]
+		};
+	},
 	computed: {
 		area: ({ $xScale, $yScale }) => {
 			return area()
@@ -21,11 +28,6 @@ export default {
 		},
 		drawArea: ({ area }) => {
 			return d => area(d);
-		},
-		fill: ({ $width }) => {
-			// TODO, make an actual scale
-			const colors = ['#0fc', '#f0c', '#0cf', '#c0f'];
-			return i => colors[i];
 		}
 	}
 };
