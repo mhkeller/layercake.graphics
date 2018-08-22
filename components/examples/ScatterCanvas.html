@@ -4,6 +4,7 @@
 import LayerCake from 'layercake';
 import points from '../../data/points.js';
 import Scatter from '../Scatter.html';
+import Voronoi from '../Voronoi.html';
 import AxisX from '../AxisX.html';
 import AxisY from '../AxisY.html';
 
@@ -24,12 +25,13 @@ export default {
 				r
 			}
 		})
-			.svgLayers([
-				{ component: AxisX, opts: {} },
-				{ component: AxisY, opts: {} }
-			])
 			.canvasLayers([
 				{ component: Scatter, opts: { color: '#c0f' } }
+			])
+			.svgLayers([
+				{ component: AxisX, opts: {} },
+				{ component: AxisY, opts: {} },
+				{ component: Voronoi, opts: {} }
 			]);
 
 		myCake.render();
