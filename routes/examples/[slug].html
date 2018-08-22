@@ -50,6 +50,7 @@
 		display: inline-block;
 		vertical-align: top;
 		margin-right: 14px;
+		margin-bottom: 8px;
 		border-bottom: 2px solid transparent;
 		color: #ccc;
 	}
@@ -59,11 +60,11 @@
 		}
 		.tab {
 			margin-top: 8px;
+			margin-bottom: 0;
 		}
 	}
 
 	.tab:hover {
-		/*color: #aaa;*/
 		border-bottom: 2px solid #aaa;
 		cursor: pointer;
 	}
@@ -96,7 +97,7 @@ export default {
 	},
 	helpers: {
 		highlight: (str, title) => {
-			return hljs.highlight(title === 'main.js' ? 'js' : 'html', str).value;
+			return hljs.highlight(title.indexOf('.js') > -1 ? 'js' : 'html', str).value;
 		}
 	},
 	async preload({ params, query }) {

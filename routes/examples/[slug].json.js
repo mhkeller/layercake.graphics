@@ -22,6 +22,12 @@ function getComponentPaths (example) {
 		.map(d => d.replace('../', ''));
 }
 
+function getModulePaths (example) {
+	console.log(example.match(/\.\.\/.+\.js/gm));
+	return example.match(/\.\.\/.+\.js/gm)
+		.map(d => d.replace('../', ''));
+}
+
 export function get (req, res, next) {
 	const { slug } = req.params;
 
@@ -52,9 +58,17 @@ export function get (req, res, next) {
 			};
 		});
 
+	const modules = getModulePaths(example)
+		.map(d => {
+			return {
+				title: d.replace('../', ''),
+				contents: fs.readFileSync(`modules/${d}`, 'utf-8').replace(/\t/g, '  ').trim()
+			};
+		});
+
 	res.writeHead(200, {
 		'Content-Type': 'application/json'
 	});
 
-	res.end(JSON.stringify({ pages: [main].concat(components) }));
+	res.end(JSON.stringify({ pages: [main].concat(components).concat(modules) }));
 }
