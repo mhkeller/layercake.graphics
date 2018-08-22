@@ -23,7 +23,6 @@ function getComponentPaths (example) {
 }
 
 function getModulePaths (example) {
-	console.log(example.match(/\.\.\/.+\.js/gm));
 	return example.match(/\.\.\/.+\.js/gm)
 		.map(d => d.replace('../', ''));
 }
