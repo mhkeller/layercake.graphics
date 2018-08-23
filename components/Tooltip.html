@@ -1,0 +1,102 @@
+<div ref:bg on:mousemove="mousemove(event)" on:mouseout="mouseout()">
+</div>
+<div ref:tooltip>{@html contents}</div>
+
+<style>
+	ref:bg,
+	ref:tooltip {
+		position: absolute;
+	}
+
+	ref:bg {
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	ref:tooltip {
+		font-size: 13px;
+		pointer-events: none;
+		width: 150px;
+		border: 1px solid #ccc;
+		background: #fff;
+		transform: translate(-50%, -100%);
+		display: none;
+		padding: 5px;
+	}
+</style>
+
+<script>
+import { quadtree } from 'd3-quadtree';
+const monthNames = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
+
+function capitalize (str) {
+	return str.charAt(0) + str.slice(1, str.length);
+}
+
+function addCommas (num) {
+	const parts = String(num).split('.');
+	parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	return parts.join('.');
+}
+
+export default {
+	data () {
+		return {
+			contents: ''
+		};
+	},
+	computed: {
+		finder: ({ $flatData, $xGet, $yGet, $width, $height }) => {
+			return quadtree()
+				.extent([[-1, -1], [$width + 1, $height + 1]])
+				.x($xGet)
+				.y($yGet)
+				.addAll($flatData);
+		}
+	},
+	methods: {
+		mousemove (e) {
+			const el = this.refs.tooltip;
+			const found = this.find(e.layerX, e.layerY);
+			if (found) {
+				this.setContents(found);
+				el.style.left = `${e.layerX}px`;
+				el.style.top = `${e.layerY - 5}px`;
+				el.style.display = 'block';
+			} else {
+				el.style.display = 'none';
+			}
+		},
+
+		mouseout () {
+			this.refs.tooltip.style.display = 'none';
+		},
+
+		find (x, y) {
+			const { finder } = this.get();
+			return finder.find(x, y, 300);
+		},
+
+		setContents (closest) {
+			const month = closest.month;
+			const { fruit } = this.store.get().custom;
+			const result = fruit.filter(d => d.month === month)[0];
+
+			const rows = Object.keys(result).filter(d => d !== 'month').map(key => {
+				return {
+					key,
+					value: result[key]
+				};
+			}).sort((a, b) => b.value - a.value);
+
+			const contents = `
+				<div style="font-weight: bold;">${monthNames[result.month.getMonth()]} ${result.month.getDate()}</div>
+				${rows.map(row => `<div><span style="color: #999; width: 65px;display:inline-block;">${capitalize(row.key)}:</span> ${addCommas(row.value)}</div>`).join('')}
+			`;
+			this.set({ contents });
+		}
+	}
+};
+</script>

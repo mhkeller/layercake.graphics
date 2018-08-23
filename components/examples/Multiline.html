@@ -7,13 +7,14 @@ import MultiLine from '../MultiLine.html';
 import AxisX from '../AxisX.html';
 import AxisY from '../AxisY.html';
 import LineLabels from '../LineLabels.html';
+import Tooltip from '../Tooltip.html';
 
 const fruitLong = Object.keys(fruit[0]).map(key => {
 	if (key === 'month') return null;
 	return {
 		key,
 		values: fruit.map(d => {
-			return { month: d.month, value: d[key] };
+			return { key, month: d.month, value: d[key] };
 		})
 	};
 }).filter(d => d);
@@ -44,7 +45,10 @@ export default {
 			},
 			yDomain: [0, null],
 			data: fruitLong,
-			target: this.refs.chart
+			target: this.refs.chart,
+			custom: {
+				fruit
+			}
 		})
 			.svgLayers([
 				{ component: AxisX, opts: { gridlines: false, tickNumber: 3, formatTick: formatXTick } },
@@ -52,7 +56,8 @@ export default {
 				{ component: MultiLine, opts: {} }
 			])
 			.htmlLayers([
-				{ component: LineLabels, opts: {} }
+				{ component: LineLabels, opts: {} },
+				{ component: Tooltip, opts: {} }
 			]);
 
 		myCake.render();

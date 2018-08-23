@@ -13,5 +13,5 @@ export default [
 	{ title: 'Column (with annotation)', slug: 'Column', component: Column },
 	{ title: 'Stacked area', slug: 'AreaStacked', component: AreaStacked },
 	{ title: 'Stacked column', slug: 'ColumnStacked', component: ColumnStacked },
-	{ title: 'Multiline (+ quadtree)', slug: 'MultiLine', component: MultiLine },
+	{ title: 'Multiline (html labels + quadtree tooltip)', slug: 'MultiLine', component: MultiLine },
 ];
