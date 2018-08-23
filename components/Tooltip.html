@@ -48,12 +48,12 @@ export default {
 		};
 	},
 	computed: {
-		finder: ({ $flatData, $xGet, $yGet, $width, $height }) => {
+		finder: ({ $custom, $xGet, $yGet, $width, $height }) => {
 			return quadtree()
 				.extent([[-1, -1], [$width + 1, $height + 1]])
 				.x($xGet)
-				.y($yGet)
-				.addAll($flatData);
+				.y($xGet)
+				.addAll($custom.fruit);
 		}
 	},
 	methods: {
@@ -76,14 +76,10 @@ export default {
 
 		find (x, y) {
 			const { finder } = this.get();
-			return finder.find(x, y, 300);
+			return finder.find(x, x, 300);
 		},
 
-		setContents (closest) {
-			const month = closest.month;
-			const { fruit } = this.store.get().custom;
-			const result = fruit.filter(d => d.month === month)[0];
-
+		setContents (result) {
 			const rows = Object.keys(result).filter(d => d !== 'month').map(key => {
 				return {
 					key,

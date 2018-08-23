@@ -24,7 +24,8 @@
     "polka": "^0.4.0",
     "sapper": "^0.15.6",
     "sirv": "^0.1.1",
-    "topojson": "^3.0.2"
+    "topojson": "^3.0.2",
+    "underscore": "^1.9.1"
   },
   "devDependencies": {
     "eslint": "^5.2.0",
