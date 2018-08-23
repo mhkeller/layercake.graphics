@@ -1,4 +1,4 @@
-{#each $data as group}
+{#each sorted as group}
 	<path class='path-line' d='{path(group.values)}' stroke="{stroke(group.key)}"></path>
 {/each}
 <style>
@@ -20,6 +20,13 @@ const colors = {
 export default {
 	namespace: 'svg',
 	computed: {
+		// Sort the lines by the highest point on hover, as requested by @veltman
+		sorted: ({ $data, $highest }) => {
+			if ($highest) {
+				return $data.filter(d => d.key !== $highest).concat($data.filter(d => d.key === $highest));
+			}
+			return $data;
+		},
 		path: ({ $xGet, $yGet }) => {
 			return values => {
 				return 'M' + values

@@ -95,6 +95,8 @@ export default {
 				<div style="font-weight: bold;">${monthNames[result.month.getMonth()]} ${result.month.getDate()}</div>
 				${rows.map(row => `<div><span style="color: #999; width: 65px;display:inline-block;">${capitalize(row.key)}:</span> ${addCommas(row.value)}</div>`).join('')}
 			`;
+
+			this.store.set({ highest: rows[0].key });
 			this.set({ contents });
 		}
 	}
