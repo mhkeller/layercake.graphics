@@ -48,7 +48,7 @@ export default {
 		};
 	},
 	computed: {
-		finder: ({ $custom, $xGet, $yGet, $width, $height }) => {
+		finder: ({ $custom, $xGet, $width, $height }) => {
 			return quadtree()
 				.extent([[-1, -1], [$width + 1, $height + 1]])
 				.x($xGet)
