@@ -1,0 +1,37 @@
+{#each $data as group}
+	<path class='path-line' d='{path(group.values)}' stroke="{stroke(group.key)}"></path>
+{/each}
+<style>
+	.path-line {
+		fill: none;
+		stroke-linejoin: round;
+		stroke-linecap: round;
+		stroke-width: 2;
+	}
+</style>
+
+<script>
+const colors = {
+	apples: '#fc0',
+	bananas: '#0cf',
+	cherries: '#0fc',
+	dates: '#c0f'
+};
+export default {
+	namespace: 'svg',
+	computed: {
+		path: ({ $xGet, $yGet }) => {
+			return values => {
+				return 'M' + values
+					.map(function (d, i) {
+						return $xGet(d) + ',' + $yGet(d);
+					})
+					.join('L');
+			};
+		}
+	},
+	helpers: {
+		stroke: key => colors[key]
+	}
+};
+</script>

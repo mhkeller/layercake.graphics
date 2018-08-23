@@ -1,7 +1,9 @@
 <g class='axis x-axis'>
 	{#each $xScale.ticks(opts.tickNumber) as tick}
 		<g class='tick tick-{ tick }' transform='translate({$xScale(tick)},{$yScale.range()[0]})'>
-			<line y1='{$height * -1}' y2='0' x1='0' x2='0'></line>
+			{#if opts.gridlines !== false}
+				<line y1='{$height * -1}' y2='0' x1='0' x2='0'></line>
+			{/if}
 			<text y='16'>{opts.formatTick ? opts.formatTick(tick) : tick}</text>
 		</g>
 	{/each}

@@ -2,27 +2,57 @@
 
 <script>
 import LayerCake from 'layercake';
-import points from '../../data/points.js';
-import Line from '../Line.html';
-import Area from '../Area.html';
+import fruit from '../../data/fruit.js';
+import MultiLine from '../MultiLine.html';
 import AxisX from '../AxisX.html';
 import AxisY from '../AxisY.html';
+import LineLabels from '../LineLabels.html';
+
+const fruitLong = Object.keys(fruit[0]).map(key => {
+	if (key === 'month') return null;
+	return {
+		key,
+		values: fruit.map(d => {
+			return { month: d.month, value: d[key] };
+		})
+	};
+}).filter(d => d);
+
+const monthNames = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
+
+function formatXTick (d) {
+	const date = new Date(d);
+	return `${monthNames[date.getMonth()]} ${date.getDate()}`;
+}
+
+function formatYTick (d) {
+	if (d > 999) {
+		return d / 1000 + 'k';
+	}
+	return d;
+}
 
 export default {
 	oncreate () {
 		const myCake = new LayerCake({
 			padding: { top: 0, right: 10, bottom: 20, left: 25 },
-			x: 'myX',
-			y: d => d['myY'],
+			x: 'month',
+			y: 'value',
+			flatten: data => {
+				// Make one flat array
+				return data.reduce((store, group) => store.concat(group.values), []);
+			},
 			yDomain: [0, null],
-			data: points,
+			data: fruitLong,
 			target: this.refs.chart
 		})
 			.svgLayers([
-				{ component: AxisX, opts: {} },
-				{ component: AxisY, opts: {} },
-				{ component: Line, opts: {} },
-				{ component: Area, opts: {} }
+				{ component: AxisX, opts: { gridlines: false, tickNumber: 3, formatTick: formatXTick } },
+				{ component: AxisY, opts: { formatTick: formatYTick } },
+				{ component: MultiLine, opts: {} }
+			])
+			.htmlLayers([
+				{ component: LineLabels, opts: {} }
 			]);
 
 		myCake.render();
