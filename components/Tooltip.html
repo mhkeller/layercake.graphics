@@ -32,7 +32,7 @@ import { quadtree } from 'd3-quadtree';
 const monthNames = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
 
 function capitalize (str) {
-	return str.charAt(0) + str.slice(1, str.length);
+	return str.charAt(0).toUpperCase() + str.slice(1, str.length);
 }
 
 function addCommas (num) {
@@ -59,7 +59,9 @@ export default {
 	methods: {
 		mousemove (e) {
 			const el = this.refs.tooltip;
-			const found = this.find(e.layerX, e.layerY);
+			const { finder } = this.get();
+			const found = finder.find(e.layerX, e.layerX, 300);
+
 			if (found) {
 				this.setContents(found);
 				el.style.left = `${e.layerX}px`;
@@ -72,11 +74,6 @@ export default {
 
 		mouseout () {
 			this.refs.tooltip.style.display = 'none';
-		},
-
-		find (x, y) {
-			const { finder } = this.get();
-			return finder.find(x, x, 300);
 		},
 
 		setContents (result) {
