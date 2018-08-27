@@ -1,5 +1,11 @@
 <div class="chart-container" ref:chart></div>
 
+<style>
+	.chart-container {
+		padding: 0 10px 20px 25px;
+	}
+</style>
+
 <script>
 import LayerCake from 'layercake';
 import points from '../../data/points.js';
@@ -11,7 +17,6 @@ import AxisY from '../AxisY.html';
 export default {
 	oncreate () {
 		const myCake = new LayerCake({
-			padding: { top: 0, right: 10, bottom: 20, left: 25 },
 			x: 'myX',
 			y: d => d['myY'],
 			yDomain: [0, null],
