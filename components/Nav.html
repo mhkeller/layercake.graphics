@@ -1,5 +1,5 @@
 <nav>
-	<ul>
+	<ul ref:main>
 		<li class="hero"><a href="{basePath}" rel=prefetch on:click="set({page: basePath})">LayerCake</a></li>
 		<li>View...</li>
 		<li id="dropdown">
@@ -11,6 +11,11 @@
 			</select>
 		</li>
 	</ul>
+	<ul ref:links>
+		<li><a href="guide" rel=prefetch>Guide</a></li>
+		<li class="divider">/</li>
+		<li><a href="https://github.com/mhkeller/layercake" target="_blank" rel="nofollow">GitHub</a></li>
+	</ul>
 </nav>
 
 <style>
@@ -19,11 +24,14 @@
 		font-weight: 300;
 		padding: 0 1em;
 		font-size: 21px;
+		height: 2.7em;
 	}
 
 	ul {
 		margin: 0;
 		padding: 0;
+		display: inline-block;
+		vertical-align: top;
 	}
 
 	/* clearfix */
@@ -38,6 +46,18 @@
 		float: left;
 		padding: 0.6em 0.5em;
 	}
+
+	ref:links {
+		font-size: 16px;
+		float: right;
+		line-height: 41px;
+	}
+
+	.divider {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
 	@media (max-width: 338px) {
 		#dropdown {
 			padding-top: 0em;
