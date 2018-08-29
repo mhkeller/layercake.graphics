@@ -7,5 +7,5 @@ const store = new Store({ activeGuideSection: null });
 init({
 	target: document.querySelector('#sapper'),
 	manifest,
-	store: data => store(data)
+	// store
 });

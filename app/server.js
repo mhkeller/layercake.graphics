@@ -6,7 +6,7 @@ import { manifest } from './manifest/server.js';
 
 polka() // You can also use Express
 	.use(
-    '/layercake',
+		'/layercake',
 		compression({ threshold: 0 }),
 		sirv('assets'),
 		sapper({ manifest })
@@ -14,4 +14,4 @@ polka() // You can also use Express
 	.listen(process.env.PORT)
 	.catch(err => {
 		console.log('error', err);
-	})
+	});
