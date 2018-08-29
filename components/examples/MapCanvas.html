@@ -1,0 +1,28 @@
+<div class="chart-container" ref:chart></div>
+
+<script>
+import LayerCake from 'layercake';
+import * as topojson from 'topojson';
+import usStates from '../../data/us-states.topojson.js';
+import MapCanvas from '../MapCanvas.html';
+
+export default {
+	oncreate () {
+		// Load in a topojson file and convert it to geojson
+		const geojson = topojson.feature(usStates, usStates.objects.collection);
+
+		const myCake = new LayerCake({
+			data: geojson,
+			target: this.refs.chart,
+			custom: {
+				projection: 'geoAlbersUsa' // define the d3.geo projection name here to make our MapSvg component more reusable
+			}
+		})
+			.svgLayers([
+				{ component: MapCanvas, opts: {} }
+			]);
+
+		myCake.render();
+	}
+};
+</script>

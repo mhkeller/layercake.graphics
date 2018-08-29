@@ -283,6 +283,7 @@ export default {
 					const { id } = anchor;
 
 					if (id !== lastId) {
+						console.log('setting', id);
 						this.store.set({ activeGuideSection: id });
 						this.fire('scroll', id);
 

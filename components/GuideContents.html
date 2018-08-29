@@ -1,9 +1,10 @@
 <ul class='guide-toc'>
 	{#each guideContents as section}
+		{console.log(section)}
 		<li>
 			<a class='section' href='guide#{section.slug}'>{section.metadata.title}</a>
 			{#each section.subsections as subsection}
-				<a class='subsection' href='guide#{subsection.slug}'>{subsection.title}</a>
+				<a class='subsection ' href='guide#{subsection.slug}'>{subsection.title}</a>
 			{/each}
 		</li>
 	{/each}
@@ -52,8 +53,9 @@
 <script>
 export default {
 	oncreate () {
-		console.log('store', this.store.get());
+		console.log('here', this.store.get());
 		const onhashchange = () => {
+			console.log('changed', window.location.hash.slice(1));
 			this.store.set({ activeGuideSection: window.location.hash.slice(1) });
 		};
 
