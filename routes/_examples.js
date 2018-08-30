@@ -5,6 +5,7 @@ import Column from '../components/examples/Column.html';
 import AreaStacked from '../components/examples/AreaStacked.html';
 import ColumnStacked from '../components/examples/ColumnStacked.html';
 import MultiLine from '../components/examples/MultiLine.html';
+import MapLayered from '../components/examples/MapLayered.html';
 
 export default [
 	{ title: 'Line + area', slug: 'Line', component: Line },
@@ -14,4 +15,5 @@ export default [
 	{ title: 'Stacked area', slug: 'AreaStacked', component: AreaStacked },
 	{ title: 'Stacked column', slug: 'ColumnStacked', component: ColumnStacked },
 	{ title: 'Multiline (html labels + quadtree tooltip)', slug: 'MultiLine', component: MultiLine },
+	{ title: 'Map (canvas + svg)', slug: 'MapLayered', component: MapLayered },
 ];
