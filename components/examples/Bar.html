@@ -1,0 +1,32 @@
+<div class="chart-container" ref:chart></div>
+
+<script>
+import LayerCake from 'layercake';
+import groups from '../../data/groups.js';
+import Bar from '../Bar.html';
+import { scaleBand } from 'd3-scale';
+import AxisX from '../AxisX.html';
+import AxisY from '../AxisYScaleBand.html';
+
+export default {
+	oncreate () {
+		const myCake = new LayerCake({
+			padding: { top: 0, right: 20, bottom: 20, left: 35 },
+			x: 'value',
+			y: 'year',
+			yScale: scaleBand().paddingInner([0.02]).round(true),
+			yDomain: ['1979', '1980', '1981', '1982', '1983'],
+			xDomain: [0, null],
+			data: groups,
+			target: this.refs.chart
+		})
+			.svgLayers([
+				{ component: AxisX, opts: { gridlines: false, baseline: true } },
+				{ component: AxisY, opts: { gridlines: false, ticks: 3 } },
+				{ component: Bar, opts: {} }
+			]);
+
+		myCake.render();
+	}
+};
+</script>
