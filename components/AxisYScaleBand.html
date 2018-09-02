@@ -4,7 +4,7 @@
 			{#if opts.gridlines !== false}
 				<line y1='{$width * -1}' y2='0' x1='0' x2='0'></line>
 			{/if}
-			<text y='{3 + ($yScale.bandwidth() / 2)}' x="-5">{opts.formatTick ? opts.formatTick(tick) : tick}</text>
+			<text y='{4 + ($yScale.bandwidth() / 2)}' x="-5">{opts.formatTick ? opts.formatTick(tick) : tick}</text>
 		</g>
 	{/each}
 </g>
