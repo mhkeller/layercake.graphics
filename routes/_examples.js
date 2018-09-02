@@ -15,5 +15,5 @@ export default [
 	{ title: 'Stacked area', slug: 'AreaStacked', component: AreaStacked },
 	{ title: 'Stacked column', slug: 'ColumnStacked', component: ColumnStacked },
 	{ title: 'Multiline (html labels + quadtree tooltip)', slug: 'MultiLine', component: MultiLine },
-	{ title: 'Map (canvas + svg)', slug: 'MapLayered', component: MapLayered },
+	{ title: 'Multilayer map (canvas + svg)', slug: 'MapLayered', component: MapLayered },
 ];
