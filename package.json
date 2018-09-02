@@ -1,6 +1,6 @@
 {
-  "name": "layercake-examples",
-  "description": "layercake-examples",
+  "name": "layercake.graphics",
+  "description": "layercake.graphics",
   "version": "0.1.0",
   "scripts": {
     "dev": "sapper dev",
@@ -44,13 +44,13 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mhkeller/layercake-examples.git"
+    "url": "git+https://github.com/mhkeller/layercake.graphics.git"
   },
   "keywords": [],
   "author": "Michael Keller",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mhkeller/layercake-examples/issues"
+    "url": "https://github.com/mhkeller/layercake.graphics/issues"
   },
-  "homepage": "https://github.com/mhkeller/layercake-examples#readme"
+  "homepage": "https://github.com/mhkeller/layercake.graphics#readme"
 }

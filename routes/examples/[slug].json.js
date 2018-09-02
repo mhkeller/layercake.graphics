@@ -65,7 +65,9 @@ export function get (req, res, next) {
 			};
 		});
 
-	const dek = fs.readFileSync(`content/examples/${slug}.md`, 'utf-8');
+	const dekPath = `content/examples/${slug}.md`;
+
+	const dek = fs.existsSync(dekPath) ? fs.readFileSync(dekPath, 'utf-8') : '';
 
 	res.writeHead(200, {
 		'Content-Type': 'application/json'

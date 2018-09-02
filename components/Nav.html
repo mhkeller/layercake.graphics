@@ -6,14 +6,14 @@
 			<select on:change="loadPage()" bind:value=page>
 				<option selected="{segment === undefined}" value="">All</option>
 				{#each examples as example}
-					<option value="examples/{example.slug}" selected="{params.slug === example.slug}">{example.title}</option>
+					<option value="examples/{example.slug}" selected="{params.slug === example.slug}">{slimName(example.title)}</option>
 				{/each}
 			</select>
 		</li>
 	</ul>
 	<ul ref:links>
 		<li><a href="guide" rel=prefetch>Guide</a></li>
-		<li class="divider">/</li>
+		<li class="divider">|</li>
 		<li><a href="https://github.com/mhkeller/layercake" target="_blank" rel="nofollow">GitHub</a></li>
 	</ul>
 </nav>
@@ -23,8 +23,8 @@
 		border-bottom: 1px solid rgba(170,30,30,0.1);
 		font-weight: 300;
 		padding: 0 1em;
-		font-size: 21px;
-		height: 56px;
+		font-size: 16px;
+		/*height: 56px;*/
 		position: sticky;
 		top: 0;
 		background-color: #fff;
@@ -52,9 +52,7 @@
 	}
 
 	ref:links {
-		font-size: 16px;
 		float: right;
-		line-height: 41px;
 	}
 
 	.divider {
@@ -88,9 +86,14 @@ import examples from '../routes/_examples.js';
 export default {
 	data () {
 		return {
-			basePath: '/layercake',
+			basePath: '/',
 			examples
 		};
+	},
+	helpers: {
+		slimName: (slug) => {
+			return slug.split(' (')[0];
+		}
 	},
 	methods: {
 		loadPage () {

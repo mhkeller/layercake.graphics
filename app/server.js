@@ -6,7 +6,6 @@ import { manifest } from './manifest/server.js';
 
 polka() // You can also use Express
 	.use(
-		'/layercake',
 		compression({ threshold: 0 }),
 		sirv('assets'),
 		sapper({ manifest })
