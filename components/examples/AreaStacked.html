@@ -23,7 +23,7 @@ function formatXTick (d) {
 
 function formatYTick (d) {
 	if (d > 999) {
-		return d / 1000 + 'k';
+		return Math.round(d / 1000) + 'k';
 	}
 	return d;
 }

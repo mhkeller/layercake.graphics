@@ -1,0 +1,46 @@
+<div class="chart-container" ref:chart></div>
+
+<script>
+import { default as LayerCake, flatten } from 'layercake';
+import { stack } from 'd3-shape';
+import { scaleBand } from 'd3-scale';
+import fruit from '../../data/fruitOrdinal.js';
+import BarStacked from '../BarStacked.html';
+import AxisX from '../AxisX.html';
+import AxisY from '../AxisYScaleBand.html';
+
+const seriesNames = Object.keys(fruit[0]).filter(d => d !== 'year');
+
+const stackData = stack()
+	.keys(seriesNames);
+
+const series = stackData(fruit);
+
+function formatXTick (d) {
+	const parts = String(d).split('.');
+	parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	return parts.join('.');
+}
+
+export default {
+	oncreate () {
+		const myCake = new LayerCake({
+			padding: { top: 0, right: 0, bottom: 20, left: 30 },
+			y: d => d.data.year,
+			x: [0, 1],
+			yScale: scaleBand().paddingInner([0.05]).round(true),
+			yDomain: ['2016', '2017', '2018', '2019'],
+			flatten,
+			data: series,
+			target: this.refs.chart
+		})
+			.svgLayers([
+				{ component: AxisX, opts: { formatTick: formatXTick, baseline: true } },
+				{ component: AxisY, opts: { gridlines: false } },
+				{ component: BarStacked, opts: {} }
+			]);
+
+		myCake.render();
+	}
+};
+</script>
