@@ -5,12 +5,12 @@
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build",
-    "export": "sapper export --basepath 'layercake'",
+    "export": "sapper export",
     "start": "node build",
     "cy:run": "cypress run",
     "cy:open": "cypress open",
     "test": "run-p --race dev cy:run",
-    "deploy": "./deploy.sh",
+    "deploy": "git subtree push --prefix public origin gh-pages",
     "predeploy": "npm run export"
   },
   "dependencies": {
