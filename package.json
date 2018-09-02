@@ -10,7 +10,7 @@
     "cy:run": "cypress run",
     "cy:open": "cypress open",
     "test": "run-p --race dev cy:run",
-    "deploy": "git subtree push --prefix public origin gh-pages",
+    "deploy": "./deploy.sh",
     "predeploy": "npm run export"
   },
   "dependencies": {
