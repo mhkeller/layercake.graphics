@@ -27,17 +27,18 @@
 		top: 56px;
 		left: 0;
 		display: none;
-		height: calc(100% - 2.7em);
+		height: calc(100% - (2.7em + 56px));
 		width: 14em;
 		padding: 1.18em 1em 2em 1.5em;
 		overflow-y: auto;
+		/*box-sizing: border-box;*/
 	}
 
 	ref:container {
 		width: 100%;
-		padding-left: 4em;
 		tab-size: 2;
 		margin-top: -7rem;
+		margin-left: 4em;
 	}
 
 	h2 {
@@ -93,6 +94,18 @@
 		font-weight: 800;
 		margin: -4em 0 1em 0;
 		pointer-events: none;
+	}
+
+	section :global(h3 .function) {
+		font-weight: normal;
+	}
+
+	section :global(h3 .call) {
+		font-weight: normal;
+	}
+
+	section :global(h3 .arguments) {
+		font-style: italic;
 	}
 
 	section :global(p) {

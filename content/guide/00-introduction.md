@@ -10,11 +10,13 @@ At its heart, LayerCake is a [Svelte store](https://svelte.technology/guide#stat
 
 By breaking a part a graphic into layers, you can more easily reuse components from project to project. It also lets you easily move between web environments by giving you a common coordinate system. You may be using Canvas for a scatterplot, SVG for axes and HTML for annotations but they all read from a common store and appear seamless to the viewer.
 
+> LayerCake uses D3 scales. See more in the [`xScale`](#xScale), [`yScale`](#yScale) and [`rScale`](#rScale) sections of the [Store API](#store-api).
+
 ### What LayerCake is not
 
 LayerCake is not a high-level charting library. It doesn't have any built-in concepts or strong opinions about how your data should be structured.
 
-> See the [`flatten`](#flatten) and [`flatData`](#flatData) methods in the API docs for more info about data structure.
+> See the [`flatten`](#flatten) and [`flatData`](#flatData) methods in the [Store API](#store-api) section below for more info about data structure.
 
 ### Getting started
 
@@ -50,13 +52,13 @@ points.forEach(d => {
 });
 ```
 
-> You can also use the shorthand `[xGet(d), yGet(d)]`. See the [API](#api) section for a full list of computed properties.
+> You can also use the shorthand `[xGet(d), yGet(d)]`. See the [Store API](#store-api) section for a full list of computed properties.
 
 Because LayerCake has bound the target DOM element's dimensions to your scales, all computed properties will be updated automatically on resize.
 
 ### Organizing components
 
-While it's perfectly fine to use LayerCake as a simple store and implement the rest of your project your own way, LayerCake also comes with helper functions to take care of creating graphic layers that have full access to the store. Each layer is a Svelte component.
+While it's perfectly fine to use LayerCake as a simple store and implement the rest of your project your own way, LayerCake also comes with helper functions to take care of creating graphic layers that have full access to the store. Add layers inside the `.svgLayers`, `.htmlLayers` or `.canvasLayers` method. Each layer is a Svelte component. When you've added all the layers to your cake, run `.render()`.
 
 Here's an example creating an SVG scatter plot using the above data.
 
@@ -118,10 +120,10 @@ Layers are rendered in the order they appear. You can call these methods multipl
 ```js
 /* { filename: 'main.js' } */
 import LayerCake from 'LayerCake';
+
 import ScatterCanvas from './components/ScatterCanvas.html';
 import AxisX from './components/AxisX.html';
 import AxisY from './components/AxisY.html';
-
 import Annotations from './components/Annotations.html';
 
 const blurbs = [
@@ -154,3 +156,5 @@ const myCake = new LayerCake({
 
 myCake.render();
 ```
+
+> Many common chart types have example pages. See the gallery at <https://layercake.graphics> or use the dropdown menu at the top of the page to navigate to one.

@@ -118,7 +118,7 @@ export default function () {
 				};
 			});
 
-			const html = marked(content, { renderer });
+			let html = marked(content, { renderer });
 
 			const hashes = {};
 
@@ -159,14 +159,29 @@ export default function () {
 				const title = unescape(
 					match[2]
 						.replace(/<\/?code>/g, '')
+						.replace(/^(\w+)(\((.+)?\))?/, (m, $1, $2, $3) => {
+							if ($3) return `${$1}(...)`;
+							if ($2) return `${$1}()`;
+							return $1;
+						})
 						.replace(/\.(\w+)(\((.+)?\))?/, (m, $1, $2, $3) => {
 							if ($3) return `.${$1}(...)`;
 							if ($2) return `.${$1}()`;
 							return `.${$1}`;
 						})
+						.split(':')[0]
 				);
 
 				subsections.push({ slug, title });
+			}
+
+			// Nicer formatting for function calls and args
+			while ((match = pattern.exec(html))) {
+				const formatted = match[2].replace(/((\w+)\.)?(\w+)\((.+)?\)/, (m, $1, $2, $3, $4) => {
+					if ($1) return `<span class="function">${$1}</span>${$3}<span class="call">(<span class="arguments">${$4}</span>)</span>`;
+					return m.replace(`(${$4})`, `<span class="call">(<span class="arguments">${$4}</span>)</span>`);
+				});
+				html = html.replace(match[2], formatted);
 			}
 
 			return {
