@@ -38,8 +38,8 @@
 		width: 100%;
 		tab-size: 2;
 		margin-top: -7rem;
-		margin-left: 4em;
-		padding-top: 6em;
+		padding: 7em 2em 2em 2em;
+		box-sizing: border-box;
 	}
 
 	h2 {
@@ -59,7 +59,7 @@
 	}
 
 	section :global(pre) :global(h2) {
-		margin: 0 0 1em 0;
+		/*margin: 0 0 1em 0;*/
 		padding: 0.2em 0;
 		border-bottom: 1px solid rgba(0,0,0,0.1);
 		font-size: 1.2em;
@@ -243,6 +243,12 @@
 		ref:sidebar {
 			display: block;
 		}
+
+		ref:container {
+			padding-left: 18em;
+			padding-right: 8em;
+		}
+
 
 		h2 {
 			padding: 4rem 0 0 0;
