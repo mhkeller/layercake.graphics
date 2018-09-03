@@ -29,13 +29,13 @@
 		display: none;
 		height: calc(100% - 2.7em);
 		width: 14em;
-		padding: 2em 1em 2em 1.5em;
+		padding: 1.18em 1em 2em 1.5em;
 		overflow-y: auto;
 	}
 
 	ref:container {
 		width: 100%;
-		padding: 0;
+		padding-left: 4em;
 		tab-size: 2;
 		margin-top: -7rem;
 	}
@@ -88,23 +88,30 @@
 	}
 
 	section :global(h3) {
-		padding-top: 7rem;
+		padding-top: 6em;
 		font-size: 1.2em;
 		font-weight: 800;
-		margin: -3em 0 1em 0;
+		margin: -4em 0 1em 0;
 		pointer-events: none;
 	}
 
 	section :global(p) {
 		margin: 0 0 1em 0;
-		font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+		font-family: Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 		font-weight: 300;
 		color: #181818;
 		line-height: 1.5;
 	}
 
 	section :global(a) {
-		border-bottom: 1px solid #e3d9d9;
+		text-decoration: none;
+		color: #037ee3;
+		/*border-bottom: 1px solid #e3d9d9;*/
+	}
+
+	section :global(a:hover) {
+		text-decoration: underline;
+		/*border-bottom: 1px solid #e3d9d9;*/
 	}
 
 	section :global(strong) {
@@ -115,6 +122,10 @@
 		background-color: #f9f9f9;
 		padding: 0.2em 0.4em;
 		border-radius: 3px;
+	}
+
+	section :global(a code) {
+		color: #037ee3;
 	}
 
 	section :global(pre) :global(code) {
@@ -167,7 +178,7 @@
 		position: relative;
 		color: #999;
 		margin: 1em 0;
-		padding: 0.5em 0 0.5em 2em;
+		padding: 0.5em 0 0.5em 2.5em;
 		max-width: 48em;
 		border-top: 1px solid #eee;
 		border-bottom: 1px solid #eee;
@@ -182,20 +193,20 @@
 	}
 
 	section :global(blockquote::before) {
-		content: '!';
+		content: '🍰';
 		position: absolute;
-		left: 0.5em;
-		top: 0.8em;
-		color: rgba(170,0,0, 0.7);
-		font-size: 0.8em;
+		left: 5px;
+		top: 5px;
+		/*color: rgba(170,0,0, 0.7);*/
+		font-size: 1.5em;
 		font-weight: 800;
 		width: 1em;
 		height: 1em;
 		text-align: center;
 		line-height: 1;
-		padding: 0.15em 0.1em 0.1em 0.1em;
+		/*padding: 0.15em 0.1em 0.1em 0.1em;*/
 		border-radius: 50%;
-		border: 2px solid rgba(170,30,30,0.7);
+		/*border: 2px solid rgba(170,30,30,0.7);*/
 	}
 
 	section :global(table) {
@@ -225,8 +236,8 @@
 		}
 
 		section :global(h3) {
-			padding-top: 7rem;
-			margin: -3em 0 1em 0;
+			padding-top: 5em;
+			margin: -4em 0 1em 0;
 		}
 	}
 </style>

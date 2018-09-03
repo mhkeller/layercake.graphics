@@ -2,113 +2,155 @@
 title: Introduction
 ---
 
-### What is Svelte?
+### What is LayerCake?
 
-Svelte is a tool for building fast web applications.
+LayerCake is a graphics framework, built on top of [Svelte](https://svelte.technology) that removes the boilerplate from making responsive web graphics.
 
-It is similar to JavaScript frameworks such as React, Angular, Vue, and Ractive, which all share a goal of making it easy to build slick interactive user interfaces.
+At its heart, LayerCake is a [Svelte store](https://svelte.technology/guide#state-management) that takes an array of data objects, a target DOM element and creates scales bound to your element's dimensions. It also includes higher level methods to organize multiple SVG, HTML and Canvas layers that use these scales.
 
-But there's a crucial difference: Svelte converts your app into ideal JavaScript at *build time*, rather than interpreting your application code at *run time*. This means you don't pay the performance cost of the framework's abstractions, and you don't incur a penalty when your app first loads.
+By breaking a part a graphic into layers, you can more easily reuse components from project to project. It also lets you easily move between web environments by giving you a common coordinate system. You may be using Canvas for a scatterplot, SVG for axes and HTML for annotations but they all read from a common store and appear seamless to the viewer.
 
-You can build your entire app with Svelte, or you can add it incrementally to an existing codebase. You can also ship components as standalone packages that work anywhere, without the overhead of a dependency on a conventional framework.
+### What LayerCake is not
 
-[Read the introductory blog post](/blog/frameworks-without-the-framework) to learn more about Svelte's goals and philosophy.
+LayerCake is not a high-level charting library. It doesn't have any built-in concepts or strong opinions about how your data should be structured.
 
-
-### Understanding Svelte components
-
-In Svelte, an application is composed from one or more *components*. A component is a reusable self-contained block of code that encapsulates markup, styles and behaviours that belong together.
-
-Like Ractive and Vue, Svelte promotes the concept of *single-file components*: a component is just an `.html` file. Here's a simple example:
-
-```html
-<!--{ title: 'Hello world!' }-->
-<h1>Hello {name}!</h1>
-```
-
-```json
-/* { hidden: true } */
-{
-	name: 'world'
-}
-```
-
-> Wherever you see <strong style="font-weight: 700; font-size: 16px; font-family: Inconsolata, monospace; color: rgba(170,30,30, 0.8)">REPL</strong> links, click through for an interactive example
-
-Svelte turns this into a JavaScript module that you can import into your app:
-
-```js
-/* { filename: 'main.js' } */
-import App from './App.html';
-
-const app = new App({
-	target: document.querySelector('main'),
-	data: { name: 'world' }
-});
-
-// change the data associated with the template
-app.set({ name: 'everybody' });
-
-// detach the component and clean everything up
-app.destroy();
-```
-
-Congratulations, you've just learned about half of Svelte's API!
-
+> See the [`flatten`](#flatten) and [`flatData`](#flatData) methods in the API docs for more info about data structure.
 
 ### Getting started
 
-Normally, this is the part where the instructions might tell you to add the framework to your page as a `<script>` tag. But because Svelte runs at build time, it works a little bit differently.
+You initialize your cake in a normal JavaScript file. Here is an example in LayerCake's most basic usage, loading in data and binding its extents to a DOM element.
 
-The best way to use Svelte is to integrate it into your build system – there are plugins for Rollup, Browserify, Gulp and others, with more on the way. See [here](https://github.com/sveltejs/svelte/#svelte) for an up-to-date list.
+```js
+/* { filename: 'main.js' } */
+import LayerCake from 'LayerCake';
 
-> You will need to have [Node.js](https://nodejs.org/en/) installed, and have some familiarity with the command line
+const points = [
+  {x: 0, y: 1},
+  {x: 10, y: 5},
+  {x: 15, y: 10}
+];
 
-#### Getting started using the REPL
+const myCake = new LayerCake({
+  x: 'x',
+  y: 'y',
+  data: points,
+  target: document.getElementById('chart-target')
+});
 
-Going to the [REPL](/repl) and pressing the *download* button on any of the examples will give you a .zip file containing everything you need to run that example locally. Just unzip it, `cd` to the directory, and run `npm install` and `npm run dev`. See [this blog post](/blog/the-easiest-way-to-get-started) for more information.
-
-#### Getting started using degit
-
-[degit](https://github.com/Rich-Harris/degit) is a tool for creating projects from templates stored in git repos. Install it globally...
-
-```bash
-npm install -g degit
+console.log(myCake.get());
 ```
 
-...then you can use it to spin up a new project:
+So far, `myCake` is a Svelte Store with a few different properties that were just computed. Because we gave LayerCake values for `x` and `y`, it's measured the extent of our data's x- and y-dimensions and created `xScale` and `yScale` properties. It's also measured our DOM element as well as created x- and y-accessors so, for a given row of our data we can compute the value in our coordinate system.
 
-```bash
-degit sveltejs/template my-new-project
-cd my-new-project
-npm install
-npm run dev
+```js
+const { x, y, xScale, yScale } = myCake.get();
+
+points.forEach(d => {
+  const firstPoint = [xScale(x(d)), yScale(y(d))];
+});
 ```
 
-You can use any git repo you like — these are the 'official' templates:
+> You can also use the shorthand `[xGet(d), yGet(d)]`. See the [API](#api) section for a full list of computed properties.
 
-* [sveltejs/template](https://github.com/sveltejs/template) — this is what you get by downloading from the REPL
-* [sveltejs/template-webpack](https://github.com/sveltejs/template-webpack) — similar, but uses [webpack](https://webpack.js.org/) instead of [Rollup](https://rollupjs.org/guide/en)
+Because LayerCake has bound the target DOM element's dimensions to your scales, all computed properties will be updated automatically on resize.
 
-#### Getting started using the CLI
+### Organizing components
 
-Svelte also provides a Command Line Interface, but it's not recommended for production use. The CLI will compile your components to standalone JavaScript files, but won't automatically recompile them when they change, and won't deduplicate code shared between your components. Use one of the above methods instead.
+While it's perfectly fine to use LayerCake as a simple store and implement the rest of your project your own way, LayerCake also comes with helper functions to take care of creating graphic layers that have full access to the store. Each layer is a Svelte component.
 
-If you've installed `svelte` globally, you can use `svelte --help` for a complete list of options. Some examples of the more common operations are:
+Here's an example creating an SVG scatter plot using the above data.
 
-```bash
-# Generate a JavaScript module from MyComponent.html
-svelte compile MyComponent.html > MyComponent.js
-svelte compile -i MyComponent.html -o MyComponent.js
+```js
+/* { filename: 'main.js' } */
+import LayerCake from 'LayerCake';
+import Scatter from './components/Scatter.html';
 
-# Generate a UMD module from MyComponent.html, inferring its name from the filename ('MyComponent')
-svelte compile -f umd MyComponent.html > MyComponent.js
+const points = [
+  {x: 0, y: 1},
+  {x: 10, y: 5},
+  {x: 15, y: 10}
+];
 
-# Generate a UMD module, specifying the name
-svelte compile -f umd -n CustomName MyComponent.html > MyComponent.js
+const myCake = new LayerCake({
+  x: 'x',
+  y: 'y',
+  data: points,
+  target: document.getElementById('chart-target')
+})
+  .svgLayers([
+    { component: Scatter, opts: { fill: 'blue', r: 3 } }
+  ])
 
-# Compile all .html files in a directory
-svelte compile -i src/components -o build/components
+myCake.render();
 ```
 
-> You can also use [npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) to use the CLI without installing Svelte globally — just prefix your command with `npx`: `npx svelte compile ...`
+```html
+<!-- { filename: 'Scatter.html' } -->
+{#each $data as d}
+  <circle cx='{xGet(d)}' cy='{yGet(d)}' fill='{opts.fill}' r='{opts.r}' />
+{/each}
+```
+
+> We've defined the circle's fill color and radius size in `main.js` using the `opts` field. You could very well hardcode these values into your layer component. Passing in values from `mains.js` is shown here to give an example of how you can make your components more reusable. For example, you could use the same layer component to render small multiples, but pass in a color to highlight one of them.
+
+Our DOM now looks something like this:
+
+```html
+<svg width="<el width>" height="<el height>">
+  <!-- One main g to wrap all layers -->
+  <g>
+    <!-- Scatter g -->
+    <g>
+      <circle cx="..." cy="..." r="..." fill="blue"/>
+      <circle cx="..." cy="..." r="..." fill="blue"/>
+      <circle cx="..." cy="..." r="..." fill="blue"/>
+    </g>
+  </g>
+</svg
+```
+
+### Adding more layers
+
+We just saw how to add SVG layers with the `.svgLayers` method. You also have `.htmlLayers` and `canvasLayers`. For the first two, every item in the array will create a new DOM element to render into, `<g>` for SVG and `<div>` for HTML. For Canvas, since there's no DOM equivalent, each layer renders into the same Canvas context. See the [Scatter canvas](examples/Scatter) example for details.
+
+Layers are rendered in the order they appear. You can call these methods multiple times to create a new layout group.
+
+```js
+/* { filename: 'main.js' } */
+import LayerCake from 'LayerCake';
+import ScatterCanvas from './components/ScatterCanvas.html';
+import AxisX from './components/AxisX.html';
+import AxisY from './components/AxisY.html';
+
+import Annotations from './components/Annotations.html';
+
+const blurbs = [
+  { x: 10, y: 20, text: 'Look at this value!'}
+];
+
+const points = [
+  {x: 0, y: 1},
+  {x: 10, y: 5},
+  {x: 15, y: 10}
+];
+
+const myCake = new LayerCake({
+  x: 'x',
+  y: 'y',
+  data: points,
+  target: document.getElementById('chart-target')
+})
+  .canvasLayers([
+    { component: Scatter, opts: { fill: 'blue', r: 3 } }
+  ])
+  .svgLayers([
+    { component: AxisX, opts: { } },
+    { component: AxisY, opts: { } }
+  ])
+  .htmlLayers([
+    { component: Annotations, opts: { blurbs } }
+  ]);
+  // If you needed to, you could do `.svgLayers` again...
+
+myCake.render();
+```

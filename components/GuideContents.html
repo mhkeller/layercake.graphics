@@ -1,6 +1,5 @@
 <ul class='guide-toc'>
 	{#each guideContents as section}
-		{console.log(section)}
 		<li>
 			<a class='section' href='guide#{section.slug}'>{section.metadata.title}</a>
 			{#each section.subsections as subsection}

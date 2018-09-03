@@ -113,7 +113,7 @@ export default {
 			return hljs.highlight(title.indexOf('.js') > -1 ? 'js' : 'html', str).value;
 		}
 	},
-	async preload({ params, query }) {
+	async preload ({ params, query }) {
 		// the `slug` parameter is available because
 		// this file is called [slug].html
 		const res = await this.fetch(`examples/${params.slug}.json`);
