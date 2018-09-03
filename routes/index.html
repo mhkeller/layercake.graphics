@@ -2,28 +2,30 @@
 	<title>LayerCake</title>
 </svelte:head>
 
-<div class="logo-container">
-	<div id="logo"></div>
-	<h1>LayerCake</h1>
-</div>
+<main>
+	<div class="logo-container">
+		<div id="logo"></div>
+		<h1>LayerCake</h1>
+	</div>
 
-<div id="dek">
-	<p>LayerCake is a graphics framework built on top of <a href="https://svelte.technology" target="_blank" rel="noopener">Svelte</a>. In its basic usage, it measures your target div and your data and creates scales that <span class="strong">stay synced</span> on layout changes. Using its component methods, you can then use these scales to organize multiple, <span class="strong">mostly-reusable Svelte components</span>, whether they be SVG, HTML, Canvas or WebGl. Since they all share the same coordinate space, you can build your graphic one layer at a time.</p>
+	<div id="dek">
+		<p>LayerCake is a graphics framework built on top of <a href="https://svelte.technology" target="_blank" rel="noopener">Svelte</a>. In its basic usage, it measures your target div and your data and creates scales that <span class="strong">stay synced</span> on layout changes. Using its component methods, you can then use these scales to organize multiple, <span class="strong">mostly-reusable Svelte components</span>, whether they be SVG, HTML, Canvas or WebGl. Since they all share the same coordinate space, you can build your graphic one layer at a time.</p>
 
-	<p>Read the <a href="guide" rel=prefetch>Guide</a> or see some examples below:</p>
-</div>
+		<p>Read the <a href="guide" rel=prefetch>guide</a> or see some examples below:</p>
+	</div>
 
-<div id="gallery">
-	{#each examples as example}
-		<a class="gallery-item" rel=prefetch href="examples/{example.slug}" on:click="set({page: example.slug})">
-			<h4 class="title">{example.title}</h4>
-			<svelte:component this="{example.component}"/>
-		</a>
-	{/each}
-</div>
+	<div id="gallery">
+		{#each examples as example}
+			<a class="gallery-item" rel=prefetch href="examples/{example.slug}" on:click="set({page: example.slug})">
+				<h4 class="title">{example.title}</h4>
+				<svelte:component this="{example.component}"/>
+			</a>
+		{/each}
+	</div>
+</main>
 
 <style>
-	:global(main) {
+	main {
 		position: relative;
 		max-width: 56em;
 		background-color: white;

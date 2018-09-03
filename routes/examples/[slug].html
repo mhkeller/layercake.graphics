@@ -3,33 +3,35 @@
 	<link rel='stylesheet' href='hljs.css'>
 </svelte:head>
 
-<h1>{example.title}</h1>
+<main>
+	<h1>{example.title}</h1>
 
-<div class="chart-hero">
-	<svelte:component this={example.component} />
-</div>
-
-<div class="dek">
-	{data.dek}
-</div>
-
-<div id="pages">
-	<ul id="page-nav">
-		{#each data.pages as page}
-			<li class="tab {active === page.title ? 'active' : ''}" on:click="set({active: page.title})">{page.title}</li>
-		{/each}
-	</ul>
-	<div id="contents-container">
-		{#each data.pages as page}
-			<div class="contents" style="display: {active === page.title ? 'block' : 'none'};">
-				<pre>{@html highlight(page.contents, page.title)}</pre>
-			</div>
-		{/each}
+	<div class="chart-hero">
+		<svelte:component this={example.component} />
 	</div>
-</div>
+
+	<div class="dek">
+		{data.dek}
+	</div>
+
+	<div id="pages">
+		<ul id="page-nav">
+			{#each data.pages as page}
+				<li class="tab {active === page.title ? 'active' : ''}" on:click="set({active: page.title})">{page.title}</li>
+			{/each}
+		</ul>
+		<div id="contents-container">
+			{#each data.pages as page}
+				<div class="contents" style="display: {active === page.title ? 'block' : 'none'};">
+					<pre>{@html highlight(page.contents, page.title)}</pre>
+				</div>
+			{/each}
+		</div>
+	</div>
+</main>
 
 <style>
-	:global(main) {
+	main {
 		position: relative;
 		max-width: 56em;
 		background-color: white;
