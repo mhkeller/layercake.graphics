@@ -5,7 +5,7 @@
 <style>
 	.feature-path {
 		stroke: #333;
-		stroke-width: 1px;
+		stroke-width: 0.5px;
 	}
 </style>
 
@@ -25,7 +25,7 @@ export default {
 	},
 	helpers: {
 		fillRandom: (random) => {
-			var colors = ['#fc0', '#cf0', '#f0c', '#0cf', '#c0f', '#0fc'];
+			const colors = ['#0fd3bb', '#f77ff4', '#8a93ed', '#f7848a'];
 			var index = Math.round(random * (colors.length - 1));
 			return colors[index];
 		}

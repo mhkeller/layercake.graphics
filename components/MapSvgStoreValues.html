@@ -14,8 +14,8 @@ export default {
 	namespace: 'svg',
 	helpers: {
 		fillRandom: (random) => {
-			var colors = ['#fc0', '#cf0', '#f0c', '#0cf', '#c0f', '#0fc'];
-			var index = Math.round(random * (colors.length - 1));
+			const colors = ['#0fd3bb','#f77ff4','#8a93ed', '#f7848a'];
+			const index = Math.round(random * (colors.length - 1));
 			return colors[index];
 		}
 	}
