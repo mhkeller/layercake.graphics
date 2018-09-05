@@ -14,8 +14,6 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
 	/*font-size: 2em;*/
-  font-family: "SignPainter";
-	font-size: 61px;
   line-height: 1;
   margin: 9px 0 0 10px;
 }
