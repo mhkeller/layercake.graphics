@@ -19,13 +19,13 @@ export default {
 			return geo.geoPath($projection);
 		},
 		features: ({ $data }) => {
-			// Just show five states in this example
-			return $data.features.slice(0, 5);
+			// Just show ten states in this example
+			return $data.features.slice(40, 50);
 		}
 	},
 	helpers: {
 		fillRandom: (random) => {
-			const colors = ['#0fd3bb','#f77ff4','#8a93ed', '#f7848a'];
+			const colors = ['#ffdecc', '#ffc09c', '#ffa06b', '#ff7a33'];
 			const index = Math.round(random * (colors.length - 1));
 			return colors[index];
 		}
