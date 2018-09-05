@@ -1,9 +1,9 @@
 body {
 	margin: 0;
-	font-family: Helvetica Neue, sans-serif;
-	font-size: 14px;
-	line-height: 1.5;
-	color: #333;
+	font-family: 'Helvetica', sans-serif;
+  line-height: 1.32;
+  font-weight: 200;
+  color: #333;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -13,7 +13,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-	font-size: 2em;
+	/*font-size: 2em;*/
+  font-family: "SignPainter";
+	font-size: 61px;
+  line-height: 1;
+  margin: 9px 0 0 10px;
 }
 
 a {
