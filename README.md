@@ -1,11 +1,9 @@
-LayerCake Examples
+LayerCake.graphics
 ===
 
-> graphics framework for [sveltejs](https://svelte.technology)
+> website and guide for [LayerCake](https://github.com/mhkeller/LayerCake)
 
-_Looking for the library? See [here](https://github.com/mhkeller/LayerCake)!_
-
-### [See the examples](https://layercake.graphics)
+### [Visit the site](https://layercake.graphics)
 
 ## Dev
 
