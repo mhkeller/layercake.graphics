@@ -2,25 +2,25 @@
 title: Introduction
 ---
 
-### What is LayerCake?
+### What is Layer Cake?
 
-LayerCake is a graphics framework, built on top of [Svelte](https://svelte.technology) that removes the boilerplate from making responsive web graphics.
+Layer Cake is a graphics framework, built on top of [Svelte](https://svelte.technology) that removes the boilerplate from making responsive web graphics.
 
-At its heart, LayerCake is a [Svelte store](https://svelte.technology/guide#state-management) that takes an array of data objects, a target DOM element and creates scales bound to your element's dimensions. It also includes higher level methods to organize multiple SVG, HTML and Canvas layers that use these scales.
+At its heart, Layer Cake is a [Svelte store](https://svelte.technology/guide#state-management) that takes an array of data objects, a target DOM element and creates scales bound to your element's dimensions. It also includes higher level methods to organize multiple SVG, HTML and Canvas layers that use these scales.
 
 By breaking a part a graphic into layers, you can more easily reuse components from project to project. It also lets you easily move between web environments by giving you a common coordinate system. You may be using Canvas for a scatterplot, SVG for axes and HTML for annotations but they all read from a common store and appear seamless to the viewer.
 
-> LayerCake uses D3 scales. See more in the [`xScale`](#xScale), [`yScale`](#yScale) and [`rScale`](#rScale) sections of the [Store API](#store-api).
+> Layer Cake uses D3 scales. See more in the [`xScale`](#xScale), [`yScale`](#yScale) and [`rScale`](#rScale) sections of the [Store API](#store-api).
 
-### What LayerCake is not
+### What Layer Cake is not
 
-LayerCake is not a high-level charting library. It doesn't have any built-in concepts or strong opinions about how your data should be structured.
+Layer Cake is not a high-level charting library. It doesn't have any built-in concepts or strong opinions about how your data should be structured.
 
 > See the [`flatten`](#flatten) and [`flatData`](#flatData) methods in the [Store API](#store-api) section below for more info about data structure.
 
 ### Getting started
 
-You initialize your cake in a normal JavaScript file. Here is an example in LayerCake's most basic usage, loading in data and binding its extents to a DOM element.
+You initialize your cake in a normal JavaScript file. Here is an example in Layer Cake's most basic usage, loading in data and binding its extents to a DOM element.
 
 ```js
 /* { filename: 'main.js' } */
@@ -42,7 +42,7 @@ const myCake = new LayerCake({
 console.log(myCake.get());
 ```
 
-So far, `myCake` is a Svelte Store with a few different properties that were just computed. Because we gave LayerCake values for `x` and `y`, it's measured the extent of our data's x- and y-dimensions and created `xScale` and `yScale` properties. It's also measured our DOM element as well as created x- and y-accessors so, for a given row of our data we can compute the value in our coordinate system.
+So far, `myCake` is a Svelte Store with a few different properties that were just computed. Because we gave Layer Cake values for `x` and `y`, it's measured the extent of our data's x- and y-dimensions and created `xScale` and `yScale` properties. It's also measured our DOM element as well as created x- and y-accessors so, for a given row of our data we can compute the value in our coordinate system.
 
 ```js
 const { x, y, xScale, yScale } = myCake.get();
@@ -54,11 +54,11 @@ points.forEach(d => {
 
 > You can also use the shorthand `[xGet(d), yGet(d)]`. See the [Store API](#store-api) section for a full list of computed properties.
 
-Because LayerCake has bound the target DOM element's dimensions to your scales, all computed properties will be updated automatically on resize.
+Because Layer Cake has bound the target DOM element's dimensions to your scales, all computed properties will be updated automatically on resize.
 
 ### Organizing components
 
-While it's perfectly fine to use LayerCake as a simple store and implement the rest of your project your own way, LayerCake also comes with helper functions to take care of creating graphic layers that have full access to the store. Add layers inside the `.svgLayers`, `.htmlLayers` or `.canvasLayers` method. Each layer is a Svelte component. When you've added all the layers to your cake, run `.render()`.
+While it's perfectly fine to use Layer Cake as a simple store and implement the rest of your project your own way, Layer Cake also comes with helper functions to take care of creating graphic layers that have full access to the store. Add layers inside the `.svgLayers`, `.htmlLayers` or `.canvasLayers` method. Each layer is a Svelte component. When you've added all the layers to your cake, run `.render()`.
 
 Here's an example creating an SVG scatter plot using the above data.
 

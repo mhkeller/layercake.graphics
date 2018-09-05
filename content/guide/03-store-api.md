@@ -164,7 +164,7 @@ const myCake = new LayerCake({
 
 ### flatten: `<Function>`
 
-In order for LayerCake to measure the extents of your data, it needs a flat array of items that the x, y and r accessors can get at. If your data is not in that format, you can pass in a function to transform it. This *will not* change the shape of the data that gets passed to components — it is only for extent calculation.
+In order for Layer Cake to measure the extents of your data, it needs a flat array of items that the x, y and r accessors can get at. If your data is not in that format, you can pass in a function to transform it. This *will not* change the shape of the data that gets passed to components — it is only for extent calculation.
 
 > You'll run into this if you get data that is nested and that's the best format for a component. For example, labelling a multi-series line chart can be done nicely if you have a `key` field for each group. If you already have a flat copy of your data, check out [`flatData`](#flatData) below.
 

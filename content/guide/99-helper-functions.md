@@ -2,11 +2,11 @@
 title: Helper functions
 ---
 
-LayerCake exposes some commonly-used helper functions. If you don't use them, they will be tree-shaken so there's no added bloat.
+Layer Cake exposes some commonly-used helper functions. If you don't use them, they will be tree-shaken so there's no added bloat.
 
 ### newDiv(className[, stylesObject, parentDomNode])
 
-You can also export a `newDiv` function from the LayerCake module to help you in creating divs. If you pass a DOM node as the third argument it will attach it to that object.
+You can also export a `newDiv` function from the Layer Cake module to help you in creating divs. If you pass a DOM node as the third argument it will attach it to that object.
 
 ```js
 import {default as Layercake, newDiv} from 'LayerCake';
