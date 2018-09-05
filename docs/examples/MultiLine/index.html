@@ -1,0 +1,328 @@
+<!doctype html> <head> <meta charset=utf-8> <meta content="width=device-width" name=viewport> <meta content=#aa1e1e name=theme-color> <base href=/ > <link href=global.css rel=stylesheet> <link href=manifest.json rel=manifest> <link href=favicon.png rel=icon type=image/png> <style>.chart-container{width:100%;height:100%}nav.svelte-eagi17{border-bottom:1px solid rgba(170,30,30,.1);font-weight:300;padding:0 1em;font-size:16px;position:sticky;top:0;background-color:#fff;z-index:9}ul.svelte-eagi17{margin:0;padding:0;display:inline-block;vertical-align:top}ul.svelte-eagi17::after{content:'';display:block;clear:both}li.svelte-eagi17{display:block;float:left;padding:.6em .5em}.svelte-ref-links.svelte-eagi17{float:right}.divider.svelte-eagi17{padding-left:0;padding-right:0}@media(max-width:338px){#dropdown.svelte-eagi17{padding-top:0}}.hero.svelte-eagi17{font-weight:700}a.svelte-eagi17{text-decoration:none}a.svelte-eagi17:hover{text-decoration:underline}main.svelte-1l4vw3j{position:relative;max-width:56em;background-color:#fff;padding:1.5em 2em 2em 2em;margin:0 auto;box-sizing:border-box}.chart-hero.svelte-1l4vw3j{width:100%;height:200px}#pages.svelte-1l4vw3j{margin-top:35px}.dek.svelte-1l4vw3j{padding-top:1em}#contents-container.svelte-1l4vw3j{border-left:3px solid #ccc;margin-top:7px}pre.svelte-1l4vw3j{margin-top:7px 0 0 0;padding-left:14px;overflow-x:auto}#page-nav.svelte-1l4vw3j{margin:0;padding:0}.tab.svelte-1l4vw3j{display:inline-block;vertical-align:top;margin-right:14px;margin-bottom:8px;border-bottom:2px solid transparent;color:#ccc}@media(max-width:475px){#pages.svelte-1l4vw3j{margin-top:21px}.tab.svelte-1l4vw3j{margin-top:8px;margin-bottom:0}}.tab.svelte-1l4vw3j:hover{border-bottom:2px solid #aaa;cursor:pointer}.tab.active{color:#000;pointer-events:none;border-bottom:2px solid #000}</style> <noscript id=sapper-head-start></noscript><title>LayerCake - Multiline (html labels + quadtree tooltip)</title><link href=hljs.css rel=stylesheet><noscript id=sapper-head-end></noscript> </head> <body> <div id=sapper><nav class=svelte-eagi17> <ul class=svelte-eagi17> <li class="svelte-eagi17 hero"><a class=svelte-eagi17 href=/ rel=prefetch>LayerCake</a></li> <li class=svelte-eagi17>View...</li> <li class=svelte-eagi17 id=dropdown> <select> <option value="">All</option> <option value=examples/Line>Line + area<option value=examples/Scatter>Scatter<option value=examples/MapSvg>Map<option value=examples/MapLayered>Multilayer map<option value=examples/MultiLine>Multiline<option value=examples/AreaStacked>Stacked area<option value=examples/Column>Column<option value=examples/ColumnStacked>Stacked column<option value=examples/Bar>Bar<option value=examples/BarStacked>Stacked bar</option> </select> </li> </ul> <ul class="svelte-eagi17 svelte-ref-links"> <li class=svelte-eagi17><a class=svelte-eagi17 href=guide rel=prefetch>Guide</a></li> <li class="svelte-eagi17 divider">|</li> <li class=svelte-eagi17><a class=svelte-eagi17 href=https://github.com/mhkeller/layercake rel=nofollow target=_blank>GitHub</a></li> </ul> </nav> <main> <main class=svelte-1l4vw3j> <h1>Multiline (html labels + quadtree tooltip)</h1> <div class="svelte-1l4vw3j chart-hero"> <div class=chart-container></div> </div> <div class="svelte-1l4vw3j dek"> </div> <div class=svelte-1l4vw3j id=pages> <ul class=svelte-1l4vw3j id=page-nav> <li class="svelte-1l4vw3j tab active">main.js<li class="svelte-1l4vw3j tab">MultiLine.html<li class="svelte-1l4vw3j tab">AxisX.html<li class="svelte-1l4vw3j tab">AxisY.html<li class="svelte-1l4vw3j tab">LineLabels.html<li class="svelte-1l4vw3j tab">Tooltip.html<li class="svelte-1l4vw3j tab">data/fruit.js</li> </ul> <div class=svelte-1l4vw3j id=contents-container> <div class=contents style=display:block> <pre class=svelte-1l4vw3j><span class=hljs-keyword>import</span> LayerCake <span class=hljs-keyword>from</span> <span class=hljs-string>'layercake'</span>;
+<span class=hljs-keyword>import</span> fruit <span class=hljs-keyword>from</span> <span class=hljs-string>'../../data/fruit.js'</span>;
+<span class=hljs-keyword>import</span> MultiLine <span class=hljs-keyword>from</span> <span class=hljs-string>'../MultiLine.html'</span>;
+<span class=hljs-keyword>import</span> AxisX <span class=hljs-keyword>from</span> <span class=hljs-string>'../AxisX.html'</span>;
+<span class=hljs-keyword>import</span> AxisY <span class=hljs-keyword>from</span> <span class=hljs-string>'../AxisY.html'</span>;
+<span class=hljs-keyword>import</span> LineLabels <span class=hljs-keyword>from</span> <span class=hljs-string>'../LineLabels.html'</span>;
+<span class=hljs-keyword>import</span> Tooltip <span class=hljs-keyword>from</span> <span class=hljs-string>'../Tooltip.html'</span>;
+
+<span class=hljs-keyword>const</span> fruitLong = <span class=hljs-built_in>Object</span>.keys(fruit[<span class=hljs-number>0</span>]).map(<span class=hljs-function><span class=hljs-params>key</span> =></span> {
+  <span class=hljs-keyword>if</span> (key === <span class=hljs-string>'month'</span>) <span class=hljs-keyword>return</span> <span class=hljs-literal>null</span>;
+  <span class=hljs-keyword>return</span> {
+    key,
+    <span class=hljs-attr>values</span>: fruit.map(<span class=hljs-function><span class=hljs-params>d</span> =></span> {
+      <span class=hljs-keyword>return</span> { key, <span class=hljs-attr>month</span>: d.month, <span class=hljs-attr>value</span>: d[key] };
+    })
+  };
+}).filter(<span class=hljs-function><span class=hljs-params>d</span> =></span> d);
+
+<span class=hljs-keyword>const</span> monthNames = [<span class=hljs-string>'Jan.'</span>, <span class=hljs-string>'Feb.'</span>, <span class=hljs-string>'Mar.'</span>, <span class=hljs-string>'Apr.'</span>, <span class=hljs-string>'May'</span>, <span class=hljs-string>'June'</span>, <span class=hljs-string>'July'</span>, <span class=hljs-string>'Aug.'</span>, <span class=hljs-string>'Sep.'</span>, <span class=hljs-string>'Oct.'</span>, <span class=hljs-string>'Nov.'</span>, <span class=hljs-string>'Dec.'</span>];
+
+<span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>formatXTick</span> (<span class=hljs-params>d</span>) </span>{
+  <span class=hljs-keyword>const</span> date = <span class=hljs-keyword>new</span> <span class=hljs-built_in>Date</span>(d);
+  <span class=hljs-keyword>return</span> <span class=hljs-string>`<span class=hljs-subst>${monthNames[date.getMonth()]}</span> <span class=hljs-subst>${date.getDate()}</span>`</span>;
+}
+
+<span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>formatYTick</span> (<span class=hljs-params>d</span>) </span>{
+  <span class=hljs-keyword>if</span> (d > <span class=hljs-number>999</span>) {
+    <span class=hljs-keyword>return</span> d / <span class=hljs-number>1000</span> + <span class=hljs-string>'k'</span>;
+  }
+  <span class=hljs-keyword>return</span> d;
+}
+
+<span class=hljs-keyword>const</span> myCake = <span class=hljs-keyword>new</span> LayerCake({
+  <span class=hljs-attr>padding</span>: { <span class=hljs-attr>top</span>: <span class=hljs-number>0</span>, <span class=hljs-attr>right</span>: <span class=hljs-number>10</span>, <span class=hljs-attr>bottom</span>: <span class=hljs-number>20</span>, <span class=hljs-attr>left</span>: <span class=hljs-number>25</span> },
+  <span class=hljs-attr>x</span>: <span class=hljs-string>'month'</span>,
+  <span class=hljs-attr>y</span>: <span class=hljs-string>'value'</span>,
+  <span class=hljs-attr>flatten</span>: <span class=hljs-function><span class=hljs-params>data</span> =></span> {
+    <span class=hljs-comment>// Make one flat array</span>
+    <span class=hljs-keyword>return</span> data.reduce(<span class=hljs-function>(<span class=hljs-params>store, group</span>) =></span> store.concat(group.values), []);
+  },
+  <span class=hljs-attr>yDomain</span>: [<span class=hljs-number>0</span>, <span class=hljs-literal>null</span>],
+  <span class=hljs-attr>data</span>: fruitLong,
+  <span class=hljs-attr>target</span>: <span class=hljs-built_in>document</span>.getElementById(<span class=hljs-string>'my-chart'</span>),
+  <span class=hljs-attr>custom</span>: {
+    fruit
+  }
+})
+  .svgLayers([
+    { <span class=hljs-attr>component</span>: AxisX, <span class=hljs-attr>opts</span>: { <span class=hljs-attr>gridlines</span>: <span class=hljs-literal>false</span>, <span class=hljs-attr>tickNumber</span>: <span class=hljs-number>3</span>, <span class=hljs-attr>formatTick</span>: formatXTick } },
+    { <span class=hljs-attr>component</span>: AxisY, <span class=hljs-attr>opts</span>: { <span class=hljs-attr>formatTick</span>: formatYTick } },
+    { <span class=hljs-attr>component</span>: MultiLine, <span class=hljs-attr>opts</span>: {} }
+  ])
+  .htmlLayers([
+    { <span class=hljs-attr>component</span>: LineLabels, <span class=hljs-attr>opts</span>: {} },
+    { <span class=hljs-attr>component</span>: Tooltip, <span class=hljs-attr>opts</span>: {} }
+  ]);
+
+myCake.render();</pre> </div><div class=contents style=display:none> <pre class=svelte-1l4vw3j>{#each sorted as group}
+  <span class=hljs-tag>&lt;<span class=hljs-name>path</span> <span class=hljs-attr>class</span>=<span class=hljs-string>'path-line'</span> <span class=hljs-attr>d</span>=<span class=hljs-string>'{path(group.values)}'</span> <span class=hljs-attr>stroke</span>=<span class=hljs-string>"{stroke(group.key)}"</span>></span><span class=hljs-tag>&lt;/<span class=hljs-name>path</span>></span>
+{/each}
+<span class=hljs-tag>&lt;<span class=hljs-name>style</span>></span><span class=css>
+  <span class=hljs-selector-class>.path-line</span> {
+    <span class=hljs-attribute>fill</span>: none;
+    <span class=hljs-attribute>stroke-linejoin</span>: round;
+    <span class=hljs-attribute>stroke-linecap</span>: round;
+    <span class=hljs-attribute>stroke-width</span>: <span class=hljs-number>3px</span>;
+  }
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>style</span>></span>
+
+<span class=hljs-tag>&lt;<span class=hljs-name>script</span>></span><span class=javascript>
+<span class=hljs-keyword>const</span> colors = {
+  <span class=hljs-attr>apples</span>: <span class=hljs-string>'#0fd3bb'</span>,
+  <span class=hljs-attr>bananas</span>: <span class=hljs-string>'#f77ff4'</span>,
+  <span class=hljs-attr>cherries</span>: <span class=hljs-string>'#8a93ed'</span>,
+  <span class=hljs-attr>dates</span>: <span class=hljs-string>'#f7848a'</span>
+};
+<span class=hljs-keyword>export</span> <span class=hljs-keyword>default</span> {
+  <span class=hljs-attr>namespace</span>: <span class=hljs-string>'svg'</span>,
+  <span class=hljs-attr>computed</span>: {
+    <span class=hljs-comment>// Sort the lines by the highest point on hover, as requested by @veltman</span>
+    sorted: <span class=hljs-function>(<span class=hljs-params>{ $data, $highest }</span>) =></span> {
+      <span class=hljs-keyword>if</span> ($highest) {
+        <span class=hljs-keyword>return</span> $data.filter(<span class=hljs-function><span class=hljs-params>d</span> =></span> d.key !== $highest).concat($data.filter(<span class=hljs-function><span class=hljs-params>d</span> =></span> d.key === $highest));
+      }
+      <span class=hljs-keyword>return</span> $data;
+    },
+    <span class=hljs-attr>path</span>: <span class=hljs-function>(<span class=hljs-params>{ $xGet, $yGet }</span>) =></span> {
+      <span class=hljs-keyword>return</span> <span class=hljs-function><span class=hljs-params>values</span> =></span> {
+        <span class=hljs-keyword>return</span> <span class=hljs-string>'M'</span> + values
+          .map(<span class=hljs-function><span class=hljs-keyword>function</span> (<span class=hljs-params>d, i</span>) </span>{
+            <span class=hljs-keyword>return</span> $xGet(d) + <span class=hljs-string>','</span> + $yGet(d);
+          })
+          .join(<span class=hljs-string>'L'</span>);
+      };
+    }
+  },
+  <span class=hljs-attr>helpers</span>: {
+    <span class=hljs-attr>stroke</span>: <span class=hljs-function><span class=hljs-params>key</span> =></span> colors[key]
+  }
+};
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>script</span>></span></pre> </div><div class=contents style=display:none> <pre class=svelte-1l4vw3j><span class=hljs-tag>&lt;<span class=hljs-name>g</span> <span class=hljs-attr>class</span>=<span class=hljs-string>'axis x-axis'</span>></span>
+  {#each ticks as tick, i}
+    <span class=hljs-tag>&lt;<span class=hljs-name>g</span> <span class=hljs-attr>class</span>=<span class=hljs-string>'tick tick-{ tick }'</span> <span class=hljs-attr>transform</span>=<span class=hljs-string>'translate({$xScale(tick)},{$yScale.range()[0]})'</span>></span>
+      {#if opts.gridlines !== false}
+        <span class=hljs-tag>&lt;<span class=hljs-name>line</span> <span class=hljs-attr>y1</span>=<span class=hljs-string>'{$height * -1}'</span> <span class=hljs-attr>y2</span>=<span class=hljs-string>'0'</span> <span class=hljs-attr>x1</span>=<span class=hljs-string>'0'</span> <span class=hljs-attr>x2</span>=<span class=hljs-string>'0'</span>></span><span class=hljs-tag>&lt;/<span class=hljs-name>line</span>></span>
+      {/if}
+      <span class=hljs-tag>&lt;<span class=hljs-name>text</span> <span class=hljs-attr>y</span>=<span class=hljs-string>'16'</span> <span class=hljs-attr>text-anchor</span>=<span class=hljs-string>'{i === 0 ? '</span><span class=hljs-attr>start</span>' <span class=hljs-attr>:</span> <span class=hljs-attr>i</span> === <span class=hljs-string>ticks.length</span> <span class=hljs-attr>-</span> <span class=hljs-attr>1</span> ? '<span class=hljs-attr>end</span>' <span class=hljs-attr>:</span> '<span class=hljs-attr>middle</span>'}'></span>{opts.formatTick ? opts.formatTick(tick) : tick}<span class=hljs-tag>&lt;/<span class=hljs-name>text</span>></span>
+    <span class=hljs-tag>&lt;/<span class=hljs-name>g</span>></span>
+  {/each}
+  {#if opts.baseline === true}
+    <span class=hljs-tag>&lt;<span class=hljs-name>line</span> <span class=hljs-attr>class</span>=<span class=hljs-string>"baseline"</span> <span class=hljs-attr>y1</span>=<span class=hljs-string>'{$height - 0.5}'</span> <span class=hljs-attr>y2</span>=<span class=hljs-string>'{$height - 0.5}'</span> <span class=hljs-attr>x1</span>=<span class=hljs-string>'0'</span> <span class=hljs-attr>x2</span>=<span class=hljs-string>'{$width - 1}'</span>></span><span class=hljs-tag>&lt;/<span class=hljs-name>line</span>></span>
+  {/if}
+<span class=hljs-tag>&lt;/<span class=hljs-name>g</span>></span>
+
+<span class=hljs-tag>&lt;<span class=hljs-name>style</span>></span><span class=css>
+  <span class=hljs-selector-class>.tick</span> {
+    <span class=hljs-attribute>font-size</span>: .<span class=hljs-number>725em</span>;
+    <span class=hljs-attribute>font-weight</span>: <span class=hljs-number>200</span>;
+  }
+
+  <span class=hljs-selector-tag>line</span>,
+  <span class=hljs-selector-class>.tick</span> <span class=hljs-selector-tag>line</span> {
+    <span class=hljs-attribute>stroke</span>: <span class=hljs-number>#aaa</span>;
+    <span class=hljs-attribute>stroke-dasharray</span>: <span class=hljs-number>2</span>;
+  }
+
+  <span class=hljs-selector-class>.tick</span> <span class=hljs-selector-tag>text</span> {
+    <span class=hljs-attribute>fill</span>: <span class=hljs-number>#666</span>;
+  }
+
+  <span class=hljs-selector-class>.baseline</span> {
+    <span class=hljs-attribute>stroke-dasharray</span>: <span class=hljs-number>0</span>;
+  }
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>style</span>></span>
+
+<span class=hljs-tag>&lt;<span class=hljs-name>script</span>></span><span class=javascript>
+<span class=hljs-keyword>export</span> <span class=hljs-keyword>default</span> {
+  <span class=hljs-attr>namespace</span>: <span class=hljs-string>'svg'</span>,
+  <span class=hljs-attr>computed</span>: {
+    <span class=hljs-attr>ticks</span>: <span class=hljs-function>(<span class=hljs-params>{ $xScale, opts }</span>) =></span> {
+      <span class=hljs-keyword>return</span> $xScale.ticks(opts.tickNumber);
+    }
+  }
+};
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>script</span>></span></pre> </div><div class=contents style=display:none> <pre class=svelte-1l4vw3j><span class=hljs-tag>&lt;<span class=hljs-name>g</span> <span class=hljs-attr>class</span>=<span class=hljs-string>'axis y-axis'</span> <span class=hljs-attr>transform</span>=<span class=hljs-string>'translate(-{$padding.left}, 0)'</span>></span>
+  {#each $yScale.ticks(opts.tickNumber || 5) as tick, i}
+    <span class=hljs-tag>&lt;<span class=hljs-name>g</span> <span class=hljs-attr>class</span>=<span class=hljs-string>'tick tick-{tick}'</span> <span class=hljs-attr>transform</span>=<span class=hljs-string>'translate(0, {$yScale(tick)})'</span>></span>
+      {#if opts.gridlines !== false}
+        <span class=hljs-tag>&lt;<span class=hljs-name>line</span> <span class=hljs-attr>x2</span>=<span class=hljs-string>'100%'</span>></span><span class=hljs-tag>&lt;/<span class=hljs-name>line</span>></span>
+      {/if}
+      <span class=hljs-tag>&lt;<span class=hljs-name>text</span> <span class=hljs-attr>y</span>=<span class=hljs-string>'-4'</span>></span>{opts.formatTick ? opts.formatTick(tick) : tick}<span class=hljs-tag>&lt;/<span class=hljs-name>text</span>></span>
+    <span class=hljs-tag>&lt;/<span class=hljs-name>g</span>></span>
+  {/each}
+<span class=hljs-tag>&lt;/<span class=hljs-name>g</span>></span>
+
+<span class=hljs-tag>&lt;<span class=hljs-name>style</span>></span><span class=css>
+  <span class=hljs-selector-class>.tick</span> {
+    <span class=hljs-attribute>font-size</span>: .<span class=hljs-number>725em</span>;
+    <span class=hljs-attribute>font-weight</span>: <span class=hljs-number>200</span>;
+  }
+
+  <span class=hljs-selector-class>.tick</span> <span class=hljs-selector-tag>line</span> {
+    <span class=hljs-attribute>stroke</span>: <span class=hljs-number>#aaa</span>;
+    <span class=hljs-attribute>stroke-dasharray</span>: <span class=hljs-number>2</span>;
+  }
+
+  <span class=hljs-selector-class>.tick</span> <span class=hljs-selector-tag>text</span> {
+    <span class=hljs-attribute>fill</span>: <span class=hljs-number>#666</span>;
+    <span class=hljs-attribute>text-anchor</span>: start;
+  }
+
+  <span class=hljs-selector-class>.tick</span><span class=hljs-selector-class>.tick-0</span> <span class=hljs-selector-tag>line</span> {
+    <span class=hljs-attribute>stroke-dasharray</span>: <span class=hljs-number>0</span>;
+  }
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>style</span>></span>
+
+<span class=hljs-tag>&lt;<span class=hljs-name>script</span>></span><span class=actionscript>
+export <span class=hljs-keyword>default</span> {
+  <span class=hljs-keyword>namespace</span>: <span class=hljs-string>'svg'</span>
+};
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>script</span>></span></pre> </div><div class=contents style=display:none> <pre class=svelte-1l4vw3j>{#each $data as group}
+  <span class=hljs-tag>&lt;<span class=hljs-name>div</span> <span class=hljs-attr>class</span>=<span class=hljs-string>"label"</span> <span class=hljs-attr>style</span>=<span class=hljs-string>"top:{top(group.values)}px;left:{left(group.values)}px;"</span>></span>{pretty(group.key)}<span class=hljs-tag>&lt;/<span class=hljs-name>div</span>></span>
+{/each}
+
+<span class=hljs-tag>&lt;<span class=hljs-name>style</span>></span><span class=css>
+  <span class=hljs-selector-class>.label</span> {
+    <span class=hljs-attribute>position</span>: absolute;
+    <span class=hljs-attribute>transform</span>: <span class=hljs-built_in>translate</span>(-100%, -100%);
+    <span class=hljs-attribute>font-size</span>: <span class=hljs-number>13px</span>;
+  }
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>style</span>></span>
+
+<span class=hljs-tag>&lt;<span class=hljs-name>script</span>></span><span class=javascript>
+<span class=hljs-keyword>import</span> * <span class=hljs-keyword>as</span> _ <span class=hljs-keyword>from</span> <span class=hljs-string>'underscore'</span>;
+
+<span class=hljs-keyword>export</span> <span class=hljs-keyword>default</span> {
+  <span class=hljs-attr>computed</span>: {
+    <span class=hljs-attr>left</span>: <span class=hljs-function>(<span class=hljs-params>{ $xGet, $x }</span>) =></span> {
+      <span class=hljs-keyword>return</span> <span class=hljs-function>(<span class=hljs-params>values</span>) =></span> {
+        <span class=hljs-comment>// Don't assume this is sorted</span>
+        <span class=hljs-keyword>const</span> max = _.max(values, d => $x(d));
+        <span class=hljs-keyword>return</span> $xGet(max);
+      };
+    },
+    <span class=hljs-attr>top</span>: <span class=hljs-function>(<span class=hljs-params>{ $yGet, $x }</span>) =></span> {
+      <span class=hljs-keyword>return</span> <span class=hljs-function>(<span class=hljs-params>values</span>) =></span> {
+        <span class=hljs-comment>// Don't assume this is sorted</span>
+        <span class=hljs-keyword>const</span> max = _.max(values, d => $x(d));
+        <span class=hljs-keyword>return</span> $yGet(max);
+      };
+    }
+  },
+  <span class=hljs-attr>helpers</span>: {
+    <span class=hljs-attr>pretty</span>: <span class=hljs-function>(<span class=hljs-params>val</span>) =></span> {
+      <span class=hljs-keyword>return</span> val.charAt(<span class=hljs-number>0</span>).toUpperCase() + val.slice(<span class=hljs-number>1</span>, val.length);
+    }
+  }
+};
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>script</span>></span></pre> </div><div class=contents style=display:none> <pre class=svelte-1l4vw3j><span class=hljs-tag>&lt;<span class=hljs-name>div</span> <span class=hljs-attr>ref:bg</span> <span class=hljs-attr>on:mousemove</span>=<span class=hljs-string>"mousemove(event)"</span> <span class=hljs-attr>on:mouseout</span>=<span class=hljs-string>"mouseout()"</span>></span>
+<span class=hljs-tag>&lt;/<span class=hljs-name>div</span>></span>
+<span class=hljs-tag>&lt;<span class=hljs-name>div</span> <span class=hljs-attr>ref:tooltip</span>></span>{@html contents}<span class=hljs-tag>&lt;/<span class=hljs-name>div</span>></span>
+
+<span class=hljs-tag>&lt;<span class=hljs-name>style</span>></span><span class=css>
+  <span class=hljs-selector-tag>ref</span><span class=hljs-selector-pseudo>:bg</span>,
+  <span class=hljs-selector-tag>ref</span><span class=hljs-selector-pseudo>:tooltip</span> {
+    <span class=hljs-attribute>position</span>: absolute;
+  }
+
+  <span class=hljs-selector-tag>ref</span><span class=hljs-selector-pseudo>:bg</span> {
+    <span class=hljs-attribute>top</span>: <span class=hljs-number>0</span>;
+    <span class=hljs-attribute>right</span>: <span class=hljs-number>0</span>;
+    <span class=hljs-attribute>bottom</span>: <span class=hljs-number>0</span>;
+    <span class=hljs-attribute>left</span>: <span class=hljs-number>0</span>;
+  }
+
+  <span class=hljs-selector-tag>ref</span><span class=hljs-selector-pseudo>:tooltip</span> {
+    <span class=hljs-attribute>font-size</span>: <span class=hljs-number>13px</span>;
+    <span class=hljs-attribute>pointer-events</span>: none;
+    <span class=hljs-attribute>width</span>: <span class=hljs-number>150px</span>;
+    <span class=hljs-attribute>border</span>: <span class=hljs-number>1px</span> solid <span class=hljs-number>#ccc</span>;
+    <span class=hljs-attribute>background</span>: <span class=hljs-number>#fff</span>;
+    <span class=hljs-attribute>transform</span>: <span class=hljs-built_in>translate</span>(-50%, -100%);
+    <span class=hljs-attribute>display</span>: none;
+    <span class=hljs-attribute>padding</span>: <span class=hljs-number>5px</span>;
+  }
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>style</span>></span>
+
+<span class=hljs-tag>&lt;<span class=hljs-name>script</span>></span><span class=javascript>
+<span class=hljs-keyword>import</span> { quadtree } <span class=hljs-keyword>from</span> <span class=hljs-string>'d3-quadtree'</span>;
+<span class=hljs-keyword>const</span> monthNames = [<span class=hljs-string>'Jan.'</span>, <span class=hljs-string>'Feb.'</span>, <span class=hljs-string>'Mar.'</span>, <span class=hljs-string>'Apr.'</span>, <span class=hljs-string>'May'</span>, <span class=hljs-string>'June'</span>, <span class=hljs-string>'July'</span>, <span class=hljs-string>'Aug.'</span>, <span class=hljs-string>'Sep.'</span>, <span class=hljs-string>'Oct.'</span>, <span class=hljs-string>'Nov.'</span>, <span class=hljs-string>'Dec.'</span>];
+
+<span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>capitalize</span> (<span class=hljs-params>str</span>) </span>{
+  <span class=hljs-keyword>return</span> str.charAt(<span class=hljs-number>0</span>).toUpperCase() + str.slice(<span class=hljs-number>1</span>, str.length);
+}
+
+<span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>addCommas</span> (<span class=hljs-params>num</span>) </span>{
+  <span class=hljs-keyword>const</span> parts = <span class=hljs-built_in>String</span>(num).split(<span class=hljs-string>'.'</span>);
+  parts[<span class=hljs-number>0</span>] = parts[<span class=hljs-number>0</span>].replace(<span class=hljs-regexp>/\B(?=(\d{3})+(?!\d))/g</span>, <span class=hljs-string>','</span>);
+  <span class=hljs-keyword>return</span> parts.join(<span class=hljs-string>'.'</span>);
+}
+
+<span class=hljs-keyword>export</span> <span class=hljs-keyword>default</span> {
+  data () {
+    <span class=hljs-keyword>return</span> {
+      <span class=hljs-attr>contents</span>: <span class=hljs-string>''</span>
+    };
+  },
+  <span class=hljs-attr>computed</span>: {
+    <span class=hljs-attr>finder</span>: <span class=hljs-function>(<span class=hljs-params>{ $custom, $xGet, $width, $height }</span>) =></span> {
+      <span class=hljs-keyword>return</span> quadtree()
+        .extent([[<span class=hljs-number>-1</span>, <span class=hljs-number>-1</span>], [$width + <span class=hljs-number>1</span>, $height + <span class=hljs-number>1</span>]])
+        .x($xGet)
+        .y($xGet)
+        .addAll($custom.fruit);
+    }
+  },
+  <span class=hljs-attr>methods</span>: {
+    mousemove (e) {
+      <span class=hljs-keyword>const</span> el = <span class=hljs-keyword>this</span>.refs.tooltip;
+      <span class=hljs-keyword>const</span> { finder } = <span class=hljs-keyword>this</span>.get();
+      <span class=hljs-keyword>const</span> found = finder.find(e.layerX, e.layerX, <span class=hljs-number>300</span>);
+
+      <span class=hljs-keyword>if</span> (found) {
+        <span class=hljs-keyword>this</span>.setContents(found);
+        el.style.left = <span class=hljs-string>`<span class=hljs-subst>${e.layerX}</span>px`</span>;
+        el.style.top = <span class=hljs-string>`<span class=hljs-subst>${e.layerY - <span class=hljs-number>5</span>}</span>px`</span>;
+        el.style.display = <span class=hljs-string>'block'</span>;
+      } <span class=hljs-keyword>else</span> {
+        el.style.display = <span class=hljs-string>'none'</span>;
+      }
+    },
+
+    mouseout () {
+      <span class=hljs-keyword>this</span>.refs.tooltip.style.display = <span class=hljs-string>'none'</span>;
+    },
+
+    setContents (result) {
+      <span class=hljs-keyword>const</span> rows = <span class=hljs-built_in>Object</span>.keys(result).filter(<span class=hljs-function><span class=hljs-params>d</span> =></span> d !== <span class=hljs-string>'month'</span>).map(<span class=hljs-function><span class=hljs-params>key</span> =></span> {
+        <span class=hljs-keyword>return</span> {
+          key,
+          <span class=hljs-attr>value</span>: result[key]
+        };
+      }).sort(<span class=hljs-function>(<span class=hljs-params>a, b</span>) =></span> b.value - a.value);
+
+      <span class=hljs-keyword>const</span> contents = <span class=hljs-string>`
+        &lt;div style="font-weight: bold;"><span class=hljs-subst>${monthNames[result.month.getMonth()]}</span> <span class=hljs-subst>${result.month.getDate()}</span>&lt;/div>
+        <span class=hljs-subst>${rows.map(row => <span class=hljs-string>`&lt;div>&lt;span style="color: #999; width: 65px;display:inline-block;"><span class=hljs-subst>${capitalize(row.key)}</span>:&lt;/span> <span class=hljs-subst>${addCommas(row.value)}</span>&lt;/div>`</span>).join(<span class=hljs-string>''</span>)}</span>
+      `</span>;
+
+      <span class=hljs-keyword>this</span>.store.set({ <span class=hljs-attr>highest</span>: rows[<span class=hljs-number>0</span>].key });
+      <span class=hljs-keyword>this</span>.set({ contents });
+    }
+  }
+};
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>script</span>></span></pre> </div><div class=contents style=display:none> <pre class=svelte-1l4vw3j><span class=hljs-comment>/* --------------------------------------------
+ *
+ * Example data for stacked charts
+ * from D3 documentation
+ * Adapted from https://github.com/d3/d3-shape/blob/master/README.md#stack
+ *
+ * --------------------------------------------
+ */</span>
+<span class=hljs-keyword>export</span> <span class=hljs-keyword>default</span> [
+  {<span class=hljs-attr>month</span>: <span class=hljs-keyword>new</span> <span class=hljs-built_in>Date</span>(<span class=hljs-number>2015</span>, <span class=hljs-number>3</span>, <span class=hljs-number>1</span>), <span class=hljs-attr>apples</span>: <span class=hljs-number>3840</span>, <span class=hljs-attr>bananas</span>: <span class=hljs-number>1920</span>, <span class=hljs-attr>cherries</span>: <span class=hljs-number>960</span>, <span class=hljs-attr>dates</span>: <span class=hljs-number>400</span>},
+  {<span class=hljs-attr>month</span>: <span class=hljs-keyword>new</span> <span class=hljs-built_in>Date</span>(<span class=hljs-number>2015</span>, <span class=hljs-number>2</span>, <span class=hljs-number>1</span>), <span class=hljs-attr>apples</span>: <span class=hljs-number>1600</span>, <span class=hljs-attr>bananas</span>: <span class=hljs-number>1440</span>, <span class=hljs-attr>cherries</span>: <span class=hljs-number>960</span>, <span class=hljs-attr>dates</span>: <span class=hljs-number>400</span>},
+  {<span class=hljs-attr>month</span>: <span class=hljs-keyword>new</span> <span class=hljs-built_in>Date</span>(<span class=hljs-number>2015</span>, <span class=hljs-number>1</span>, <span class=hljs-number>1</span>), <span class=hljs-attr>apples</span>: <span class=hljs-number>640</span>, <span class=hljs-attr>bananas</span>: <span class=hljs-number>960</span>, <span class=hljs-attr>cherries</span>: <span class=hljs-number>640</span>, <span class=hljs-attr>dates</span>: <span class=hljs-number>400</span>},
+  {<span class=hljs-attr>month</span>: <span class=hljs-keyword>new</span> <span class=hljs-built_in>Date</span>(<span class=hljs-number>2015</span>, <span class=hljs-number>0</span>, <span class=hljs-number>1</span>), <span class=hljs-attr>apples</span>: <span class=hljs-number>320</span>, <span class=hljs-attr>bananas</span>: <span class=hljs-number>480</span>, <span class=hljs-attr>cherries</span>: <span class=hljs-number>640</span>, <span class=hljs-attr>dates</span>: <span class=hljs-number>400</span>}
+];</pre> </div> </div> </div> </main> </main></div> <script>__SAPPER__={baseUrl:"",preloaded:[{},null,{data:{pages:[{title:"main.js",contents:"import LayerCake from 'layercake';\nimport fruit from '..\u002F..\u002Fdata\u002Ffruit.js';\nimport MultiLine from '..\u002FMultiLine.html';\nimport AxisX from '..\u002FAxisX.html';\nimport AxisY from '..\u002FAxisY.html';\nimport LineLabels from '..\u002FLineLabels.html';\nimport Tooltip from '..\u002FTooltip.html';\n\nconst fruitLong = Object.keys(fruit[0]).map(key =\u003E {\n  if (key === 'month') return null;\n  return {\n    key,\n    values: fruit.map(d =\u003E {\n      return { key, month: d.month, value: d[key] };\n    })\n  };\n}).filter(d =\u003E d);\n\nconst monthNames = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];\n\nfunction formatXTick (d) {\n  const date = new Date(d);\n  return `${monthNames[date.getMonth()]} ${date.getDate()}`;\n}\n\nfunction formatYTick (d) {\n  if (d \u003E 999) {\n    return d \u002F 1000 + 'k';\n  }\n  return d;\n}\n\nconst myCake = new LayerCake({\n  padding: { top: 0, right: 10, bottom: 20, left: 25 },\n  x: 'month',\n  y: 'value',\n  flatten: data =\u003E {\n    \u002F\u002F Make one flat array\n    return data.reduce((store, group) =\u003E store.concat(group.values), []);\n  },\n  yDomain: [0, null],\n  data: fruitLong,\n  target: document.getElementById('my-chart'),\n  custom: {\n    fruit\n  }\n})\n  .svgLayers([\n    { component: AxisX, opts: { gridlines: false, tickNumber: 3, formatTick: formatXTick } },\n    { component: AxisY, opts: { formatTick: formatYTick } },\n    { component: MultiLine, opts: {} }\n  ])\n  .htmlLayers([\n    { component: LineLabels, opts: {} },\n    { component: Tooltip, opts: {} }\n  ]);\n\nmyCake.render();"},{title:"MultiLine.html",contents:"{#each sorted as group}\n  \u003Cpath class='path-line' d='{path(group.values)}' stroke=\"{stroke(group.key)}\"\u003E\u003C\u002Fpath\u003E\n{\u002Feach}\n\u003Cstyle\u003E\n  .path-line {\n    fill: none;\n    stroke-linejoin: round;\n    stroke-linecap: round;\n    stroke-width: 3px;\n  }\n\u003C\u002Fstyle\u003E\n\n\u003Cscript\u003E\nconst colors = {\n  apples: '#0fd3bb',\n  bananas: '#f77ff4',\n  cherries: '#8a93ed',\n  dates: '#f7848a'\n};\nexport default {\n  namespace: 'svg',\n  computed: {\n    \u002F\u002F Sort the lines by the highest point on hover, as requested by @veltman\n    sorted: ({ $data, $highest }) =\u003E {\n      if ($highest) {\n        return $data.filter(d =\u003E d.key !== $highest).concat($data.filter(d =\u003E d.key === $highest));\n      }\n      return $data;\n    },\n    path: ({ $xGet, $yGet }) =\u003E {\n      return values =\u003E {\n        return 'M' + values\n          .map(function (d, i) {\n            return $xGet(d) + ',' + $yGet(d);\n          })\n          .join('L');\n      };\n    }\n  },\n  helpers: {\n    stroke: key =\u003E colors[key]\n  }\n};\n\u003C\u002Fscript\u003E"},{title:"AxisX.html",contents:"\u003Cg class='axis x-axis'\u003E\n  {#each ticks as tick, i}\n    \u003Cg class='tick tick-{ tick }' transform='translate({$xScale(tick)},{$yScale.range()[0]})'\u003E\n      {#if opts.gridlines !== false}\n        \u003Cline y1='{$height * -1}' y2='0' x1='0' x2='0'\u003E\u003C\u002Fline\u003E\n      {\u002Fif}\n      \u003Ctext y='16' text-anchor='{i === 0 ? 'start' : i === ticks.length - 1 ? 'end' : 'middle'}'\u003E{opts.formatTick ? opts.formatTick(tick) : tick}\u003C\u002Ftext\u003E\n    \u003C\u002Fg\u003E\n  {\u002Feach}\n  {#if opts.baseline === true}\n    \u003Cline class=\"baseline\" y1='{$height - 0.5}' y2='{$height - 0.5}' x1='0' x2='{$width - 1}'\u003E\u003C\u002Fline\u003E\n  {\u002Fif}\n\u003C\u002Fg\u003E\n\n\u003Cstyle\u003E\n  .tick {\n    font-size: .725em;\n    font-weight: 200;\n  }\n\n  line,\n  .tick line {\n    stroke: #aaa;\n    stroke-dasharray: 2;\n  }\n\n  .tick text {\n    fill: #666;\n  }\n\n  .baseline {\n    stroke-dasharray: 0;\n  }\n\u003C\u002Fstyle\u003E\n\n\u003Cscript\u003E\nexport default {\n  namespace: 'svg',\n  computed: {\n    ticks: ({ $xScale, opts }) =\u003E {\n      return $xScale.ticks(opts.tickNumber);\n    }\n  }\n};\n\u003C\u002Fscript\u003E"},{title:"AxisY.html",contents:"\u003Cg class='axis y-axis' transform='translate(-{$padding.left}, 0)'\u003E\n  {#each $yScale.ticks(opts.tickNumber || 5) as tick, i}\n    \u003Cg class='tick tick-{tick}' transform='translate(0, {$yScale(tick)})'\u003E\n      {#if opts.gridlines !== false}\n        \u003Cline x2='100%'\u003E\u003C\u002Fline\u003E\n      {\u002Fif}\n      \u003Ctext y='-4'\u003E{opts.formatTick ? opts.formatTick(tick) : tick}\u003C\u002Ftext\u003E\n    \u003C\u002Fg\u003E\n  {\u002Feach}\n\u003C\u002Fg\u003E\n\n\u003Cstyle\u003E\n  .tick {\n    font-size: .725em;\n    font-weight: 200;\n  }\n\n  .tick line {\n    stroke: #aaa;\n    stroke-dasharray: 2;\n  }\n\n  .tick text {\n    fill: #666;\n    text-anchor: start;\n  }\n\n  .tick.tick-0 line {\n    stroke-dasharray: 0;\n  }\n\u003C\u002Fstyle\u003E\n\n\u003Cscript\u003E\nexport default {\n  namespace: 'svg'\n};\n\u003C\u002Fscript\u003E"},{title:"LineLabels.html",contents:"{#each $data as group}\n  \u003Cdiv class=\"label\" style=\"top:{top(group.values)}px;left:{left(group.values)}px;\"\u003E{pretty(group.key)}\u003C\u002Fdiv\u003E\n{\u002Feach}\n\n\u003Cstyle\u003E\n  .label {\n    position: absolute;\n    transform: translate(-100%, -100%);\n    font-size: 13px;\n  }\n\u003C\u002Fstyle\u003E\n\n\u003Cscript\u003E\nimport * as _ from 'underscore';\n\nexport default {\n  computed: {\n    left: ({ $xGet, $x }) =\u003E {\n      return (values) =\u003E {\n        \u002F\u002F Don't assume this is sorted\n        const max = _.max(values, d =\u003E $x(d));\n        return $xGet(max);\n      };\n    },\n    top: ({ $yGet, $x }) =\u003E {\n      return (values) =\u003E {\n        \u002F\u002F Don't assume this is sorted\n        const max = _.max(values, d =\u003E $x(d));\n        return $yGet(max);\n      };\n    }\n  },\n  helpers: {\n    pretty: (val) =\u003E {\n      return val.charAt(0).toUpperCase() + val.slice(1, val.length);\n    }\n  }\n};\n\u003C\u002Fscript\u003E"},{title:"Tooltip.html",contents:"\u003Cdiv ref:bg on:mousemove=\"mousemove(event)\" on:mouseout=\"mouseout()\"\u003E\n\u003C\u002Fdiv\u003E\n\u003Cdiv ref:tooltip\u003E{@html contents}\u003C\u002Fdiv\u003E\n\n\u003Cstyle\u003E\n  ref:bg,\n  ref:tooltip {\n    position: absolute;\n  }\n\n  ref:bg {\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n  }\n\n  ref:tooltip {\n    font-size: 13px;\n    pointer-events: none;\n    width: 150px;\n    border: 1px solid #ccc;\n    background: #fff;\n    transform: translate(-50%, -100%);\n    display: none;\n    padding: 5px;\n  }\n\u003C\u002Fstyle\u003E\n\n\u003Cscript\u003E\nimport { quadtree } from 'd3-quadtree';\nconst monthNames = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];\n\nfunction capitalize (str) {\n  return str.charAt(0).toUpperCase() + str.slice(1, str.length);\n}\n\nfunction addCommas (num) {\n  const parts = String(num).split('.');\n  parts[0] = parts[0].replace(\u002F\\B(?=(\\d{3})+(?!\\d))\u002Fg, ',');\n  return parts.join('.');\n}\n\nexport default {\n  data () {\n    return {\n      contents: ''\n    };\n  },\n  computed: {\n    finder: ({ $custom, $xGet, $width, $height }) =\u003E {\n      return quadtree()\n        .extent([[-1, -1], [$width + 1, $height + 1]])\n        .x($xGet)\n        .y($xGet)\n        .addAll($custom.fruit);\n    }\n  },\n  methods: {\n    mousemove (e) {\n      const el = this.refs.tooltip;\n      const { finder } = this.get();\n      const found = finder.find(e.layerX, e.layerX, 300);\n\n      if (found) {\n        this.setContents(found);\n        el.style.left = `${e.layerX}px`;\n        el.style.top = `${e.layerY - 5}px`;\n        el.style.display = 'block';\n      } else {\n        el.style.display = 'none';\n      }\n    },\n\n    mouseout () {\n      this.refs.tooltip.style.display = 'none';\n    },\n\n    setContents (result) {\n      const rows = Object.keys(result).filter(d =\u003E d !== 'month').map(key =\u003E {\n        return {\n          key,\n          value: result[key]\n        };\n      }).sort((a, b) =\u003E b.value - a.value);\n\n      const contents = `\n        \u003Cdiv style=\"font-weight: bold;\"\u003E${monthNames[result.month.getMonth()]} ${result.month.getDate()}\u003C\u002Fdiv\u003E\n        ${rows.map(row =\u003E `\u003Cdiv\u003E\u003Cspan style=\"color: #999; width: 65px;display:inline-block;\"\u003E${capitalize(row.key)}:\u003C\u002Fspan\u003E ${addCommas(row.value)}\u003C\u002Fdiv\u003E`).join('')}\n      `;\n\n      this.store.set({ highest: rows[0].key });\n      this.set({ contents });\n    }\n  }\n};\n\u003C\u002Fscript\u003E"},{title:"data\u002Ffruit.js",contents:"\u002F* --------------------------------------------\n *\n * Example data for stacked charts\n * from D3 documentation\n * Adapted from https:\u002F\u002Fgithub.com\u002Fd3\u002Fd3-shape\u002Fblob\u002Fmaster\u002FREADME.md#stack\n *\n * --------------------------------------------\n *\u002F\nexport default [\n  {month: new Date(2015, 3, 1), apples: 3840, bananas: 1920, cherries: 960, dates: 400},\n  {month: new Date(2015, 2, 1), apples: 1600, bananas: 1440, cherries: 960, dates: 400},\n  {month: new Date(2015, 1, 1), apples: 640, bananas: 960, cherries: 640, dates: 400},\n  {month: new Date(2015, 0, 1), apples: 320, bananas: 480, cherries: 640, dates: 400}\n];"}],dek:""}}]};if ('serviceWorker' in navigator) navigator.serviceWorker.register('/service-worker.js');</script><script src=/client/955b4f3a88f31efa4e6f/main.js></script> 

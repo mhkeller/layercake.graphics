@@ -1,0 +1,167 @@
+<!doctype html> <head> <meta charset=utf-8> <meta content="width=device-width" name=viewport> <meta content=#aa1e1e name=theme-color> <base href=/ > <link href=global.css rel=stylesheet> <link href=manifest.json rel=manifest> <link href=favicon.png rel=icon type=image/png> <style>.chart-container{width:100%;height:100%}nav.svelte-eagi17{border-bottom:1px solid rgba(170,30,30,.1);font-weight:300;padding:0 1em;font-size:16px;position:sticky;top:0;background-color:#fff;z-index:9}ul.svelte-eagi17{margin:0;padding:0;display:inline-block;vertical-align:top}ul.svelte-eagi17::after{content:'';display:block;clear:both}li.svelte-eagi17{display:block;float:left;padding:.6em .5em}.svelte-ref-links.svelte-eagi17{float:right}.divider.svelte-eagi17{padding-left:0;padding-right:0}@media(max-width:338px){#dropdown.svelte-eagi17{padding-top:0}}.hero.svelte-eagi17{font-weight:700}a.svelte-eagi17{text-decoration:none}a.svelte-eagi17:hover{text-decoration:underline}main.svelte-1l4vw3j{position:relative;max-width:56em;background-color:#fff;padding:1.5em 2em 2em 2em;margin:0 auto;box-sizing:border-box}.chart-hero.svelte-1l4vw3j{width:100%;height:200px}#pages.svelte-1l4vw3j{margin-top:35px}.dek.svelte-1l4vw3j{padding-top:1em}#contents-container.svelte-1l4vw3j{border-left:3px solid #ccc;margin-top:7px}pre.svelte-1l4vw3j{margin-top:7px 0 0 0;padding-left:14px;overflow-x:auto}#page-nav.svelte-1l4vw3j{margin:0;padding:0}.tab.svelte-1l4vw3j{display:inline-block;vertical-align:top;margin-right:14px;margin-bottom:8px;border-bottom:2px solid transparent;color:#ccc}@media(max-width:475px){#pages.svelte-1l4vw3j{margin-top:21px}.tab.svelte-1l4vw3j{margin-top:8px;margin-bottom:0}}.tab.svelte-1l4vw3j:hover{border-bottom:2px solid #aaa;cursor:pointer}.tab.active{color:#000;pointer-events:none;border-bottom:2px solid #000}</style> <noscript id=sapper-head-start></noscript><title>LayerCake - Stacked column</title><link href=hljs.css rel=stylesheet><noscript id=sapper-head-end></noscript> </head> <body> <div id=sapper><nav class=svelte-eagi17> <ul class=svelte-eagi17> <li class="svelte-eagi17 hero"><a class=svelte-eagi17 href=/ rel=prefetch>LayerCake</a></li> <li class=svelte-eagi17>View...</li> <li class=svelte-eagi17 id=dropdown> <select> <option value="">All</option> <option value=examples/Line>Line + area<option value=examples/Scatter>Scatter<option value=examples/MapSvg>Map<option value=examples/MapLayered>Multilayer map<option value=examples/MultiLine>Multiline<option value=examples/AreaStacked>Stacked area<option value=examples/Column>Column<option value=examples/ColumnStacked>Stacked column<option value=examples/Bar>Bar<option value=examples/BarStacked>Stacked bar</option> </select> </li> </ul> <ul class="svelte-eagi17 svelte-ref-links"> <li class=svelte-eagi17><a class=svelte-eagi17 href=guide rel=prefetch>Guide</a></li> <li class="svelte-eagi17 divider">|</li> <li class=svelte-eagi17><a class=svelte-eagi17 href=https://github.com/mhkeller/layercake rel=nofollow target=_blank>GitHub</a></li> </ul> </nav> <main> <main class=svelte-1l4vw3j> <h1>Stacked column</h1> <div class="svelte-1l4vw3j chart-hero"> <div class=chart-container></div> </div> <div class="svelte-1l4vw3j dek"> </div> <div class=svelte-1l4vw3j id=pages> <ul class=svelte-1l4vw3j id=page-nav> <li class="svelte-1l4vw3j tab active">main.js<li class="svelte-1l4vw3j tab">ColumnStacked.html<li class="svelte-1l4vw3j tab">AxisXScaleBand.html<li class="svelte-1l4vw3j tab">AxisY.html<li class="svelte-1l4vw3j tab">data/fruitOrdinal.js</li> </ul> <div class=svelte-1l4vw3j id=contents-container> <div class=contents style=display:block> <pre class=svelte-1l4vw3j><span class=hljs-keyword>import</span> { <span class=hljs-keyword>default</span> <span class=hljs-keyword>as</span> LayerCake, flatten } <span class=hljs-keyword>from</span> <span class=hljs-string>'layercake'</span>;
+<span class=hljs-keyword>import</span> { stack } <span class=hljs-keyword>from</span> <span class=hljs-string>'d3-shape'</span>;
+<span class=hljs-keyword>import</span> { scaleBand } <span class=hljs-keyword>from</span> <span class=hljs-string>'d3-scale'</span>;
+<span class=hljs-keyword>import</span> fruit <span class=hljs-keyword>from</span> <span class=hljs-string>'../../data/fruitOrdinal.js'</span>;
+<span class=hljs-keyword>import</span> ColumnStacked <span class=hljs-keyword>from</span> <span class=hljs-string>'../ColumnStacked.html'</span>;
+<span class=hljs-keyword>import</span> AxisX <span class=hljs-keyword>from</span> <span class=hljs-string>'../AxisXScaleBand.html'</span>;
+<span class=hljs-keyword>import</span> AxisY <span class=hljs-keyword>from</span> <span class=hljs-string>'../AxisY.html'</span>;
+
+<span class=hljs-keyword>const</span> seriesNames = <span class=hljs-built_in>Object</span>.keys(fruit[<span class=hljs-number>0</span>]).filter(<span class=hljs-function><span class=hljs-params>d</span> =></span> d !== <span class=hljs-string>'year'</span>);
+
+<span class=hljs-keyword>const</span> stackData = stack()
+  .keys(seriesNames);
+
+<span class=hljs-keyword>const</span> series = stackData(fruit);
+
+<span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>formatYTick</span> (<span class=hljs-params>d</span>) </span>{
+  <span class=hljs-keyword>if</span> (d > <span class=hljs-number>999</span>) {
+    <span class=hljs-keyword>return</span> <span class=hljs-built_in>Math</span>.round(d / <span class=hljs-number>1000</span>) + <span class=hljs-string>'k'</span>;
+  }
+  <span class=hljs-keyword>return</span> d;
+}
+
+<span class=hljs-keyword>const</span> myCake = <span class=hljs-keyword>new</span> LayerCake({
+  <span class=hljs-attr>padding</span>: { <span class=hljs-attr>top</span>: <span class=hljs-number>0</span>, <span class=hljs-attr>right</span>: <span class=hljs-number>0</span>, <span class=hljs-attr>bottom</span>: <span class=hljs-number>20</span>, <span class=hljs-attr>left</span>: <span class=hljs-number>20</span> },
+  <span class=hljs-attr>x</span>: <span class=hljs-function><span class=hljs-params>d</span> =></span> d.data.year,
+  <span class=hljs-attr>y</span>: [<span class=hljs-number>0</span>, <span class=hljs-number>1</span>],
+  <span class=hljs-attr>xScale</span>: scaleBand().paddingInner([<span class=hljs-number>0.02</span>]).round(<span class=hljs-literal>true</span>),
+  <span class=hljs-attr>xDomain</span>: [<span class=hljs-string>'2016'</span>, <span class=hljs-string>'2017'</span>, <span class=hljs-string>'2018'</span>, <span class=hljs-string>'2019'</span>],
+  flatten,
+  <span class=hljs-attr>data</span>: series,
+  <span class=hljs-attr>target</span>: <span class=hljs-built_in>document</span>.getElementById(<span class=hljs-string>'my-chart'</span>)
+})
+  .svgLayers([
+    { <span class=hljs-attr>component</span>: AxisX, <span class=hljs-attr>opts</span>: { <span class=hljs-attr>gridlines</span>: <span class=hljs-literal>false</span> } },
+    { <span class=hljs-attr>component</span>: AxisY, <span class=hljs-attr>opts</span>: { <span class=hljs-attr>gridlines</span>: <span class=hljs-literal>false</span>, <span class=hljs-attr>ticks</span>: <span class=hljs-number>3</span>, <span class=hljs-attr>formatTick</span>: formatYTick } },
+    { <span class=hljs-attr>component</span>: ColumnStacked, <span class=hljs-attr>opts</span>: {} }
+  ]);
+
+myCake.render();</pre> </div><div class=contents style=display:none> <pre class=svelte-1l4vw3j>{#each $data as series, i}
+  {#each series as d}
+    <span class=hljs-tag>&lt;<span class=hljs-name>rect</span> <span class=hljs-attr>class</span>=<span class=hljs-string>'group-rect'</span> <span class=hljs-attr>data-id</span>=<span class=hljs-string>"{i}"</span> <span class=hljs-attr>x</span>=<span class=hljs-string>"{x(d)}"</span> <span class=hljs-attr>y</span>=<span class=hljs-string>"{y(d)[1]}"</span> {<span class=hljs-attr>width</span>} <span class=hljs-attr>height</span>=<span class=hljs-string>"{height(d)}"</span><span class=hljs-attr>fill</span>=<span class=hljs-string>{fill(i)}</span>></span><span class=hljs-tag>&lt;/<span class=hljs-name>rect</span>></span>
+  {/each}
+  }
+{/each}
+
+<span class=hljs-tag>&lt;<span class=hljs-name>script</span>></span><span class=javascript>
+<span class=hljs-keyword>export</span> <span class=hljs-keyword>default</span> {
+  <span class=hljs-attr>namespace</span>: <span class=hljs-string>'svg'</span>,
+  data () {
+    <span class=hljs-comment>// TODO, make an actual scale</span>
+    <span class=hljs-keyword>const</span> colors = [<span class=hljs-string>'#0fd3bb'</span>,<span class=hljs-string>'#f77ff4'</span>,<span class=hljs-string>'#8a93ed'</span>, <span class=hljs-string>'#f7848a'</span>];
+    <span class=hljs-keyword>return</span> {
+      <span class=hljs-attr>fill</span>: <span class=hljs-function><span class=hljs-params>i</span> =></span> colors[i]
+    };
+  },
+  <span class=hljs-attr>computed</span>: {
+    <span class=hljs-attr>x</span>: <span class=hljs-function>(<span class=hljs-params>{ $xGet }</span>) =></span> {
+      <span class=hljs-keyword>return</span> <span class=hljs-function>(<span class=hljs-params>d</span>) =></span> {
+        <span class=hljs-keyword>return</span> $xGet(d);
+      };
+    },
+    <span class=hljs-attr>y</span>: <span class=hljs-function>(<span class=hljs-params>{ $yGet }</span>) =></span> {
+      <span class=hljs-keyword>return</span> <span class=hljs-function>(<span class=hljs-params>d</span>) =></span> {
+        <span class=hljs-keyword>return</span> $yGet(d);
+      };
+    },
+    <span class=hljs-attr>width</span>: <span class=hljs-function>(<span class=hljs-params>{ $xScale }</span>) =></span> {
+      <span class=hljs-keyword>return</span> $xScale.bandwidth();
+    },
+    <span class=hljs-attr>height</span>: <span class=hljs-function>(<span class=hljs-params>{ $height, $xScale, y }</span>) =></span> {
+      <span class=hljs-keyword>return</span> <span class=hljs-function>(<span class=hljs-params>d</span>) =></span> {
+        <span class=hljs-keyword>const</span> vals = y(d);
+        <span class=hljs-keyword>return</span> vals[<span class=hljs-number>0</span>] - vals[<span class=hljs-number>1</span>];
+      };
+    }
+  }
+};
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>script</span>></span></pre> </div><div class=contents style=display:none> <pre class=svelte-1l4vw3j><span class=hljs-tag>&lt;<span class=hljs-name>g</span> <span class=hljs-attr>class</span>=<span class=hljs-string>'axis x-axis'</span>></span>
+  {#each $xScale.domain() as tick}
+    <span class=hljs-tag>&lt;<span class=hljs-name>g</span> <span class=hljs-attr>class</span>=<span class=hljs-string>'tick tick-{ tick }'</span> <span class=hljs-attr>transform</span>=<span class=hljs-string>'translate({$xScale(tick)},{$yScale.range()[0]})'</span>></span>
+      {#if opts.gridlines !== false}
+        <span class=hljs-tag>&lt;<span class=hljs-name>line</span> <span class=hljs-attr>y1</span>=<span class=hljs-string>'{$height * -1}'</span> <span class=hljs-attr>y2</span>=<span class=hljs-string>'0'</span> <span class=hljs-attr>x1</span>=<span class=hljs-string>'0'</span> <span class=hljs-attr>x2</span>=<span class=hljs-string>'0'</span>></span><span class=hljs-tag>&lt;/<span class=hljs-name>line</span>></span>
+      {/if}
+      <span class=hljs-tag>&lt;<span class=hljs-name>text</span> <span class=hljs-attr>y</span>=<span class=hljs-string>'16'</span> <span class=hljs-attr>x</span>=<span class=hljs-string>"{$xScale.bandwidth() / 2}"</span>></span>{opts.formatTick ? opts.formatTick(tick) : tick}<span class=hljs-tag>&lt;/<span class=hljs-name>text</span>></span>
+    <span class=hljs-tag>&lt;/<span class=hljs-name>g</span>></span>
+  {/each}
+<span class=hljs-tag>&lt;/<span class=hljs-name>g</span>></span>
+
+<span class=hljs-tag>&lt;<span class=hljs-name>style</span>></span><span class=css>
+  <span class=hljs-selector-class>.tick</span> {
+    <span class=hljs-attribute>font-size</span>: .<span class=hljs-number>725em</span>;
+    <span class=hljs-attribute>font-weight</span>: <span class=hljs-number>200</span>;
+  }
+
+  <span class=hljs-selector-class>.tick</span> <span class=hljs-selector-tag>line</span> {
+    <span class=hljs-attribute>stroke</span>: <span class=hljs-number>#aaa</span>;
+    <span class=hljs-attribute>stroke-dasharray</span>: <span class=hljs-number>2</span>;
+  }
+
+  <span class=hljs-selector-class>.tick</span> <span class=hljs-selector-tag>text</span> {
+    <span class=hljs-attribute>fill</span>: <span class=hljs-number>#666</span>;
+    <span class=hljs-attribute>text-anchor</span>: start;
+  }
+
+  <span class=hljs-selector-class>.tick</span><span class=hljs-selector-class>.tick-0</span> <span class=hljs-selector-tag>line</span> {
+    <span class=hljs-attribute>stroke-dasharray</span>: <span class=hljs-number>0</span>;
+  }
+
+  <span class=hljs-selector-class>.x-axis</span> <span class=hljs-selector-class>.tick</span> <span class=hljs-selector-tag>text</span> {
+    <span class=hljs-attribute>text-anchor</span>: middle;
+  }
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>style</span>></span>
+
+<span class=hljs-tag>&lt;<span class=hljs-name>script</span>></span><span class=actionscript>
+export <span class=hljs-keyword>default</span> {
+  <span class=hljs-keyword>namespace</span>: <span class=hljs-string>'svg'</span>
+};
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>script</span>></span></pre> </div><div class=contents style=display:none> <pre class=svelte-1l4vw3j><span class=hljs-tag>&lt;<span class=hljs-name>g</span> <span class=hljs-attr>class</span>=<span class=hljs-string>'axis y-axis'</span> <span class=hljs-attr>transform</span>=<span class=hljs-string>'translate(-{$padding.left}, 0)'</span>></span>
+  {#each $yScale.ticks(opts.tickNumber || 5) as tick, i}
+    <span class=hljs-tag>&lt;<span class=hljs-name>g</span> <span class=hljs-attr>class</span>=<span class=hljs-string>'tick tick-{tick}'</span> <span class=hljs-attr>transform</span>=<span class=hljs-string>'translate(0, {$yScale(tick)})'</span>></span>
+      {#if opts.gridlines !== false}
+        <span class=hljs-tag>&lt;<span class=hljs-name>line</span> <span class=hljs-attr>x2</span>=<span class=hljs-string>'100%'</span>></span><span class=hljs-tag>&lt;/<span class=hljs-name>line</span>></span>
+      {/if}
+      <span class=hljs-tag>&lt;<span class=hljs-name>text</span> <span class=hljs-attr>y</span>=<span class=hljs-string>'-4'</span>></span>{opts.formatTick ? opts.formatTick(tick) : tick}<span class=hljs-tag>&lt;/<span class=hljs-name>text</span>></span>
+    <span class=hljs-tag>&lt;/<span class=hljs-name>g</span>></span>
+  {/each}
+<span class=hljs-tag>&lt;/<span class=hljs-name>g</span>></span>
+
+<span class=hljs-tag>&lt;<span class=hljs-name>style</span>></span><span class=css>
+  <span class=hljs-selector-class>.tick</span> {
+    <span class=hljs-attribute>font-size</span>: .<span class=hljs-number>725em</span>;
+    <span class=hljs-attribute>font-weight</span>: <span class=hljs-number>200</span>;
+  }
+
+  <span class=hljs-selector-class>.tick</span> <span class=hljs-selector-tag>line</span> {
+    <span class=hljs-attribute>stroke</span>: <span class=hljs-number>#aaa</span>;
+    <span class=hljs-attribute>stroke-dasharray</span>: <span class=hljs-number>2</span>;
+  }
+
+  <span class=hljs-selector-class>.tick</span> <span class=hljs-selector-tag>text</span> {
+    <span class=hljs-attribute>fill</span>: <span class=hljs-number>#666</span>;
+    <span class=hljs-attribute>text-anchor</span>: start;
+  }
+
+  <span class=hljs-selector-class>.tick</span><span class=hljs-selector-class>.tick-0</span> <span class=hljs-selector-tag>line</span> {
+    <span class=hljs-attribute>stroke-dasharray</span>: <span class=hljs-number>0</span>;
+  }
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>style</span>></span>
+
+<span class=hljs-tag>&lt;<span class=hljs-name>script</span>></span><span class=actionscript>
+export <span class=hljs-keyword>default</span> {
+  <span class=hljs-keyword>namespace</span>: <span class=hljs-string>'svg'</span>
+};
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>script</span>></span></pre> </div><div class=contents style=display:none> <pre class=svelte-1l4vw3j><span class=hljs-comment>/* --------------------------------------------
+ *
+ * Example data for stacked charts
+ * from D3 documentation
+ * Adapted from https://github.com/d3/d3-shape/blob/master/README.md#stack
+ *
+ * --------------------------------------------
+ */</span>
+<span class=hljs-keyword>export</span> <span class=hljs-keyword>default</span> [
+  {<span class=hljs-attr>year</span>: <span class=hljs-string>'2019'</span>, <span class=hljs-attr>apples</span>: <span class=hljs-number>3840</span>, <span class=hljs-attr>bananas</span>: <span class=hljs-number>1920</span>, <span class=hljs-attr>cherries</span>: <span class=hljs-number>960</span>, <span class=hljs-attr>dates</span>: <span class=hljs-number>400</span>},
+  {<span class=hljs-attr>year</span>: <span class=hljs-string>'2018'</span>, <span class=hljs-attr>apples</span>: <span class=hljs-number>1600</span>, <span class=hljs-attr>bananas</span>: <span class=hljs-number>1440</span>, <span class=hljs-attr>cherries</span>: <span class=hljs-number>960</span>, <span class=hljs-attr>dates</span>: <span class=hljs-number>400</span>},
+  {<span class=hljs-attr>year</span>: <span class=hljs-string>'2017'</span>, <span class=hljs-attr>apples</span>: <span class=hljs-number>640</span>, <span class=hljs-attr>bananas</span>: <span class=hljs-number>960</span>, <span class=hljs-attr>cherries</span>: <span class=hljs-number>640</span>, <span class=hljs-attr>dates</span>: <span class=hljs-number>400</span>},
+  {<span class=hljs-attr>year</span>: <span class=hljs-string>'2016'</span>, <span class=hljs-attr>apples</span>: <span class=hljs-number>320</span>, <span class=hljs-attr>bananas</span>: <span class=hljs-number>480</span>, <span class=hljs-attr>cherries</span>: <span class=hljs-number>640</span>, <span class=hljs-attr>dates</span>: <span class=hljs-number>400</span>}
+];</pre> </div> </div> </div> </main> </main></div> <script>__SAPPER__={baseUrl:"",preloaded:[{},null,{data:{pages:[{title:"main.js",contents:"import { default as LayerCake, flatten } from 'layercake';\nimport { stack } from 'd3-shape';\nimport { scaleBand } from 'd3-scale';\nimport fruit from '..\u002F..\u002Fdata\u002FfruitOrdinal.js';\nimport ColumnStacked from '..\u002FColumnStacked.html';\nimport AxisX from '..\u002FAxisXScaleBand.html';\nimport AxisY from '..\u002FAxisY.html';\n\nconst seriesNames = Object.keys(fruit[0]).filter(d =\u003E d !== 'year');\n\nconst stackData = stack()\n  .keys(seriesNames);\n\nconst series = stackData(fruit);\n\nfunction formatYTick (d) {\n  if (d \u003E 999) {\n    return Math.round(d \u002F 1000) + 'k';\n  }\n  return d;\n}\n\nconst myCake = new LayerCake({\n  padding: { top: 0, right: 0, bottom: 20, left: 20 },\n  x: d =\u003E d.data.year,\n  y: [0, 1],\n  xScale: scaleBand().paddingInner([0.02]).round(true),\n  xDomain: ['2016', '2017', '2018', '2019'],\n  flatten,\n  data: series,\n  target: document.getElementById('my-chart')\n})\n  .svgLayers([\n    { component: AxisX, opts: { gridlines: false } },\n    { component: AxisY, opts: { gridlines: false, ticks: 3, formatTick: formatYTick } },\n    { component: ColumnStacked, opts: {} }\n  ]);\n\nmyCake.render();"},{title:"ColumnStacked.html",contents:"{#each $data as series, i}\n  {#each series as d}\n    \u003Crect class='group-rect' data-id=\"{i}\" x=\"{x(d)}\" y=\"{y(d)[1]}\" {width} height=\"{height(d)}\"fill={fill(i)}\u003E\u003C\u002Frect\u003E\n  {\u002Feach}\n  }\n{\u002Feach}\n\n\u003Cscript\u003E\nexport default {\n  namespace: 'svg',\n  data () {\n    \u002F\u002F TODO, make an actual scale\n    const colors = ['#0fd3bb','#f77ff4','#8a93ed', '#f7848a'];\n    return {\n      fill: i =\u003E colors[i]\n    };\n  },\n  computed: {\n    x: ({ $xGet }) =\u003E {\n      return (d) =\u003E {\n        return $xGet(d);\n      };\n    },\n    y: ({ $yGet }) =\u003E {\n      return (d) =\u003E {\n        return $yGet(d);\n      };\n    },\n    width: ({ $xScale }) =\u003E {\n      return $xScale.bandwidth();\n    },\n    height: ({ $height, $xScale, y }) =\u003E {\n      return (d) =\u003E {\n        const vals = y(d);\n        return vals[0] - vals[1];\n      };\n    }\n  }\n};\n\u003C\u002Fscript\u003E"},{title:"AxisXScaleBand.html",contents:"\u003Cg class='axis x-axis'\u003E\n  {#each $xScale.domain() as tick}\n    \u003Cg class='tick tick-{ tick }' transform='translate({$xScale(tick)},{$yScale.range()[0]})'\u003E\n      {#if opts.gridlines !== false}\n        \u003Cline y1='{$height * -1}' y2='0' x1='0' x2='0'\u003E\u003C\u002Fline\u003E\n      {\u002Fif}\n      \u003Ctext y='16' x=\"{$xScale.bandwidth() \u002F 2}\"\u003E{opts.formatTick ? opts.formatTick(tick) : tick}\u003C\u002Ftext\u003E\n    \u003C\u002Fg\u003E\n  {\u002Feach}\n\u003C\u002Fg\u003E\n\n\u003Cstyle\u003E\n  .tick {\n    font-size: .725em;\n    font-weight: 200;\n  }\n\n  .tick line {\n    stroke: #aaa;\n    stroke-dasharray: 2;\n  }\n\n  .tick text {\n    fill: #666;\n    text-anchor: start;\n  }\n\n  .tick.tick-0 line {\n    stroke-dasharray: 0;\n  }\n\n  .x-axis .tick text {\n    text-anchor: middle;\n  }\n\u003C\u002Fstyle\u003E\n\n\u003Cscript\u003E\nexport default {\n  namespace: 'svg'\n};\n\u003C\u002Fscript\u003E"},{title:"AxisY.html",contents:"\u003Cg class='axis y-axis' transform='translate(-{$padding.left}, 0)'\u003E\n  {#each $yScale.ticks(opts.tickNumber || 5) as tick, i}\n    \u003Cg class='tick tick-{tick}' transform='translate(0, {$yScale(tick)})'\u003E\n      {#if opts.gridlines !== false}\n        \u003Cline x2='100%'\u003E\u003C\u002Fline\u003E\n      {\u002Fif}\n      \u003Ctext y='-4'\u003E{opts.formatTick ? opts.formatTick(tick) : tick}\u003C\u002Ftext\u003E\n    \u003C\u002Fg\u003E\n  {\u002Feach}\n\u003C\u002Fg\u003E\n\n\u003Cstyle\u003E\n  .tick {\n    font-size: .725em;\n    font-weight: 200;\n  }\n\n  .tick line {\n    stroke: #aaa;\n    stroke-dasharray: 2;\n  }\n\n  .tick text {\n    fill: #666;\n    text-anchor: start;\n  }\n\n  .tick.tick-0 line {\n    stroke-dasharray: 0;\n  }\n\u003C\u002Fstyle\u003E\n\n\u003Cscript\u003E\nexport default {\n  namespace: 'svg'\n};\n\u003C\u002Fscript\u003E"},{title:"data\u002FfruitOrdinal.js",contents:"\u002F* --------------------------------------------\n *\n * Example data for stacked charts\n * from D3 documentation\n * Adapted from https:\u002F\u002Fgithub.com\u002Fd3\u002Fd3-shape\u002Fblob\u002Fmaster\u002FREADME.md#stack\n *\n * --------------------------------------------\n *\u002F\nexport default [\n  {year: '2019', apples: 3840, bananas: 1920, cherries: 960, dates: 400},\n  {year: '2018', apples: 1600, bananas: 1440, cherries: 960, dates: 400},\n  {year: '2017', apples: 640, bananas: 960, cherries: 640, dates: 400},\n  {year: '2016', apples: 320, bananas: 480, cherries: 640, dates: 400}\n];"}],dek:""}}]};if ('serviceWorker' in navigator) navigator.serviceWorker.register('/service-worker.js');</script><script src=/client/955b4f3a88f31efa4e6f/main.js></script> 

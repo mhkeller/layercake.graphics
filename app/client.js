@@ -10,6 +10,7 @@ init({
 	target: document.querySelector('#sapper'),
 	manifest,
 	store: data => {
+		console.log({ data });
 		store.set(data);
 		window.store = store;
 

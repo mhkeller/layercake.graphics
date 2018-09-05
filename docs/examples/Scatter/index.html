@@ -1,0 +1,343 @@
+<!doctype html> <head> <meta charset=utf-8> <meta content="width=device-width" name=viewport> <meta content=#aa1e1e name=theme-color> <base href=/ > <link href=global.css rel=stylesheet> <link href=manifest.json rel=manifest> <link href=favicon.png rel=icon type=image/png> <style>.chart-container{width:100%;height:100%}nav.svelte-eagi17{border-bottom:1px solid rgba(170,30,30,.1);font-weight:300;padding:0 1em;font-size:16px;position:sticky;top:0;background-color:#fff;z-index:9}ul.svelte-eagi17{margin:0;padding:0;display:inline-block;vertical-align:top}ul.svelte-eagi17::after{content:'';display:block;clear:both}li.svelte-eagi17{display:block;float:left;padding:.6em .5em}.svelte-ref-links.svelte-eagi17{float:right}.divider.svelte-eagi17{padding-left:0;padding-right:0}@media(max-width:338px){#dropdown.svelte-eagi17{padding-top:0}}.hero.svelte-eagi17{font-weight:700}a.svelte-eagi17{text-decoration:none}a.svelte-eagi17:hover{text-decoration:underline}main.svelte-1l4vw3j{position:relative;max-width:56em;background-color:#fff;padding:1.5em 2em 2em 2em;margin:0 auto;box-sizing:border-box}.chart-hero.svelte-1l4vw3j{width:100%;height:200px}#pages.svelte-1l4vw3j{margin-top:35px}.dek.svelte-1l4vw3j{padding-top:1em}#contents-container.svelte-1l4vw3j{border-left:3px solid #ccc;margin-top:7px}pre.svelte-1l4vw3j{margin-top:7px 0 0 0;padding-left:14px;overflow-x:auto}#page-nav.svelte-1l4vw3j{margin:0;padding:0}.tab.svelte-1l4vw3j{display:inline-block;vertical-align:top;margin-right:14px;margin-bottom:8px;border-bottom:2px solid transparent;color:#ccc}@media(max-width:475px){#pages.svelte-1l4vw3j{margin-top:21px}.tab.svelte-1l4vw3j{margin-top:8px;margin-bottom:0}}.tab.svelte-1l4vw3j:hover{border-bottom:2px solid #aaa;cursor:pointer}.tab.active{color:#000;pointer-events:none;border-bottom:2px solid #000}</style> <noscript id=sapper-head-start></noscript><title>LayerCake - Scatter (svg + canvas + voronoi)</title><link href=hljs.css rel=stylesheet><noscript id=sapper-head-end></noscript> </head> <body> <div id=sapper><nav class=svelte-eagi17> <ul class=svelte-eagi17> <li class="svelte-eagi17 hero"><a class=svelte-eagi17 href=/ rel=prefetch>LayerCake</a></li> <li class=svelte-eagi17>View...</li> <li class=svelte-eagi17 id=dropdown> <select> <option value="">All</option> <option value=examples/Line>Line + area<option value=examples/Scatter>Scatter<option value=examples/MapSvg>Map<option value=examples/MapLayered>Multilayer map<option value=examples/MultiLine>Multiline<option value=examples/AreaStacked>Stacked area<option value=examples/Column>Column<option value=examples/ColumnStacked>Stacked column<option value=examples/Bar>Bar<option value=examples/BarStacked>Stacked bar</option> </select> </li> </ul> <ul class="svelte-eagi17 svelte-ref-links"> <li class=svelte-eagi17><a class=svelte-eagi17 href=guide rel=prefetch>Guide</a></li> <li class="svelte-eagi17 divider">|</li> <li class=svelte-eagi17><a class=svelte-eagi17 href=https://github.com/mhkeller/layercake rel=nofollow target=_blank>GitHub</a></li> </ul> </nav> <main> <main class=svelte-1l4vw3j> <h1>Scatter (svg + canvas + voronoi)</h1> <div class="svelte-1l4vw3j chart-hero"> <div class=chart-container></div> </div> <div class="svelte-1l4vw3j dek"> </div> <div class=svelte-1l4vw3j id=pages> <ul class=svelte-1l4vw3j id=page-nav> <li class="svelte-1l4vw3j tab active">main.js<li class="svelte-1l4vw3j tab">Scatter.html<li class="svelte-1l4vw3j tab">Voronoi.html<li class="svelte-1l4vw3j tab">AxisX.html<li class="svelte-1l4vw3j tab">AxisY.html<li class="svelte-1l4vw3j tab">data/points.js</li> </ul> <div class=svelte-1l4vw3j id=contents-container> <div class=contents style=display:block> <pre class=svelte-1l4vw3j><span class=hljs-keyword>import</span> LayerCake <span class=hljs-keyword>from</span> <span class=hljs-string>'layercake'</span>;
+<span class=hljs-keyword>import</span> points <span class=hljs-keyword>from</span> <span class=hljs-string>'../../data/points.js'</span>;
+<span class=hljs-keyword>import</span> Scatter <span class=hljs-keyword>from</span> <span class=hljs-string>'../Scatter.html'</span>;
+<span class=hljs-keyword>import</span> Voronoi <span class=hljs-keyword>from</span> <span class=hljs-string>'../Voronoi.html'</span>;
+<span class=hljs-keyword>import</span> AxisX <span class=hljs-keyword>from</span> <span class=hljs-string>'../AxisX.html'</span>;
+<span class=hljs-keyword>import</span> AxisY <span class=hljs-keyword>from</span> <span class=hljs-string>'../AxisY.html'</span>;
+
+<span class=hljs-keyword>const</span> r = <span class=hljs-number>3</span>;
+<span class=hljs-keyword>const</span> padding = <span class=hljs-number>4</span>;
+
+<span class=hljs-keyword>const</span> myCake = <span class=hljs-keyword>new</span> LayerCake({
+  <span class=hljs-attr>padding</span>: { <span class=hljs-attr>top</span>: <span class=hljs-number>0</span>, <span class=hljs-attr>right</span>: <span class=hljs-number>5</span>, <span class=hljs-attr>bottom</span>: <span class=hljs-number>20</span>, <span class=hljs-attr>left</span>: <span class=hljs-number>25</span> },
+  <span class=hljs-attr>x</span>: <span class=hljs-string>'myX'</span>,
+  <span class=hljs-attr>y</span>: <span class=hljs-string>'myY'</span>,
+  <span class=hljs-attr>xPadding</span>: [padding, padding],
+  <span class=hljs-attr>yPadding</span>: [padding, padding],
+  <span class=hljs-attr>data</span>: points,
+  <span class=hljs-attr>target</span>: <span class=hljs-built_in>document</span>.getElementById(<span class=hljs-string>'my-chart'</span>),
+  <span class=hljs-attr>custom</span>: {
+    r
+  }
+})
+  .canvasLayers([
+    { <span class=hljs-attr>component</span>: Scatter, <span class=hljs-attr>opts</span>: { <span class=hljs-attr>color</span>: <span class=hljs-string>'#8a93ed'</span> } }
+  ])
+  .svgLayers([
+    { <span class=hljs-attr>component</span>: AxisX, <span class=hljs-attr>opts</span>: {} },
+    { <span class=hljs-attr>component</span>: AxisY, <span class=hljs-attr>opts</span>: {} },
+    { <span class=hljs-attr>component</span>: Voronoi, <span class=hljs-attr>opts</span>: {} }
+  ]);
+
+myCake.render();</pre> </div><div class=contents style=display:none> <pre class=svelte-1l4vw3j><span class=hljs-tag>&lt;<span class=hljs-name>script</span>></span><span class=javascript>
+<span class=hljs-keyword>import</span> { scaleCanvas } <span class=hljs-keyword>from</span> <span class=hljs-string>'LayerCake'</span>;
+<span class=hljs-keyword>export</span> <span class=hljs-keyword>default</span> {
+  <span class=hljs-comment>/* --------------------------------------------
+   * Put our canvas drawing functions inside of onstate
+   * which will change on first load and whenever
+   * the store update fires
+   */</span>
+  onstate () {
+    <span class=hljs-keyword>const</span> { canvas, ctx, opts } = <span class=hljs-keyword>this</span>.get();
+    <span class=hljs-keyword>const</span> { width, height, xGet, yGet, data, custom } = <span class=hljs-keyword>this</span>.store.get();
+
+    <span class=hljs-comment>/* --------------------------------------------
+     * If you were to have multiple canvas layers
+     * maybe for some artistic layering purposes
+     * put these reset functions in the first layer, not each one
+     * since they should only run once per update
+     */</span>
+    scaleCanvas(canvas, ctx, width, height);
+    ctx.clearRect(<span class=hljs-number>0</span>, <span class=hljs-number>0</span>, width, height);
+
+    <span class=hljs-comment>/* --------------------------------------------
+     * Draw our scatterplot
+     */</span>
+    data.forEach(<span class=hljs-function><span class=hljs-params>d</span> =></span> {
+      ctx.beginPath();
+      ctx.arc(xGet(d), yGet(d), custom.r, <span class=hljs-number>0</span>, <span class=hljs-number>2</span> * <span class=hljs-built_in>Math</span>.PI, <span class=hljs-literal>false</span>);
+      ctx.fillStyle = opts.color;
+      ctx.fill();
+    });
+  }
+};
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>script</span>></span></pre> </div><div class=contents style=display:none> <pre class=svelte-1l4vw3j>{#each points as point, i}
+  <span class=hljs-tag>&lt;<span class=hljs-name>path</span> <span class=hljs-attr>class</span>=<span class=hljs-string>"voronoi-cell"</span> <span class=hljs-attr>d</span>=<span class=hljs-string>{voronoi.renderCell(i)}</span> <span class=hljs-attr>on:mouseover</span>=<span class=hljs-string>"log(event, point)"</span>></span><span class=hljs-tag>&lt;/<span class=hljs-name>path</span>></span>
+{/each}
+
+<span class=hljs-tag>&lt;<span class=hljs-name>style</span>></span><span class=css>
+  <span class=hljs-selector-class>.voronoi-cell</span> {
+    <span class=hljs-attribute>fill</span>: none;
+    <span class=hljs-attribute>stroke</span>: none;
+    <span class=hljs-attribute>pointer-events</span>: all;
+  }
+
+  <span class=hljs-selector-class>.voronoi-cell</span><span class=hljs-selector-pseudo>:hover</span> {
+    <span class=hljs-attribute>stroke</span>: <span class=hljs-number>#000</span>;
+  }
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>style</span>></span>
+
+<span class=hljs-tag>&lt;<span class=hljs-name>script</span>></span><span class=javascript>
+<span class=hljs-keyword>import</span> { Delaunay } <span class=hljs-keyword>from</span> <span class=hljs-string>'d3-delaunay'</span>;
+<span class=hljs-keyword>import</span> * <span class=hljs-keyword>as</span> _ <span class=hljs-keyword>from</span> <span class=hljs-string>'underscore'</span>;
+
+<span class=hljs-keyword>export</span> <span class=hljs-keyword>default</span> {
+  <span class=hljs-attr>namespace</span>: <span class=hljs-string>'svg'</span>,
+  <span class=hljs-attr>computed</span>: {
+    <span class=hljs-attr>points</span>: <span class=hljs-function>(<span class=hljs-params>{ $data, $xGet, $yGet }</span>) =></span> {
+      <span class=hljs-keyword>const</span> points = _.chain($data)
+        .map(<span class=hljs-function><span class=hljs-params>d</span> =></span> {
+          <span class=hljs-keyword>const</span> point = [$xGet(d), $yGet(d)];
+          point.data = d;
+          <span class=hljs-keyword>return</span> point;
+        })
+        .uniq(<span class=hljs-function><span class=hljs-params>d</span> =></span> d.join(<span class=hljs-string>''</span>))
+        .value();
+      <span class=hljs-keyword>return</span> points;
+    },
+    <span class=hljs-attr>voronoi</span>: <span class=hljs-function>(<span class=hljs-params>{ $width, $height, $padding, points }</span>) =></span> {
+      <span class=hljs-keyword>const</span> delaunay = Delaunay.from(points);
+      <span class=hljs-keyword>const</span> voronoi = delaunay.voronoi([<span class=hljs-number>0</span>, <span class=hljs-number>0</span>, $width, $height]);
+      <span class=hljs-keyword>return</span> voronoi;
+    }
+  },
+  <span class=hljs-attr>methods</span>: {
+    log (e, point) {
+      <span class=hljs-built_in>console</span>.log(point, point.data);
+    }
+  }
+};
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>script</span>></span></pre> </div><div class=contents style=display:none> <pre class=svelte-1l4vw3j><span class=hljs-tag>&lt;<span class=hljs-name>g</span> <span class=hljs-attr>class</span>=<span class=hljs-string>'axis x-axis'</span>></span>
+  {#each ticks as tick, i}
+    <span class=hljs-tag>&lt;<span class=hljs-name>g</span> <span class=hljs-attr>class</span>=<span class=hljs-string>'tick tick-{ tick }'</span> <span class=hljs-attr>transform</span>=<span class=hljs-string>'translate({$xScale(tick)},{$yScale.range()[0]})'</span>></span>
+      {#if opts.gridlines !== false}
+        <span class=hljs-tag>&lt;<span class=hljs-name>line</span> <span class=hljs-attr>y1</span>=<span class=hljs-string>'{$height * -1}'</span> <span class=hljs-attr>y2</span>=<span class=hljs-string>'0'</span> <span class=hljs-attr>x1</span>=<span class=hljs-string>'0'</span> <span class=hljs-attr>x2</span>=<span class=hljs-string>'0'</span>></span><span class=hljs-tag>&lt;/<span class=hljs-name>line</span>></span>
+      {/if}
+      <span class=hljs-tag>&lt;<span class=hljs-name>text</span> <span class=hljs-attr>y</span>=<span class=hljs-string>'16'</span> <span class=hljs-attr>text-anchor</span>=<span class=hljs-string>'{i === 0 ? '</span><span class=hljs-attr>start</span>' <span class=hljs-attr>:</span> <span class=hljs-attr>i</span> === <span class=hljs-string>ticks.length</span> <span class=hljs-attr>-</span> <span class=hljs-attr>1</span> ? '<span class=hljs-attr>end</span>' <span class=hljs-attr>:</span> '<span class=hljs-attr>middle</span>'}'></span>{opts.formatTick ? opts.formatTick(tick) : tick}<span class=hljs-tag>&lt;/<span class=hljs-name>text</span>></span>
+    <span class=hljs-tag>&lt;/<span class=hljs-name>g</span>></span>
+  {/each}
+  {#if opts.baseline === true}
+    <span class=hljs-tag>&lt;<span class=hljs-name>line</span> <span class=hljs-attr>class</span>=<span class=hljs-string>"baseline"</span> <span class=hljs-attr>y1</span>=<span class=hljs-string>'{$height - 0.5}'</span> <span class=hljs-attr>y2</span>=<span class=hljs-string>'{$height - 0.5}'</span> <span class=hljs-attr>x1</span>=<span class=hljs-string>'0'</span> <span class=hljs-attr>x2</span>=<span class=hljs-string>'{$width - 1}'</span>></span><span class=hljs-tag>&lt;/<span class=hljs-name>line</span>></span>
+  {/if}
+<span class=hljs-tag>&lt;/<span class=hljs-name>g</span>></span>
+
+<span class=hljs-tag>&lt;<span class=hljs-name>style</span>></span><span class=css>
+  <span class=hljs-selector-class>.tick</span> {
+    <span class=hljs-attribute>font-size</span>: .<span class=hljs-number>725em</span>;
+    <span class=hljs-attribute>font-weight</span>: <span class=hljs-number>200</span>;
+  }
+
+  <span class=hljs-selector-tag>line</span>,
+  <span class=hljs-selector-class>.tick</span> <span class=hljs-selector-tag>line</span> {
+    <span class=hljs-attribute>stroke</span>: <span class=hljs-number>#aaa</span>;
+    <span class=hljs-attribute>stroke-dasharray</span>: <span class=hljs-number>2</span>;
+  }
+
+  <span class=hljs-selector-class>.tick</span> <span class=hljs-selector-tag>text</span> {
+    <span class=hljs-attribute>fill</span>: <span class=hljs-number>#666</span>;
+  }
+
+  <span class=hljs-selector-class>.baseline</span> {
+    <span class=hljs-attribute>stroke-dasharray</span>: <span class=hljs-number>0</span>;
+  }
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>style</span>></span>
+
+<span class=hljs-tag>&lt;<span class=hljs-name>script</span>></span><span class=javascript>
+<span class=hljs-keyword>export</span> <span class=hljs-keyword>default</span> {
+  <span class=hljs-attr>namespace</span>: <span class=hljs-string>'svg'</span>,
+  <span class=hljs-attr>computed</span>: {
+    <span class=hljs-attr>ticks</span>: <span class=hljs-function>(<span class=hljs-params>{ $xScale, opts }</span>) =></span> {
+      <span class=hljs-keyword>return</span> $xScale.ticks(opts.tickNumber);
+    }
+  }
+};
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>script</span>></span></pre> </div><div class=contents style=display:none> <pre class=svelte-1l4vw3j><span class=hljs-tag>&lt;<span class=hljs-name>g</span> <span class=hljs-attr>class</span>=<span class=hljs-string>'axis y-axis'</span> <span class=hljs-attr>transform</span>=<span class=hljs-string>'translate(-{$padding.left}, 0)'</span>></span>
+  {#each $yScale.ticks(opts.tickNumber || 5) as tick, i}
+    <span class=hljs-tag>&lt;<span class=hljs-name>g</span> <span class=hljs-attr>class</span>=<span class=hljs-string>'tick tick-{tick}'</span> <span class=hljs-attr>transform</span>=<span class=hljs-string>'translate(0, {$yScale(tick)})'</span>></span>
+      {#if opts.gridlines !== false}
+        <span class=hljs-tag>&lt;<span class=hljs-name>line</span> <span class=hljs-attr>x2</span>=<span class=hljs-string>'100%'</span>></span><span class=hljs-tag>&lt;/<span class=hljs-name>line</span>></span>
+      {/if}
+      <span class=hljs-tag>&lt;<span class=hljs-name>text</span> <span class=hljs-attr>y</span>=<span class=hljs-string>'-4'</span>></span>{opts.formatTick ? opts.formatTick(tick) : tick}<span class=hljs-tag>&lt;/<span class=hljs-name>text</span>></span>
+    <span class=hljs-tag>&lt;/<span class=hljs-name>g</span>></span>
+  {/each}
+<span class=hljs-tag>&lt;/<span class=hljs-name>g</span>></span>
+
+<span class=hljs-tag>&lt;<span class=hljs-name>style</span>></span><span class=css>
+  <span class=hljs-selector-class>.tick</span> {
+    <span class=hljs-attribute>font-size</span>: .<span class=hljs-number>725em</span>;
+    <span class=hljs-attribute>font-weight</span>: <span class=hljs-number>200</span>;
+  }
+
+  <span class=hljs-selector-class>.tick</span> <span class=hljs-selector-tag>line</span> {
+    <span class=hljs-attribute>stroke</span>: <span class=hljs-number>#aaa</span>;
+    <span class=hljs-attribute>stroke-dasharray</span>: <span class=hljs-number>2</span>;
+  }
+
+  <span class=hljs-selector-class>.tick</span> <span class=hljs-selector-tag>text</span> {
+    <span class=hljs-attribute>fill</span>: <span class=hljs-number>#666</span>;
+    <span class=hljs-attribute>text-anchor</span>: start;
+  }
+
+  <span class=hljs-selector-class>.tick</span><span class=hljs-selector-class>.tick-0</span> <span class=hljs-selector-tag>line</span> {
+    <span class=hljs-attribute>stroke-dasharray</span>: <span class=hljs-number>0</span>;
+  }
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>style</span>></span>
+
+<span class=hljs-tag>&lt;<span class=hljs-name>script</span>></span><span class=actionscript>
+export <span class=hljs-keyword>default</span> {
+  <span class=hljs-keyword>namespace</span>: <span class=hljs-string>'svg'</span>
+};
+</span><span class=hljs-tag>&lt;/<span class=hljs-name>script</span>></span></pre> </div><div class=contents style=display:none> <pre class=svelte-1l4vw3j><span class=hljs-keyword>export</span> <span class=hljs-keyword>default</span> [
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1979</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>7.19</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1980</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>7.83</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1981</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>7.24</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1982</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>7.44</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1983</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>7.51</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1984</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>7.1</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1985</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>6.91</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1986</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>7.53</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1987</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>7.47</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1988</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>7.48</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1989</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>7.03</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1990</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>6.23</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1991</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>6.54</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1992</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>7.54</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1993</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>6.5</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1994</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>7.18</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1995</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>6.12</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1996</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>7.87</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1997</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>6.73</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1998</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>6.55</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>1999</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>6.23</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>2000</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>6.31</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>2001</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>6.74</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>2002</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>5.95</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>2003</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>6.13</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>2004</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>6.04</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>2005</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>5.56</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>2006</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>5.91</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>2007</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>4.29</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>2008</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>4.72</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>2009</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>5.38</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>2010</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>4.92</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>2011</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>4.61</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>2012</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>3.62</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>2013</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>5.35</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>2014</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>5.28</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>2015</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>4.63</span>
+  },
+  {
+    <span class=hljs-attr>myX</span>: <span class=hljs-number>2016</span>,
+    <span class=hljs-attr>myY</span>: <span class=hljs-number>4.72</span>
+  }
+];</pre> </div> </div> </div> </main> </main></div> <script>__SAPPER__={baseUrl:"",preloaded:[{},null,{data:{pages:[{title:"main.js",contents:"import LayerCake from 'layercake';\nimport points from '..\u002F..\u002Fdata\u002Fpoints.js';\nimport Scatter from '..\u002FScatter.html';\nimport Voronoi from '..\u002FVoronoi.html';\nimport AxisX from '..\u002FAxisX.html';\nimport AxisY from '..\u002FAxisY.html';\n\nconst r = 3;\nconst padding = 4;\n\nconst myCake = new LayerCake({\n  padding: { top: 0, right: 5, bottom: 20, left: 25 },\n  x: 'myX',\n  y: 'myY',\n  xPadding: [padding, padding],\n  yPadding: [padding, padding],\n  data: points,\n  target: document.getElementById('my-chart'),\n  custom: {\n    r\n  }\n})\n  .canvasLayers([\n    { component: Scatter, opts: { color: '#8a93ed' } }\n  ])\n  .svgLayers([\n    { component: AxisX, opts: {} },\n    { component: AxisY, opts: {} },\n    { component: Voronoi, opts: {} }\n  ]);\n\nmyCake.render();"},{title:"Scatter.html",contents:"\u003Cscript\u003E\nimport { scaleCanvas } from 'LayerCake';\nexport default {\n  \u002F* --------------------------------------------\n   * Put our canvas drawing functions inside of onstate\n   * which will change on first load and whenever\n   * the store update fires\n   *\u002F\n  onstate () {\n    const { canvas, ctx, opts } = this.get();\n    const { width, height, xGet, yGet, data, custom } = this.store.get();\n\n    \u002F* --------------------------------------------\n     * If you were to have multiple canvas layers\n     * maybe for some artistic layering purposes\n     * put these reset functions in the first layer, not each one\n     * since they should only run once per update\n     *\u002F\n    scaleCanvas(canvas, ctx, width, height);\n    ctx.clearRect(0, 0, width, height);\n\n    \u002F* --------------------------------------------\n     * Draw our scatterplot\n     *\u002F\n    data.forEach(d =\u003E {\n      ctx.beginPath();\n      ctx.arc(xGet(d), yGet(d), custom.r, 0, 2 * Math.PI, false);\n      ctx.fillStyle = opts.color;\n      ctx.fill();\n    });\n  }\n};\n\u003C\u002Fscript\u003E"},{title:"Voronoi.html",contents:"{#each points as point, i}\n  \u003Cpath class=\"voronoi-cell\" d={voronoi.renderCell(i)} on:mouseover=\"log(event, point)\"\u003E\u003C\u002Fpath\u003E\n{\u002Feach}\n\n\u003Cstyle\u003E\n  .voronoi-cell {\n    fill: none;\n    stroke: none;\n    pointer-events: all;\n  }\n\n  .voronoi-cell:hover {\n    stroke: #000;\n  }\n\u003C\u002Fstyle\u003E\n\n\u003Cscript\u003E\nimport { Delaunay } from 'd3-delaunay';\nimport * as _ from 'underscore';\n\nexport default {\n  namespace: 'svg',\n  computed: {\n    points: ({ $data, $xGet, $yGet }) =\u003E {\n      const points = _.chain($data)\n        .map(d =\u003E {\n          const point = [$xGet(d), $yGet(d)];\n          point.data = d;\n          return point;\n        })\n        .uniq(d =\u003E d.join(''))\n        .value();\n      return points;\n    },\n    voronoi: ({ $width, $height, $padding, points }) =\u003E {\n      const delaunay = Delaunay.from(points);\n      const voronoi = delaunay.voronoi([0, 0, $width, $height]);\n      return voronoi;\n    }\n  },\n  methods: {\n    log (e, point) {\n      console.log(point, point.data);\n    }\n  }\n};\n\u003C\u002Fscript\u003E"},{title:"AxisX.html",contents:"\u003Cg class='axis x-axis'\u003E\n  {#each ticks as tick, i}\n    \u003Cg class='tick tick-{ tick }' transform='translate({$xScale(tick)},{$yScale.range()[0]})'\u003E\n      {#if opts.gridlines !== false}\n        \u003Cline y1='{$height * -1}' y2='0' x1='0' x2='0'\u003E\u003C\u002Fline\u003E\n      {\u002Fif}\n      \u003Ctext y='16' text-anchor='{i === 0 ? 'start' : i === ticks.length - 1 ? 'end' : 'middle'}'\u003E{opts.formatTick ? opts.formatTick(tick) : tick}\u003C\u002Ftext\u003E\n    \u003C\u002Fg\u003E\n  {\u002Feach}\n  {#if opts.baseline === true}\n    \u003Cline class=\"baseline\" y1='{$height - 0.5}' y2='{$height - 0.5}' x1='0' x2='{$width - 1}'\u003E\u003C\u002Fline\u003E\n  {\u002Fif}\n\u003C\u002Fg\u003E\n\n\u003Cstyle\u003E\n  .tick {\n    font-size: .725em;\n    font-weight: 200;\n  }\n\n  line,\n  .tick line {\n    stroke: #aaa;\n    stroke-dasharray: 2;\n  }\n\n  .tick text {\n    fill: #666;\n  }\n\n  .baseline {\n    stroke-dasharray: 0;\n  }\n\u003C\u002Fstyle\u003E\n\n\u003Cscript\u003E\nexport default {\n  namespace: 'svg',\n  computed: {\n    ticks: ({ $xScale, opts }) =\u003E {\n      return $xScale.ticks(opts.tickNumber);\n    }\n  }\n};\n\u003C\u002Fscript\u003E"},{title:"AxisY.html",contents:"\u003Cg class='axis y-axis' transform='translate(-{$padding.left}, 0)'\u003E\n  {#each $yScale.ticks(opts.tickNumber || 5) as tick, i}\n    \u003Cg class='tick tick-{tick}' transform='translate(0, {$yScale(tick)})'\u003E\n      {#if opts.gridlines !== false}\n        \u003Cline x2='100%'\u003E\u003C\u002Fline\u003E\n      {\u002Fif}\n      \u003Ctext y='-4'\u003E{opts.formatTick ? opts.formatTick(tick) : tick}\u003C\u002Ftext\u003E\n    \u003C\u002Fg\u003E\n  {\u002Feach}\n\u003C\u002Fg\u003E\n\n\u003Cstyle\u003E\n  .tick {\n    font-size: .725em;\n    font-weight: 200;\n  }\n\n  .tick line {\n    stroke: #aaa;\n    stroke-dasharray: 2;\n  }\n\n  .tick text {\n    fill: #666;\n    text-anchor: start;\n  }\n\n  .tick.tick-0 line {\n    stroke-dasharray: 0;\n  }\n\u003C\u002Fstyle\u003E\n\n\u003Cscript\u003E\nexport default {\n  namespace: 'svg'\n};\n\u003C\u002Fscript\u003E"},{title:"data\u002Fpoints.js",contents:"export default [\n  {\n    myX: 1979,\n    myY: 7.19\n  },\n  {\n    myX: 1980,\n    myY: 7.83\n  },\n  {\n    myX: 1981,\n    myY: 7.24\n  },\n  {\n    myX: 1982,\n    myY: 7.44\n  },\n  {\n    myX: 1983,\n    myY: 7.51\n  },\n  {\n    myX: 1984,\n    myY: 7.1\n  },\n  {\n    myX: 1985,\n    myY: 6.91\n  },\n  {\n    myX: 1986,\n    myY: 7.53\n  },\n  {\n    myX: 1987,\n    myY: 7.47\n  },\n  {\n    myX: 1988,\n    myY: 7.48\n  },\n  {\n    myX: 1989,\n    myY: 7.03\n  },\n  {\n    myX: 1990,\n    myY: 6.23\n  },\n  {\n    myX: 1991,\n    myY: 6.54\n  },\n  {\n    myX: 1992,\n    myY: 7.54\n  },\n  {\n    myX: 1993,\n    myY: 6.5\n  },\n  {\n    myX: 1994,\n    myY: 7.18\n  },\n  {\n    myX: 1995,\n    myY: 6.12\n  },\n  {\n    myX: 1996,\n    myY: 7.87\n  },\n  {\n    myX: 1997,\n    myY: 6.73\n  },\n  {\n    myX: 1998,\n    myY: 6.55\n  },\n  {\n    myX: 1999,\n    myY: 6.23\n  },\n  {\n    myX: 2000,\n    myY: 6.31\n  },\n  {\n    myX: 2001,\n    myY: 6.74\n  },\n  {\n    myX: 2002,\n    myY: 5.95\n  },\n  {\n    myX: 2003,\n    myY: 6.13\n  },\n  {\n    myX: 2004,\n    myY: 6.04\n  },\n  {\n    myX: 2005,\n    myY: 5.56\n  },\n  {\n    myX: 2006,\n    myY: 5.91\n  },\n  {\n    myX: 2007,\n    myY: 4.29\n  },\n  {\n    myX: 2008,\n    myY: 4.72\n  },\n  {\n    myX: 2009,\n    myY: 5.38\n  },\n  {\n    myX: 2010,\n    myY: 4.92\n  },\n  {\n    myX: 2011,\n    myY: 4.61\n  },\n  {\n    myX: 2012,\n    myY: 3.62\n  },\n  {\n    myX: 2013,\n    myY: 5.35\n  },\n  {\n    myX: 2014,\n    myY: 5.28\n  },\n  {\n    myX: 2015,\n    myY: 4.63\n  },\n  {\n    myX: 2016,\n    myY: 4.72\n  }\n];"}],dek:""}}]};if ('serviceWorker' in navigator) navigator.serviceWorker.register('/service-worker.js');</script><script src=/client/955b4f3a88f31efa4e6f/main.js></script> 
