@@ -17,9 +17,10 @@ const stackData = stack()
 const series = stackData(fruit);
 
 function formatXTick (d) {
-	const parts = String(d).split('.');
-	parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	return parts.join('.');
+	if (d > 999) {
+		return Math.round(d / 1000) + 'k';
+	}
+	return d;
 }
 
 export default {
@@ -35,7 +36,7 @@ export default {
 			target: this.refs.chart
 		})
 			.svgLayers([
-				{ component: AxisX, opts: { formatTick: formatXTick, baseline: true } },
+				{ component: AxisX, opts: { formatTick: formatXTick, baseline: true, snapTicks: true } },
 				{ component: AxisY, opts: { gridlines: false } },
 				{ component: BarStacked, opts: {} }
 			]);

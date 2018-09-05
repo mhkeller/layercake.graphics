@@ -4,11 +4,11 @@
 			{#if opts.gridlines !== false}
 				<line y1='{$height * -1}' y2='0' x1='0' x2='0'></line>
 			{/if}
-			<text y='16' text-anchor='{i === 0 ? 'start' : i === ticks.length - 1 ? 'end' : 'middle'}'>{opts.formatTick ? opts.formatTick(tick) : tick}</text>
+			<text y='16' text-anchor='{textAnchor(i)}'>{opts.formatTick ? opts.formatTick(tick) : tick}</text>
 		</g>
 	{/each}
 	{#if opts.baseline === true}
-		<line class="baseline" y1='{$height - 0.5}' y2='{$height - 0.5}' x1='0' x2='{$width - 1}'></line>
+		<line class="baseline" y1='{$height - 0.5}' y2='{$height - 0.5}' x1='0' x2='{$width}'></line>
 	{/if}
 </g>
 
@@ -39,6 +39,19 @@ export default {
 	computed: {
 		ticks: ({ $xScale, opts }) => {
 			return $xScale.ticks(opts.tickNumber);
+		},
+		textAnchor: ({ ticks, opts }) => {
+			return function (i) {
+				if (opts.snapTicks === true) {
+					if (i === 0) {
+						return 'start';
+					}
+					if (i === ticks.length -1) {
+						return 'end';
+					}
+				}
+				return 'middle';
+			};
 		}
 	}
 };
