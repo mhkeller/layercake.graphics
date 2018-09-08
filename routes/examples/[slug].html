@@ -3,7 +3,7 @@
 	<link rel='stylesheet' href='hljs.css'>
 </svelte:head>
 
-<main>
+<div class="main">
 	<h1>{example.title}</h1>
 
 	<div class="chart-hero">
@@ -11,7 +11,7 @@
 	</div>
 
 	<div class="download">
-		<DownloadBtn/>
+		<!-- <DownloadBtn/> -->
 	</div>
 
 	<div class="dek">
@@ -32,10 +32,10 @@
 			{/each}
 		</div>
 	</div>
-</main>
+</div>
 
 <style>
-	main {
+	.main {
 		position: relative;
 		max-width: 56em;
 		background-color: white;
@@ -121,7 +121,7 @@ examples.forEach(example => {
 
 export default {
 	components: {
-		DownloadBtn: '../../components/DownloadBtn.html'
+		// DownloadBtn: '../../components/DownloadBtn.html'
 	},
 	data () {
 		return {
