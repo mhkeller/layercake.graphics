@@ -8,3 +8,5 @@ yarn-error.log
 /build/
 /app/manifest/
 /routes/test.html
+assets/svelte-app.json
+scripts/svelte-app
