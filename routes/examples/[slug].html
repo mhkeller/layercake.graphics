@@ -11,7 +11,7 @@
 	</div>
 
 	<div class="download">
-		<!-- <DownloadBtn/> -->
+		<DownloadBtn main='{data.main}' components='{data.components}' modules='{data.modules}' slug='{params.slug}'/>
 	</div>
 
 	<div class="dek">
@@ -20,12 +20,12 @@
 
 	<div id="pages">
 		<ul id="page-nav">
-			{#each data.pages as page}
+			{#each pages as page}
 				<li class="tab {active === page.title ? 'active' : ''}" on:click="set({active: page.title})">{page.title}</li>
 			{/each}
 		</ul>
 		<div id="contents-container">
-			{#each data.pages as page}
+			{#each pages as page}
 				<div class="contents" style="display: {active === page.title ? 'block' : 'none'};">
 					<pre>{@html highlight(page.contents, page.title)}</pre>
 				</div>
@@ -121,7 +121,7 @@ examples.forEach(example => {
 
 export default {
 	components: {
-		// DownloadBtn: '../../components/DownloadBtn.html'
+		DownloadBtn: '../../components/DownloadBtn.html'
 	},
 	data () {
 		return {
@@ -131,6 +131,9 @@ export default {
 	computed: {
 		example: ({ params }) => {
 			return exampleLookup.get(params.slug);
+		},
+		pages: ({ data }) => {
+			return [data.main].concat(data.components).concat(data.modules);
 		}
 	},
 	helpers: {

@@ -74,5 +74,5 @@ export function get (req, res, next) {
 		'Content-Type': 'application/json'
 	});
 
-	res.end(JSON.stringify({ pages: [main].concat(components).concat(modules), dek }));
+	res.end(JSON.stringify({ main, components, modules, dek }));
 }

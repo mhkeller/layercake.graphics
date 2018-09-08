@@ -55,8 +55,15 @@
 </style>
 
 <script>
-// import doNotZip from 'do-not-zip';
-// import downloadBlob from '../_utils/downloadBlob.js';
+import doNotZip from 'do-not-zip';
+import downloadBlob from '../_utils/downloadBlob.js';
+
+function getImports (file = '') {
+	const match = file.match(/from\s'(.+)'?/gm) || [];
+	const imports = match.map(d => d.replace(/(from |'|"|;)/g, '')).filter(d => !d.startsWith('.'));
+	console.log('i', imports);
+	return imports;
+}
 
 export default {
 	data () {
@@ -64,38 +71,45 @@ export default {
 			downloading: false
 		};
 	},
+	computed: {
+		imports: ({ main, components }) => {
+			const imports = [main, ...components].reduce((store, val) => store.concat(getImports(val.contents)), []);
+			console.log('id', imports);
+			return imports;
+		}
+	},
 	methods: {
 		async download () {
 			this.set({ downloading: true });
 
-// 			const { bundle, components, data } = this.get();
-// 			const files = await (await window.fetch('/svelte-app.json')).json();
+			const { main, imports, components, modules, slug } = this.get();
+			console.log('imports', imports);
+			const files = await (await window.fetch('/svelte-app.json')).json();
 
-// 			if (bundle.imports.length > 0) {
-// 				const idx = files.findIndex(({ path }) => path === 'package.json');
-// 				const pkg = JSON.parse(files[idx].data);
-// 				const deps = {};
-// 				bundle.imports.forEach(mod => {
-// 					const match = /^(@[^\/]+\/)?[^@\/]+/.exec(mod);
-// 					deps[match[0]] = 'latest';
-// 				});
-// 				pkg.dependencies = deps;
-// 				files[idx].data = JSON.stringify(pkg, null, '  ');
-// 			}
+			if (imports.length > 0) {
+				const idx = files.findIndex(({ path }) => path === 'package.json');
+				const pkg = JSON.parse(files[idx].data);
+				const deps = {};
+				imports.forEach(mod => {
+					const match = /^(@[^\/]+\/)?[^@\/]+/.exec(mod);
+					deps[match[0]] = 'latest';
+				});
+				pkg.dependencies = deps;
+				files[idx].data = JSON.stringify(pkg, null, '  ');
+			}
 
-// 			files.push(...components.map(component => ({ path: `src/${component.name}.${component.type}`, data: component.source })));
-// 			files.push({
-// 				path: `src/main.js`,
-// 				data: `import App from './App.html';
+			files.push(...components.map(component => ({ path: `src/${component.name}.${component.type}`, data: component.source })));
+			files.push({
+				path: `src/main.js`,
+				data: `import App from './App.html';
 
-// var app = new App({
-// target: document.body,
-// data: ${JSON.stringify(data, null, '\t').replace(/\n/g, '\n\t')}
-// });
+var app = new App({
+target: document.body
+});
 
-// export default app;` });
+export default app;` });
 
-// 			downloadBlob(doNotZip(files), 'svelte-app.zip');
+			downloadBlob(doNotZip(files), `layercake-${slug}.zip`);
 
 			this.set({ downloading: false });
 		}
