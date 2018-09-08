@@ -16,7 +16,7 @@
     "d3-delaunay": "^4.1.0",
     "d3-geo": "^1.10.0",
     "d3-quadtree": "^1.0.3",
-    "d3-scale": "^2.1.0",
+    "d3-scale": "^2.1.2",
     "d3-shape": "^1.2.0",
     "golden-fleece": "^1.0.9",
     "highlight.js": "^9.12.0",

@@ -25,6 +25,8 @@ function formatXTick (d) {
 
 export default {
 	oncreate () {
+		const colors = ['#00bbff', '#8bcef6', '#c4e2ed', '#f7f6e3'];
+
 		const myCake = new LayerCake({
 			padding: { top: 0, right: 0, bottom: 20, left: 30 },
 			y: d => d.data.year,
@@ -33,12 +35,13 @@ export default {
 			yDomain: ['2016', '2017', '2018', '2019'],
 			flatten,
 			data: series,
-			target: this.refs.chart
+			target: this.refs.chart,
+			custom: { seriesNames }
 		})
 			.svgLayers([
 				{ component: AxisX, opts: { formatTick: formatXTick, baseline: true, snapTicks: true } },
 				{ component: AxisY, opts: { gridlines: false } },
-				{ component: BarStacked, opts: {} }
+				{ component: BarStacked, opts: { colors } }
 			]);
 
 		myCake.render();

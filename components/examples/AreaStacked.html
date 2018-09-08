@@ -30,18 +30,21 @@ function formatYTick (d) {
 
 export default {
 	oncreate () {
+		const colors = ['#ff00cc', '#ff7ac7', '#ffb3c0', '#ffe4b8'];
+
 		const myCake = new LayerCake({
 			padding: { top: 0, right: 0, bottom: 20, left: 17 },
 			x: d => d.data.month,
 			y: [0, 1],
 			flatten,
 			data: series,
-			target: this.refs.chart
+			target: this.refs.chart,
+			custom: { seriesNames }
 		})
 			.svgLayers([
 				{ component: AxisX, opts: { formatTick: formatXTick, tickNumber: 3 } },
 				{ component: AxisY, opts: { formatTick: formatYTick } },
-				{ component: AreaStacked, opts: {} }
+				{ component: AreaStacked, opts: { colors } }
 			]);
 
 		myCake.render();
