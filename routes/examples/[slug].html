@@ -10,6 +10,10 @@
 		<svelte:component this={example.component} />
 	</div>
 
+	<div class="download">
+		<DownloadBtn/>
+	</div>
+
 	<div class="dek">
 		{data.dek}
 	</div>
@@ -43,7 +47,7 @@
 	.chart-hero {
 		width: 100%;
 		height: 200px;
-		margin-top: 10px;
+		margin: 1.5em 0;
 	}
 
 	#pages {
@@ -51,7 +55,7 @@
 	}
 
 	.dek {
-		padding-top: 1em;
+		width: calc(100% - 80px);
 	}
 
 	#contents-container {
@@ -87,6 +91,12 @@
 			margin-top: 8px;
 			margin-bottom: 0;
 		}
+		.download {
+			display: none;
+		}
+		.dek {
+			width: 100%;
+		}
 	}
 
 	.tab:hover {
@@ -110,6 +120,9 @@ examples.forEach(example => {
 });
 
 export default {
+	components: {
+		DownloadBtn: '../../components/DownloadBtn.html'
+	},
 	data () {
 		return {
 			active: 'main.js'

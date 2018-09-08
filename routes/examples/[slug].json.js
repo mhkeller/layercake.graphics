@@ -14,6 +14,7 @@ function cleanMain (example) {
 		.replace(/^\t\t/gm, '')
 		.replace(/\t/g, '  ')
 		.trim();
+
 	return [imports, oncreate].join('\n\n');
 }
 

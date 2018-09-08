@@ -1,0 +1,104 @@
+<button disabled={downloading} on:click='download()' title='download zip file' class='icon' style='background-image: url(icons/download.svg)'>Download &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+
+<style>
+	button {
+		font-weight: 200;
+		font-family: Helvetica, sans-serif;
+		outline: 0;
+		padding: 0;
+		border: none;
+		float: right;
+		cursor: pointer;
+		transform: translateY(-6px);
+	}
+	.icon {
+		color: transparent;
+		font-size: 16px;
+		height: 2em;
+		background: transparent no-repeat 100% 0px;
+		background-size: 1.6em 1.6em;
+		opacity: .6;
+	}
+
+	.icon:before {
+		content: 'Download';
+		color: #000;
+		display: inline-block;
+		transform: translate(100%, 0);
+	}
+
+	.icon:hover {
+		opacity: 1;
+	}
+
+	.icon:disabled {
+		filter: grayscale(1);
+		opacity: 0.4;
+		cursor: default;
+	}
+
+	.icon:disabled:before {
+		content: 'Please wait...';
+		transform: translate(75%, 0);
+
+	}
+
+	@keyframes zoom-in {
+		0% { transform: scale(0); opacity: 0 }
+		100% { transform: scale(1); opacity: 1; }
+	}
+
+	@keyframes fade-in {
+		0% { opacity: 0 }
+		100% { opacity: 0.6 }
+	}
+</style>
+
+<script>
+import doNotZip from 'do-not-zip';
+import downloadBlob from '../_utils/downloadBlob.js';
+
+export default {
+	data () {
+		return {
+			downloading: false
+		};
+	},
+	methods: {
+		async download () {
+			this.set({ downloading: true });
+
+// 			const { bundle, components, data } = this.get();
+// 			const files = await (await window.fetch('/svelte-app.json')).json();
+
+// 			if (bundle.imports.length > 0) {
+// 				const idx = files.findIndex(({ path }) => path === 'package.json');
+// 				const pkg = JSON.parse(files[idx].data);
+// 				const deps = {};
+// 				bundle.imports.forEach(mod => {
+// 					const match = /^(@[^\/]+\/)?[^@\/]+/.exec(mod);
+// 					deps[match[0]] = 'latest';
+// 				});
+// 				pkg.dependencies = deps;
+// 				files[idx].data = JSON.stringify(pkg, null, '  ');
+// 			}
+
+// 			files.push(...components.map(component => ({ path: `src/${component.name}.${component.type}`, data: component.source })));
+// 			files.push({
+// 				path: `src/main.js`,
+// 				data: `import App from './App.html';
+
+// var app = new App({
+// target: document.body,
+// data: ${JSON.stringify(data, null, '\t').replace(/\n/g, '\n\t')}
+// });
+
+// export default app;` });
+
+// 			downloadBlob(doNotZip(files), 'svelte-app.zip');
+
+			this.set({ downloading: false });
+		}
+	}
+};
+</script>
