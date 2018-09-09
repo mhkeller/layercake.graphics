@@ -2,11 +2,9 @@
 
 <script>
 import LayerCake from 'layercake';
-import * as geo from 'd3-geo';
 import * as topojson from 'topojson';
 import usStates from '../../data/us-states.topojson.js';
-import MapSvgStore from '../MapSvgStore.html';
-import MapCanvasStore from '../MapCanvasStore.html';
+import MapSvg from '../../components/MapSvg.html';
 
 export default {
 	oncreate () {
@@ -15,19 +13,14 @@ export default {
 
 		const myCake = new LayerCake({
 			data: geojson,
-			target: this.refs.chart
+			target: this.refs.chart,
+			custom: {
+				projection: 'geoAlbersUsa' // define the d3.geo projection name here to make our MapSvg component more reusable
+			}
 		})
-			.canvasLayers([
-				{ component: MapCanvasStore, opts: {} }
-			])
 			.svgLayers([
-				{ component: MapSvgStore, opts: {} }
+				{ component: MapSvg, opts: {} }
 			]);
-
-		myCake.compute('projection', ['width', 'height', 'data'], (width, height, data) => {
-			return geo.geoAlbersUsa()
-				.fitSize([width, height], data);
-		});
 
 		myCake.render();
 	}

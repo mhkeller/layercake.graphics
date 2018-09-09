@@ -5,9 +5,9 @@ import { default as LayerCake, flatten } from 'layercake';
 import { stack } from 'd3-shape';
 import { scaleBand } from 'd3-scale';
 import fruit from '../../data/fruitOrdinal.js';
-import ColumnStacked from '../ColumnStacked.html';
-import AxisX from '../AxisXScaleBand.html';
-import AxisY from '../AxisY.html';
+import ColumnStacked from '../../components/ColumnStacked.html';
+import AxisX from '../../components/AxisXScaleBand.html';
+import AxisY from '../../components/AxisY.html';
 
 const seriesNames = Object.keys(fruit[0]).filter(d => d !== 'year');
 

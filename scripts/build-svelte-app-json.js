@@ -9,3 +9,6 @@ for (const path of process.argv.slice(2)) {
 }
 
 fs.writeFileSync('assets/svelte-app.json', JSON.stringify(files));
+
+const deps = JSON.parse(fs.readFileSync('package.json', 'utf-8')).dependencies;
+fs.writeFileSync('assets/deps.json', JSON.stringify(deps));

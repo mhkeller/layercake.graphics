@@ -1,8 +1,8 @@
 cd `dirname $0`/..
 
 # fetch svelte-app
-rm -rf scripts/svelte-app
-node_modules/.bin/degit sveltejs/template scripts/svelte-app
+# rm -rf scripts/svelte-app
+# node_modules/.bin/degit sveltejs/template scripts/svelte-app
 
 # update repl-viewer.css based on template
 # cp scripts/svelte-app/public/global.css assets/repl-viewer.css

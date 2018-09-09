@@ -6,6 +6,7 @@ function cleanMain (example) {
 
 	const imports = parts[0]
 		.replace(/\t/g, '  ')
+		.replace(/\.\.\/\.\.\//g, './')
 		.trim();
 
 	const oncreate = parts[1].trim()
@@ -31,7 +32,7 @@ function getModulePaths (example) {
 export function get (req, res, next) {
 	const { slug } = req.params;
 
-	const examplePath = `components/examples/${slug}.html`;
+	const examplePath = `routes/_examples/${slug}.html`;
 
 	if (!fs.existsSync(examplePath)) {
 		res.writeHead(404, {
@@ -53,15 +54,15 @@ export function get (req, res, next) {
 	const components = getComponentPaths(example)
 		.map(d => {
 			return {
-				title: d,
-				contents: fs.readFileSync(`components/${d}`, 'utf-8').replace(/\t/g, '  ').trim()
+				title: d.replace('../', './'),
+				contents: fs.readFileSync(`components/${d}`, 'utf-8').replace(/\t/g, '  ').replace(/'\.\.\/modules/g, '\'./modules').trim()
 			};
 		});
 
 	const modules = getModulePaths(example)
 		.map(d => {
 			return {
-				title: d.replace('../', ''),
+				title: d.replace('../', './'),
 				contents: fs.readFileSync(`modules/${d}`, 'utf-8').replace(/\t/g, '  ').trim()
 			};
 		});

@@ -1,13 +1,13 @@
-import Line from '../components/examples/Line.html';
-import Scatter from '../components/examples/Scatter.html';
-import MapSvg from '../components/examples/MapSvg.html';
-import Column from '../components/examples/Column.html';
-import AreaStacked from '../components/examples/AreaStacked.html';
-import ColumnStacked from '../components/examples/ColumnStacked.html';
-import MultiLine from '../components/examples/MultiLine.html';
-import MapLayered from '../components/examples/MapLayered.html';
-import Bar from '../components/examples/Bar.html';
-import BarStacked from '../components/examples/BarStacked.html';
+import Line from './_examples/Line.html';
+import Scatter from './_examples/Scatter.html';
+import MapSvg from './_examples/MapSvg.html';
+import Column from './_examples/Column.html';
+import AreaStacked from './_examples/AreaStacked.html';
+import ColumnStacked from './_examples/ColumnStacked.html';
+import MultiLine from './_examples/MultiLine.html';
+import MapLayered from './_examples/MapLayered.html';
+import Bar from './_examples/Bar.html';
+import BarStacked from './_examples/BarStacked.html';
 
 export default [
 	{ title: 'Line + area', slug: 'Line', component: Line },
