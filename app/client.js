@@ -11,11 +11,12 @@ init({
 	manifest,
 	store: data => {
 		store.set(data);
-		window.store = store;
 
 		window.fetch(`api/guide/contents`).then(r => r.json()).then(guideContents => {
 			store.set({ guideContents });
 		});
+
+		window.store = store;
 
 		return store;
 	}

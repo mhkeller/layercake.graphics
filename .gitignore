@@ -10,3 +10,4 @@ yarn-error.log
 /routes/test.html
 assets/svelte-app.json
 scripts/svelte-app
+export/
