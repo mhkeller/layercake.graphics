@@ -13,9 +13,7 @@ init({
 		store.set(data);
 		window.store = store;
 
-		console.log('here');
 		window.fetch(`api/guide/contents`).then(r => r.json()).then(guideContents => {
-			console.log('here', guideContents);
 			store.set({ guideContents });
 		});
 
