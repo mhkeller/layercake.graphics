@@ -10,13 +10,13 @@
 </style>
 
 <script>
-import * as geo from 'd3-geo';
+import { geoPath as d3GeoPath } from 'd3-geo';
 
 export default {
 	namespace: 'svg',
 	computed: {
 		geoPath: ({ $projection }) => {
-			return geo.geoPath($projection);
+			return d3GeoPath($projection);
 		},
 		features: ({ $data }) => {
 			// Just show ten states in this example

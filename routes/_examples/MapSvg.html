@@ -2,14 +2,14 @@
 
 <script>
 import LayerCake from 'layercake';
-import * as topojson from 'topojson';
+import { feature } from 'topojson';
 import usStates from '../../data/us-states.topojson.js';
 import MapSvg from '../../components/MapSvg.html';
 
 export default {
 	oncreate () {
 		// Load in a topojson file and convert it to geojson
-		const geojson = topojson.feature(usStates, usStates.objects.collection);
+		const geojson = feature(usStates, usStates.objects.collection);
 
 		const myCake = new LayerCake({
 			data: geojson,
