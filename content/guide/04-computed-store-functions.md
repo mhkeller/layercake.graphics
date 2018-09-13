@@ -2,7 +2,7 @@
 title: Computed Store Properties
 ---
 
-Convenience functions and other internal properties that are exposed to the user in case they're handy.
+Convenience functions and other internal properties that are exposed to the user on the store in case they're handy.
 
 ### box
 
