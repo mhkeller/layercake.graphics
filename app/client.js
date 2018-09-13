@@ -12,9 +12,9 @@ init({
 	store: data => {
 		store.set(data);
 
-		window.fetch(`api/guide/contents`).then(r => r.json()).then(guideContents => {
-			store.set({ guideContents });
-		});
+		// window.fetch(`api/guide/contents`).then(r => r.json()).then(guideContents => {
+		// 	store.set({ guideContents });
+		// });
 
 		window.store = store;
 
