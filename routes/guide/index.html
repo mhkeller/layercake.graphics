@@ -3,9 +3,8 @@
 	<link rel='stylesheet' href='hljs.css'>
 </svelte:head>
 
-
 <sidebar ref:sidebar>
-	<GuideContents ref:contents {guideContents}/>
+	<GuideContents ref:contents/>
 </sidebar>
 
 <div ref:container class='content'>
@@ -270,14 +269,7 @@ export default {
 
 	preload () {
 		return this.fetch(`api/guide`).then(r => r.json()).then(sections => {
-			const guideContents = sections.map(section => {
-				return {
-					metadata: section.metadata,
-					subsections: section.subsections,
-					slug: section.slug
-				};
-			});
-			return { sections, guideContents };
+			return { sections };
 		});
 	},
 

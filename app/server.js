@@ -12,7 +12,7 @@ polka() // You can also use Express
 		sapper({
 			manifest,
 			store: (req, res) => {
-				return new Store({ });
+				return new Store({ guideContents: [] });
 			}
 		})
 	)

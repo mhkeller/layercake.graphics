@@ -1,5 +1,5 @@
 <ul class='guide-toc'>
-	{#each guideContents as section}
+	{#each $guideContents as section}
 		<li>
 			<a class='section {section.slug === $activeGuideSection ? "active": ""}' href='guide#{section.slug}'>{section.metadata.title}</a>
 			{#each section.subsections as subsection}
@@ -52,7 +52,6 @@
 <script>
 export default {
 	oncreate () {
-		console.log('here', this.store.get());
 		const onhashchange = () => {
 			console.log('changed', window.location.hash.slice(1));
 			this.store.set({ activeGuideSection: window.location.hash.slice(1) });
