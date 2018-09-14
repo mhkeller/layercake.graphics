@@ -4,11 +4,17 @@ title: Cake API
 
 When you run `new LayerCake(StoreValues)` the Svelte store you get back has the following custom methods.
 
-Each of the `Layers` functions takes an array containing the following objects, which we'll call a "component object":
+Each of the `Layers` functions takes an array containing the following objects, which we'll call a "component layer", as the first argument and an optional second argument where you can set a `z-index`. Here's what each of the `Layers` methods looks like in use:
 
 ```js
-{ component: SvelteComponent, opts: { optionalInfo } }
+.svgLayers([
+  { component: SvelteComponent }
+], {
+  zIndex: <optional z-index value>
+})
 ```
+
+> If you set an `opts` object on your component layer, those values will be available in the component under `opts`, e.g. `{ component: SvelteComponent, opts: { color: '#f0c' } }`.
 
 All of the container elements created by `Layers` functions are absolutely positioned and use any [padding](#padding) that is set. That way, they share the same coordinate system and can sit one on top of another.
 
@@ -16,17 +22,19 @@ All of the container elements created by `Layers` functions are absolutely posit
 
 Creates a `<svg>` element containing one `<g>` wrapper element, which gets translated based on any [padding](#padding).
 
-For every component object in the passed in array, a `<g>` element is created.
+For every component layer in the passed in array, a `<g>` element is created.
 
 ### cake.htmlLayers(ComponentsList[, opts])
 
 Creates a `<div>` element.
 
-For every component object in the passed in array, a `<div>` element is created.
+For every component layer in the passed in array, a `<div>` element is created.
 
 ### cake.canvasLayers(ComponentsList[, opts])
 
 Creates a `<canvas>` element.
+
+Any options that you set on `opts` (except for `zIndex`) will get passed as the second argument to  `canvas.getContext('2d', opts)`.
 
 Every component has access to the `canvas` and `ctx` objects as *data items*, not as store values since you could have multiple canvas elements in your cake.
 
@@ -54,7 +62,9 @@ export default {
 
 ### cake.webglLayers(ComponentsList[, opts])
 
-Work in progress. Want to help out? Get in touch on the [issue tracker](https://github.com/mhkeller/layercake).
+Same as the canvas element except your `ctx` value is a webgl context. You also get a `webglSupported` Boolean variable as a data item since if webgl is not supported, `ctx` will be a normal 2d canvas context.
+
+Any options that you set on `opts` (except for `zIndex`) will get passed as the second argument to  `canvas.getContext('webgl', opts)`.
 
 ### cake.render(options)
 
