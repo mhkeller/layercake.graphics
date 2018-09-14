@@ -11,7 +11,7 @@
 	</div>
 
 	<div class="download">
-		<DownloadBtn main='{data.main}' components='{data.components}' modules='{data.modules}' slug='{params.slug}'/>
+		<DownloadBtn main='{data.main}' components='{data.components}' modules='{data.modules}' componentModules='{data.componentModules}' slug='{params.slug}'/>
 	</div>
 
 	{#if data.dek}
@@ -139,7 +139,7 @@ export default {
 			return exampleLookup.get(params.slug);
 		},
 		pages: ({ data }) => {
-			return [data.main].concat(data.components).concat(data.modules);
+			return [data.main].concat(data.components).concat(data.modules).concat(data.componentModules);
 		}
 	},
 	helpers: {

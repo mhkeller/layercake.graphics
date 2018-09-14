@@ -89,7 +89,7 @@ export default {
 		async download () {
 			this.set({ downloading: true });
 
-			const { main, imports, components, modules, slug } = this.get();
+			const { main, imports, components, modules, componentModules, slug } = this.get();
 			const files = await (await window.fetch('/svelte-app.json')).json();
 			const depsLookup = await (await window.fetch('/deps.json')).json();
 
@@ -106,6 +106,7 @@ export default {
 
 			files.push(...components.map(component => ({ path: `src/${component.title.replace('./', '')}`, data: component.contents })));
 			files.push(...modules.map(mod => ({ path: `src/${mod.title.replace('./', '')}`, data: mod.contents })));
+			files.push(...componentModules.map(mod => ({ path: `src/${mod.title.replace('../', '')}`, data: mod.contents })));
 			files.push({
 				path: `src/main.js`,
 				data: main.contents});
