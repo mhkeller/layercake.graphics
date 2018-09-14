@@ -12,11 +12,11 @@ const myCake = new LayerCake({
 });
 ```
 
+> Only `target` is required. Everything else is optional.
+
 ### data: `<Array>`
 
 A list of data items. This will be accessible
-
-> Only `target` and `data` are required. Everything else is optional.
 
 ### x: `<String|Function>`
 
