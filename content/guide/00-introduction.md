@@ -87,6 +87,7 @@ myCake.render();
 ```
 
 ```html
+<!-- { title: 'Scatter example' } -->
 <!-- { filename: 'Scatter.html' } -->
 {#each $data as d}
   <circle cx='{xGet(d)}' cy='{yGet(d)}' fill='{opts.fill}' r='{opts.r}' />
@@ -98,6 +99,7 @@ myCake.render();
 Our DOM now looks something like this:
 
 ```html
+<!-- { title: 'Layout sample' } -->
 <svg width="<el width>" height="<el height>">
   <!-- One main g to wrap all layers -->
   <g>

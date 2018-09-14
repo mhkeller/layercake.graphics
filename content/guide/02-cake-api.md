@@ -33,6 +33,7 @@ Every component has access to the `canvas` and `ctx` objects as *data items*, no
 This means you fetch the `canvas` and `ctx` using `this.get()` instead of `this.store.get()`. For example, here's how a scatterplot layer component would be implemented in canvas.
 
 ```html
+<!-- { title: 'Canvas example' } -->
 <!-- { filename: CanvasLayer.html } -->
 <script>
 export default {
