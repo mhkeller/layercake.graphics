@@ -1,7 +1,7 @@
 <div class='{open ? "open": "closed"} mousecatcher' on:click='set({ open: false })'></div>
 <div class='container'>
 	<span class="menu-link {open ? "menu-open": "menu-closed"}" on:click='toggleOpen()'>{open ? 'Close' : 'Menu'}</span>
-	<a href='.' class='logo'>Layer Cake</a>
+	<a href='.' class='logo' on:click='set({ open: false })'>Layer Cake</a>
 </div>
 
 <ul class="dropdown">
@@ -306,6 +306,7 @@ export default {
 	methods: {
 		loadPage () {
 			const { page } = this.get();
+			this.set({ open: false });
 			goto(page);
 		},
 		toggleOpen () {

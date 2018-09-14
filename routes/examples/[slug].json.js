@@ -24,9 +24,10 @@ function getComponentPaths (example) {
 		.map(d => d.replace('../', ''));
 }
 
-function getModulePaths (example) {
-	return example.match(/\.\.\/.+\.js/gm)
+function getJsPaths (example) {
+	const m = example.match(/\.\/.+\.js/gm)
 		.map(d => d.replace('../', ''));
+	return m;
 }
 
 export function get (req, res, next) {
@@ -46,6 +47,7 @@ export function get (req, res, next) {
 	}
 
 	const example = fs.readFileSync(examplePath, 'utf-8');
+
 	const main = {
 		title: 'main.js',
 		contents: cleanMain(example)
@@ -59,11 +61,12 @@ export function get (req, res, next) {
 			};
 		});
 
-	const modules = getModulePaths(example)
+	const modules = getJsPaths(example + components.map(d => d.contents).join(''))
 		.map(d => {
+			const title = d.replace('../', './');
 			return {
-				title: d.replace('../', './'),
-				contents: fs.readFileSync(`modules/${d}`, 'utf-8').replace(/\t/g, '  ').trim()
+				title,
+				contents: fs.readFileSync(title.replace('./', ''), 'utf-8').replace(/\t/g, '  ').trim()
 			};
 		});
 
