@@ -111,9 +111,7 @@ export default {
 				path: `src/main.js`,
 				data: main.contents});
 
-			console.log('files', files);
-
-			downloadBlob(doNotZip(files), `layercake-${slug}.zip`);
+			downloadBlob(doNotZip(files.filter(Boolean)), `layercake-${slug}.zip`);
 
 			this.set({ downloading: false });
 		}

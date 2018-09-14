@@ -76,7 +76,8 @@ export function get (req, res, next) {
 			};
 		});
 
-	const componentModules = getComponentJsPaths(components.map(d => d.contents).join(''))
+	const componentModulesMatches = getComponentJsPaths(components.map(d => d.contents).join(''));
+	const componentModules = componentModulesMatches === null ? [] : componentModulesMatches
 		.map(d => {
 			return {
 				title: d,
@@ -92,5 +93,6 @@ export function get (req, res, next) {
 		'Content-Type': 'application/json'
 	});
 
-	res.end(JSON.stringify({ main, components, modules, componentModules, dek }));
+	const response = { main, components, modules, componentModules, dek };
+	res.end(JSON.stringify(response));
 }
