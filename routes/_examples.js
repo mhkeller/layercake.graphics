@@ -8,6 +8,7 @@ import MultiLine from './_examples/MultiLine.html';
 import MapLayered from './_examples/MapLayered.html';
 import Bar from './_examples/Bar.html';
 import BarStacked from './_examples/BarStacked.html';
+import ScatterWebgl from './_examples/ScatterWebgl.html';
 
 export default [
 	{ title: 'Line + area', slug: 'Line', component: Line },
@@ -20,4 +21,5 @@ export default [
 	{ title: 'Stacked bar', slug: 'BarStacked', component: BarStacked },
 	{ title: 'Multiline (html labels + quadtree tooltip)', slug: 'MultiLine', component: MultiLine },
 	{ title: 'Stacked area', slug: 'AreaStacked', component: AreaStacked },
+	{ title: 'WebGl Scatter (svg axes)', slug: 'ScatterWebgl', component: ScatterWebgl },
 ];

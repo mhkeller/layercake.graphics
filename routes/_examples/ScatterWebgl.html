@@ -1,0 +1,36 @@
+<div class="chart-container" ref:chart></div>
+
+<script>
+import LayerCake from 'layercake';
+import points from '../../data/points.js';
+import ScatterWebgl from '../../components/ScatterWebgl.html';
+import AxisX from '../../components/AxisX.html';
+import AxisY from '../../components/AxisY.html';
+
+export default {
+	oncreate () {
+		const diameter = 7;
+		const padding = 4;
+
+		const myCake = new LayerCake({
+			padding: { top: 0, right: 5, bottom: 20, left: 25 },
+			x: 'myX',
+			y: 'myY',
+			xPadding: [padding, padding],
+			yPadding: [padding, padding],
+			data: points,
+			target: this.refs.chart,
+			custom: { diameter }
+		})
+			.svgLayers([
+				{ component: AxisX, opts: {} },
+				{ component: AxisY, opts: {} }
+			])
+			.webglLayers([
+				{ component: ScatterWebgl, opts: { color: '#ab00d6' } }
+			]);
+
+		myCake.render();
+	}
+};
+</script>
