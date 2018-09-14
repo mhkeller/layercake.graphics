@@ -188,6 +188,11 @@
 		margin-bottom: 1.5em !important;
 	}
 
+	@media (max-width: 450px) {
+		.dropdown select {
+			max-width: 60px;
+		}
+	}
 	@media (max-width: 500px) {
 		.dropdown li:before {
 			content: '';
@@ -240,7 +245,7 @@
 		.primary li {
 			display: inline-block;
 			position: relative;
-			padding: 0 0.5em;
+			padding: 0 1em;
 		}
 
 		.primary li a.active {
