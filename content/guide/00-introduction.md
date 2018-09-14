@@ -54,7 +54,7 @@ points.forEach(d => {
 
 Because Layer Cake has bound the target DOM element's dimensions to your scales, all computed properties will be updated automatically on resize.
 
-### Organizing components
+### Layer components
 
 While it's perfectly fine to use Layer Cake as a simple store and implement the rest of your project your own way, Layer Cake also comes with higher-level methods to take care of creating graphic layers that have full access to the store. Add layers inside the `.svgLayers`, `.htmlLayers` or `.canvasLayers` method. Each layer is a Svelte component. When you've added all the layers to your cake, run `.render()`.
 
@@ -111,7 +111,7 @@ Our DOM now looks something like this:
 </svg
 ```
 
-### Adding more layers
+### More layer types
 
 We just saw how to add SVG layers with the `.svgLayers` method. You also have `.htmlLayers` and `canvasLayers`. For the first two, every item in the array will create a new DOM element to render into, `<g>` for SVG and `<div>` for HTML. For Canvas, since there's no DOM equivalent, each layer renders into the same Canvas context. See the [Scatter canvas](examples/Scatter) example for details.
 
