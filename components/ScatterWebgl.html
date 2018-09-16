@@ -1,7 +1,8 @@
 <script>
 import * as reglWrapper from 'regl';
 
-function resize (canvas) {
+function resize (gl) {
+	const canvas = gl.canvas;
 	// Lookup the size the browser is displaying the canvas.
 	var displayWidth = canvas.clientWidth;
 	var displayHeight = canvas.clientHeight;
@@ -12,15 +13,15 @@ function resize (canvas) {
 		canvas.width = displayWidth;
 		canvas.height = displayHeight;
 	}
+	gl.viewport(0, 0, canvas.width, canvas.height);
 }
 
 export default {
 	onstate () {
-		const { canvas, gl } = this.get();
-		const { width, height, xGet, yGet, data, custom } = this.store.get();
+		const { gl } = this.get();
+		const { xGet, yGet, data, custom } = this.store.get();
 
-		resize(canvas);
-		gl.viewport(0, 0, width, height);
+		resize(gl);
 		const regl = reglWrapper(gl);
 
 		const draw = regl({
