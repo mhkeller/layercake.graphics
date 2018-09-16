@@ -62,7 +62,7 @@ export default {
 
 ### cake.webglLayers(ComponentsList[, opts])
 
-Same as the canvas element except instead of `ctx` you have `gl` as a component-level data item, which is your webgl context. If webgl is not supported, `gl` will be `null` and you can get a fallback canvas by grabbing `ctx` just as you would in a normal canvas layer.
+Same as the canvas element except instead of `ctx` you have `gl` as a component-level data item, which is your webgl context. If webgl is not supported, `gl` will be `null`.
 
 Any options that you set on `opts` (except for `zIndex`) will get passed as the second argument to  `canvas.getContext('webgl', opts)`.
 
