@@ -6,19 +6,19 @@ title: Introduction
 
 Layer Cake is a graphics framework, built on top of [Svelte](https://svelte.technology) that removes the boilerplate from making responsive web graphics.
 
-Layer Cake is a [Svelte store](https://svelte.technology/guide#state-management) that generally takes an array of data objects, a target DOM element and creates scales bound to your element's dimensions. It also includes higher level methods to organize multiple SVG, HTML and Canvas layers that use these scales.
+Once you pass in your parameters of a target DOM element and some data, the library creates a [Svelte store](https://svelte.technology/guide#state-management) that includes scales bound to your element's dimensions and the data's extents. Layer Cake also includes higher level methods to organize multiple SVG, HTML and Canvas layers that use these scales.
 
-By breaking a part a graphic into layers, you can more easily reuse components from project to project. It also lets you easily move between web environments by giving you a common coordinate system. You may be using Canvas for a scatterplot, SVG for axes and HTML for annotations but they all read from a common store and appear seamless to the viewer.
+By breaking a part a graphic into layers, you can more easily reuse components from project to project. It also lets you easily move between web languages (SVG, Canvas, HTML, WebGL) by giving you a common coordinate system. You may be using Canvas for a scatterplot, SVG for axes and HTML for annotations but they all read from a common store and appear seamless to the viewer. You can choose the best technology for that part of the graphic without worrying about how it will interact with other elements.
 
 > Layer Cake uses D3 scales. See more in the [`xScale`](#xScale), [`yScale`](#yScale) and [`rScale`](#rScale) sections of the [Store API](#store-api).
 
-Layer Cake is not a high-level charting library. It doesn't have any built-in concepts or strong opinions about how your data should be structured.
+Layer Cake is more about having a system to organize your own custom components than it is a high-level charting library. It doesn't have any built-in concepts or strong opinions about how your data should be structured.
 
 > See the [`flatten`](#flatten) and [`flatData`](#flatData) methods in the [Store API](#store-api) section below for more info about data structure.
 
 ### Getting started
 
-You initialize your cake in a normal JavaScript file. Here is an example in Layer Cake's most basic usage, loading in data and binding its extents to a DOM element.
+You initialize your cake in your main JavaScript file. Here is basic example loading in data and binding extents to a DOM element.
 
 ```js
 /* { filename: 'main.js' } */
@@ -31,16 +31,18 @@ const points = [
 ];
 
 const myCake = new LayerCake({
-  x: 'x',
-  y: 'y',
+  target: document.getElementById('chart-target'),
   data: points,
-  target: document.getElementById('chart-target')
+  x: 'x',
+  y: 'y'
 });
 
 console.log(myCake.get());
 ```
 
-So far, `myCake` is a Svelte Store with a few different properties that were just computed. Because we gave Layer Cake values for `x` and `y`, it's measured the extent of our data's x- and y-dimensions and created `xScale` and `yScale` properties. It's also measured our DOM element as well as created x- and y-accessors so, for a given row of our data we can compute the value in our coordinate system.
+> If you are using Layer Cake within Sapper, this entry code would go inside of `oncreate()`, which is how this examples site is built.
+
+The `myCake` variable is a Svelte Store with a few different properties that were just computed. Because we gave Layer Cake values for `x` and `y`, it has measured the extent of our data's x- and y-dimensions and created `xScale` and `yScale` properties. It's also measured our DOM element as well as created x- and y-accessors so, for a given row of our data we can compute the value in our coordinate system.
 
 ```js
 const { x, y, xScale, yScale } = myCake.get();
@@ -52,11 +54,13 @@ points.forEach(d => {
 
 > You can also use the shorthand `[xGet(d), yGet(d)]`. See the [Store API](#store-api) section for a full list of computed properties.
 
-Because Layer Cake has bound the target DOM element's dimensions to your scales, all computed properties will be updated automatically on resize.
+Because Layer Cake has bound the target DOM element's dimensions to your scales, all computed properties will update on resize automatically.
 
 ### Layer components
 
-While it's perfectly fine to use Layer Cake as a simple store and implement the rest of your project your own way, Layer Cake also comes with higher-level methods to take care of creating graphic layers that have full access to the store. Add layers inside the `.svgLayers`, `.htmlLayers` or `.canvasLayers` method. Each layer is a Svelte component. When you've added all the layers to your cake, run `.render()`.
+While it's perfectly fine to use Layer Cake as a store and implement the rest of your project your own way, the library also comes with higher-level methods to create graphic layers and lay them out in a common coordinate space.
+
+To do this, pass a list of Svelte components to any of the `.svgLayers`, `.htmlLayers`, `.canvasLayers` or `.webglLayers` methods. When you've added all the layers to your cake, run `.render()`.
 
 Here's an example creating an SVG scatter plot using the above data.
 
@@ -78,7 +82,7 @@ const myCake = new LayerCake({
   target: document.getElementById('chart-target')
 })
   .svgLayers([
-    { component: Scatter, opts: { fill: 'blue', r: 3 } }
+    { component: Scatter, opts: { fill: 'blue', r: 3 } } // The opts field is optional but exists to let you pass settings down to your components so they can be more reusable.
   ])
 
 myCake.render();
@@ -113,9 +117,9 @@ Our DOM now looks something like this:
 
 ### More layer types
 
-We just saw how to add SVG layers with the `.svgLayers` method. You also have `.htmlLayers` and `canvasLayers`. For the first two, every item in the array will create a new DOM element to render into, `<g>` for SVG and `<div>` for HTML. For Canvas, since there's no DOM equivalent, each layer renders into the same Canvas context. See the [Scatter canvas](examples/Scatter) example for details.
+We just saw how to add SVG layers with the `.svgLayers` method. You also have `htmlLayers` and `canvasLayers`. For the SVG and HTML groups, every item in the array will create a new DOM element to render into, `<g>` for SVG and `<div>` for HTML. For Canvas, since there's no DOM equivalent, each layer renders into the same Canvas context. See the [Scatter canvas](examples/Scatter) example for details.
 
-Layers are rendered in the order they appear. You can call these methods multiple times to create a new layout group.
+Layers are rendered in the order they appear and you can call these methods multiple times to create a new layout group.
 
 ```js
 /* { filename: 'main.js' } */
@@ -161,7 +165,7 @@ myCake.render();
 
 ### Data-less cakes
 
-You can also use Layer Cake to simply arrange SVG, HTML and Canvas elements on top of one another in the same coordinate system. This might be handy if, say, you have some SVG artwork that you want to put an HTML video player inside or something.
+You can also use Layer Cake to simply arrange SVG, HTML, Canvas and WebGL elements on top of one another, sharing the same dimensions. For example, this would be handy if you have some SVG artwork that you want to put on top of an HTML video player.
 
 Here's an example just setting the `target` value.
 

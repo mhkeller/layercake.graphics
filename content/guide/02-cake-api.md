@@ -2,21 +2,21 @@
 title: Cake API
 ---
 
-When you run `new LayerCake(StoreValues)` the Svelte store you get back has the following custom methods.
+When you run `new LayerCake(StoreValues)` the Svelte store you get back has the following methods.
 
-Each of the `Layers` functions takes an array containing the following objects, which we'll call a "component layer", as the first argument and an optional second argument where you can set a `z-index`. Here's what each of the `Layers` methods looks like in use:
+Each of the `xyzLayers` functions takes as a first argument an array of objects for each layer. You can optionally pass in an options object as the second argument. All of the layers methods share this pattern:
 
 ```js
-.svgLayers([
-  { component: SvelteComponent }
+.xyzLayers([
+  { component: SvelteComponent, opts: {} }
 ], {
-  zIndex: <optional z-index value>
+  zIndex: <optional z-index number>
 })
 ```
 
-> If you set an `opts` object on your component layer, those values will be available in the component under `opts`, e.g. `{ component: SvelteComponent, opts: { color: '#f0c' } }`.
+If you set an `opts` object on your component layer, those values will be available in the component under `opts`, e.g. `{ component: SvelteComponent, opts: { color: '#f0c' } }`.
 
-All of the container elements created by `Layers` functions are absolutely positioned and use any [padding](#padding) that is set. That way, they share the same coordinate system and can sit one on top of another.
+> All of the container elements created by `Layers` functions are absolutely positioned and use any [padding](#padding) that is set. That way, they share the same coordinate system and can sit one on top of another.
 
 ### cake.svgLayers(ComponentsList[, opts])
 
@@ -34,11 +34,9 @@ For every component layer in the passed in array, a `<div>` element is created.
 
 Creates a `<canvas>` element.
 
-Any options that you set on `opts` (except for `zIndex`) will get passed as the second argument to  `canvas.getContext('2d', opts)`.
+Because canvas elements have no DOM representation for each layer, you get access to the canvas and the 2d context as *data items* in each layer component. These aren't store values since you could have multiple canvas elements in a cake.
 
-Every component has access to the `canvas` and `ctx` objects as *data items*, not as store values since you could have multiple canvas elements in your cake.
-
-This means you fetch the `canvas` and `ctx` using `this.get()` instead of `this.store.get()`. For example, here's how a scatterplot layer component would be implemented in canvas.
+This means you access the `canvas` and `ctx` using `this.get()` instead of `this.store.get()`. For example, here's how a scatterplot layer component would be implemented in canvas.
 
 ```html
 <!-- { title: 'Canvas example' } -->
@@ -60,12 +58,14 @@ export default {
 </script>
 ```
 
+Canvas layouts have more options for `opts`. Anything you set here (except for `zIndex`) will get passed as the second argument to  `canvas.getContext('2d', opts)`. See the [Canvas docs](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext) for what options are possible.
+
 ### cake.webglLayers(ComponentsList[, opts])
 
 Same as the canvas element except instead of `ctx` you have `gl` as a component-level data item, which is your webgl context. If webgl is not supported, `gl` will be `null`.
 
-Any options that you set on `opts` (except for `zIndex`) will get passed as the second argument to  `canvas.getContext('webgl', opts)`.
+Same as in `.canvasLayers`, any options that you set on `opts` (except for `zIndex`) will get passed as the second argument to  `canvas.getContext('webgl', opts)`. See the [Canvas docs](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext) for what options are possible.
 
 ### cake.render(options)
 
-Instantiates your cake and layout groups. Returns an object `{ app, store }` where `app` is the instantiate Svelte app and `store` is the cake's Svelte store. Any options you pass in are added as [Svelte options](https://svelte.technology/guide#component-options), including `hydrate`.
+Instantiates your cake and layout groups. Returns an object `{ app, store }` where `app` is the instantiated Svelte app and `store` is the cake's Svelte store. Any options you pass in are added as [Svelte options](https://svelte.technology/guide#component-options), including `hydrate`.

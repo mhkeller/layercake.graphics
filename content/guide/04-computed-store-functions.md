@@ -2,11 +2,11 @@
 title: Computed Store Properties
 ---
 
-Convenience functions and other internal properties that are exposed to the user on the store in case they're handy.
+Some convenience functions and other internal properties are exposed to the user on the store in case they're handy.
 
 ### box
 
-A bounding box object of the [target](#target) element with `top`, `right`, `bottom`, `left`, `width` and `height` numbers in pixels.
+A bounding box object of the [target](#target) element with `top`, `right`, `bottom`, `left`, `width` and `height` numbers in pixels. Useful for creating tooltips.
 
 ## domains
 
@@ -14,7 +14,7 @@ An object containing a key for every [active key](#activeKeys) whose value is a 
 
 ### xGet(dataRow)
 
-Often you want to get the x value from a row in your data and scale it like so: `$xScale($x(d))`. This function is shorthand for doing just that.
+Often you want to get the x value from a row in your data and scale it like so: `$xScale($x(d))`. This function is shorthand for doing just that. Super handy!
 
 Here's an example from a simple SVG line path generator:
 
@@ -37,4 +37,3 @@ Same as [xGet](#xGet) but for the y scale.
 ### rGet(dataRow)
 
 Same as [xGet](#xGet) but for the r scale.
-

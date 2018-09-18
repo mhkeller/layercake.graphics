@@ -16,11 +16,11 @@ const myCake = new LayerCake({
 
 ### data: `<Array>`
 
-A list of data items. This will be accessible
+A list of data items. This is available on the store as `$data`.
 
 ### x: `<String|Function>`
 
-The key in each row of data that corresponds to the x-field. This can be a string or an accessor function. This property gets converted to an acessor function available on the store as `$x`.
+The key in each row of data that corresponds to the x-field. This can be a string or an accessor function. This property gets converted to an accessor function available on the store as `$x`.
 
 ```js
 const myCake = new LayerCake({
@@ -30,7 +30,7 @@ const myCake = new LayerCake({
 });
 ```
 
-You can also give this value an array. While it may seem counter-intuitive to have more than one x- or y-accessor, this is the case in stacked layouts. See the [Stacked bar](/examples/BarStacked), [Stacked area](/examples/AreaStacked) or [Stacked colummn](/examples/ColumnStacked) for complete examples.
+You can also give this value an array. While it may seem counter-intuitive to have more than one x- or y-accessor, this is the case in stacked layouts and lollipop or Cleveland dot plots. See the [Stacked bar](/examples/BarStacked), [Stacked area](/examples/AreaStacked) or [Stacked colummn](/examples/ColumnStacked) for complete examples.
 
 Here's an overview using the `d3.stack()` to make a horizontal bar chart, which will have two values for the x-accessor.
 
@@ -72,11 +72,11 @@ Calls to `x(dataRow)` in this scenario will return the two-value array. Calls to
 
 ### y: `<String|Function>`
 
-Same as [x](#x) but for the y scale. Accessor function is available on the store as `$y`.
+Same as [x](#x) but for the y scale. The accessor function is available on the store as `$y`.
 
 ### r: `<String|Function>`
 
-Same as [x](#x) but for the r scale. Accessor function is available on the store as `$r`.
+Same as [x](#x) but for the r scale. The accessor function is available on the store as `$r`.
 
 ### padding: `<Object>`
 
@@ -94,7 +94,7 @@ const myCake = new LayerCake({
 
 ### xScale: d3Scale()
 
-Pass in an instatiated D3 scale if you want to override the default `d3.scaleLinear()` or you want to add extra options.
+Pass in an instantiated D3 scale if you want to override the default `d3.scaleLinear()` or you want to add extra options.
 
 See the [Column chart](/examples/Column) for an example of passing in a `d3.scaleBand()` to override the default.
 
@@ -136,7 +136,7 @@ Reverse the default y domain. By default this is `true` and the domain is `[heig
 
 ### xPadding: `<Array:[leftPixels, rightPixels]>`
 
-Assign a value, in pixels, to add to the min or max of the x scale. This will increase the scales domain by the scale unit equivalent of the provided pixels. It uses D3 scale's [invert function](https://github.com/d3/d3-scale#continuous_invert), so this only applies to continuous scales like `scaleLinear`. This is useful for adding extra space to a scatter plot so that your circles don't interfere with your y axis.
+Assign a pixel value to add to the min or max of the x scale. This will increase the scales domain by the scale unit equivalent of the provided pixels. It uses D3 scale's [invert function](https://github.com/d3/d3-scale#continuous_invert), so this only applies to continuous scales like `scaleLinear`. This is useful for adding extra space to a scatter plot so that your circles don't interfere with your y axis.
 
 ```js
 const myCake = new LayerCake({
@@ -154,7 +154,7 @@ Same as [xPadding](#xPadding) but for the r domain.
 
 ### rRange: `<Array:[min, max]>`
 
-If you're using the r scale, set it's range here since it doens't infer that from anything nt the layout. The r scale defaults to `d3.scaleSqrt` so make sure you don't use a zero in your range.
+If you're using the r scale, set it's range here since it doesn't infer that from anything in the layout. The r scale defaults to `d3.scaleSqrt` so make sure you don't use a zero in your range.
 
 ```js
 const myCake = new LayerCake({
@@ -164,18 +164,32 @@ const myCake = new LayerCake({
 
 ### flatten: `<Function>`
 
-In order for Layer Cake to measure the extents of your data, it needs a flat array of items that the x, y and r accessors can get at. If your data is not in that format, you can pass in a function to transform it. This *will not* change the shape of the data that gets passed to components — it is only for extent calculation.
+In order for Layer Cake to measure the extents of your data, it needs a flat array of items that the x, y and r accessors can find. If your data is not flat, you can pass in a function to transform it. This *will not* change the shape of the data that gets passed to components — it is only for extent calculation.
 
-> You'll run into this if you get data that is nested and that's the best format for a component. For example, labelling a multi-series line chart can be done nicely if you have a `key` field for each group. If you already have a flat copy of your data, check out [`flatData`](#flatData) below.
+For example, let's say you have nested data like this:
 
-For example, let's say you have nested data. You need a function to concatenate the two `values` arrays like so:
+
+You need a function to concatenate the two `values` arrays like so:
 
 ```js
 const data = [
   {key: 'group1', values: [{x: 1, y: 5},  {x: 2, y: 10}, {x: 3, y: 20}]},
   {key: 'group2', values: [{x: 1, y: 10}, {x: 2, y: 20}, {x: 3, y: 30}]}
 ];
+```
 
+You eventually need data that looks like this:
+
+```js
+[
+  {x: 1, y: 5},  {x: 2, y: 10}, {x: 3, y: 20},
+  {x: 1, y: 10}, {x: 2, y: 20}, {x: 3, y: 30}
+]
+```
+
+This function we pass into `flatten` can do that transformation.
+
+```js
 const myCake = new LayerCake({
     target,
     x: 'x',
@@ -191,7 +205,11 @@ const myCake = new LayerCake({
 
 ### flatData: `<Array>`
 
-If your data was originally flat but it's since been transformed it into a format more convenient for your components (or you just have a flat copy lying around somewhere) you can pass that data here and it will be used to measure extents using the x, y and r accessors.
+An alternative to setting a flatten function is to pass in a flat copy of the data using `flatData`.
+
+This can be preferable if you already have a flat copy of your data from some pre-transformation step. This data will only be used to measure extents using the x, y and r accessors.
+
+Here's an example showing passing different data formats for extent calculation versus what is used by layer components.
 
 ```js
 const flatData = [
