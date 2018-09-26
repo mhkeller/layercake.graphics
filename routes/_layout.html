@@ -15,16 +15,11 @@
 export default {
 	components: {
 		Nav: '../components/Nav.html'
+	},
+	data () {
+		return {
+			page: null
+		};
 	}
-	// async preload ({ params, query }) {
-	// 	console.log('here');
-	// 	const res = await this.fetch(`_layout.json`);
-	// 	const data = await res.json();
-	// 	if (res.status === 200) {
-	// 		return { data };
-	// 	} else {
-	// 		this.error(res.status, data.message);
-	// 	}
-	// }
 };
 </script>
