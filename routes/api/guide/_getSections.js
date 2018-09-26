@@ -132,7 +132,7 @@ export default function () {
 				const json5 = group.blocks.find(block => block.lang === 'json');
 
 				const title = main.meta.title;
-				if (!title) console.error(`Missing title for demo in ${file}`);
+				// if (!title) console.error(`Missing title for demo in ${file}`);
 
 				demos.set(hash, JSON.stringify({
 					title: title || 'Example from guide',
