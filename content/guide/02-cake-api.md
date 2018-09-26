@@ -39,8 +39,7 @@ Because canvas elements have no DOM representation for each layer, you get acces
 This means you access the `canvas` and `ctx` using `this.get()` instead of `this.store.get()`. For example, here's how a scatterplot layer component would be implemented in canvas.
 
 ```html
-<!-- { title: 'Canvas example' } -->
-<!-- { filename: CanvasLayer.html } -->
+<!-- { filename: 'CanvasLayer.html' } -->
 <script>
 export default {
   oncreate () {

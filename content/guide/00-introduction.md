@@ -18,18 +18,34 @@ Layer Cake is more about having a system to organize your own custom components 
 
 ### Getting started
 
-You initialize your cake in your main JavaScript file. Here is basic example loading in data and binding extents to a DOM element.
+Here is an example with a basic folder structure like this:
+
+```bash
+my-app
+ ├── index.html
+ └── js
+   └── main.js
+```
+
+```html
+<!-- { filename: 'index.html' } -->
+<!-- The target div needs to have a width and a height -->
+<div id="chart-target" style="width: 100%; height: 300px;"></div>
+```
 
 ```js
-/* { filename: 'main.js' } */
+/* { filename: 'js/main.js' } */
 import LayerCake from 'LayerCake';
 
+// Define some data
 const points = [
   {x: 0, y: 1},
   {x: 10, y: 5},
   {x: 15, y: 10}
 ];
 
+// Instantiate the cake, point it to our target div
+// and which keys to look for on the data
 const myCake = new LayerCake({
   target: document.getElementById('chart-target'),
   data: points,
@@ -40,9 +56,9 @@ const myCake = new LayerCake({
 console.log(myCake.get());
 ```
 
-> If you are using Layer Cake within Sapper, this entry code would go inside of `oncreate()`, which is how this examples site is built.
+> Each of the chart examples on the home page can be run locally by clicking into them and clikcing `Download`. If you are using Layer Cake within Sapper, the code here in `main.js` would go inside your components `oncreate()` method, which is how this examples site is built.
 
-The `myCake` variable is a Svelte Store with a few different properties that were just computed. Because we gave Layer Cake values for `x` and `y`, it has measured the extent of our data's x- and y-dimensions and created `xScale` and `yScale` properties. It's also measured our DOM element as well as created x- and y-accessors so, for a given row of our data we can compute the value in our coordinate system.
+The `myCake` variable is a Svelte Store that just computed different properties to use in our chart. Because we gave Layer Cake values for `x` and `y`, it has measured the extent of our data's x- and y-dimensions and created `xScale` and `yScale` properties. It has also measured our DOM element as well as created x- and y-accessors so, for a given row of our data we can compute the value in our coordinate system.
 
 ```js
 const { x, y, xScale, yScale } = myCake.get();
@@ -89,8 +105,7 @@ myCake.render();
 ```
 
 ```html
-<!-- { title: 'Scatter example' } -->
-<!-- { filename: 'Scatter.html' } -->
+<!-- { filename: '/components/Scatter.html' } -->
 {#each $data as d}
   <circle cx='{xGet(d)}' cy='{yGet(d)}' fill='{opts.fill}' r='{opts.r}' />
 {/each}
@@ -101,7 +116,6 @@ myCake.render();
 Our DOM now looks something like this:
 
 ```html
-<!-- { title: 'Layout sample' } -->
 <svg width="<el width>" height="<el height>">
   <!-- One main g to wrap all layers -->
   <g>

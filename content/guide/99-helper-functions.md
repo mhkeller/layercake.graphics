@@ -130,7 +130,6 @@ Scale your canvas size to retina screens. This function will modify the canvas, 
 Such as in the [Scatter canvas](/examples/Scatter) example:
 
 ```html
-<!-- { title: 'ScaleCanvas example' } -->
 <!-- { filename: 'Scatter.html' } -->
 <script>
 import { scaleCanvas } from 'LayerCake';
