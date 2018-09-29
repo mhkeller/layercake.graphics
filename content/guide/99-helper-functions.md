@@ -11,7 +11,7 @@ Easily create new divs. If you pass a DOM node as the third argument it will att
 Handy when creating small multiples. You can put your cake inside a loop and append a new [target](#target) div for every chart.
 
 ```js
-import {default as Layercake, newDiv} from 'LayerCake';
+import { default as Layercake, newDiv } from 'LayerCake';
 
 const container = document.getElementById('container');
 
