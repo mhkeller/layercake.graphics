@@ -1,0 +1,37 @@
+<div class="chart-container" ref:chart></div>
+
+<script>
+import LayerCake from 'layercake';
+import { scaleBand } from 'd3-scale';
+import fruit from '../../data/fruitOrdinal.js';
+import ClevelandDotPlot from '../../components/ClevelandDotPlot.html';
+import AxisX from '../../components/AxisX.html';
+import AxisY from '../../components/AxisYScaleBand.html';
+
+export default {
+	oncreate () {
+		const itemNames = ['apples', 'bananas', 'cherries', 'dates'];
+		const colors = ['#f0c', '#fc0', '#0fc', '#c0f'];
+
+		const myCake = new LayerCake({
+			padding: { right: 10, bottom: 20, left: 40 },
+			x: itemNames,
+			y: 'year',
+			yScale: scaleBand().paddingInner([0.05]).round(true),
+			yDomain: ['2016', '2017', '2018', '2019'],
+			xDomain: [0, null],
+			xPadding: [10, 0],
+			data: fruit,
+			target: this.refs.chart,
+			custom: { itemNames }
+		})
+			.svgLayers([
+				{ component: AxisX, opts: {} },
+				{ component: AxisY, opts: { gridlines: false } },
+				{ component: ClevelandDotPlot, opts: { colors } }
+			]);
+
+		myCake.render();
+	}
+};
+</script>

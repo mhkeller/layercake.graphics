@@ -9,6 +9,7 @@ import MapLayered from './_examples/MapLayered.html';
 import Bar from './_examples/Bar.html';
 import BarStacked from './_examples/BarStacked.html';
 import ScatterWebgl from './_examples/ScatterWebgl.html';
+import ClevelandDotPlot from './_examples/ClevelandDotPlot.html';
 
 export default [
 	{ title: 'Line + area', slug: 'Line', component: Line },
@@ -22,4 +23,5 @@ export default [
 	{ title: 'Multiline (html labels + quadtree tooltip)', slug: 'MultiLine', component: MultiLine },
 	{ title: 'Stacked area', slug: 'AreaStacked', component: AreaStacked },
 	{ title: 'WebGl Scatter (svg axes)', slug: 'ScatterWebgl', component: ScatterWebgl },
+	{ title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
 ];
