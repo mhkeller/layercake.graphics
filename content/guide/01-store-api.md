@@ -18,7 +18,7 @@ const myCake = new LayerCake({
 
 A list of data items. This is available on the store as `$data`.
 
-### x: `<String|Function>`
+### x: `<String|Function|Array>`
 
 The key in each row of data that corresponds to the x-field. This can be a string or an accessor function. This property gets converted to an accessor function available on the store as `$x`.
 
@@ -30,7 +30,7 @@ const myCake = new LayerCake({
 });
 ```
 
-You can also give this value an array. While it may seem counter-intuitive to have more than one x- or y-accessor, this is the case in stacked layouts and lollipop or Cleveland dot plots. See the [Stacked bar](/examples/BarStacked), [Stacked area](/examples/AreaStacked) or [Stacked colummn](/examples/ColumnStacked) for complete examples.
+You can also give this value an array of strings or arrays of functions. While it may seem counter-intuitive to have more than one x- or y-accessor, this is the case in stacked layouts and Cleveland dot plots. See the [Stacked bar](/examples/BarStacked), [Stacked area](/examples/AreaStacked) or [Stacked colummn](/examples/ColumnStacked) for complete examples.
 
 Here's an overview using the `d3.stack()` to make a horizontal bar chart, which will have two values for the x-accessor.
 
@@ -70,11 +70,11 @@ const myCake = new LayerCake({
 
 Calls to `x(dataRow)` in this scenario will return the two-value array. Calls to `xGet(dataRow)` will return a two-value array, mapped through the [xScale](#xScale).
 
-### y: `<String|Function>`
+### y: `<String|Function|Array>`
 
 Same as [x](#x) but for the y scale. The accessor function is available on the store as `$y`.
 
-### r: `<String|Function>`
+### r: `<String|Function|Array>`
 
 Same as [x](#x) but for the r scale. The accessor function is available on the store as `$r`.
 
