@@ -162,52 +162,11 @@ const myCake = new LayerCake({
 });
 ```
 
-### flatten: `<Function>`
-
-In order for Layer Cake to measure the extents of your data, it needs a flat array of items that the x, y and r accessors can find. If your data is not flat, you can pass in a function to transform it. This *will not* change the shape of the data that gets passed to components — it is only for extent calculation.
-
-For example, let's say you have nested data like this:
-
-
-You need a function to concatenate the two `values` arrays like so:
-
-```js
-const data = [
-  {key: 'group1', values: [{x: 1, y: 5},  {x: 2, y: 10}, {x: 3, y: 20}]},
-  {key: 'group2', values: [{x: 1, y: 10}, {x: 2, y: 20}, {x: 3, y: 30}]}
-];
-```
-
-You eventually need data that looks like this:
-
-```js
-[
-  {x: 1, y: 5},  {x: 2, y: 10}, {x: 3, y: 20},
-  {x: 1, y: 10}, {x: 2, y: 20}, {x: 3, y: 30}
-]
-```
-
-This function we pass into `flatten` can do that transformation.
-
-```js
-const myCake = new LayerCake({
-    target,
-    x: 'x',
-    y: 'y',
-    data,
-    flatten: data => {
-      return data.reduce((memo, val) => {
-        return memo.concat(val.values);
-      }, []);
-    }
-  });
-```
-
 ### flatData: `<Array>`
 
-An alternative to setting a flatten function is to pass in a flat copy of the data using `flatData`.
+In order for Layer Cake to measure the extents of your data, it needs a flat array of items that the x, y and r accessors can find. If your data is not flat (often the case if your renderers prefer a more nested format), you can tell it to measure extents against a flat version. This *will not* change the shape of the data that gets passed to components — it is only for extent calculation.
 
-This can be preferable if you already have a flat copy of your data from some pre-transformation step. This data will only be used to measure extents using the x, y and r accessors.
+> The library also exports a flattening function to handle common use cases if you need to flatten your data and you don't already have a flat version. See the [flatten](#flatten-data-) helper function for more info.
 
 Here's an example showing passing different data formats for extent calculation versus what is used by layer components.
 

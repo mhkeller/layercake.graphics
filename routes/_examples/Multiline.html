@@ -35,14 +35,15 @@ function formatYTick (d) {
 
 export default {
 	oncreate () {
+		// Make a flat array of the `values` of our nested series
+		// we can pluck the `value` field from each item in the array to measure extents
+		const flatten = data => data.reduce((store, group) => store.concat(group.values), []);
+
 		const myCake = new LayerCake({
 			padding: { top: 7, right: 10, bottom: 20, left: 25 },
 			x: 'month',
 			y: 'value',
-			flatten: data => {
-				// Make one flat array
-				return data.reduce((store, group) => store.concat(group.values), []);
-			},
+			flatData: flatten(fruitLong),
 			yDomain: [0, null],
 			data: fruitLong,
 			target: this.refs.chart,

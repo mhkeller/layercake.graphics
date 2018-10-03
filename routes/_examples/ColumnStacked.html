@@ -33,7 +33,7 @@ export default {
 			y: [0, 1],
 			xScale: scaleBand().paddingInner([0.02]).round(true),
 			xDomain: ['2016', '2017', '2018', '2019'],
-			flatten,
+			flatData: flatten(series),
 			data: series,
 			target: this.refs.chart,
 			custom: { seriesNames }
