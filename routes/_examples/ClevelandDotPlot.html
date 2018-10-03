@@ -10,20 +10,18 @@ import AxisY from '../../components/AxisYScaleBand.html';
 
 export default {
 	oncreate () {
-		const itemNames = ['apples', 'bananas', 'cherries', 'dates'];
 		const colors = ['#f0c', '#fc0', '#0fc', '#c0f'];
 
 		const myCake = new LayerCake({
 			padding: { right: 10, bottom: 20, left: 30 },
-			x: itemNames,
+			x: ['apples', 'bananas', 'cherries', 'dates'],
 			y: 'year',
 			yScale: scaleBand().paddingInner([0.05]).round(true),
 			yDomain: ['2016', '2017', '2018', '2019'],
 			xDomain: [0, null],
 			xPadding: [10, 0],
 			data: fruit,
-			target: this.refs.chart,
-			custom: { itemNames }
+			target: this.refs.chart
 		})
 			.svgLayers([
 				{ component: AxisX, opts: {} },
