@@ -1,4 +1,8 @@
-<div class="chart-container" ref:chart></div>
+<div class="input-container" style="height:10%;margin-bottom:2%">
+	  <label><input type="radio" bind:group=whichScale value="individual"/> Individual scale</label>
+		<label><input type="radio" bind:group=whichScale value="shared"/> Shared scale</label>
+</div>
+<div class="chart-container" ref:chart style="height:88%"></div>
 
 <script>
 import { default as LayerCake, newDiv } from 'layercake';
@@ -6,6 +10,11 @@ import pointSeries from '../../data/pointSeries.js';
 import Line from '../../components/Line.html';
 
 export default {
+	data () {
+		return {
+			whichScale: 'individual'
+		};
+	},
 	oncreate () {
 		pointSeries.forEach(point => {
 			const styles = {
@@ -27,6 +36,12 @@ export default {
 				.svgLayers([
 					{ component: Line, opts: { stroke: '#000' } }
 				]);
+
+			this.on('state', ({ changed, current }) => {
+				if (changed.whichScale === true) {
+					console.log(current.whichScale);
+				}
+			});
 
 			myCake.render();
 		});
