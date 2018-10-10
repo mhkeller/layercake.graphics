@@ -18,7 +18,7 @@ export default {
 	computed: {
 		path: ({ $data, $xGet, $yGet }) => {
 			return 'M' + $data
-				.map(function (d, i) {
+				.map((d, i) => {
 					return $xGet(d) + ',' + $yGet(d);
 				})
 				.join('L');

@@ -10,6 +10,7 @@ import Bar from './_examples/Bar.html';
 import BarStacked from './_examples/BarStacked.html';
 import ScatterWebgl from './_examples/ScatterWebgl.html';
 import ClevelandDotPlot from './_examples/ClevelandDotPlot.html';
+import Histogram from './_examples/Histogram.html';
 import SmallMultiples from './_examples/SmallMultiples.html';
 
 export default [
@@ -25,5 +26,6 @@ export default [
 	{ title: 'Stacked area', slug: 'AreaStacked', component: AreaStacked },
 	{ title: 'WebGl Scatter (svg axes)', slug: 'ScatterWebgl', component: ScatterWebgl },
 	{ title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
+	{ title: 'Histogram', slug: 'Histogram', component: Histogram },
 	{ title: 'Small multiples', slug: 'SmallMultiples', component: SmallMultiples },
 ];

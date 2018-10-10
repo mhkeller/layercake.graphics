@@ -1,0 +1,38 @@
+<div class="chart-container" ref:chart></div>
+
+<script>
+import LayerCake from 'layercake';
+import { scaleBand } from 'd3-scale';
+import { histogram, extent, thresholdSturges } from 'd3-array';
+import unemployment from '../../data/unemployment.js';
+import Column from '../../components/Column.html';
+import AxisX from '../../components/AxisXScaleBand.html';
+import AxisY from '../../components/AxisY.html';
+
+export default {
+	oncreate () {
+		const doughmain = extent(unemployment);
+		const bins = histogram()
+			.domain(doughmain)
+			.thresholds(thresholdSturges)(unemployment);
+
+		const myCake = new LayerCake({
+			padding: { top: 5, right: 5, bottom: 20, left: 20 },
+			x: 'x0',
+			y: 'length',
+			xScale: scaleBand().round(true),
+			xDomain: bins.map(d => d.x0),
+			yDomain: [0, null],
+			data: bins,
+			target: this.refs.chart
+		})
+			.svgLayers([
+				{ component: AxisX, opts: { gridlines: false } },
+				{ component: AxisY, opts: { gridlines: false, ticks: 3 } },
+				{ component: Column, opts: { fill: '#fff', stroke: '#000', 'stroke-width': 1 } }
+			]);
+
+		myCake.render();
+	}
+};
+</script>
