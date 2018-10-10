@@ -11,6 +11,7 @@
 <script>
 import * as eases from 'eases-jsnext';
 import { tween } from 'svelte-extras';
+import { interpolateString } from 'd3-interpolate';
 
 export default {
 	namespace: 'svg',
@@ -26,9 +27,11 @@ export default {
 	oncreate () {
 		const listener = this.store.on('state', ({ changed, current }) => {
 			if (changed.xGet || changed.yGet) {
-				this.tween('_data', current.data, {
+				const { path } = this.get();
+				this.tween('path', path, {
 					duration: 300,
-					easing: eases.cubicOut
+					easing: eases.cubicOut,
+					interpolate: interpolateString
 				});
 			}
 		});
