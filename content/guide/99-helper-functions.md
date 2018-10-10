@@ -152,3 +152,26 @@ export default {
 };
 </script>
 ```
+
+### calcExtents(flatData, fields)
+
+Calculate the extents of any of the keys specified in `fields`, which is an array of objects with `field` and `accessor` keys, representing the field name (x, y, r) and an accessor function.
+
+For example, calculating the extents for the x and y fields, which are in the data as `myX` and `myY` would look like this:
+
+```js
+const extents = calcExtents(flatData, [
+  {field: 'x', accessor: d => d.myX },
+  {field: 'y', accessor: d => d.myY }
+]);
+
+console.log(extents);
+/*
+{
+  x: [0, 10],
+  y: [-20, 20]
+}
+*/
+```
+
+Returns an object whose keys are the field names specified as the first item in the key group array followed by an array of `[min, max]`.

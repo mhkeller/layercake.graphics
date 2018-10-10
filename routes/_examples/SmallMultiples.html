@@ -18,8 +18,8 @@ export default {
 	oncreate () {
 		// Grab the extents of the full dataset
 		const extents = calcExtents(flatten(pointSeries), [
-			['x', d => d.x],
-			['y', d => d.y]
+			{field: 'x', accessor: d => d.x},
+			{field: 'y', accessor: d => d.y}
 		]);
 
 		// Sort by the last value
