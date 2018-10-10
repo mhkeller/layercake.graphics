@@ -5,9 +5,12 @@
 <div class="chart-container" ref:chart style="height:87%"></div>
 
 <script>
+import * as eases from 'eases-jsnext';
+import { tween } from 'svelte-extras';
+import { interpolateArray } from 'd3-interpolate';
 import { default as LayerCake, newDiv, calcExtents, flatten } from 'layercake';
 import pointSeries from '../../data/pointSeries.js';
-import Line from '../../components/LineTween.html';
+import Line from '../../components/Line.html';
 
 export default {
 	data () {
@@ -48,11 +51,22 @@ export default {
 					{ component: Line, opts: { stroke: '#000' } }
 				]);
 
+			myCake.set({ tween: tween.bind(myCake) });
+
 			this.on('state', ({ changed, current }) => {
 				if (changed.whichScale === true) {
 					const xDomain = current.whichScale === 'shared' ? extents.x : [null, null];
 					const yDomain = current.whichScale === 'shared' ? extents.y : [null, null];
-					myCake.set({ xDomain, yDomain });
+					myCake.get().tween('yDomain', yDomain, {
+						duration: 300,
+						easing: eases.cubicOut,
+						interpolate: interpolateArray
+					});
+					myCake.get().tween('xDomain', xDomain, {
+						duration: 300,
+						easing: eases.cubicOut,
+						interpolate: interpolateArray
+					});
 				}
 			});
 
