@@ -53,7 +53,6 @@
 export default {
 	oncreate () {
 		const onhashchange = () => {
-			console.log('changed', window.location.hash.slice(1));
 			this.store.set({ activeGuideSection: window.location.hash.slice(1) });
 		};
 

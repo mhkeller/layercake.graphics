@@ -1,0 +1,42 @@
+<path class='path-line' d='{path}' style="stroke: {opts.stroke || '#ab00d6'};"></path>
+<style>
+	.path-line {
+		fill: none;
+		stroke-linejoin: round;
+		stroke-linecap: round;
+		stroke-width: 2;
+	}
+</style>
+
+<script>
+import * as eases from 'eases-jsnext';
+import { tween } from 'svelte-extras';
+
+export default {
+	namespace: 'svg',
+	computed: {
+		path: ({ $data, $xGet, $yGet }) => {
+			return 'M' + $data
+				.map(function (d, i) {
+					return $xGet(d) + ',' + $yGet(d);
+				})
+				.join('L');
+		}
+	},
+	oncreate () {
+		const listener = this.store.on('state', ({ changed, current }) => {
+			if (changed.xGet || changed.yGet) {
+				this.tween('_data', current.data, {
+					duration: 300,
+					easing: eases.cubicOut
+				});
+			}
+		});
+
+		this.on('destroy', listener.cancel);
+	},
+	methods: {
+		tween
+	}
+};
+</script>

@@ -1,11 +1,11 @@
-<div class="input-container" style="height:10%;margin-bottom:2%">
+<div class="input-container" style="height:10%;margin-bottom:3%">
 	  <label><input type="radio" bind:group=whichScale value="individual"/> Individual scale</label>
 		<label><input type="radio" bind:group=whichScale value="shared"/> Shared scale</label>
 </div>
-<div class="chart-container" ref:chart style="height:88%"></div>
+<div class="chart-container" ref:chart style="height:87%"></div>
 
 <script>
-import { default as LayerCake, newDiv } from 'layercake';
+import { default as LayerCake, newDiv, calcExtents, flatten } from 'layercake';
 import pointSeries from '../../data/pointSeries.js';
 import Line from '../../components/Line.html';
 
@@ -16,6 +16,17 @@ export default {
 		};
 	},
 	oncreate () {
+		// Grab the extents of the full dataset
+		const extents = calcExtents(flatten(pointSeries), [
+			['x', d => d.x],
+			['y', d => d.y]
+		]);
+
+		// Sort by the last value
+		pointSeries.sort((a, b) => {
+			return b[b.length - 1].y - a[a.length - 1].y;
+		});
+
 		pointSeries.forEach(point => {
 			const styles = {
 				position: 'relative',
@@ -39,7 +50,9 @@ export default {
 
 			this.on('state', ({ changed, current }) => {
 				if (changed.whichScale === true) {
-					console.log(current.whichScale);
+					const xDomain = current.whichScale === 'shared' ? extents.x : [null, null];
+					const yDomain = current.whichScale === 'shared' ? extents.y : [null, null];
+					myCake.set({ xDomain, yDomain });
 				}
 			});
 

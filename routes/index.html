@@ -16,10 +16,10 @@
 
 	<div id="gallery">
 		{#each examples as example}
-			<a class="gallery-item" rel=prefetch href="examples/{example.slug}" on:click="set({page: example.slug})">
-				<h4 class="title">{example.title}</h4>
+			<div class="gallery-item">
+				<h4 class="title"><a rel=prefetch href="examples/{example.slug}" on:click="set({page: example.slug})">{example.title}</a></h4>
 				<svelte:component this="{example.component}"/>
-			</a>
+			</div>
 		{/each}
 	</div>
 </div>
@@ -81,10 +81,10 @@
 	a {
 		text-decoration: none;
 	}
-	a .title {
+	.title {
 		margin-bottom: 9px;
 	}
-	a:hover .title {
+	.title a:hover {
 		text-decoration: underline;
 	}
 	.strong {
