@@ -1,6 +1,6 @@
-<div class="input-container" style="height:10%;margin-bottom:3%;user-select: none;">
-	<label><input type="radio" bind:group=whichScale value="individual"/> Individual scale</label>
-	<label><input type="radio" bind:group=whichScale value="shared"/> Shared scale</label>
+<div class="input-container" data-which="small-multiples" style="height:10%;margin-bottom:3%;user-select: none;">
+	<label><input type="radio" name="scale" value="individual" checked="true"/> Individual scale</label>
+	<label><input type="radio" name="scale" value="shared"/> Shared scale</label>
 </div>
 <div class="chart-container" ref:chart style="height:87%"></div>
 
@@ -12,11 +12,6 @@ import pointSeries from '../../data/pointSeries.js';
 import Line from '../../components/Line.html';
 
 export default {
-	data () {
-		return {
-			whichScale: 'individual'
-		};
-	},
 	oncreate () {
 		// Grab the extents of the full dataset
 		const extents = calcExtents(flatten(pointSeries), [
@@ -28,6 +23,8 @@ export default {
 		pointSeries.sort((a, b) => {
 			return b[b.length - 1].y - a[a.length - 1].y;
 		});
+
+		const cakes = [];
 
 		pointSeries.forEach(point => {
 			const styles = {
@@ -50,26 +47,28 @@ export default {
 					{ component: Line, opts: { stroke: '#000' } }
 				]);
 
-			myCake.set({ tween: tween.bind(myCake) });
-
-			this.on('state', ({ changed, current }) => {
-				if (changed.whichScale === true) {
-					const { tween, domains } = myCake.get();
-					// Set the source of our domain extent
-					const doughmain = current.whichScale === 'shared' ? extents : domains;
-
-					tween('xDomain', doughmain.x, {
-						duration: 300,
-						easing: eases.cubicOut
-					});
-					tween('yDomain', doughmain.y, {
-						duration: 300,
-						easing: eases.cubicOut
-					});
-				}
-			});
-
 			myCake.render();
+			cakes.push(myCake);
+		});
+
+		Array.prototype.forEach.call(document.querySelectorAll('.input-container[data-which="small-multiples"]'), el => {
+			el.addEventListener('change', e => {
+				const whichScale = e.target.value;
+				cakes.forEach(myCake => {
+					const { domains } = myCake.get();
+					// Set the source of our domain extent
+					const doughmain = whichScale === 'shared' ? extents : domains;
+
+					tween.call(myCake, 'xDomain', doughmain.x, {
+						duration: 300,
+						easing: eases.cubicOut
+					});
+					tween.call(myCake, 'yDomain', doughmain.y, {
+						duration: 300,
+						easing: eases.cubicOut
+					});
+				});
+			});
 		});
 	}
 };
