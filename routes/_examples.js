@@ -27,5 +27,5 @@ export default [
 	{ title: 'WebGl Scatter (svg axes)', slug: 'ScatterWebgl', component: ScatterWebgl },
 	{ title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
 	{ title: 'Histogram', slug: 'Histogram', component: Histogram },
-	{ title: 'Small multiples', slug: 'SmallMultiples', component: SmallMultiples },
+	{ title: 'Small multiples (animated domain transition)', slug: 'SmallMultiples', component: SmallMultiples },
 ];
