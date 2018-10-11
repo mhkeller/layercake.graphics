@@ -1,8 +1,12 @@
-<div class="chart-container" ref:chart></div>
+<div class="input-container" style="position: absolute;top:15px;right:0;z-index: 9;">
+	<div style="text-align: right;">{binCount} bins</div>
+	<input style="margin:0;"type="range" bind:value=binCount min="2" max="100"/>
+</div>
+<div class="chart-container" ref:chart>
+</div>
 
 <script>
 import LayerCake from 'layercake';
-import { scaleLinear } from 'd3-scale';
 import { histogram, extent } from 'd3-array';
 import unemployment from '../../data/unemployment.js';
 import Column from '../../components/ColumnLinear.html';
@@ -10,20 +14,25 @@ import AxisX from '../../components/AxisX.html';
 import AxisY from '../../components/AxisY.html';
 
 export default {
+	data () {
+		return {
+			binCount: 40
+		};
+	},
 	oncreate () {
+		const { binCount } = this.get();
 		const doughmain = extent(unemployment);
 		const hist = histogram()
 			.domain(doughmain)
-			.thresholds(40);
+			.thresholds(binCount);
 
 		const bins = hist(unemployment);
 
 		const myCake = new LayerCake({
-			padding: { top: 5, right: 5, bottom: 20, left: 20 },
+			padding: { top: 10, right: 5, bottom: 20, left: 20 },
 			x: ['x0', 'x1'],
 			y: 'length',
 			xNice: true,
-			// xDomain: bins.map(d => d.x0),
 			yDomain: [0, null],
 			data: bins,
 			target: this.refs.chart
@@ -35,6 +44,15 @@ export default {
 			]);
 
 		myCake.render();
+
+		this.on('state', ({ changed, current }) => {
+			if (changed.binCount) {
+				hist.thresholds(current.binCount);
+				const bins = hist(unemployment);
+
+				myCake.set({ data: bins });
+			}
+		});
 	}
 };
 </script>

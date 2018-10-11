@@ -26,6 +26,6 @@ export default [
 	{ title: 'Stacked area', slug: 'AreaStacked', component: AreaStacked },
 	{ title: 'WebGl Scatter (svg axes)', slug: 'ScatterWebgl', component: ScatterWebgl },
 	{ title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
-	{ title: 'Histogram', slug: 'Histogram', component: Histogram },
+	{ title: 'Histogram (variable bins)', slug: 'Histogram', component: Histogram },
 	{ title: 'Small multiples (animated domain transition)', slug: 'SmallMultiples', component: SmallMultiples },
 ];
