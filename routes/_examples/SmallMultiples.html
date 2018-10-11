@@ -20,8 +20,8 @@ export default {
 	oncreate () {
 		// Grab the extents of the full dataset
 		const extents = calcExtents(flatten(pointSeries), [
-			{field: 'x', accessor: d => d.x},
-			{field: 'y', accessor: d => d.y}
+			{ field: 'x', accessor: d => d.x },
+			{ field: 'y', accessor: d => d.y }
 		]);
 
 		// Sort by the last value
@@ -55,14 +55,14 @@ export default {
 			this.on('state', ({ changed, current }) => {
 				if (changed.whichScale === true) {
 					const { tween, domains } = myCake.get();
-					const xDomain = current.whichScale === 'shared' ? extents.x : domains.x;
-					const yDomain = current.whichScale === 'shared' ? extents.y : domains.y;
+					// Set the source of our domain extent
+					const doughmain = current.whichScale === 'shared' ? extents : domains;
 
-					tween('yDomain', yDomain, {
+					tween('xDomain', doughmain.x, {
 						duration: 300,
 						easing: eases.cubicOut
 					});
-					tween('xDomain', xDomain, {
+					tween('yDomain', doughmain.y, {
 						duration: 300,
 						easing: eases.cubicOut
 					});
