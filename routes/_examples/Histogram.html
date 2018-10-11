@@ -2,34 +2,36 @@
 
 <script>
 import LayerCake from 'layercake';
-import { scaleBand } from 'd3-scale';
-import { histogram, extent, thresholdSturges } from 'd3-array';
+import { scaleLinear } from 'd3-scale';
+import { histogram, extent } from 'd3-array';
 import unemployment from '../../data/unemployment.js';
-import Column from '../../components/Column.html';
-import AxisX from '../../components/AxisXScaleBand.html';
+import Column from '../../components/ColumnLinear.html';
+import AxisX from '../../components/AxisX.html';
 import AxisY from '../../components/AxisY.html';
 
 export default {
 	oncreate () {
 		const doughmain = extent(unemployment);
-		const bins = histogram()
+		const hist = histogram()
 			.domain(doughmain)
-			.thresholds(thresholdSturges)(unemployment);
+			.thresholds(40);
+
+		const bins = hist(unemployment);
 
 		const myCake = new LayerCake({
 			padding: { top: 5, right: 5, bottom: 20, left: 20 },
-			x: 'x0',
+			x: ['x0', 'x1'],
 			y: 'length',
-			xScale: scaleBand().round(true),
-			xDomain: bins.map(d => d.x0),
+			xNice: true,
+			// xDomain: bins.map(d => d.x0),
 			yDomain: [0, null],
 			data: bins,
 			target: this.refs.chart
 		})
 			.svgLayers([
-				{ component: AxisX, opts: { gridlines: false } },
+				{ component: AxisX, opts: { gridlines: false, baseline: true } },
 				{ component: AxisY, opts: { gridlines: false, ticks: 3 } },
-				{ component: Column, opts: { fill: '#fff', stroke: '#000', 'stroke-width': 1 } }
+				{ component: Column, opts: { fill: '#f0c', stroke: '#000', 'stroke-width': 0 } }
 			]);
 
 		myCake.render();

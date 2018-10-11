@@ -1,5 +1,5 @@
 {#each $data as d, i}
-	<rect class='group-rect' data-id="{i}" x="{x(d)}" y="{y(d)}" {width} height="{height(d)}"
+	<rect class='group-rect' data-id="{i}" x="{x(d)}" y="{y(d)}" width="{width(d)}" height="{height(d)}"
 	fill="{opts.fill || '#00e047'}" stroke="{opts.stroke || ''}" stroke-width="{opts['stroke-width'] || 0}"></rect>
 {/each}
 
@@ -9,7 +9,7 @@ export default {
 	computed: {
 		x: ({ $xGet }) => {
 			return (d) => {
-				return $xGet(d);
+				return $xGet(d)[0] + 1;
 			};
 		},
 		y: ({ $yGet }) => {
@@ -17,8 +17,11 @@ export default {
 				return $yGet(d);
 			};
 		},
-		width: ({ $xScale }) => {
-			return $xScale.bandwidth();
+		width: ({ $xGet }) => {
+			return (d) => {
+				const val = $xGet(d);
+				return Math.max(0, (val[1] - val[0]) - 1);
+			};
 		},
 		height: ({ $height, $xScale, y }) => {
 			return (d) => {

@@ -162,6 +162,18 @@ const myCake = new LayerCake({
 });
 ```
 
+### xNice: `<Boolean:false>`
+
+Applies D3's [scale.nice()](https://github.com/d3/d3-scale#continuous_nice) to the x domain. This is a separate option instead of being one you can apply to a passed in scale because D3's "nice" transformation only works on existing domains and does not use a state to be able to tell if your existing scale wants to be nice.
+
+### yNice: `<Boolean:false>`
+
+Same as [xNice](#xPadding) but for the y domain.
+
+### rNice: `<Boolean:false>`
+
+Same as [xNice](#xPadding) but for the r domain.
+
 ### flatData: `<Array>`
 
 In order for Layer Cake to measure the extents of your data, it needs a flat array of items that the x, y and r accessors can find. If your data is not flat (often the case if your renderers prefer a more nested format), you can tell it to measure extents against a flat version. This *will not* change the shape of the data that gets passed to components — it is only for extent calculation.
