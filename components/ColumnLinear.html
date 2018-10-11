@@ -9,7 +9,7 @@ export default {
 	computed: {
 		x: ({ $xGet }) => {
 			return (d) => {
-				return $xGet(d)[0] + 1;
+				return $xGet(d)[0];
 			};
 		},
 		y: ({ $yGet }) => {
@@ -20,7 +20,7 @@ export default {
 		width: ({ $xGet }) => {
 			return (d) => {
 				const val = $xGet(d);
-				return Math.max(0, (val[1] - val[0]) - 1);
+				return Math.max(0, (val[1] - val[0]));
 			};
 		},
 		height: ({ $height, $xScale, y }) => {
