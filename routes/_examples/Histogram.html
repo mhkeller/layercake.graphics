@@ -1,5 +1,5 @@
 <div class="input-container" data-which="histogram" style="position: absolute;right:10px;z-index: 9;">
-	<input style="margin:0;"type="range" value="40" min="2" max="100"/> <span class="counter-container" style="display:inline-block;vertical-align:top;width: 70px;text-align:right;">40 bins</span>
+	<input style="margin:0;"type="range" value="40" min="2" max="100" step="4"/> <span class="counter-container" style="display:inline-block;vertical-align:top;width: 70px;text-align:right;">40 bins</span>
 </div>
 <div class="chart-container" ref:chart>
 </div>
@@ -11,13 +11,14 @@ import unemployment from '../../data/unemployment.js';
 import Column from '../../components/ColumnLinear.html';
 import AxisX from '../../components/AxisX.html';
 import AxisY from '../../components/AxisY.html';
+import thresholds from '../../modules/thresholds';
 
 export default {
 	oncreate () {
 		const doughmain = extent(unemployment);
 		const hist = histogram()
 			.domain(doughmain)
-			.thresholds(40);
+			.thresholds(thresholds(doughmain, 40));
 
 		const bins = hist(unemployment);
 
@@ -41,14 +42,13 @@ export default {
 		const inputContainer = document.querySelector('.input-container[data-which="histogram"]');
 		const counterContainer = inputContainer.querySelector('.counter-container');
 
-		inputContainer.querySelector('input').addEventListener('mousemove', e => {
+		inputContainer.querySelector('input').addEventListener('input', e => {
 			const binCount = e.target.value;
 			counterContainer.innerHTML = binCount + ' bins';
-					hist.thresholds(binCount);
-					const bins = hist(unemployment);
+			hist.thresholds(thresholds(doughmain, binCount));
+			const bins = hist(unemployment);
 
-					myCake.set({ data: bins });
-
+			myCake.set({ data: bins });
 		});
 	}
 };
