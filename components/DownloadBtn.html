@@ -98,7 +98,14 @@ export default {
 				const pkg = JSON.parse(files[idx].data);
 				const deps = {};
 				imports.forEach(mod => {
-					deps[mod] = depsLookup[mod];
+					if (mod === 'layercake') {
+						deps[mod] = 'github:mhkeller/layercake';
+					} else {
+						deps[mod] = depsLookup[mod];
+					}
+					if (!deps[mod]) {
+						window.alert(`Missing dependency, add "${mod}" to layercake.graphic's package.json`);
+					}
 				});
 				pkg.dependencies = deps;
 				files[idx].data = JSON.stringify(pkg, null, '  ');
@@ -111,9 +118,9 @@ export default {
 				path: `src/main.js`,
 				data: main.contents});
 
-			downloadBlob(doNotZip(files.filter(Boolean)), `layercake-${slug}.zip`);
+			// downloadBlob(doNotZip(files.filter(Boolean)), `layercake-${slug}.zip`);
 
-			this.set({ downloading: false });
+			// this.set({ downloading: false });
 		}
 	}
 };
