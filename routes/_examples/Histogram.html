@@ -1,6 +1,6 @@
-<div class="input-container" style="position: absolute;top:15px;right:0;z-index: 9;">
-	<div style="text-align: right;">{binCount} bins</div>
-	<input style="margin:0;"type="range" bind:value=binCount min="2" max="100"/>
+<div class="input-container" data-which="histogram" style="position: absolute;top:15px;right:0;z-index: 9;">
+	<div class="counter-container"style="text-align: right;">40 bins</div>
+	<input style="margin:0;"type="range" value="40" min="2" max="100"/>
 </div>
 <div class="chart-container" ref:chart>
 </div>
@@ -14,17 +14,11 @@ import AxisX from '../../components/AxisX.html';
 import AxisY from '../../components/AxisY.html';
 
 export default {
-	data () {
-		return {
-			binCount: 40
-		};
-	},
 	oncreate () {
-		const { binCount } = this.get();
 		const doughmain = extent(unemployment);
 		const hist = histogram()
 			.domain(doughmain)
-			.thresholds(binCount);
+			.thresholds(40);
 
 		const bins = hist(unemployment);
 
@@ -45,13 +39,17 @@ export default {
 
 		myCake.render();
 
-		this.on('state', ({ changed, current }) => {
-			if (changed.binCount) {
-				hist.thresholds(current.binCount);
-				const bins = hist(unemployment);
+		const inputContainer = document.querySelector('.input-container[data-which="histogram"]');
+		const counterContainer = inputContainer.querySelector('.counter-container');
 
-				myCake.set({ data: bins });
-			}
+		inputContainer.querySelector('input').addEventListener('mousemove', e => {
+			const binCount = e.target.value;
+			counterContainer.innerHTML = binCount + ' bins';
+					hist.thresholds(binCount);
+					const bins = hist(unemployment);
+
+					myCake.set({ data: bins });
+
 		});
 	}
 };
