@@ -118,9 +118,9 @@ export default {
 				path: `src/main.js`,
 				data: main.contents});
 
-			// downloadBlob(doNotZip(files.filter(Boolean)), `layercake-${slug}.zip`);
+			downloadBlob(doNotZip(files.filter(Boolean)), `layercake-${slug}.zip`);
 
-			// this.set({ downloading: false });
+			this.set({ downloading: false });
 		}
 	}
 };
