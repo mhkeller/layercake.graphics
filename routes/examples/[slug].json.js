@@ -5,8 +5,10 @@ function cleanContents (str) {
 }
 
 function cleanMain (example) {
-	const js = example.split('<script>')[1];
-	const parts = js.split('export');
+	const body = example.split('<script>');
+	const htmlExtras = body[0].split('<div class="chart-container"')[0];
+	const script = body[1];
+	const parts = script.split('export');
 
 	const imports = parts[0]
 		.replace(/\t/g, '  ')
@@ -20,7 +22,8 @@ function cleanMain (example) {
 		.replace(/\t/g, '  ')
 		.trim();
 
-	return [imports, oncreate].join('\n\n');
+	const js = [imports, oncreate].join('\n\n');
+	return { htmlExtras, js };
 }
 
 function getComponentPaths (example) {
@@ -55,9 +58,13 @@ export function get (req, res, next) {
 
 	const example = fs.readFileSync(examplePath, 'utf-8');
 
+	const fromMain = cleanMain(example);
+
+	const htmlExtras = fromMain.htmlExtras;
+
 	const main = {
 		title: 'main.js',
-		contents: cleanMain(example)
+		contents: fromMain.js
 	};
 
 	const components = getComponentPaths(example)
@@ -93,6 +100,6 @@ export function get (req, res, next) {
 		'Content-Type': 'application/json'
 	});
 
-	const response = { main, components, modules, componentModules, dek };
+	const response = { main, htmlExtras, components, modules, componentModules, dek };
 	res.end(JSON.stringify(response));
 }

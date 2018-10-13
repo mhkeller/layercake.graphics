@@ -11,7 +11,7 @@
 	</div>
 
 	<div class="download">
-		<DownloadBtn main='{data.main}' components='{data.components}' modules='{data.modules}' componentModules='{data.componentModules}' slug='{params.slug}'/>
+		<DownloadBtn {...data} slug='{params.slug}'/>
 	</div>
 
 	{#if data.dek}
