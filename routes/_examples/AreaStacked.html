@@ -10,10 +10,13 @@ import AxisY from '../../components/AxisY.html';
 
 const seriesNames = Object.keys(fruit[0]).filter(d => d !== 'month');
 
+/* --------------------------------------------
+ * Create a stacked data structure
+ */
 const stackData = stack()
 	.keys(seriesNames);
-
 const series = stackData(fruit);
+
 const monthNames = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
 
 function formatXTick (d) {
@@ -36,6 +39,7 @@ export default {
 			padding: { top: 0, right: 0, bottom: 20, left: 17 },
 			x: d => d.data.month,
 			y: [0, 1],
+			// Because our stacked data is an array of arrays and we need a flat area to measure extents, pass a flat version to the extents calculator
 			flatData: flatten(series),
 			data: series,
 			target: this.refs.chart,

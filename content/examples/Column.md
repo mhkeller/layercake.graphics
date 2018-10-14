@@ -1,0 +1,1 @@
+Since we want an ordinal x-axis and Layer Cake defaults to a linear scale, pass in a custom scale to `xScale` with a few formatting options. Set the y-scale to always start at `0` so you don't show misleading differences between groups.
