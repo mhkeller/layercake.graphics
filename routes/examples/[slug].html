@@ -16,7 +16,7 @@
 
 	{#if data.dek}
 		<div class="dek">
-			{data.dek}
+			{@html mdToHtml(data.dek)}
 		</div>
 	{/if}
 
@@ -64,6 +64,15 @@
 
 	.dek {
 		width: calc(100% - 80px);
+	}
+
+	.dek :global(p a) {
+		color: #f0c;
+		text-decoration: none;
+	}
+
+	.dek :global(p a:hover) {
+		text-decoration: underline;
 	}
 
 	#contents-container {
@@ -165,8 +174,11 @@
 </style>
 
 <script>
+import marked from 'marked';
 import hljs from 'highlight.js';
 import examples from '../_examples.js';
+
+const renderer = new marked.Renderer();
 
 const exampleLookup = new Map();
 examples.forEach(example => {
@@ -213,7 +225,10 @@ export default {
 		highlight: (str, title) => {
 			return hljs.highlight(title.indexOf('.js') > -1 ? 'js' : 'html', str).value;
 		},
-		cleanTitle
+		cleanTitle,
+		mdToHtml: (text) => {
+			return marked(text, { renderer });
+		}
 	},
 	methods: {
 		copyToClipboard () {
