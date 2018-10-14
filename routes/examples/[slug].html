@@ -23,12 +23,12 @@
 	<div id="pages" class="{data.dek ? 'has-dek' : ''}">
 		<ul id="page-nav">
 			{#each pages as page}
-				<li class="tab {active === page.title ? 'active' : ''}" on:click="set({active: page.title})">{page.title}</li>
+				<li class="tab {active === cleanTitle(page.title) ? 'active' : ''}" on:click="set({active: cleanTitle(page.title)})">{page.title}</li>
 			{/each}
 		</ul>
 		<div id="contents-container">
 			{#each pages as page}
-				<div class="contents" style="display: {active === page.title ? 'block' : 'none'};">
+				<div class="contents" style="display: {active === cleanTitle(page.title) ? 'block' : 'none'};">
 					<pre>{@html highlight(page.contents, page.title)}</pre>
 				</div>
 			{/each}
@@ -126,13 +126,18 @@ examples.forEach(example => {
 	exampleLookup.set(example.slug, example);
 });
 
+function cleanTitle (title) {
+	const parts = title.split('/');
+	return parts[parts.length - 1].split('.')[0].toLowerCase();
+}
+
 export default {
 	components: {
 		DownloadBtn: '../../components/DownloadBtn.html'
 	},
 	data () {
 		return {
-			active: 'main.js'
+			active: 'main'
 		};
 	},
 	computed: {
@@ -143,10 +148,25 @@ export default {
 			return [data.main].concat(data.components).concat(data.modules).concat(data.componentModules);
 		}
 	},
+	oncreate () {
+		if (window.location.hash) {
+			this.set({ active: window.location.hash.replace('#', '') });
+		}
+		window.onhashchange = () => {
+			this.set({ active: window.location.hash.replace('#', '') });
+		};
+		this.on('state', ({ changed, current }) => {
+			if (changed.active === true) {
+				const hash = `#${cleanTitle(current.active)}`;
+				window.location.hash = hash;
+			}
+		});
+	},
 	helpers: {
 		highlight: (str, title) => {
 			return hljs.highlight(title.indexOf('.js') > -1 ? 'js' : 'html', str).value;
-		}
+		},
+		cleanTitle
 	},
 	async preload ({ params, query }) {
 		// the `slug` parameter is available because
