@@ -15,7 +15,7 @@ import SmallMultiples from './_examples/SmallMultiples.html';
 
 export default [
 	{ title: 'Line + area', slug: 'Line', component: Line },
-	{ title: 'Scatter (svg + canvas + voronoi)', slug: 'Scatter', component: Scatter },
+	{ title: 'WebGl Scatter (svg axes, quadtree hover)', slug: 'ScatterWebgl', component: ScatterWebgl },
 	{ title: 'Map (svg)', slug: 'MapSvg', component: MapSvg },
 	{ title: 'Multilayer map (canvas + svg)', slug: 'MapLayered', component: MapLayered },
 	{ title: 'Column (with annotation)', slug: 'Column', component: Column },
@@ -24,7 +24,7 @@ export default [
 	{ title: 'Stacked bar', slug: 'BarStacked', component: BarStacked },
 	{ title: 'Multiline (html labels + quadtree tooltip)', slug: 'MultiLine', component: MultiLine },
 	{ title: 'Stacked area', slug: 'AreaStacked', component: AreaStacked },
-	{ title: 'WebGl Scatter (svg axes)', slug: 'ScatterWebgl', component: ScatterWebgl },
+	{ title: 'Scatter (svg + canvas + voronoi)', slug: 'Scatter', component: Scatter },
 	{ title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
 	{ title: 'Histogram (variable bins)', slug: 'Histogram', component: Histogram },
 	{ title: 'Small multiples (animated domain transition)', slug: 'SmallMultiples', component: SmallMultiples },

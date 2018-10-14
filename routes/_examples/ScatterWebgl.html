@@ -6,6 +6,7 @@ import points from '../../data/points.js';
 import ScatterWebgl from '../../components/ScatterWebgl.html';
 import AxisX from '../../components/AxisX.html';
 import AxisY from '../../components/AxisY.html';
+import QuadTree from '../../components/QuadTree.html';
 
 export default {
 	oncreate () {
@@ -27,7 +28,10 @@ export default {
 				{ component: AxisY, opts: {} }
 			])
 			.webglLayers([
-				{ component: ScatterWebgl, opts: { color: '#ab00d6' } }
+				{ component: ScatterWebgl, opts: { } }
+			])
+			.htmlLayers([
+				{ component: QuadTree, opts: { } }
 			]);
 
 		myCake.render();
