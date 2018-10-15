@@ -38,6 +38,10 @@ Same as [xGet](#xGet) but for the y scale.
 
 Same as [xGet](#xGet) but for the r scale.
 
+### activeKeys
+
+A list of all the keys that have an accessor set.
+
 ### domains
 
-An object containing a key for every active key whose value is a two-value array representing the min and max values for that field in the data. This value could differ from the domain of your scale if you are manually setting a limit on your scale by setting any of the `xDomain`, `yDomain` or `rDomain` settings. This is used internally to set domain things but it's also useful as a reference if you want to toggle between an arbitrary domain and the measured extents of the data, such as in the [small multiples example](/examples/SmallMultiples).
+An object containing a key for every [active key](#activekeys) whose value is a two-value array representing the min and max values for that field in the data. This value could differ from the domain of your scale if you are manually setting a limit on your scale by setting any of the `xDomain`, `yDomain` or `rDomain` settings. This is used internally to set domain things but it's also useful as a reference if you want to toggle between an arbitrary domain and the measured extents of the data, such as in the [small multiples example](/examples/SmallMultiples).
