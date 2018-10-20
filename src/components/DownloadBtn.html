@@ -90,20 +90,27 @@ export default {
 			this.set({ downloading: true });
 
 			const { main, htmlExtras, imports, components, modules, componentModules, slug } = this.get();
-			const files = await (await window.fetch('/svelte-app.json')).json();
-			const depsLookup = await (await window.fetch('/deps.json')).json();
+			const cacheBust = new Date().getTime();
+			const files = await (await window.fetch(`/svelte-app.json?${cacheBust}`)).json();
+			const depsLookup = await (await window.fetch(`/deps.json?${cacheBust}`)).json();
 
 			if (imports.length > 0) {
 				const idx = files.findIndex(({ path }) => path === 'package.json');
 				const pkg = JSON.parse(files[idx].data);
 				const deps = {};
+				const devDeps = {};
 				imports.forEach(mod => {
-					deps[mod] = depsLookup[mod];
-					if (!deps[mod]) {
+					if (mod === 'layercake') {
+						devDeps[mod] = depsLookup[mod];
+					} else {
+						deps[mod] = depsLookup[mod];
+					}
+					if (!depsLookup[mod]) {
 						window.alert(`Missing dependency, add "${mod}" to layercake.graphic's package.json`);
 					}
 				});
 				pkg.dependencies = deps;
+				Object.assign(pkg.devDependencies, devDeps);
 				files[idx].data = JSON.stringify(pkg, null, '  ');
 			}
 
@@ -123,7 +130,6 @@ export default {
 			}
 
 			downloadBlob(doNotZip(files.filter(Boolean)), `layercake-${slug}.zip`);
-
 			this.set({ downloading: false });
 		}
 	}

@@ -10,5 +10,6 @@ for (const path of process.argv.slice(2)) {
 
 fs.writeFileSync('static/svelte-app.json', JSON.stringify(files));
 
-const deps = JSON.parse(fs.readFileSync('package.json', 'utf-8')).dependencies;
-fs.writeFileSync('static/deps.json', JSON.stringify(deps));
+const pkg = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
+const allDeps = { ...pkg.dependencies, ...pkg.devDependencies };
+fs.writeFileSync('static/deps.json', JSON.stringify(allDeps));

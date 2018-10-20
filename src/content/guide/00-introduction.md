@@ -18,6 +18,12 @@ Layer Cake is more about having a system to organize your own custom components 
 
 ### Getting started
 
+In your project, install Layer Cake in your `devDependencies` alongside Svelte.
+
+```sh
+npm install --save-dev layercake
+```
+
 The easiest way to get started is to clone down or use [degit](https://github.com/rich-harris/degit) to grab the starter template at [github.com/mhkeller/layercake-template](https://github.com/mhkeller/layercake-template).
 
 The important files are like your `index.html` which has the DOM element we want to render into and the cake configuration in `main.js`:
