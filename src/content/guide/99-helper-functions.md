@@ -179,3 +179,36 @@ Returns an object whose keys are the field names specified as the first item in 
 ### uniques(data: Array[, accessor: String|Function, transform|Boolean])
 
 A function get get the unique values from a list. If **accessor** is a string or a function, the uniqueness will be compared using that and, be default, the values in the returned list will be the ones returned by the accessor. Pass `false` to the **transform** argument if you want to return the original elements, which will be the first one that appears for every unique value.
+
+This is different from Underscore's [uniq](https://underscorejs.org/#uniq) function, because that will not return the transformed value.
+
+```js
+import { uniques } from 'layercake';
+
+const data = [
+  { year: '1990', x: 0, y: 1},
+  { year: '1990', x: 5, y: 4},
+  { year: '1991', x: 2, y: 5},
+  { year: '1991', x: 6, y: 1},
+  { year: '1992', x: 1, y: 6},
+  { year: '1992', x: 7, y: 3},
+  { year: '1993', x: 7, y: 8},
+  { year: '1993', x: 3, y: 2}
+];
+
+const uniqueYears = unique(data, 'year');
+// ['1990', '1991', '1992', '1993']
+
+// this is equivalent to
+const uniqueYears = unique(data, d => d.year);
+
+// setting transform to `false` gives you the full row of the first unique element
+const uniqueYears = unique(data, 'year', false);
+/*
+[
+  {year: '1990', x: 0, y: 1},
+  {year: '1991', x: 2, y: 5},
+  {year: '1992', x: 1, y: 6},
+  {year: '1993', x: 7, y: 8}
+*/
+```
