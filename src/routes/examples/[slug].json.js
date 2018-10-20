@@ -61,7 +61,6 @@ export function get (req, res, next) {
 	const fromMain = cleanMain(example);
 
 	const htmlExtras = fromMain.htmlExtras;
-
 	const main = {
 		title: 'main.js',
 		contents: fromMain.js
@@ -88,7 +87,7 @@ export function get (req, res, next) {
 		.map(d => {
 			return {
 				title: d,
-				contents: cleanContents(fs.readFileSync(d.replace('../', ''), 'utf-8'))
+				contents: cleanContents(fs.readFileSync(d.replace('../', 'src/'), 'utf-8'))
 			};
 		});
 
