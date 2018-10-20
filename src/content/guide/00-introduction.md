@@ -18,7 +18,7 @@ Layer Cake is more about having a system to organize your own custom components 
 
 ### Getting started
 
-In your project, install Layer Cake in your `devDependencies` alongside Svelte.
+Install Layer Cake in your `devDependencies` alongside Svelte.
 
 ```sh
 npm install --save-dev layercake
