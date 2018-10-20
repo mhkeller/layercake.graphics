@@ -169,7 +169,7 @@ export default function () {
 							if ($2) return `.${$1}()`;
 							return `.${$1}`;
 						})
-						.split(':')[0]
+						.split(' ')[0]
 				);
 
 				subsections.push({ slug, title });

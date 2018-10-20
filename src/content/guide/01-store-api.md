@@ -4,7 +4,7 @@ title: Store API
 
 These are the options you can pass into `new LayerCake()`. You can also set your own custom values and they will be normal store properties. Many of the examples do this to set color scales or other values that will be used across components, for instance. To make sure the names don't conflict, the examples suffix any custom properties with an underscore, but it's not required.
 
-### target: `DOM Node`
+### target `DOM Node`
 
 The DOM object you want to use as the the basis for measurements and for rendering into.
 
@@ -16,11 +16,11 @@ const myCake = new LayerCake({
 
 > Only `target` is required. Everything else is optional.
 
-### data: `Array`
+### data `Array`
 
 A list of data items. This is available on the store as `$data`.
 
-### x: `String|Function|Array`
+### x `String|Function|Array`
 
 The key in each row of data that corresponds to the x-field. This can be a string or an accessor function. This property gets converted to an accessor function available on the store as `$x`.
 
@@ -72,15 +72,15 @@ const myCake = new LayerCake({
 
 Calls to `x(dataRow)` in this scenario will return the two-value array. Calls to `xGet(dataRow)` will return a two-value array, mapped through the [xScale](#xScale).
 
-### y: `String|Function|Array`
+### y `String|Function|Array`
 
 Same as [x](#x) but for the y scale. The accessor function is available on the store as `$y`.
 
-### r: `String|Function|Array`
+### r `String|Function|Array`
 
 Same as [x](#x) but for the r scale. The accessor function is available on the store as `$r`.
 
-### padding: `Object`
+### padding `Object`
 
 An object that can specify `top`, `right`, `bottom`, or `left` padding in pixels. Any unspecified values are filled in as `0`. Padding operates like CSS `box-sizing: border-box;` where values are subtracted from the target container's width and height, the same as [a D3 margin convention](https://bl.ocks.org/mbostock/3019563).
 
@@ -94,21 +94,21 @@ const myCake = new LayerCake({
 
 > Another way to set padding is to add it via normal CSS on your [target](#target) div. The target element is assigned CSS of `box-sizing: border-box;` so padding settings won't affect the width or height. If you set any padding via CSS, the padding object will be ignored.
 
-### xScale: d3Scale()
+### xScale `d3Scale()`
 
 Pass in an instantiated D3 scale if you want to override the default `d3.scaleLinear()` or you want to add extra options.
 
 See the [Column chart](/examples/Column) for an example of passing in a `d3.scaleBand()` to override the default.
 
-### yScale: d3Scale()
+### yScale `d3Scale()`
 
 Same as [xScale](#xScale) but for the y scale. The default is `d3.scaleLinear()`.
 
-### rScale: d3Scale()
+### rScale `d3Scale()`
 
 Same as [xScale](#xScale) but for the r scale. The default is `d3.scaleSqrt()`.
 
-### xDomain: `Array:[min: Number, max: Number]`
+### xDomain `Array:[min: Number, max: Number]`
 
 Set a min or max on the x scale. If you want to inherit the value from the data's extent, set that value to `null`.
 
@@ -120,23 +120,23 @@ const myCake = new LayerCake({
 });
 ```
 
-### yDomain: `Array:[min: Number, max: Number]`
+### yDomain `Array:[min: Number, max: Number]`
 
 Same as [xDomain](#xDomain) but for the y scale.
 
-### rDomain: `Array:[min: Number, max: Number]`
+### rDomain `Array:[min: Number, max: Number]`
 
 Same as [xDomain](#xDomain) but for the r scale.
 
-### reverseX: `Boolean:false`
+### reverseX `Boolean=false`
 
 Reverse the default x domain. By default this is `false` and the domain is `[0, width]`.
 
-### reverseY: `Boolean:true`
+### reverseY `Boolean=true`
 
 Reverse the default y domain. By default this is `true` and the domain is `[height, 0]`.
 
-### xPadding: `Array:[leftPixels: Number, rightPixels: Number]`
+### xPadding `Array:[leftPixels: Number, rightPixels: Number]`
 
 Assign a pixel value to add to the min or max of the x scale. This will increase the scales domain by the scale unit equivalent of the provided pixels. It uses D3 scale's [invert function](https://github.com/d3/d3-scale#continuous_invert), so this only applies to continuous scales like `scaleLinear`. This is useful for adding extra space to a scatter plot so that your circles don't interfere with your y axis.
 
@@ -146,15 +146,15 @@ const myCake = new LayerCake({
 });
 ```
 
-### yPadding: `Array:[leftPixels: Number, rightPixels: Number]`
+### yPadding `Array:[leftPixels: Number, rightPixels: Number]`
 
 Same as [xPadding](#xPadding) but for the y domain.
 
-### rPadding: `Array:[leftPixels: Number, rightPixels: Number]`
+### rPadding `Array:[leftPixels: Number, rightPixels: Number]`
 
 Same as [xPadding](#xPadding) but for the r domain.
 
-### rRange: `Array:[min: Number, max: Number]`
+### rRange `Array:[min: Number, max: Number]`
 
 If you're using the r scale, set it's range here since it doesn't infer that from anything in the layout. The r scale defaults to `d3.scaleSqrt` so make sure you don't use a zero in your range.
 
@@ -164,19 +164,19 @@ const myCake = new LayerCake({
 });
 ```
 
-### xNice: `Boolean:false`
+### xNice `Boolean=false`
 
 Applies D3's [scale.nice()](https://github.com/d3/d3-scale#continuous_nice) to the x domain. This is a separate option instead of being one you can apply to a passed in scale because D3's "nice" transformation only works on existing domains and does not use a state to be able to tell if your existing scale wants to be nice.
 
-### yNice: `Boolean:false`
+### yNice `Boolean:false`
 
 Same as [xNice](#xPadding) but for the y domain.
 
-### rNice: `Boolean:false`
+### rNice `Boolean:false`
 
 Same as [xNice](#xPadding) but for the r domain.
 
-### flatData: `Array`
+### flatData `Array`
 
 In order for Layer Cake to measure the extents of your data, it needs a flat array of items that the x, y and r accessors can find. If your data is not flat (often the case if your renderers prefer a more nested format), you can tell it to measure extents against a flat version. This *will not* change the shape of the data that gets passed to components — it is only for extent calculation.
 
