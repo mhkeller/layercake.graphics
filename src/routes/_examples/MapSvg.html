@@ -14,9 +14,7 @@ export default {
 		const myCake = new LayerCake({
 			data: geojson,
 			target: this.refs.chart,
-			custom: {
-				projection: 'geoAlbersUsa' // define the d3.geo projection name here to make our MapSvg component more reusable
-			}
+			projection_: 'geoAlbersUsa' // define the d3.geo projection name here to make our MapSvg component more reusable
 		})
 			.svgLayers([
 				{ component: MapSvg, opts: {} }

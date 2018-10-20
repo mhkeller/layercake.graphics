@@ -24,7 +24,7 @@ export default {
 				{ component: MapSvgStore, opts: {} }
 			]);
 
-		myCake.compute('projection', ['width', 'height', 'data'], (width, height, data) => {
+		myCake.compute('projection_', ['width', 'height', 'data'], (width, height, data) => {
 			return geoAlbersUsa()
 				.fitSize([width, height], data);
 		});

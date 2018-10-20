@@ -21,9 +21,7 @@ export default {
 			yPadding: [padding, padding],
 			data: points,
 			target: this.refs.chart,
-			custom: {
-				r
-			}
+			r_: r
 		})
 			.canvasLayers([
 				{ component: Scatter, opts: { color: '#ff4eff' } }

@@ -47,9 +47,7 @@ export default {
 			yDomain: [0, null],
 			data: fruitLong,
 			target: this.refs.chart,
-			custom: {
-				fruit
-			}
+			fruit_: fruit
 		})
 			.svgLayers([
 				{ component: AxisX, opts: { gridlines: false, tickNumber: 3, formatTick: formatXTick } },

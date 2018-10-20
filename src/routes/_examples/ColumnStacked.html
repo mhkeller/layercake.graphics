@@ -36,11 +36,11 @@ export default {
 			flatData: flatten(series),
 			data: series,
 			target: this.refs.chart,
-			custom: { seriesNames }
+			seriesNames_: seriesNames
 		})
 			.svgLayers([
 				{ component: AxisX, opts: { gridlines: false } },
-				{ component: AxisY, opts: { gridlines: false, ticks: 3, formatTick: formatYTick } },
+				{ component: AxisY, opts: { gridlines: false, formatTick: formatYTick } },
 				{ component: ColumnStacked, opts: { colors } }
 			]);
 

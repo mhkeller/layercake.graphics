@@ -36,7 +36,7 @@ export default {
 			flatData: flatten(series),
 			data: series,
 			target: this.refs.chart,
-			custom: { seriesNames }
+			seriesNames_: seriesNames
 		})
 			.svgLayers([
 				{ component: AxisX, opts: { formatTick: formatXTick, baseline: true, snapTicks: true } },

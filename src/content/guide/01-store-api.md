@@ -2,6 +2,8 @@
 title: Store API
 ---
 
+These are the options you can pass into `new LayerCake()`. You can also set your own custom values and they will be normal store properties. Many of the examples do this to set color scales or other values that will be used across components, for instance. To make sure the names don't conflict, the examples suffix any custom properties with an underscore, but it's not required.
+
 ### target: `<DOM Node>`
 
 The DOM object you want to use as the the basis for measurements and for rendering into.
