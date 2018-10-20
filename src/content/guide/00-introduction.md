@@ -18,7 +18,9 @@ Layer Cake is more about having a system to organize your own custom components 
 
 ### Getting started
 
-Here is an example with a basic folder structure like this:
+The easiest way to get started is to clone down or use [degit](https://github.com/rich-harris/degit) to grab the starter template at [github.com/mhkeller/layercake-template](https://github.com/mhkeller/layercake-template).
+
+The important files are like your `index.html` which has the DOM element we want to render into and the cake configuration in `main.js`:
 
 ```bash
 my-app
@@ -56,7 +58,7 @@ const myCake = new LayerCake({
 console.log(myCake.get());
 ```
 
-> Each of the chart examples on the home page can be run locally by clicking into them and clikcing `Download`. If you are using Layer Cake within Sapper, the code here in `main.js` would go inside your components `oncreate()` method, which is how this examples site is built. You can also download a starter template at [github.com/mhkeller/layercake-template](https://github.com/mhkeller/layercake-template).
+> Each of the chart examples on the home page can be run locally by clicking into them and clikcing `Download`. If you are using Layer Cake within Sapper, the code here in `main.js` would go inside your components `oncreate()` method, which is how this examples site is built.
 
 The `myCake` variable is a Svelte Store that just computed different properties to use in our chart. Because we gave Layer Cake values for `x` and `y`, it has measured the extent of our data's x- and y-dimensions and created `xScale` and `yScale` properties. It has also measured our DOM element as well as created x- and y-accessors so, for a given row of our data we can compute the value in our coordinate system.
 
