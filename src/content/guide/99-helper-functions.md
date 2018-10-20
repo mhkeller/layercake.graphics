@@ -180,7 +180,7 @@ Returns an object whose keys are the field names specified as the first item in 
 
 A function get get the unique values from a list. If **accessor** is a string or a function, the uniqueness will be compared using that and, be default, the values in the returned list will be the ones returned by the accessor. Pass `false` to the **transform** argument if you want to return the original elements, which will be the first one that appears for every unique value.
 
-This is different from Underscore's [uniq](https://underscorejs.org/#uniq) function, because that will not return the transformed value.
+This is different from Underscore's [uniq](https://underscorejs.org/#uniq) because that function doesn't return the transformed value.
 
 ```js
 import { uniques } from 'layercake';
