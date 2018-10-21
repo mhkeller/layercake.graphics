@@ -97,7 +97,24 @@
 		font-weight: 800;
 		margin: -4em 0 1em 0;
 		padding-top: 6em;
-		pointer-events: none;
+		position: relative;
+	}
+
+	section :global(h3 > a) {
+		width: 25px;
+		height: 25px;
+		background-image: url(icons/link.svg);
+		background-repeat: no-repeat;
+		position: absolute;
+		transform: translate(0px, -4px);
+		box-sizing: border-box;
+		padding-left: 30px;
+		background-position: center center;
+		display: none;
+	}
+
+	section :global(h3:hover > a) {
+		display: inline-block;
 	}
 
 	section :global(h3 > code) {
@@ -217,7 +234,7 @@
 		content: '🍰';
 		position: absolute;
 		left: 5px;
-		top: 6px;
+		top: 7px;
 		/*color: rgba(170,0,0, 0.7);*/
 		font-size: 1.5em;
 		font-weight: 800;

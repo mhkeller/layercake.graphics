@@ -67,7 +67,9 @@ export default function () {
 			const renderer = new marked.Renderer();
 
 			renderer.heading = function (text, level) {
-				return `<h${level} id="${slugify(text)}">${text}</h${level}>`;
+				const slug = slugify(text);
+				// TODO, better anchor handling maybe with even newer sapper?
+				return `<h${level} id="${slug}">${text}<a href="/guide/#${slug}"> </a></h${level}>`;
 			};
 
 			renderer.code = (source, lang) => {
@@ -164,10 +166,10 @@ export default function () {
 							if ($2) return `.${$1}()`;
 							return `.${$1}`;
 						})
+						.split('<a')[0]
 						.split(' <code>')[0]
 						.replace(/<\/?code>/g, '')
 				);
-				// throw new Error()
 				subsections.push({ slug, title });
 			}
 
