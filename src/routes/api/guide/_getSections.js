@@ -4,15 +4,7 @@ import * as fleece from 'golden-fleece';
 import processMarkdown from '../_processMarkdown.js';
 import marked from 'marked';
 import hljs from 'highlight.js';
-
-const langs = {
-	'hidden-data': 'json',
-	'html-no-repl': 'html'
-};
-
-function btoa (str) {
-	return new Buffer(str).toString('base64');
-}
+import slugify from '../_slugify.js';
 
 const escaped = {
 	'"': '&quot;',
@@ -73,6 +65,10 @@ export default function () {
 			let uid = 1;
 
 			const renderer = new marked.Renderer();
+
+			renderer.heading = function (text, level) {
+				return `<h${level} id="${slugify(text)}">${text}</h${level}>`;
+			};
 
 			renderer.code = (source, lang) => {
 				source = source.replace(/^ +/gm, match => match.split('    ').join('\t'));
@@ -158,7 +154,6 @@ export default function () {
 				const slug = match[1];
 				const title = unescape(
 					match[2]
-						.replace(/<\/?code>/g, '')
 						.replace(/^(\w+)(\((.+)?\))?/, (m, $1, $2, $3) => {
 							if ($3) return `${$1}(...)`;
 							if ($2) return `${$1}()`;
@@ -169,9 +164,10 @@ export default function () {
 							if ($2) return `.${$1}()`;
 							return `.${$1}`;
 						})
-						.split(' ')[0]
+						.split(' <code>')[0]
+						.replace(/<\/?code>/g, '')
 				);
-
+				// throw new Error()
 				subsections.push({ slug, title });
 			}
 

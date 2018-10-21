@@ -18,7 +18,7 @@ A bounding box object of the [target](#target) element with `top`, `right`, `bot
 
 ### domains `Object`
 
-An object containing a key for every [active key](#activekeys) whose value is a two-value array representing the min and max values for that field in the data. This value could differ from the domain of your scale if you are manually setting a limit on your scale by setting any of the `xDomain`, `yDomain` or `rDomain` settings. This is used internally to set domain things but it's also useful as a reference if you want to toggle between an arbitrary domain and the measured extents of the data, such as in the [small multiples example](/examples/SmallMultiples).
+An object containing a key for every [active key](#activekeys-array) whose value is a two-value array representing the min and max values for that field in the data. This value could differ from the domain of your scale if you are manually setting a limit on your scale by setting any of the `xDomain`, `yDomain` or `rDomain` settings. This is used internally to set domain things but it's also useful as a reference if you want to toggle between an arbitrary domain and the measured extents of the data, such as in the [small multiples example](/examples/SmallMultiples).
 
 ### originalSettings `Object`
 
