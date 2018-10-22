@@ -8,7 +8,7 @@ Layer Cake exposes some commonly-used helper functions. If you don't use them, t
 
 Easily create new divs. If you pass a DOM node as the third argument it will attach it to that object.
 
-Handy when creating small multiples. You can put your cake inside a loop and append a new [target](#target) div for every chart.
+Handy when creating small multiples. You can put your cake inside a loop and append a new [target](/guide#target) div for every chart.
 
 ```js
 import { default as Layercake, newDiv } from 'layercake';

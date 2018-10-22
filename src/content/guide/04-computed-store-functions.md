@@ -14,11 +14,11 @@ A list of all the keys that have an accessor set.
 
 ### box `Object`
 
-A bounding box object of the [target](#target) element with `top`, `right`, `bottom`, `left`, `width` and `height` numbers in pixels. Useful for creating tooltips.
+A bounding box object of the [target](/guide#target) element with `top`, `right`, `bottom`, `left`, `width` and `height` numbers in pixels. Useful for creating tooltips.
 
 ### domains `Object`
 
-An object containing a key for every [active key](#activekeys-array) whose value is a two-value array representing the min and max values for that field in the data. This value could differ from the domain of your scale if you are manually setting a limit on your scale by setting any of the `xDomain`, `yDomain` or `rDomain` settings. This is used internally to set domain things but it's also useful as a reference if you want to toggle between an arbitrary domain and the measured extents of the data, such as in the [small multiples example](/examples/SmallMultiples).
+An object containing a key for every [active key](/guide#activekeys) whose value is a two-value array representing the min and max values for that field in the data. This value could differ from the domain of your scale if you are manually setting a limit on your scale by setting any of the `xDomain`, `yDomain` or `rDomain` settings. This is used internally to set domain things but it's also useful as a reference if you want to toggle between an arbitrary domain and the measured extents of the data, such as in the [small multiples example](/examples/SmallMultiples).
 
 ### originalSettings `Object`
 
@@ -44,8 +44,8 @@ computed: {
 
 ### yGet(d: `Object`)
 
-Same as [xGet](#xGet) but for the y scale.
+Same as [xGet](/guide#xget) but for the y scale.
 
 ### rGet(d: `Object`)
 
-Same as [xGet](#xGet) but for the r scale.
+Same as [xGet](/guide#xget) but for the r scale.

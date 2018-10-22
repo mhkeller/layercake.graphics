@@ -70,15 +70,15 @@ const myCake = new LayerCake({
 });
 ```
 
-Calls to `x(dataRow)` in this scenario will return the two-value array. Calls to `xGet(dataRow)` will return a two-value array, mapped through the [xScale](#xScale).
+Calls to `x(dataRow)` in this scenario will return the two-value array. Calls to `xGet(dataRow)` will return a two-value array, mapped through the [xScale](/guide#xscale).
 
 ### y `String|Function|Array`
 
-Same as [x](#x) but for the y scale. The accessor function is available on the store as `$y`.
+Same as [x](/guide#x) but for the y scale. The accessor function is available on the store as `$y`.
 
 ### r `String|Function|Array`
 
-Same as [x](#x) but for the r scale. The accessor function is available on the store as `$r`.
+Same as [x](/guide#x) but for the r scale. The accessor function is available on the store as `$r`.
 
 ### padding `Object`
 
@@ -92,7 +92,7 @@ const myCake = new LayerCake({
 });
 ```
 
-> Another way to set padding is to add it via normal CSS on your [target](#target) div. The target element is assigned CSS of `box-sizing: border-box;` so padding settings won't affect the width or height. If you set any padding via CSS, the padding object will be ignored.
+> Another way to set padding is to add it via normal CSS on your [target](/guide#target) div. The target element is assigned CSS of `box-sizing: border-box;` so padding settings won't affect the width or height. If you set any padding via CSS, the padding object will be ignored.
 
 ### xScale `d3Scale()`
 
@@ -102,11 +102,11 @@ See the [Column chart](/examples/Column) for an example of passing in a `d3.scal
 
 ### yScale `d3Scale()`
 
-Same as [xScale](#xScale) but for the y scale. The default is `d3.scaleLinear()`.
+Same as [xScale](/guide#xscale) but for the y scale. The default is `d3.scaleLinear()`.
 
 ### rScale `d3Scale()`
 
-Same as [xScale](#xScale) but for the r scale. The default is `d3.scaleSqrt()`.
+Same as [xScale](/guide#xscale) but for the r scale. The default is `d3.scaleSqrt()`.
 
 ### xDomain `Array:[min: Number, max: Number]`
 
@@ -122,11 +122,11 @@ const myCake = new LayerCake({
 
 ### yDomain `Array:[min: Number, max: Number]`
 
-Same as [xDomain](#xDomain) but for the y scale.
+Same as [xDomain](/guide#xdomain) but for the y scale.
 
 ### rDomain `Array:[min: Number, max: Number]`
 
-Same as [xDomain](#xDomain) but for the r scale.
+Same as [xDomain](/guide#xdomain) but for the r scale.
 
 ### reverseX `Boolean=false`
 
@@ -148,11 +148,11 @@ const myCake = new LayerCake({
 
 ### yPadding `Array:[leftPixels: Number, rightPixels: Number]`
 
-Same as [xPadding](#xPadding) but for the y domain.
+Same as [xPadding](/guide#xpadding) but for the y domain.
 
 ### rPadding `Array:[leftPixels: Number, rightPixels: Number]`
 
-Same as [xPadding](#xPadding) but for the r domain.
+Same as [xPadding](/guide#xpadding) but for the r domain.
 
 ### rRange `Array:[min: Number, max: Number]`
 
@@ -170,17 +170,17 @@ Applies D3's [scale.nice()](https://github.com/d3/d3-scale#continuous_nice) to t
 
 ### yNice `Boolean:false`
 
-Same as [xNice](#xPadding) but for the y domain.
+Same as [xNice](/guide#xpadding) but for the y domain.
 
 ### rNice `Boolean:false`
 
-Same as [xNice](#xPadding) but for the r domain.
+Same as [xNice](/guide#xpadding) but for the r domain.
 
 ### flatData `Array`
 
 In order for Layer Cake to measure the extents of your data, it needs a flat array of items that the x, y and r accessors can find. If your data is not flat (often the case if your renderers prefer a more nested format), you can tell it to measure extents against a flat version. This *will not* change the shape of the data that gets passed to components — it is only for extent calculation.
 
-> The library also exports a flattening function to handle common use cases if you need to flatten your data and you don't already have a flat version. See the [flatten](#flatten-data-) helper function for more info.
+> The library also exports a flattening function to handle common use cases if you need to flatten your data and you don't already have a flat version. See the [flatten](/guide#flatten) helper function for more info.
 
 Here's an example showing passing different data formats for extent calculation versus what is used by layer components.
 

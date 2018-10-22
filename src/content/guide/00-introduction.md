@@ -4,17 +4,17 @@ title: Introduction
 
 ### What is Layer Cake?
 
-Layer Cake is a graphics framework, built on top of [Svelte](https://svelte.technology) that removes the boilerplate from making responsive web graphics.
+Layer Cake is a graphics framework, built on top of [Svelte](https://svelte.technology) that removes the boilerplate from making responsive web graphics. it gives you common elements, like a coordinate system and scales, for you to start creating your own dataviz layers, like axes, plots and annotations.
 
-Once you pass in your parameters of a target DOM element and some data, the library creates a [Svelte store](https://svelte.technology/guide#state-management) that includes scales bound to your element's dimensions and the data's extents. Layer Cake also includes higher level methods to organize multiple SVG, HTML and Canvas layers that use these scales.
+Give it some data and a target DOM element and Layer Cake will create a [Svelte store](https://svelte.technology/guide#state-management) that includes scales bound to your element's dimensions and the data's extents. Layer Cake also includes higher level methods to organize multiple SVG, HTML and Canvas layers that use these scales.
 
 By breaking a part a graphic into layers, you can more easily reuse components from project to project. It also lets you easily move between web languages (SVG, Canvas, HTML, WebGL) by giving you a common coordinate system. You may be using Canvas for a scatterplot, SVG for axes and HTML for annotations but they all read from a common store and appear seamless to the viewer. You can choose the best technology for that part of the graphic without worrying about how it will interact with other elements.
 
-> Layer Cake uses D3 scales. See more in the [xScale](#xScale), [yScale](#yScale) and [rScale](#rScale) sections of the [Store API](#store-api).
+> Layer Cake uses D3 scales. See more in the [xScale](/guide#xscale), [yScale](/guide#yscale) and [rScale](/guide#rscale) sections of the [Store API](/guide#store-api).
 
 Layer Cake is more about having a system to organize your own custom components than it is a high-level charting library. It doesn't have any built-in concepts or strong opinions about how your data should be structured.
 
-> See the [`flatten`](#flatten) and [`flatData`](#flatData) methods in the [Store API](#store-api) section below for more info about data structure.
+> See the [`flatData`](/guide#flatdata) option in the [Store API](/guide#store-api) section and the [`flatten`](/guide#flatten) helper function for more info about data structure.
 
 ### Getting started
 
@@ -76,7 +76,7 @@ points.forEach(d => {
 });
 ```
 
-> You can also use the shorthand `[xGet(d), yGet(d)]`. See the [Store API](#store-api) section for a full list of computed properties.
+> You can also use the shorthand `[xGet(d), yGet(d)]`. See the [Store API](/guide#store-api) section for a full list of computed properties.
 
 Because Layer Cake has bound the target DOM element's dimensions to your scales, all computed properties will update on resize automatically.
 
