@@ -1,0 +1,106 @@
+{#each days as day}
+	<rect
+		class="day"
+		width="{cellSize}"
+		height="{cellSize}"
+		x="{rectX(day)}"
+		y="{rectY(day)}"
+		style="fill:{fillColor(day)};"
+		on:mouseover="showCount(day)"
+	>
+	</rect>
+{/each}
+
+<style>
+	.day {
+		stroke: #000;
+		stroke-width: 1;
+		fill: #fff;
+	}
+	:global(.calendar:before) {
+		content: attr(data-month);
+		position: absolute;
+		top: 0;
+		left: 0;
+		transform: translate(0, -100%);
+	}
+
+</style>
+
+<script>
+import { scaleQuantize } from 'd3-scale';
+import { timeFormat } from 'd3-time-format';
+import { timeDay } from 'd3-time';
+
+const getDayOfWeek = timeFormat('%w');
+const getWeekOfYear = timeFormat('%U');
+
+export default {
+	namespace: 'svg',
+	computed: {
+		count: ({ $data, $x, $r }) => {
+			return date => {
+				const stringDate = date.toISOString().split('T')[0];
+				const days = $data.filter(d => $x(d) === stringDate)[0];
+				if (days) {
+					return $r(days);
+				}
+				return 0;
+			};
+		},
+		colorScale: ({ $domains }) => {
+			return scaleQuantize()
+				.domain($domains.r)
+				.range(['#bdf2ff','#83dbf9','#50c2e9','#20a8d1','#008fb3']);
+		},
+		fillColor: ({ count, colorScale }) => {
+			return day => {
+				const n = count(day);
+				return n ? colorScale(n) : '#fff';
+			};
+		},
+		cellSize: ({ opts, $width, $height }) => {
+			return opts.cellSize($width, $height);
+		},
+		days: ({ $domains, $x, cellSize }) => {
+			/* --------------------------------------------
+			 * Calculate what month we're in and generate the full days of that month
+			 */
+
+			const minDate = $domains.x[0];
+			const parts = minDate.split('-').map(d => +d);
+
+			const days = timeDay.range(new Date(Date.UTC(parts[0], parts[1] - 1, 1)), new Date(Date.UTC(parts[0], parts[1], 1)));
+			console.log(days);
+			return days;
+		},
+		rectX: ({ $x, cellSize }) => {
+			/* --------------------------------------------
+			 * Offset x by the day of the week for this day
+			 */
+			return day => {
+				return getDayOfWeek(day) * cellSize;
+			};
+		},
+		rectY: ({ cellSize }) => {
+			/* --------------------------------------------
+			 * Offset y by the week in this month
+			 * We don't have a convenient way to do this so get the week of the year
+			 * minus the week of the year of the first week in this month
+			 */
+			return day => {
+				const startWeek = getWeekOfYear(new Date(day.getUTCFullYear(), day.getUTCMonth(), 1));
+				const thisWeek = getWeekOfYear(day);
+				const weekDiff = thisWeek - startWeek;
+				return weekDiff * cellSize;
+			};
+		}
+	},
+	methods: {
+		showCount (day) {
+			const { count } = this.get();
+			console.log(day, count(day));
+		}
+	}
+};
+</script>

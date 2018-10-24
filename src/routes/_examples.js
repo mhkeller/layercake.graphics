@@ -12,6 +12,7 @@ import ScatterWebgl from './_examples/ScatterWebgl.html';
 import ClevelandDotPlot from './_examples/ClevelandDotPlot.html';
 import Histogram from './_examples/Histogram.html';
 import SmallMultiples from './_examples/SmallMultiples.html';
+import Calendar from './_examples/Calendar.html';
 
 export default [
 	{ title: 'Line + area', slug: 'Line', component: Line },
@@ -28,4 +29,5 @@ export default [
 	{ title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
 	{ title: 'Histogram (variable bins)', slug: 'Histogram', component: Histogram },
 	{ title: 'Small multiples (animated domain transition)', slug: 'SmallMultiples', component: SmallMultiples },
+	{ title: 'Calendar (one cake per month)', slug: 'Calendar', component: Calendar },
 ];

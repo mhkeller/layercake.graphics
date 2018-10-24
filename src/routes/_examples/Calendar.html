@@ -1,0 +1,69 @@
+<div class="chart-container" ref:chart></div>
+
+<script>
+import { default as LayerCake, newDiv } from 'layercake';
+import dates from '../../data/dates.js';
+import { nest } from 'd3-collection';
+import { csvParse } from 'd3-dsv';
+import CalendarMonth from '../../components/CalendarMonth.html';
+
+export default {
+	oncreate () {
+		const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+		const datesJson = csvParse(dates, row => {
+			row.date = new Date(row.timestring);
+			return row;
+		});
+
+		/* --------------------------------------------
+		 * Group by month then by date
+		 */
+		const byMonthByDate = nest()
+			.key(d => d.date.getUTCMonth())
+			.key(d => d.timestring.split('T')[0])
+			.entries(datesJson);
+
+		byMonthByDate.sort((a, b) => a.key - b.key).forEach((month, i) => {
+			const margin = 5;
+			const width = (100 / byMonthByDate.length) - Math.floor((margin / (Math.max(byMonthByDate.length - 1, 1))));
+			const styles = {
+				display: 'inline-block',
+				position: 'relative',
+				'vertical-align': 'top',
+				'width': `${width}%`,
+				height: '100%',
+				'margin-top': '25px'
+			};
+			// Apply margin to everything that isn't the first one
+			if (i !== byMonthByDate.length - 1) {
+				styles['margin-right'] = `${margin}%`;
+			}
+			const target = newDiv('calendar', styles, this.refs.chart);
+
+			target.dataset.month = months[+month.key - 1];
+
+			const myCake = new LayerCake({
+				padding: { top: 1, right: 1, bottom: 1, left: 1 },
+				x: 'key',
+				// Using the r scale for color but you could also use the y scale
+				r: d => d.values.length,
+				data: month.values,
+				target
+			})
+				.svgLayers([
+					{ component: CalendarMonth,
+						opts: {
+							// Constrain the figure so it fits into the container div showing either five weeks or seven days across, whichever fits better
+							cellSize: ($width, $height) => {
+								return Math.min($width / 7, $height / 5);
+							}
+						}
+					}
+				]);
+
+			myCake.render();
+		});
+	}
+};
+</script>
