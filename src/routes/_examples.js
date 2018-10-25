@@ -13,6 +13,7 @@ import ClevelandDotPlot from './_examples/ClevelandDotPlot.html';
 import Histogram from './_examples/Histogram.html';
 import SmallMultiples from './_examples/SmallMultiples.html';
 import Calendar from './_examples/Calendar.html';
+import Timeplot from './_examples/Timeplot.html';
 
 export default [
 	{ title: 'Line + area', slug: 'Line', component: Line },
@@ -27,7 +28,8 @@ export default [
 	{ title: 'Stacked area', slug: 'AreaStacked', component: AreaStacked },
 	{ title: 'Scatter (svg + canvas + voronoi)', slug: 'Scatter', component: Scatter },
 	{ title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
+	{ title: 'Calendar (one cake per month)', slug: 'Calendar', component: Calendar },
+	{ title: 'Time of day plot', slug: 'Timeplot', component: Timeplot },
 	{ title: 'Histogram (variable bins)', slug: 'Histogram', component: Histogram },
 	{ title: 'Small multiples (animated domain transition)', slug: 'SmallMultiples', component: SmallMultiples },
-	{ title: 'Calendar (one cake per month)', slug: 'Calendar', component: Calendar },
 ];

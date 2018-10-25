@@ -2,9 +2,9 @@
 	{#each $yScale.domain() as tick}
 		<g class='tick tick-{ tick }' transform='translate({$xScale.range()[0]}, {$yScale(tick)})'>
 			{#if opts.gridlines !== false}
-				<line x2='100%'></line>
+				<line x2='100%' y1="{halfBandwidth}" y2="{halfBandwidth}"></line>
 			{/if}
-			<text y='{4 + ($yScale.bandwidth() / 2)}' x="-5">{opts.formatTick ? opts.formatTick(tick) : tick}</text>
+			<text y='{4 + (halfBandwidth)}' x="-5">{opts.formatTick ? opts.formatTick(tick) : tick}</text>
 		</g>
 	{/each}
 </g>
@@ -35,6 +35,11 @@
 
 <script>
 export default {
-	namespace: 'svg'
+	namespace: 'svg',
+	computed: {
+		halfBandwidth: ({ $yScale }) => {
+			return $yScale.bandwidth() / 2;
+		}
+	}
 };
 </script>

@@ -51,7 +51,7 @@ export default {
 		colorScale: ({ $domains }) => {
 			return scaleQuantize()
 				.domain($domains.r)
-				.range(['#bdf2ff','#83dbf9','#50c2e9','#20a8d1','#008fb3']);
+				.range(['#bdf2ff', '#83dbf9', '#50c2e9', '#20a8d1', '#008fb3']);
 		},
 		fillColor: ({ count, colorScale }) => {
 			return day => {
@@ -71,7 +71,6 @@ export default {
 			const parts = minDate.split('-').map(d => +d);
 
 			const days = timeDay.range(new Date(Date.UTC(parts[0], parts[1] - 1, 1)), new Date(Date.UTC(parts[0], parts[1], 1)));
-			console.log(days);
 			return days;
 		},
 		rectX: ({ $x, cellSize }) => {
