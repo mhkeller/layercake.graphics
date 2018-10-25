@@ -168,11 +168,11 @@ const myCake = new LayerCake({
 
 Applies D3's [scale.nice()](https://github.com/d3/d3-scale#continuous_nice) to the x domain. This is a separate option instead of being one you can apply to a passed in scale because D3's "nice" transformation only works on existing domains and does not use a state to be able to tell if your existing scale wants to be nice.
 
-### yNice `Boolean:false`
+### yNice `Boolean=false`
 
 Same as [xNice](/guide#xpadding) but for the y domain.
 
-### rNice `Boolean:false`
+### rNice `Boolean=false`
 
 Same as [xNice](/guide#xpadding) but for the r domain.
 
