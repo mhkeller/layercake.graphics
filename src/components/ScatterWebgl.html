@@ -36,7 +36,8 @@ export default {
 	},
 	methods: {
 		render (regl) {
-			const { xGet, yGet, data, diameter_ } = this.store.get();
+			const { opts } = this.get();
+			const { xGet, yGet, data } = this.store.get();
 
 			regl.clear({
 				color: [0, 0, 0, 0],
@@ -144,7 +145,7 @@ export default {
 			});
 
 			draw({
-				pointWidth: diameter_,
+				pointWidth: opts.diameter,
 				points: data
 			});
 		}

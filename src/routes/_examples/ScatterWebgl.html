@@ -20,15 +20,14 @@ export default {
 			xPadding: [padding, padding],
 			yPadding: [padding, padding],
 			data: points,
-			target: this.refs.chart,
-			diameter_: diameter
+			target: this.refs.chart
 		})
 			.svgLayers([
 				{ component: AxisX, opts: {} },
 				{ component: AxisY, opts: {} }
 			])
 			.webglLayers([
-				{ component: ScatterWebgl, opts: { } }
+				{ component: ScatterWebgl, opts: { diameter } }
 			])
 			.htmlLayers([
 				{ component: QuadTree, opts: { color: '#fff' } }

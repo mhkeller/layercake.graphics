@@ -12,7 +12,7 @@ import AxisY from '../../components/AxisYScaleBand.html';
 
 export default {
 	oncreate () {
-		const r = 5;
+		const r = 4;
 		const padding = 4;
 
 		const daysJson = csvParse(days, row => {
@@ -47,8 +47,7 @@ export default {
 			xPadding: [padding, padding],
 			yPadding: [padding, padding],
 			data: daysJson,
-			target: this.refs.chart,
-			r_: r
+			target: this.refs.chart
 		})
 			.svgLayers([
 				{ component: AxisX,
@@ -60,7 +59,7 @@ export default {
 				{ component: AxisY, opts: { } }
 			])
 			.canvasLayers([
-				{ component: Scatter, opts: { color: 'rgba(0, 204, 255, 0.5)' } }
+				{ component: Scatter, opts: { r, color: 'rgba(255, 204, 0, 0.75)' } }
 			]);
 
 		myCake.render();
