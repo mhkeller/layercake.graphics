@@ -25,8 +25,12 @@ export default {
 		data.forEach(d => {
 			ctx.beginPath();
 			ctx.arc(xGet(d), yGet(d), opts.r, 0, 2 * Math.PI, false);
-			ctx.fillStyle = opts.color;
+			ctx.fillStyle = opts.fill;
 			ctx.fill();
+			if (opts.stroke) {
+				ctx.strokeStyle = opts.stroke;
+				ctx.stroke();
+			}
 		});
 	}
 };
