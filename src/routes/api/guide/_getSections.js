@@ -69,7 +69,7 @@ export default function () {
 			renderer.heading = function (text, level) {
 				const slug = slugify(text);
 				// TODO, better anchor handling maybe with even newer sapper?
-				return `<h${level} id="${slug}">${text}<a href="/guide/#${slug}"> </a></h${level}>`;
+				return `<h${level} id="${slug}">${text}<a href="/guide#${slug}"> </a></h${level}>`;
 			};
 
 			renderer.code = (source, lang) => {
