@@ -20,7 +20,7 @@ export default [
 	{ title: 'WebGl Scatter (svg axes, quadtree hover)', slug: 'ScatterWebgl', component: ScatterWebgl },
 	{ title: 'Map (svg)', slug: 'MapSvg', component: MapSvg },
 	{ title: 'Multilayer map (canvas + svg)', slug: 'MapLayered', component: MapLayered },
-	{ title: 'Annotated Column', slug: 'Column', component: Column },
+	{ title: 'Annotated column', slug: 'Column', component: Column },
 	{ title: 'Stacked column', slug: 'ColumnStacked', component: ColumnStacked },
 	{ title: 'Bar', slug: 'Bar', component: Bar },
 	{ title: 'Stacked bar', slug: 'BarStacked', component: BarStacked },
