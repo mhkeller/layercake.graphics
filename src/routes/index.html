@@ -52,9 +52,7 @@
 		margin-right: 17px;
 		background: url('layercake-logo-128.png');
 		background-size: contain;
-	}
-	.logo-container {
-		white-space: nowrap;
+		background-repeat: no-repeat;
 	}
 	h1 {
 		margin-bottom: 7px;
@@ -68,10 +66,17 @@
 		margin-bottom: 60px;
 	}
 	@media (max-width: 650px) {
-	 .gallery-item {
-		 width: 100%;
-	 }
+		.gallery-item {
+			width: 100%;
+		}
 	}
+	@media (max-width: 350px) {
+		#logo {
+			width: 70px;
+			margin-right: 7px;
+		}
+	}
+
 	.gallery-item:nth-child(odd) {
 		margin-right: 5%;
 	}
