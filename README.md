@@ -15,5 +15,7 @@ npm run dev
 ##### Publishing
 
 ```sh
-npm run publish
+npm run export
+git commit -am 'publish'
+git push
 ```
