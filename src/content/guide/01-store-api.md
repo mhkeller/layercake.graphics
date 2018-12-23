@@ -32,7 +32,7 @@ const myCake = new LayerCake({
 });
 ```
 
-You can also give this value an array of strings or arrays of functions. While it may seem counter-intuitive to have more than one x- or y-accessor, this is the case in stacked layouts and Cleveland dot plots. See the [Stacked bar](/examples/BarStacked), [Stacked area](/examples/AreaStacked) or [Stacked colummn](/examples/ColumnStacked) for complete examples.
+You can also give this value an array of strings or arrays of functions. While it may seem counter-intuitive to have more than one x- or y-accessor, this is the case in stacked layouts and Cleveland dot plots. See the [Stacked bar](/examples/BarStacked), [Stacked area](/examples/AreaStacked), [Stacked colummn](/examples/ColumnStacked) or [Cleveland dot plot](/examples/ClevelandDotPlot) for complete examples.
 
 Here's an overview using the `d3.stack()` to make a horizontal bar chart, which will have two values for the x-accessor.
 
@@ -94,17 +94,17 @@ const myCake = new LayerCake({
 
 > Another way to set padding is to add it via normal CSS on your [target](/guide#target) div. The target element is assigned CSS of `box-sizing: border-box;` so padding settings won't affect the width or height. If you set any padding via CSS, the padding object will be ignored.
 
-### xScale `d3Scale()`
+### xScale `d3.scaleLinear()`
 
 Pass in an instantiated D3 scale if you want to override the default `d3.scaleLinear()` or you want to add extra options.
 
 See the [Column chart](/examples/Column) for an example of passing in a `d3.scaleBand()` to override the default.
 
-### yScale `d3Scale()`
+### yScale `d3.scaleLinear()`
 
 Same as [xScale](/guide#xscale) but for the y scale. The default is `d3.scaleLinear()`.
 
-### rScale `d3Scale()`
+### rScale `d3.scaleSqrt()`
 
 Same as [xScale](/guide#xscale) but for the r scale. The default is `d3.scaleSqrt()`.
 
