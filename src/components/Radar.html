@@ -1,0 +1,54 @@
+<g
+	transform="translate({ $width / 2 }, { $height / 2 })"
+>
+	{#each $data as row}
+		<!-- Plot each dots -->
+		{#each $rGet(row) as circleR, i}
+			<circle
+				cx="{circleR * Math.cos(angleSlice * i - Math.PI/2)}"
+				cy="{circleR * Math.sin(angleSlice * i - Math.PI/2)}"
+				r="5"
+				fill="#f0c"
+				stroke="#fff"
+				stroke-width="2"
+			>
+			</circle>
+		{/each}
+		<!-- Now connect them with a line -->
+		<path class='path-line' d='{path}' stroke="#f0c"></path>
+
+	{/each}
+</g>
+
+
+<style>
+	.path-line {
+		fill: none;
+		stroke-linejoin: round;
+		stroke-linecap: round;
+		stroke-width: 2;
+	}
+</style>
+
+<script>
+export default {
+	namespace: 'svg',
+	computed: {
+		angleSlice: ({ $originalSettings }) => {
+			return Math.PI * 2 / $originalSettings.r.length;
+		},
+		path: ({ $data, $rGet, angleSlice }) => {
+			return 'M' + $data
+				.map(d => {
+					return $rGet(d).map((val, i) => {
+						return [
+							val * Math.cos(angleSlice * i - Math.PI / 2),
+							val * Math.sin(angleSlice * i - Math.PI / 2)
+						].join(',');
+					});
+				})
+				.join('L') + 'z';
+		}
+	}
+};
+</script>
