@@ -4,7 +4,7 @@ export default [
 		fastball: 10,
 		change: 0,
 		slider: 4,
-		cutter: 2,
+		cutter: 8,
 		curve: 5
 	}
 ];

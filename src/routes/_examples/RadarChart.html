@@ -5,6 +5,7 @@ import LayerCake from 'layercake';
 import points from '../../data/radarScores.js';
 import Radar from '../../components/Radar.html';
 import { scaleLinear } from 'd3-scale';
+import { line } from 'd3-shape';
 
 export default {
 	oncreate () {
@@ -13,7 +14,6 @@ export default {
 			r: ['fastball', 'change', 'slider', 'cutter', 'curve'],
 			rScale: scaleLinear(),
 			rRange: ({ width, height }) => {
-				console.log('width', width);
 				return [0, height / 2];
 			},
 			rDomain: [0, 10],
