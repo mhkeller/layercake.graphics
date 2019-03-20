@@ -42,7 +42,7 @@
     "underscore": "^1.9.1"
   },
   "devDependencies": {
-    "eslint": "^5.2.0",
+    "eslint": "^5.15.3",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-node": "^7.0.1",
