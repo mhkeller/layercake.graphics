@@ -2,6 +2,8 @@
 	transform="translate({ $width / 2 }, { $height / 2 })"
 >
 	{#each $data as row}
+		<!-- Draw a line connecting all the dots -->
+		<path class='path-line' d='{path}' stroke="#f0c" fill="#f0c" fill-opacity="0.5"></path>
 		<!-- Plot each dots -->
 		{#each $rGet(row) as circleR, i}
 			<circle
@@ -10,20 +12,16 @@
 				r="5"
 				fill="#f0c"
 				stroke="#fff"
-				stroke-width="2"
+				stroke-width="1"
 			>
 			</circle>
 		{/each}
-		<!-- Now connect them with a line -->
-		<path class='path-line' d='{path}' stroke="#f0c"></path>
-
 	{/each}
 </g>
 
 
 <style>
 	.path-line {
-		fill: none;
 		stroke-linejoin: round;
 		stroke-linecap: round;
 		stroke-width: 2;
