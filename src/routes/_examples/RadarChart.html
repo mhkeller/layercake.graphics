@@ -4,13 +4,13 @@
 import LayerCake from 'layercake';
 import points from '../../data/radarScores.js';
 import Radar from '../../components/Radar.html';
+import AxisRadial from '../../components/AxisRadial.html';
 import { scaleLinear } from 'd3-scale';
-import { line } from 'd3-shape';
 
 export default {
 	oncreate () {
 		const myCake = new LayerCake({
-			padding: { top: 5, right: 5, bottom: 5, left: 5 },
+			padding: { top: 25, right: 0, bottom: 5, left: 0 },
 			r: ['fastball', 'change', 'slider', 'cutter', 'curve'],
 			rScale: scaleLinear(),
 			rRange: ({ width, height }) => {
@@ -21,6 +21,7 @@ export default {
 			target: this.refs.chart
 		})
 			.svgLayers([
+				{ component: AxisRadial, opts: {} },
 				{ component: Radar, opts: {} }
 			]);
 

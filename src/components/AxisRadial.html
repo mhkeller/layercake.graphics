@@ -1,0 +1,52 @@
+<g
+	transform="translate({ $width / 2 }, { $height / 2 })"
+>
+	{#each $originalSettings.r as label, i}
+		<text text-anchor="middle" transform="translate({(max + padding) * Math.cos(angleSlice * i - Math.PI/2)}, {(max + padding) * Math.sin(angleSlice * i - Math.PI/2)})">{label}</text>
+		<line
+			x1="0"
+			y1="0"
+			x2="{max * Math.cos(angleSlice * i - Math.PI/2)}"
+			y2="{max * Math.sin(angleSlice * i - Math.PI/2)}"
+			stroke="#ccc"
+			stroke-width="1"
+			fill="none"
+		>
+		</line>
+	{/each}
+	<circle
+		cx="0"
+		cy="y"
+		r="{max}"
+		stroke="#ccc"
+		stroke-width="1"
+		fill="none"
+	></circle>
+	<circle
+		cx="0"
+		cy="y"
+		r="{max / 2}"
+		stroke="#ccc"
+		stroke-width="1"
+		fill="none"
+	></circle>
+</g>
+
+<script>
+export default {
+	namespace: 'svg',
+	data () {
+		return {
+			padding: 10
+		};
+	},
+	computed: {
+		max: ({ $domains, $rScale }) => {
+			return $rScale(Math.max(...$domains.r));
+		},
+		angleSlice: ({ $originalSettings }) => {
+			return Math.PI * 2 / $originalSettings.r.length;
+		}
+	}
+};
+</script>
