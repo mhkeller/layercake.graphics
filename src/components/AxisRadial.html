@@ -1,19 +1,6 @@
 <g
 	transform="translate({ $width / 2 }, { $height / 2 })"
 >
-	{#each $originalSettings.r as label, i}
-		<text text-anchor="middle" transform="translate({(max + padding) * Math.cos(angleSlice * i - Math.PI/2)}, {(max + padding) * Math.sin(angleSlice * i - Math.PI/2)})">{label}</text>
-		<line
-			x1="0"
-			y1="0"
-			x2="{max * Math.cos(angleSlice * i - Math.PI/2)}"
-			y2="{max * Math.sin(angleSlice * i - Math.PI/2)}"
-			stroke="#ccc"
-			stroke-width="1"
-			fill="none"
-		>
-		</line>
-	{/each}
 	<circle
 		cx="0"
 		cy="y"
@@ -30,6 +17,24 @@
 		stroke-width="1"
 		fill="none"
 	></circle>
+
+	{#each $originalSettings.r as label, i}
+		<line
+			x1="0"
+			y1="0"
+			x2="{(max * linePaddingFactor) * Math.cos(angleSlice * i - Math.PI/2)}"
+			y2="{(max * linePaddingFactor) * Math.sin(angleSlice * i - Math.PI/2)}"
+			stroke="#ccc"
+			stroke-width="1"
+			fill="none"
+		>
+		</line>
+		<text
+			text-anchor="middle"
+			dy="0.35em"
+			text-outline="#fff"
+			transform="translate({(max * labelPaddingFactor) * Math.cos(angleSlice * i - Math.PI/2)}, {(max * labelPaddingFactor) * Math.sin(angleSlice * i - Math.PI/2)})">{label}</text>
+	{/each}
 </g>
 
 <script>
@@ -37,7 +42,8 @@ export default {
 	namespace: 'svg',
 	data () {
 		return {
-			padding: 10
+			linePaddingFactor: 1.11,
+			labelPaddingFactor: 1.31
 		};
 	},
 	computed: {
