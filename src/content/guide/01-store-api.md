@@ -136,6 +136,31 @@ Reverse the default x domain. By default this is `false` and the domain is `[0, 
 
 Reverse the default y domain. By default this is `true` and the domain is `[height, 0]`.
 
+### xRange `Function|Array:[min: Number, max: Number]`
+
+Override the default y range of `[0, width]` by setting it here to an array or function with argument `({ width, height})` that returns an array. This setting is ignored if you set `reverseX` to `true`.
+
+```js
+const myCake = new LayerCake({
+  xRange: [1, 100]
+});
+```
+It can also be a function:
+
+```js
+const myCake = new LayerCake({
+  xRange: ({ width, height }) => [0, width / 2]
+});
+```
+
+### yRange `Function|Array:[min: Number, max: Number]`
+
+Same as [xRange](/guide#xrange) but for the y scale. Override the default y range of `[0, height]` by setting it here to an array or function with argument `({ width, height})` that returns an array. This setting is ignored if you set `reverseY` to `true`.
+
+### rRange `Function|Array:[min: Number, max: Number]`
+
+Same as [xRange](/guide#xrange) but for the r scale. Override the default y range of `[1, 25]` by setting it here to an array or function with argument `({ width, height})` that returns an array. The r scale defaults to `d3.scaleSqrt` so make sure you don't use a zero in your range.
+
 ### xPadding `Array:[leftPixels: Number, rightPixels: Number]`
 
 Assign a pixel value to add to the min or max of the x scale. This will increase the scales domain by the scale unit equivalent of the provided pixels. It uses D3 scale's [invert function](https://github.com/d3/d3-scale#continuous_invert), so this only applies to continuous scales like `scaleLinear`. This is useful for adding extra space to a scatter plot so that your circles don't interfere with your y axis.
@@ -153,16 +178,6 @@ Same as [xPadding](/guide#xpadding) but for the y domain.
 ### rPadding `Array:[leftPixels: Number, rightPixels: Number]`
 
 Same as [xPadding](/guide#xpadding) but for the r domain.
-
-### rRange `Array:[min: Number, max: Number]`
-
-If you're using the r scale, set it's range here since it doesn't infer that from anything in the layout. The r scale defaults to `d3.scaleSqrt` so make sure you don't use a zero in your range.
-
-```js
-const myCake = new LayerCake({
-  rRange: [1, 100]
-});
-```
 
 ### xNice `Boolean=false`
 
