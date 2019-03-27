@@ -176,6 +176,23 @@ console.log(extents);
 
 Returns an object whose keys are the field names specified as the first item in the key group array followed by an array of `[min, max]`.
 
+You can also return an array if you have an object with keys where each one is more logically associated with the min or the max like this:
+
+```js
+const timeData = [{start: 0, end: 1}, {start: -10000, end: 0}];
+
+const extents = calcExtents(timeData, [
+  { field: 'y', accessor: d => [d.start, d.end] }
+]);
+
+console.log(extents);
+/*
+{
+  y: [-10000, 1]
+}
+*/
+```
+
 ### uniques(data: `Array`[, accessor: `String|Function`, transform: `Boolean`])
 
 A function get get the unique values from a list. If **accessor** is a string or a function, the uniqueness will be compared using that and, be default, the values in the returned list will be the ones returned by the accessor. Pass `false` to the **transform** argument if you want to return the original elements, which will be the first one that appears for every unique value.
