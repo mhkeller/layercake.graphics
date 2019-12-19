@@ -1,0 +1,52 @@
+<script>
+	import { getContext } from 'svelte';
+
+	const { data, xGet, yGet, xScale, yScale, domains } = getContext('LayerCake');
+
+	$: path = 'M' + $data
+		.map(d => {
+			return $xGet(d) + ',' + $yGet(d);
+		})
+		.join('L');
+
+	let area;
+
+	$: {
+		const yRange = $yScale.range();
+		area = path + (
+			'L' + $xScale($domains.x[1]) + ',' + yRange[0] +
+			'L' + $xScale($domains.x[0]) + ',' + yRange[0] +
+			'Z'
+		);
+	}
+
+// export default {
+// 	namespace: 'svg',
+// 	computed: {
+// 		area: ({ $xScale, $domains, $yScale, path }) => {
+// 			const yRange = $yScale.range();
+// 			return path + (
+// 				'L' + $xScale($domains.x[1]) + ',' + yRange[0] +
+// 				'L' + $xScale($domains.x[0]) + ',' + yRange[0] +
+// 				'Z'
+// 			);
+// 		},
+// 		path: ({ $data, $xGet, $yGet }) => {
+// 			return 'M' + $data
+// 				.map(function (d, i) {
+// 					return $xGet(d) + ',' + $yGet(d);
+// 				})
+// 				.join('L');
+// 		}
+// 	}
+// };
+</script>
+
+<path class='path-area' d='{area}'></path>
+
+<style>
+	.path-area {
+		fill: #ab00d610;
+	}
+</style>
+
