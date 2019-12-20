@@ -6,14 +6,10 @@
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 
-	let width;
-	let height;
 </script>
 
-<div class="chart-container" bind:clientWidth={width} bind:clientHeight={height}>
+<div class="chart-container">
 	<LayerCake
-		{width}
-		{height}
 		padding={{ right: 10, bottom: 20, left: 25 }}
 		x={'myX'}
 		y={d => d.myY}
