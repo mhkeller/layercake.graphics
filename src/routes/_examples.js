@@ -1,14 +1,14 @@
 import Line from './_examples/Line.svelte';
 // import Scatter from './_examples/Scatter.html';
 // import MapSvg from './_examples/MapSvg.html';
-// import Column from './_examples/Column.html';
+import Column from './_examples/Column.svelte';
 // import AreaStacked from './_examples/AreaStacked.html';
 // import ColumnStacked from './_examples/ColumnStacked.html';
 // import MultiLine from './_examples/MultiLine.html';
 // import MapLayered from './_examples/MapLayered.html';
 // import Bar from './_examples/Bar.html';
 // import BarStacked from './_examples/BarStacked.html';
-// import ScatterWebgl from './_examples/ScatterWebgl.html';
+import ScatterWebgl from './_examples/ScatterWebgl.svelte';
 // import ClevelandDotPlot from './_examples/ClevelandDotPlot.html';
 // import Histogram from './_examples/Histogram.html';
 // import SmallMultiples from './_examples/SmallMultiples.html';
@@ -18,10 +18,10 @@ import Line from './_examples/Line.svelte';
 
 export default [
 	{ title: 'Line + area', slug: 'Line', component: Line },
-	// { title: 'WebGl Scatter (svg axes, quadtree hover)', slug: 'ScatterWebgl', component: ScatterWebgl },
+	{ title: 'WebGl Scatter (svg axes, quadtree hover)', slug: 'ScatterWebgl', component: ScatterWebgl },
 	// { title: 'Map (svg)', slug: 'MapSvg', component: MapSvg },
 	// { title: 'Multilayer map (canvas + svg)', slug: 'MapLayered', component: MapLayered },
-	// { title: 'Annotated column', slug: 'Column', component: Column },
+	{ title: 'Annotated column', slug: 'Column', component: Column },
 	// { title: 'Stacked column', slug: 'ColumnStacked', component: ColumnStacked },
 	// { title: 'Bar', slug: 'Bar', component: Bar },
 	// { title: 'Stacked bar', slug: 'BarStacked', component: BarStacked },

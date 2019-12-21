@@ -3,7 +3,7 @@
 
 	const { data, xGet, yGet } = getContext('LayerCake');
 
-	export let opts = {};
+	export let stroke = '#ab00d6';
 
 	$: path = 'M' + $data
 		.map(d => {
@@ -12,7 +12,7 @@
 		.join('L');
 </script>
 
-<path class='path-line' d='{path}' style="stroke: {opts.stroke || '#ab00d6'};"></path>
+<path class='path-line' d='{path}' style="stroke: {stroke};"></path>
 
 <style>
 	.path-line {

@@ -3,17 +3,20 @@
 
 	const { padding, yScale } = getContext('LayerCake');
 
-	export let opts = {};
+	export let ticks;
+	export let tickNumber = 5;
+	export let gridlines = true;
+	export let formatTick = d => d;
 
 </script>
 
 <g class='axis y-axis' transform='translate(-{$padding.left}, 0)'>
-	{#each $yScale.ticks(opts.ticks || opts.tickNumber || 5) as tick, i}
+	{#each $yScale.ticks(ticks || tickNumber) as tick, i}
 		<g class='tick tick-{tick}' transform='translate(0, {$yScale(tick)})'>
-			{#if opts.gridlines !== false}
+			{#if gridlines !== false}
 				<line x2='100%'></line>
 			{/if}
-			<text y='-4'>{opts.formatTick ? opts.formatTick(tick) : tick}</text>
+			<text y='-4'>{formatTick(tick)}</text>
 		</g>
 	{/each}
 </g>

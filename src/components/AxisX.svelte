@@ -3,12 +3,17 @@
 
 	const { xScale, yScale, height, width } = getContext('LayerCake');
 
-	export let opts = {};
+	export let gridlines = true;
+	export let formatTick = d => d;
+	export let baseline = false;
+	export let snapTicks = false;
+	export let ticks;
+	export let tickNumber;
 
-	$: ticks = opts.ticks || $xScale.ticks(opts.tickNumber);
+	$: ticks = ticks || $xScale.ticks(tickNumber);
 
 	function textAnchor(i) {
-		if (opts.snapTicks === true) {
+		if (snapTicks === true) {
 			if (i === 0) {
 				return 'start';
 			}
@@ -23,13 +28,13 @@
 <g class='axis x-axis'>
 	{#each ticks as tick, i}
 		<g class='tick tick-{ tick }' transform='translate({$xScale(tick)},{$yScale.range()[0]})'>
-			{#if opts.gridlines !== false}
+			{#if gridlines !== false}
 				<line y1='{$height * -1}' y2='0' x1='0' x2='0'></line>
 			{/if}
-			<text y='16' text-anchor='{textAnchor(i)}'>{opts.formatTick ? opts.formatTick(tick) : tick}</text>
+			<text y='16' text-anchor='{textAnchor(i)}'>{formatTick(tick)}</text>
 		</g>
 	{/each}
-	{#if opts.baseline === true}
+	{#if baseline === true}
 		<line class="baseline" y1='{$height + 0.5}' y2='{$height + 0.5}' x1='0' x2='{$width}'></line>
 	{/if}
 </g>
