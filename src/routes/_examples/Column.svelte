@@ -66,7 +66,7 @@ const annotations = [
 		</Html>
 
 		<Svg>
-			<Arrows {annotations}/>
+			<!-- <Arrows {annotations}/> -->
 		</Svg>
 
 	</LayerCake>

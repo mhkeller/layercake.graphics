@@ -16,7 +16,18 @@
 
 </script>
 
-{#each $data as d, i}
-	<rect class='group-rect' data-id="{i}" x="{$xGet(d)}" y="{$yGet(d)}" width={$xScale.bandwidth()} height="{columnHeight(d)}"
-	{fill} stroke="{stroke}" stroke-width="{strokeWidth}"></rect>
-{/each}
+<g class="column-group">
+	{#each $data as d, i}
+		<rect
+			class='group-rect'
+			data-id="{i}"
+			x="{$xGet(d)}"
+			y="{$yGet(d)}"
+			width={$xScale.bandwidth()}
+			height="{columnHeight(d)}"
+			{fill}
+			stroke="{stroke}"
+			stroke-width="{strokeWidth}"
+		></rect>
+	{/each}
+</g>
