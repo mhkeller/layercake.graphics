@@ -10,14 +10,14 @@
 	export let ticks;
 	export let tickNumber;
 
-	$: ticks = ticks || $xScale.ticks(tickNumber);
+	$: tickVals = ticks || $xScale.ticks(tickNumber);
 
 	function textAnchor(i) {
 		if (snapTicks === true) {
 			if (i === 0) {
 				return 'start';
 			}
-			if (i === ticks.length - 1) {
+			if (i === tickVals.length - 1) {
 				return 'end';
 			}
 		}
@@ -26,7 +26,7 @@
 </script>
 
 <g class='axis x-axis'>
-	{#each ticks as tick, i}
+	{#each tickVals as tick, i}
 		<g class='tick tick-{ tick }' transform='translate({$xScale(tick)},{$yScale.range()[0]})'>
 			{#if gridlines !== false}
 				<line y1='{$height * -1}' y2='0' x1='0' x2='0'></line>

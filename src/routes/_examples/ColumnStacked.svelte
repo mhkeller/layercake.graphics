@@ -15,7 +15,7 @@
 
 	const series = stackData(fruit);
 
-	function formatYTick (d) {
+	function formatTickY (d) {
 		if (d > 999) {
 			return Math.round(d / 1000) + 'k';
 		}
@@ -43,7 +43,7 @@
 			/>
 			<AxisY
 				gridlines={false}
-				formatTick={formatYTick}
+				formatTick={formatTickY}
 			/>
 			<ColumnStacked
 				{seriesColors}

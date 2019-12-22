@@ -15,7 +15,7 @@
 
 	const series = stackData(fruit);
 
-	function formatXTick (d) {
+	function formatTickX (d) {
 		if (d > 999) {
 			return Math.round(d / 1000) + 'k';
 		}
@@ -40,7 +40,7 @@
 			<AxisX
 				baseline={true}
 				snapTicks={true}
-				formatTick={formatXTick}
+				formatTick={formatTickX}
 			/>
 			<AxisY
 				gridlines={false}
