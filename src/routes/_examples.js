@@ -1,5 +1,5 @@
 import Line from './_examples/Line.svelte';
-// import Scatter from './_examples/Scatter.html';
+import Scatter from './_examples/Scatter.svelte';
 // import MapSvg from './_examples/MapSvg.html';
 import Column from './_examples/Column.svelte';
 import AreaStacked from './_examples/AreaStacked.svelte';
@@ -27,7 +27,7 @@ export default [
 	{ title: 'Stacked bar', slug: 'BarStacked', component: BarStacked },
 	{ title: 'Multiline (html labels + quadtree tooltip)', slug: 'MultiLine', component: MultiLine },
 	{ title: 'Stacked area', slug: 'AreaStacked', component: AreaStacked },
-		// { title: 'Scatter (svg + canvas + voronoi)', slug: 'Scatter', component: Scatter },
+	{ title: 'Scatter (svg + canvas + voronoi)', slug: 'Scatter', component: Scatter },
 		// { title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
 		// { title: 'Calendar (one cake per month)', slug: 'Calendar', component: Calendar },
 		// { title: 'Time of day plot', slug: 'Timeplot', component: Timeplot },
