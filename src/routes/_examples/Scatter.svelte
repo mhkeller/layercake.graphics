@@ -1,16 +1,17 @@
 <script>
-	import { LayerCake, Svg } from 'layercake';
+	import { LayerCake, Svg, Canvas } from 'layercake';
 	import points from '../../data/points.js';
 	import Scatter from '../../components/Scatter.svelte';
+	import ScatterCanvas from '../../components/ScatterCanvas.svelte';
 	// import Voronoi from '../../components/Voronoi.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 
 	const r = 3;
 	const padding = 10;
-	const color = '#ff4eff';
+	const color = '#fff';
 
-	// TODO, Canvas scatter, voronoi
+	// TODO, voronoi
 </script>
 
 <div class="chart-container">
@@ -22,10 +23,20 @@
 		yPadding={[padding, padding]}
 		data={points}
 	>
+
 		<Svg>
 			<AxisX/>
 			<AxisY/>
+		</Svg>
 
+		<Canvas>
+			<ScatterCanvas
+				r={r * 1.5}
+				fill={'#0cf'}
+			/>
+		</Canvas>
+
+		<Svg>
 			<Scatter
 				{r}
 				fill={color}
