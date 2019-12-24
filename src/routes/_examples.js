@@ -1,11 +1,11 @@
 import Line from './_examples/Line.svelte';
 import Scatter from './_examples/Scatter.svelte';
-// import MapSvg from './_examples/MapSvg.html';
+import MapSvg from './_examples/MapSvg.svelte';
 import Column from './_examples/Column.svelte';
 import AreaStacked from './_examples/AreaStacked.svelte';
 import ColumnStacked from './_examples/ColumnStacked.svelte';
 import MultiLine from './_examples/MultiLine.svelte';
-// import MapLayered from './_examples/MapLayered.html';
+import MapLayered from './_examples/MapLayered.svelte';
 import Bar from './_examples/Bar.svelte';
 import BarStacked from './_examples/BarStacked.svelte';
 import ScatterWebgl from './_examples/ScatterWebgl.svelte';
@@ -19,8 +19,8 @@ import RadarChart from './_examples/Radar.svelte';
 export default [
 	{ title: 'Line + area', slug: 'Line', component: Line },
 	{ title: 'WebGl Scatter (svg axes, quadtree hover)', slug: 'ScatterWebgl', component: ScatterWebgl },
-		// { title: 'Map (svg)', slug: 'MapSvg', component: MapSvg },
-		// { title: 'Multilayer map (canvas + svg)', slug: 'MapLayered', component: MapLayered },
+	{ title: 'Map (svg)', slug: 'MapSvg', component: MapSvg },
+	{ title: 'Multilayer map (canvas + svg)', slug: 'MapLayered', component: MapLayered },
 	{ title: 'Annotated column', slug: 'Column', component: Column },
 	{ title: 'Stacked column', slug: 'ColumnStacked', component: ColumnStacked },
 	{ title: 'Bar', slug: 'Bar', component: Bar },
@@ -28,7 +28,7 @@ export default [
 	{ title: 'Multiline (html labels + quadtree tooltip)', slug: 'MultiLine', component: MultiLine },
 	{ title: 'Stacked area', slug: 'AreaStacked', component: AreaStacked },
 	{ title: 'Scatter (svg + canvas + voronoi)', slug: 'Scatter', component: Scatter },
-		{ title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
+	{ title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
 	// { title: 'Caslendar (one cake per month)', slug: 'Calendar', component: Calendar },
 	// { title: 'Time of day plot', slug: 'Timeplot', component: Timeplot },
 	// { title: 'Histogram (variable bins)', slug: 'Histogram', component: Histogram },
