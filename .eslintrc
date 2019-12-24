@@ -30,6 +30,7 @@
     "import/extensions": 0,
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "prefer-template": 0,
-    "operator-linebreak": 0
+    "operator-linebreak": 0,
+    "no-else-return": 0
   }
 }

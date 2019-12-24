@@ -25,7 +25,6 @@
 	</LayerCake>
 </div>
 
-
 <style>
 	.chart-container {
 		width: 100%;
