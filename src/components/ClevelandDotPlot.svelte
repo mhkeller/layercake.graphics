@@ -17,10 +17,20 @@
 <g class="dot-group">
 	{#each $data as row}
 		<g>
-			<line x1="{Math.min(...$xGet(row))}" y1="{$yGet(row) + midHeight}" x2="{Math.max(...$xGet(row))}" y2="{$yGet(row) + midHeight}"></line>
+			<line
+				x1="{Math.min(...$xGet(row))}"
+				y1="{$yGet(row) + midHeight}"
+				x2="{Math.max(...$xGet(row))}"
+				y2="{$yGet(row) + midHeight}"
+			></line>
 
 			{#each $xGet(row) as circleX, i}
-				<circle cx="{circleX}" cy="{$yGet(row) + midHeight}" r="5" fill="{colorScale($originalSettings.x[i])}"></circle>
+				<circle
+					cx="{circleX}"
+					cy="{$yGet(row) + midHeight}"
+					r="5"
+					fill="{colorScale($originalSettings.x[i])}"
+				></circle>
 			{/each}
 		</g>
 	{/each}
@@ -36,4 +46,3 @@
 		stroke-width: 1px;
 	}
 </style>
-
