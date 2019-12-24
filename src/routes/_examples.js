@@ -9,7 +9,7 @@ import MultiLine from './_examples/MultiLine.svelte';
 import Bar from './_examples/Bar.svelte';
 import BarStacked from './_examples/BarStacked.svelte';
 import ScatterWebgl from './_examples/ScatterWebgl.svelte';
-// import ClevelandDotPlot from './_examples/ClevelandDotPlot.html';
+import ClevelandDotPlot from './_examples/ClevelandDotPlot.svelte';
 // import Histogram from './_examples/Histogram.html';
 // import SmallMultiples from './_examples/SmallMultiples.html';
 // import Calendar from './_examples/Calendar.html';
@@ -28,7 +28,7 @@ export default [
 	{ title: 'Multiline (html labels + quadtree tooltip)', slug: 'MultiLine', component: MultiLine },
 	{ title: 'Stacked area', slug: 'AreaStacked', component: AreaStacked },
 	{ title: 'Scatter (svg + canvas + voronoi)', slug: 'Scatter', component: Scatter },
-		// { title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
+		{ title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
 		// { title: 'Calendar (one cake per month)', slug: 'Calendar', component: Calendar },
 		// { title: 'Time of day plot', slug: 'Timeplot', component: Timeplot },
 		// { title: 'Histogram (variable bins)', slug: 'Histogram', component: Histogram },
