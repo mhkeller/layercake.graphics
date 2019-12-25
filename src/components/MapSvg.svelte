@@ -6,6 +6,12 @@
 
 	export let projectionName = 'geoAlbersUsa';
 
+	/* --------------------------------------------
+	 * Add this in case you want to plot only a subset of the features
+	 * while keeping the zoom on the whole geojson feature set
+	 */
+	export let features = $data.features;
+
 	$: projection = geo[projectionName]()
 		.fitSize([$width, $height], $data);
 
@@ -19,7 +25,7 @@
 </script>
 
 <g class="map-group">
-	{#each $data.features as feature}
+	{#each features as feature}
 		<path
 			class="feature-path"
 			fill="{fillRandom(Math.random())}"

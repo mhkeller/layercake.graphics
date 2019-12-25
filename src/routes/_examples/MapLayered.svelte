@@ -14,17 +14,19 @@
 	<LayerCake
 		data={geojson}
 	>
-		<!-- <Svg>
-			<MapSvg
-				projectionName={'geoAlbersUsa'}
-			/>
-		</Svg> -->
 
 		<Canvas>
 			<MapCanvas
 				projectionName={'geoAlbersUsa'}
 			/>
 		</Canvas>
+
+		<Svg>
+			<MapSvg
+				projectionName={'geoAlbersUsa'}
+				features={geojson.features.slice(40, 50)}
+			/>
+		</Svg>
 	</LayerCake>
 </div>
 
