@@ -12,7 +12,7 @@
 		.join('L');
 </script>
 
-<path class='path-line' d='{path}' style="stroke: {stroke};"></path>
+<path class='path-line' d='{path}' {stroke}></path>
 
 <style>
 	.path-line {
