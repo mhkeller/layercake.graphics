@@ -5,7 +5,7 @@
 
 	import fruit from '../../data/fruitOrdinal.js';
 	import ColumnStacked from '../../components/ColumnStacked.svelte';
-	import AxisX from '../../components/AxisXScaleBand.svelte';
+	import AxisXScaleBand from '../../components/AxisXScaleBand.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 
 	const seriesNames = Object.keys(fruit[0]).filter(d => d !== 'year');
@@ -38,7 +38,7 @@
  			custom={{ seriesNames }}
 	>
 		<Svg>
-			<AxisX
+			<AxisXScaleBand
 				gridlines={false}
 			/>
 			<AxisY

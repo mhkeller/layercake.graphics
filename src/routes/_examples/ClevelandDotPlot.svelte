@@ -4,7 +4,7 @@
 	import fruit from '../../data/fruitOrdinal.js';
 	import ClevelandDotPlot from '../../components/ClevelandDotPlot.svelte';
 	import AxisX from '../../components/AxisX.svelte';
-	import AxisY from '../../components/AxisYScaleBand.svelte';
+	import AxisYScaleBand from '../../components/AxisYScaleBand.svelte';
 
 	const seriesColors = ['#f0c', '#00bbff', '#00e047', '#ff7a33'];
 </script>
@@ -23,7 +23,7 @@
 	>
 		<Svg>
 			<AxisX/>
-			<AxisY
+			<AxisYScaleBand
 				gridlines={false}
 			/>
 			<ClevelandDotPlot

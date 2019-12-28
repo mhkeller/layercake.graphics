@@ -5,7 +5,7 @@ import { scaleBand } from 'd3-scale';
 import groups from '../../data/groups.js';
 import Bar from '../../components/Bar.svelte';
 import AxisX from '../../components/AxisX.svelte';
-import AxisY from '../../components/AxisYScaleBand.svelte';
+import AxisYScaleBand from '../../components/AxisYScaleBand.svelte';
 
 </script>
 
@@ -25,7 +25,7 @@ import AxisY from '../../components/AxisYScaleBand.svelte';
 				baseline={true}
 				snapTicks={true}
 			/>
-			<AxisY gridlines={false}/>
+			<AxisYScaleBand gridlines={false}/>
 			<Bar/>
 		</Svg>
 	</LayerCake>
