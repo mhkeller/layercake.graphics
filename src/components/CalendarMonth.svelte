@@ -65,9 +65,8 @@
 		x="{rectX(day)}"
 		y="{rectY(day)}"
 		style="fill:{fillColor(day)};"
-		on:mouseover="{showCount(day)}"
-	>
-	</rect>
+		on:mouseenter="{showCount(day)}"
+	/>
 {/each}
 
 <style>
