@@ -10,7 +10,7 @@ import Bar from './_examples/Bar.svelte';
 import BarStacked from './_examples/BarStacked.svelte';
 import ScatterWebgl from './_examples/ScatterWebgl.svelte';
 import ClevelandDotPlot from './_examples/ClevelandDotPlot.svelte';
-// import Histogram from './_examples/Histogram.html';
+import Histogram from './_examples/Histogram.svelte';
 // import SmallMultiples from './_examples/SmallMultiples.html';
 import Calendar from './_examples/Calendar.svelte';
 import Timeplot from './_examples/Timeplot.svelte';
@@ -31,7 +31,7 @@ export default [
 	{ title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
 	{ title: 'Caslendar (one cake per month)', slug: 'Calendar', component: Calendar },
 	{ title: 'Time of day plot', slug: 'Timeplot', component: Timeplot },
-	// { title: 'Histogram (variable bins)', slug: 'Histogram', component: Histogram },
+	{ title: 'Histogram (variable bins)', slug: 'Histogram', component: Histogram },
 	// { title: 'Small multiples (animated domain transition)', slug: 'SmallMultiples', component: SmallMultiples },
 	{ title: 'Radar Chart', slug: 'RadarChart', component: RadarChart }
 ];

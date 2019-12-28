@@ -1,8 +1,8 @@
 <script>
+	import { getContext } from 'svelte';
 	import { scaleQuantize } from 'd3-scale';
 	import { timeFormat } from 'd3-time-format';
 	import { timeDay } from 'd3-time';
-	import { getContext } from 'svelte';
 
 	export let calcCellSize = d => d;
 	export let seriesColors = ['#fff5cc', '#ffeba9', '#ffe182', '#ffd754', '#ffcc00'];
