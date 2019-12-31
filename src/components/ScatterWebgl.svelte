@@ -1,154 +1,153 @@
 <script>
 	import reglWrapper from 'regl';
+	import { getContext } from 'svelte';
+	import { scaleCanvas } from 'layercake';
 
-	function resize (gl) {
-		const canvas = gl.canvas;
-		// Lookup the size the browser is displaying the canvas.
-		var displayWidth = canvas.clientWidth;
-		var displayHeight = canvas.clientHeight;
+	const { data, xGet, yGet, width, height } = getContext('LayerCake');
 
-		// Check if the canvas is not the same size.
-		if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
-			// Make the canvas the same size
-			canvas.width = displayWidth;
-			canvas.height = displayHeight;
+	export let diameter;
+
+	const { gl } = getContext('gl');
+
+	function resize () {
+		if ($gl) {
+			const canvas = $gl.canvas;
+			// Lookup the size the browser is displaying the canvas.
+			const displayWidth = canvas.clientWidth;
+			const displayHeight = canvas.clientHeight;
+
+			// Check if the canvas is not the same size.
+			if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
+				// Make the canvas the same size
+				canvas.width = displayWidth;
+				canvas.height = displayHeight;
+			}
+			$gl.viewport(0, 0, canvas.width, canvas.height);
 		}
-		gl.viewport(0, 0, canvas.width, canvas.height);
 	}
 
-// export default {
-// 	// onupdate is fired after the dom is updated so it's a good time to
-// 	// resize and redraw
-// 	onupdate () {
-// 		const { gl } = this.get();
+	let regl;
 
-// 		resize(gl);
+	function render () {
+		if ($gl) {
+			regl = reglWrapper({
+				gl: $gl,
+				extensions: ['oes_standard_derivatives']
+			});
 
-// 		// This reinstantiates the regl canvas every time
-// 		// it seems to be necessary to get it to size properly
-// 		// but maybe there's a better way
-// 		const regl = reglWrapper({
-// 			gl,
-// 			extensions: ['oes_standard_derivatives']
-// 		});
+			// console.log('rendering', regl);
+			regl.clear({
+				color: [0, 0, 0, 0],
+				depth: 1
+			});
 
-// 		this.render(regl);
-// 	},
-// 	methods: {
-// 		render (regl) {
-// 			const { opts } = this.get();
-// 			const { xGet, yGet, data } = this.store.get();
+			const draw = regl({
+				// circle code comes from:
+				// https://www.desultoryquest.com/blog/drawing-anti-aliased-circular-points-using-opengl-slash-webgl/
+				frag: `
+				#extension GL_OES_standard_derivatives : enable
+				precision mediump float;
+				uniform vec3 fill_color;
+				uniform vec3 stroke_color;
+				varying float s_s;
+				void main () {
 
-// 			regl.clear({
-// 				color: [0, 0, 0, 0],
-// 				depth: 1
-// 			});
+					vec2 cxy = 2.0 * gl_PointCoord - 1.0;
 
-// 			const draw = regl({
-// 				// circle code comes from:
-// 				// https://www.desultoryquest.com/blog/drawing-anti-aliased-circular-points-using-opengl-slash-webgl/
-// 				frag: `
-// 				#extension GL_OES_standard_derivatives : enable
-// 				precision mediump float;
-// 				uniform vec3 fill_color;
-// 				uniform vec3 stroke_color;
-// 				varying float s_s;
-// 				void main () {
+					float dist = dot(cxy, cxy);
 
-// 					vec2 cxy = 2.0 * gl_PointCoord - 1.0;
+					float delta = fwidth(dist);
 
-// 					float dist = dot(cxy, cxy);
+					float alpha = 1.0 - smoothstep(1.0 - delta, 1.0 + delta, dist);
 
-// 					float delta = fwidth(dist);
+					float outer_edge_center = 1.0 - s_s;
+					float stroke = 1.0 - smoothstep(outer_edge_center - delta, outer_edge_center + delta, dist);
 
-// 					float alpha = 1.0 - smoothstep(1.0 - delta, 1.0 + delta, dist);
+					// gl_FragColor = vec4(fill_color,1.0) * alpha;
+					gl_FragColor = vec4( mix(stroke_color, fill_color, stroke), 1.0 ) * alpha;
+					gl_FragColor.rgb *= gl_FragColor.a;
+				}`,
+				vert: `
+				precision mediump float;
+				attribute vec2 position;
+				attribute float r;
+				attribute float stroke_size;
 
-// 					float outer_edge_center = 1.0 - s_s;
-// 					float stroke = 1.0 - smoothstep(outer_edge_center - delta, outer_edge_center + delta, dist);
+				varying float s_s;
 
-// 					// gl_FragColor = vec4(fill_color,1.0) * alpha;
-// 					gl_FragColor = vec4( mix(stroke_color, fill_color, stroke), 1.0 ) * alpha;
-// 					gl_FragColor.rgb *= gl_FragColor.a;
-// 				}`,
-// 				vert: `
-// 				precision mediump float;
-// 				attribute vec2 position;
-// 				attribute float r;
-// 				attribute float stroke_size;
+				uniform float stage_width;
+				uniform float stage_height;
 
-// 				varying float s_s;
+				// http://peterbeshai.com/beautifully-animate-points-with-webgl-and-regl.html
+				vec2 normalizeCoords(vec2 position) {
+					// read in the positions into x and y vars
+					float x = position[0];
+					float y = position[1];
+					return vec2(
+						2.0 * ((x / stage_width) - 0.5),
+						// invert y to treat [0,0] as bottom left in pixel space
+						-(2.0 * ((y / stage_height) - 0.5))
+					);
+				}
 
-// 				uniform float stage_width;
-// 				uniform float stage_height;
+				void main () {
+					s_s = stroke_size;
+					gl_PointSize = r;
+					gl_Position = vec4(normalizeCoords(position), 0.0, 1.0);
+				}`,
+				attributes: {
+					// There will be a position value for each point
+					// we pass in
+					position: (context, props) => {
+						return props.points.map(point => {
+							return [$xGet(point), $yGet(point)];
+						});
+					},
+					r: (context, props) => {
+						// const m = window.devicePixelRatio > 1 ? 4.0 : 2.0
+						// If using an r-scale, set width here
+						return props.points.map(point => props.pointWidth);
+					},
+					stroke_size: (context, props) => {
+						// If using an r-scale, set width here
+						return props.points.map(point => 0);
+					}
+				},
+				uniforms: {
+					fill_color: [0.6705882352941176, 0, 0.8392156862745098],
+					// stroke_color: [0.6705882352941176, 0, 0.8392156862745098],
+					stroke_color: [0, 0, 0],
+					// FYI: there is a helper method for grabbing
+					// values out of the context as well.
+					// These uniforms are used in our fragment shader to
+					// convert our x / y values to WebGL coordinate space.
+					stage_width: regl.context('drawingBufferWidth'),
+					stage_height: regl.context('drawingBufferHeight')
+				},
+				count: (context, props) => {
+					// set the count based on the number of points we have
+					return props.points.length;
+				},
+				primitive: 'points',
+				blend: {
+					enable: true,
+					func: {
+						srcRGB: 'src alpha',
+						srcAlpha: 'src alpha',
+						dstRGB: 'one minus src alpha',
+						dstAlpha: 'one minus src alpha'
+					}
+				},
+				depth: { enable: false }
+			});
 
-// 				// http://peterbeshai.com/beautifully-animate-points-with-webgl-and-regl.html
-// 				vec2 normalizeCoords(vec2 position) {
-// 					// read in the positions into x and y vars
-// 					float x = position[0];
-// 					float y = position[1];
-// 					return vec2(
-// 						2.0 * ((x / stage_width) - 0.5),
-// 						// invert y to treat [0,0] as bottom left in pixel space
-// 						-(2.0 * ((y / stage_height) - 0.5))
-// 					);
-// 				}
+			draw({
+				pointWidth: diameter,
+				points: $data
+			});
+		}
+	}
 
-// 				void main () {
-// 					s_s = stroke_size;
-// 					gl_PointSize = r;
-// 					gl_Position = vec4(normalizeCoords(position), 0.0, 1.0);
-// 				}`,
-// 				attributes: {
-// 					// There will be a position value for each point
-// 					// we pass in
-// 					position: (context, props) => {
-// 						return props.points.map(point => {
-// 							return [xGet(point), yGet(point)];
-// 						});
-// 					},
-// 					r: (context, props) => {
-// 						// const m = window.devicePixelRatio > 1 ? 4.0 : 2.0
-// 						// If using an r-scale, set width here
-// 						return props.points.map(point => props.pointWidth);
-// 					},
-// 					stroke_size: (context, props) => {
-// 						// If using an r-scale, set width here
-// 						return props.points.map(point => 0);
-// 					}
-// 				},
-// 				uniforms: {
-// 					fill_color: [0.6705882352941176, 0, 0.8392156862745098],
-// 					// stroke_color: [0.6705882352941176, 0, 0.8392156862745098],
-// 					stroke_color: [0, 0, 0],
-// 					// FYI: there is a helper method for grabbing
-// 					// values out of the context as well.
-// 					// These uniforms are used in our fragment shader to
-// 					// convert our x / y values to WebGL coordinate space.
-// 					stage_width: regl.context('drawingBufferWidth'),
-// 					stage_height: regl.context('drawingBufferHeight')
-// 				},
-// 				count: (context, props) => {
-// 					// set the count based on the number of points we have
-// 					return props.points.length;
-// 				},
-// 				primitive: 'points',
-// 				blend: {
-// 					enable: true,
-// 					func: {
-// 						srcRGB: 'src alpha',
-// 						srcAlpha: 'src alpha',
-// 						dstRGB: 'one minus src alpha',
-// 						dstAlpha: 'one minus src alpha'
-// 					}
-// 				},
-// 				depth: { enable: false }
-// 			});
+	$: ($width, $height, $gl, resize(), render());
 
-// 			draw({
-// 				pointWidth: opts.diameter,
-// 				points: data
-// 			});
-// 		}
-// 	}
-// };
 </script>

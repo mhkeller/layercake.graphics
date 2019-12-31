@@ -1,7 +1,7 @@
 <script>
-	import { LayerCake, Svg } from 'layercake';
+	import { LayerCake, Svg, Webgl } from 'layercake';
 	import points from '../../data/points.js';
-	// import ScatterWebgl from '../../components/ScatterWebgl.html';
+	import ScatterWebgl from '../../components/ScatterWebgl.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 	// import QuadTree from '../../components/QuadTree.html';
@@ -9,9 +9,6 @@
 	const diameter = 6;
 	const padding = 6;
 
-	// .webglLayers([
-	// 	{ component: ScatterWebgl, opts: { diameter } }
-	// ])
 	// .htmlLayers([
 	// 	{ component: QuadTree, opts: { color: '#fff' } }
 	// ]);
@@ -30,6 +27,10 @@
 			<AxisX/>
 			<AxisY/>
 		</Svg>
+
+		<Webgl>
+			<ScatterWebgl {diameter}/>
+		</Webgl>
 	</LayerCake>
 </div>
 
