@@ -1,17 +1,17 @@
 <script>
-	// import * as eases from 'eases-jsnext';
-	// import { tween } from 'svelte-extras';
-	import { LayerCake, Svg, calcExtents, flatten } from 'layercake';
+	import { calcExtents, flatten } from 'layercake';
 	import pointSeries from '../../data/pointSeries.js';
-	import Line from '../../components/Line.svelte';
+	import ChartWrapper from '../../components/ChartWrapper.svelte';
 
 	/* --------------------------------------------
 	 * Grab the extents of the full dataset
 	 */
-	const extents = calcExtents(flatten(pointSeries), [
+	const extentGetters = [
 		{ field: 'x', accessor: d => d.x },
 		{ field: 'y', accessor: d => d.y }
-	]);
+	];
+
+	const fullExtents = calcExtents(flatten(pointSeries), extentGetters);
 
 	/* --------------------------------------------
 	 * Sort by the last value
@@ -20,50 +20,24 @@
 		return b[b.length - 1].y - a[a.length - 1].y;
 	});
 
-// 		Array.prototype.forEach.call(document.querySelectorAll('.input-container[data-which="small-multiples"]'), el => {
-// 			el.addEventListener('change', e => {
-// 				const whichScale = e.target.value;
-// 				cakes.forEach(myCake => {
-// 					const { domains } = myCake.get();
-// 					// Set the source of our domain extent
-// 					const doughmain = whichScale === 'shared' ? extents : domains;
-
-// 					tween.call(myCake, 'xDomain', doughmain.x, {
-// 						duration: 300,
-// 						easing: eases.cubicOut
-// 					});
-// 					tween.call(myCake, 'yDomain', doughmain.y, {
-// 						duration: 300,
-// 						easing: eases.cubicOut
-// 					});
-// 				});
-// 			});
-// 		});
-// 	}
-// };
+	let scale = 'individual';
 </script>
 
-<div class="input-container" data-which="small-multiples" style="margin-bottom:7px;">
-	<label><input type="radio" name="scale" value="individual" checked="true"/> Individual scale</label>
-	<label><input type="radio" name="scale" value="shared"/> Shared scale</label>
+<div class="input-container">
+	<label><input type="radio" bind:group={scale} value="individual"/>Individual scale</label>
+	<label><input type="radio" bind:group={scale} value="shared"/>Shared scale</label>
 </div>
 
 
 <div class="group-container">
 	{#each pointSeries as data}
 		<div class="chart-container">
-			<LayerCake
-				padding={{ top: 2, right: 6, bottom: 2, left: 6 }}
-				x={'x'}
-				y={'y'}
+			<ChartWrapper
 				{data}
-			>
-				<Svg>
-					<Line
-						stroke={'#000'}
-					/>
-				</Svg>
-			</LayerCake>
+				{fullExtents}
+				{scale}
+				{extentGetters}
+			/>
 		</div>
 	{/each}
 
@@ -73,6 +47,14 @@
 	.group-container {
 		height: 90%;
 		width: 100%;
+	}
+
+	.input-container {
+		margin-bottom: 7px;
+	}
+
+	input {
+		margin-right: 7px;
 	}
 
 	.chart-container {
