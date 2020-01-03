@@ -20,14 +20,8 @@
 
 	const domains = calcExtents(data, extentGetters);
 
-	// console.log('domains', domains);
-	// console.log('fullextents', fullExtents);
-
-
 	$: xDomain.set(scale === 'shared' ? fullExtents.x : domains.x);
 	$: yDomain.set(scale === 'shared' ? fullExtents.y : domains.y);
-	$: console.log('x', $xDomain);
-	$: console.log('y', $yDomain);
 
 </script>
 
@@ -36,8 +30,8 @@
 	x={'x'}
 	y={'y'}
 	{data}
-	{xDomain}
-	{yDomain}
+	xDomain={$xDomain}
+	yDomain={$yDomain}
 >
 	<Svg>
 		<Line

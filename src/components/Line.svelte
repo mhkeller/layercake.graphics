@@ -7,6 +7,7 @@
 
 	$: path = 'M' + $data
 		.map(d => {
+			// console.log($yGet(d));
 			return $xGet(d) + ',' + $yGet(d);
 		})
 		.join('L');
