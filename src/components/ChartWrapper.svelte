@@ -18,10 +18,10 @@
 	const xDomain = tweened(undefined, tweenOptions);
 	const yDomain = tweened(undefined, tweenOptions);
 
-	const domains = calcExtents(data, extentGetters);
+	const extents = calcExtents(data, extentGetters);
 
-	$: xDomain.set(scale === 'shared' ? fullExtents.x : domains.x);
-	$: yDomain.set(scale === 'shared' ? fullExtents.y : domains.y);
+	$: xDomain.set(scale === 'shared' ? fullExtents.x : extents.x);
+	$: yDomain.set(scale === 'shared' ? fullExtents.y : extents.y);
 
 </script>
 

@@ -7,7 +7,7 @@
 	export let calcCellSize = d => d;
 	export let seriesColors = ['#fff5cc', '#ffeba9', '#ffe182', '#ffd754', '#ffcc00'];
 
-	const { width, height, data, x, r, domains } = getContext('LayerCake');
+	const { width, height, data, x, r, extents } = getContext('LayerCake');
 
 	const getDayOfWeek = timeFormat('%w');
 	const getWeekOfYear = timeFormat('%U');
@@ -22,7 +22,7 @@
 	};
 
 	$: colorScale = scaleQuantize()
-		.domain($domains.r)
+		.domain($extents.r)
 		.range(seriesColors);
 
 	$: fillColor = day => {
@@ -38,7 +38,7 @@
 	 * Calculate what month we're in and generate the full days of that month
 	 */
 	$: {
-		const minDate = $domains.x[0];
+		const minDate = $extents.x[0];
 		const parts = minDate.split('-').map(d => +d);
 
 		days = timeDay.range(new Date(Date.UTC(parts[0], parts[1] - 1, 1)), new Date(Date.UTC(parts[0], parts[1], 1)));
