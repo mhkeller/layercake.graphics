@@ -1,26 +1,26 @@
 import * as fs from 'fs';
 
-function cleanMain (example) {
-	const body = example.split('<script>');
-	const htmlExtras = body[0].split('<div class="chart-container"')[0];
-	const script = body[1];
-	const parts = script.split('export');
+// function cleanMain (example) {
+// 	const body = example.split('<script>');
+// 	const htmlExtras = body[0].split('<div class="chart-container"')[0];
+// 	const script = body[1];
+// 	const parts = script.split('export');
 
-	const imports = parts[0]
-		.replace(/\t/g, '  ')
-		.replace(/\.\.\/\.\.\//g, './')
-		.trim();
+// 	const imports = parts[0]
+// 		.replace(/\t/g, '  ')
+// 		.replace(/\.\.\/\.\.\//g, './')
+// 		.trim();
 
-	const oncreate = parts[1].trim()
-		.replace(/(}\n};\n<\/script>|default {.*|oncreate.*)/g, '')
-		.replace('this.refs.chart', 'document.getElementById(\'my-chart\')')
-		.replace(/^\t\t/gm, '')
-		.replace(/\t/g, '  ')
-		.trim();
+// 	const oncreate = parts[1].trim()
+// 		.replace(/(}\n};\n<\/script>|default {.*|oncreate.*)/g, '')
+// 		.replace('this.refs.chart', 'document.getElementById(\'my-chart\')')
+// 		.replace(/^\t\t/gm, '')
+// 		.replace(/\t/g, '  ')
+// 		.trim();
 
-	const js = [imports, oncreate].join('\n\n');
-	return { htmlExtras, js };
-}
+// 	const js = [imports, oncreate].join('\n\n');
+// 	return { htmlExtras, js };
+// }
 
 export function get(req, res, next) {
 	// the `slug` parameter is available because

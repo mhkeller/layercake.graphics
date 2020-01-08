@@ -17,7 +17,7 @@
 	import examples from '../_examples.js';
 
 	export let slug;
-	export let data;
+	// export let data;
 
 	const exampleLookup = new Map();
 	examples.forEach(exmpl => {
@@ -25,8 +25,6 @@
 	});
 
 	const example = exampleLookup.get(slug);
-
-	console.log('ddd', data);
 </script>
 
 <svelte:head>

@@ -5,8 +5,6 @@
 		const res = await this.fetch(`examples/${params.slug}.json`);
 		const data = await res.json();
 
-		console.log(data);
-
 		if (res.status === 200) {
 			return { data, params };
 		} else {
