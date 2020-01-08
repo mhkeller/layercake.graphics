@@ -1,7 +1,7 @@
 <script>
 	import { getContext } from 'svelte';
 
-	const { data, xGet, yGet, xScale, yScale, extents } = getContext('LayerCake');
+	const { data, xGet, yGet, xScale, yScale, domains } = getContext('LayerCake');
 
 	$: path = 'M' + $data
 		.map(d => {
@@ -14,8 +14,8 @@
 	$: {
 		const yRange = $yScale.range();
 		area = path + (
-			'L' + $xScale($extents.x[1]) + ',' + yRange[0] +
-			'L' + $xScale($extents.x[0]) + ',' + yRange[0] +
+			'L' + $xScale($domains.x[1]) + ',' + yRange[0] +
+			'L' + $xScale($domains.x[0]) + ',' + yRange[0] +
 			'Z'
 		);
 	}
