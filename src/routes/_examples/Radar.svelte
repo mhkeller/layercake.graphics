@@ -12,7 +12,7 @@
 		padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
 		r={['fastball', 'change', 'slider', 'cutter', 'curve']}
 		rScale={scaleLinear()}
-		rRange={({ width, height }) => [0, height / 2]}
+		rRange={({ height }) => [0, height / 2]}
 		rDomain={[0, 10]}
 		data={points}
 	>

@@ -1,12 +1,12 @@
 <script>
 	import { getContext } from 'svelte';
 
-	const { width, height, rScale, domains, originalSettings } = getContext('LayerCake');
+	const { width, height, rScale, extents, originalSettings } = getContext('LayerCake');
 
 	export let linePaddingFactor = 1.1;
 	export let labelPaddingFactor = 1.25;
 
-	$: max = $rScale(Math.max(...$domains.r));
+	$: max = $rScale(Math.max(...$extents.r));
 
 	$: angleSlice = (Math.PI * 2) / $originalSettings.r.length;
 

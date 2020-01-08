@@ -14,7 +14,7 @@ import Histogram from './_examples/Histogram.svelte';
 import SmallMultiples from './_examples/SmallMultiples.svelte';
 import Calendar from './_examples/Calendar.svelte';
 import Timeplot from './_examples/Timeplot.svelte';
-import RadarChart from './_examples/Radar.svelte';
+import Radar from './_examples/Radar.svelte';
 
 export default [
 	{ title: 'Line + area', slug: 'Line', component: Line },
@@ -33,5 +33,5 @@ export default [
 	{ title: 'Time of day plot', slug: 'Timeplot', component: Timeplot },
 	{ title: 'Histogram (variable bins)', slug: 'Histogram', component: Histogram },
 	{ title: 'Small multiples (animated domain transition)', slug: 'SmallMultiples', component: SmallMultiples },
-	{ title: 'Radar Chart', slug: 'RadarChart', component: RadarChart }
+	{ title: 'Radar Chart', slug: 'Radar', component: Radar }
 ];
