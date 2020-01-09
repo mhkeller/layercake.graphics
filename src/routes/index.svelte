@@ -24,7 +24,7 @@
 	<div id="gallery">
 		{#each examples as example}
 			<div class="gallery-item">
-				<h4 class="title"><a rel=prefetch href="examples/{example.slug}">{example.title}</a></h4>
+				<h4 class="title"><a rel=prefetch href="example/{example.slug}">{example.title}</a></h4>
 				<svelte:component this="{example.component}"/>
 			</div>
 		{/each}
