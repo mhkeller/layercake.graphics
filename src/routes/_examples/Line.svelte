@@ -17,10 +17,10 @@
 		data={points}
 	>
 		<Svg>
-			<!-- <AxisX/> -->
-			<!-- <AxisY/> -->
+			<AxisX/>
+			<AxisY/>
 			<Line/>
-			<!-- <Area/> -->
+			<Area/>
 		</Svg>
 	</LayerCake>
 </div>
