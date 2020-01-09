@@ -9,17 +9,13 @@
 
 	let binCount = 40;
 
-	const doughmain = extent(unemployment);
-	const hist = histogram()
-		.domain(doughmain)
-		.thresholds(thresholds(doughmain, binCount));
+	const domain = extent(unemployment);
 
-	let bins = hist(unemployment);
+	$: hist = histogram()
+		.domain(domain)
+		.thresholds(thresholds(domain, binCount));
 
-	function updateChart () {
-		hist.thresholds(thresholds(doughmain, binCount));
-		bins = hist(unemployment);
-	}
+	$: bins = hist(unemployment);
 
 </script>
 
@@ -30,7 +26,6 @@
 		min="4"
 		max="100"
 		step="4"
-		on:input={updateChart}
 		bind:value={binCount}
 	/> <span class="counter-container" style="display:inline-block;vertical-align:top;width: 70px;text-align:right;">{binCount} bins</span>
 </div>
