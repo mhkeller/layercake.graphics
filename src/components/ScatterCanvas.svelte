@@ -17,7 +17,7 @@
 			 * put these reset functions in the first layer, not each one
 			 * since they should only run once per update
 			 */
-			scaleCanvas($ctx.canvas, $ctx, $width, $height);
+			scaleCanvas($ctx, $width, $height);
 			$ctx.clearRect(0, 0, $width, $height);
 
 			/* --------------------------------------------

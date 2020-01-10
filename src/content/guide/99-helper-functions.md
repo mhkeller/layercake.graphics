@@ -123,7 +123,7 @@ Becomes...
 ]
 ```
 
-### scaleCanvas(canvas: `DOM Node`, ctx: `Canvas Context`, width: `Number`, height: `Number`)
+### scaleCanvas(ctx: `Canvas Context`, width: `Number`, height: `Number`)
 
 Scale your canvas size to retina screens. This function will modify the canvas, if necessary, and return an object with the new `width` and `height` as properties.
 
@@ -136,10 +136,10 @@ import { scaleCanvas } from 'layercake';
 
 export default {
   onstate () {
-    const { canvas, ctx, opts } = this.get();
+    const { ctx, opts } = this.get();
     const { width, height, xGet, yGet, data, custom } = this.store.get();
 
-    scaleCanvas(canvas, ctx, width, height);
+    scaleCanvas(ctx, width, height);
     ctx.clearRect(0, 0, width, height);
 
     data.forEach(d => {

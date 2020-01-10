@@ -16,7 +16,7 @@
 
 	$: {
 		if ($ctx && geoPath) {
-			scaleCanvas($ctx.canvas, $ctx, $width, $height);
+			scaleCanvas($ctx, $width, $height);
 			$ctx.clearRect(0, 0, $width, $height);
 
 			$ctx.beginPath();
