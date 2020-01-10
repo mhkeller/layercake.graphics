@@ -95,7 +95,7 @@
 		max-width: 800px;
 	}
 	p a {
-		color: green;
+		color: #ff3e00;
 	}
 	p a:hover {
 		text-decoration: underline;
@@ -110,7 +110,7 @@
 		text-decoration: underline;
 	}
 	.title a:hover {
-		color: green;
+		color: #ff3e00;
 	}
 	.strong {
 		font-weight: bold;

@@ -61,7 +61,7 @@
 	}
 
 	.section.active, .subsection.active {
-		color: #f0c;
+		color: #ff3e00;
 	}
 </style>
 

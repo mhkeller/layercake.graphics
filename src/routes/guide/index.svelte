@@ -209,7 +209,7 @@
 
 	section :global(a) {
 		text-decoration: none;
-		color: #f0c;
+		color: #ff3e00;
 		/*border-bottom: 1px solid #e3d9d9;*/
 	}
 
@@ -229,7 +229,7 @@
 	}
 
 	section :global(a code) {
-		color: #f0c;
+		color: #ff3e00;
 	}
 
 	section :global(pre) :global(code) {
