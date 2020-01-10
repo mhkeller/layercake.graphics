@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "compression": "^1.7.1",
+    "emoji-regex": "^8.0.0",
+    "golden-fleece": "^1.0.9",
     "highlight.js": "^9.17.1",
     "marked": "^0.8.0",
     "polka": "next",

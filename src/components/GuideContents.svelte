@@ -1,0 +1,77 @@
+<script>
+	export let sections = [];
+
+	const guideSections = sections.map(section => {
+		return {
+			metadata: section.metadata,
+			subsections: section.subsections,
+			slug: section.slug
+		};
+	});
+
+// export default {
+// 	oncreate () {
+// 		const onhashchange = () => {
+// 			this.store.set({ activeGuideSection: window.location.hash.slice(1) });
+// 		};
+
+// 		window.addEventListener('hashchange', onhashchange, false);
+// 		this.on('destroy', () => {
+// 			window.removeEventListener('hashchange', onhashchange, false);
+// 		});
+
+// 		onhashchange();
+// 	}
+// };
+</script>
+
+<style>
+	.guide-toc {
+		margin: 0;
+		padding: 0;
+	}
+
+	.guide-toc a {
+		text-decoration: none;
+	}
+
+	.guide-toc a:hover {
+		text-decoration: underline;
+	}
+
+	.guide-toc li {
+		display: block;
+		margin: 0 0 1.5em 0;
+	}
+
+	.section {
+		display: block;
+		font-weight: 700;
+		color: #333;
+		font-size: 1.2rem;
+		margin: 0 0 0.15em 0;
+	}
+
+	.subsection {
+		display: block;
+		/*font-weight: 500;*/
+		color:#727272;
+		font-size: 1em;
+		margin: 0 0 0.15em 0;
+	}
+
+	.section.active, .subsection.active {
+		color: #f0c;
+	}
+</style>
+
+<ul class='guide-toc'>
+	{#each guideSections as section}
+		<li>
+			<a class='section' href='guide#{section.slug}'>{section.metadata.title}</a>
+			{#each section.subsections as subsection}
+				<a class='subsection' href='guide#{subsection.slug}'>{subsection.title}</a>
+			{/each}
+		</li>
+	{/each}
+</ul>
