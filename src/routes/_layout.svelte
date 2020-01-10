@@ -13,6 +13,9 @@
 		margin: 0 auto;
 		box-sizing: border-box;
 	}
+	:global(.input-container) {
+		user-select: none;
+	}
 </style>
 
 <Nav {segment}/>

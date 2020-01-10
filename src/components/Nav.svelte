@@ -1,60 +1,287 @@
 <script>
+	import examples from '../routes/_examples.js';
+
 	export let segment;
+	export let slug = '';
+
+	let basePath = '/';
+	let open = false;
+
+	const slimName = d => d.split(' (')[0];
+
 </script>
 
 <style>
+	.mousecatcher {
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: 100vw;
+		height: 100vh;
+		background-color: black;
+		pointer-events: none;
+		opacity: 0;
+		/*transition: opacity 0.4s;*/
+		z-index: 3;
+	}
+
+	.mousecatcher.open {
+		pointer-events: all;
+		opacity: 0.3;
+	}
+
+	@keyframes fadein {
+		from { opacity: 0; }
+		to { opacity: 1; }
+	}
+
+	.container {
+		position: fixed;
+		width: 100%;
+		height: 2.5em;
+		background-color: #fff;
+		color: #000;
+		border-bottom: 1px solid rgb(170,30,30, 0.1);
+		font-family: "SignPainter", Helvetica, sans-serif ;
+		z-index: 12;
+	}
+
+	.dropdown {
+		position: fixed;
+		top: 21px;
+		transform: translate(0, -50%);
+		font-family: SignPainter, Helvetica, sans-serif;
+		font-size: 25px;
+		z-index: 13;
+		line-height: 1;
+		right: 1rem;
+		left: auto;
+	}
+
+	.dropdown li {
+		padding: 0;
+		margin: 0;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.dropdown li:before {
+		color: #000;
+		content: 'View...';
+		margin-right: 0.25em;
+	}
+
 	nav {
-		border-bottom: 1px solid rgba(255,62,0,0.1);
-		font-weight: 300;
-		padding: 0 1em;
+		position: fixed;
+		width: 14em;
+		height: calc(100vh - 2.5em);
+		top: 2.5em;
+		font-family: "SignPainter", Helvetica, sans-serif ;
+		background-color: white;
+		transform: translate(-100%,0);
+		transition: transform 0.2s cubic-bezier(.17,.67,.24,.99);
+		border-right: 1px solid #eee;
+		z-index: 12;
+		padding: 1em;
+		user-select: none;
+	}
+
+	.open {
+		transform: translate(0,0);
+		transition: transform 0.3s cubic-bezier(.17,.67,.24,.99);
+		overflow-y: auto;
+	}
+
+	.menu-link {
+		display: inline;
+		position: absolute;
+		top: 50%;
+		left: 1rem;
+		transform: translate(0, -50%);
+		font-size: 25px;
+		line-height: 1;
+		color: #000;
+		cursor: pointer;
+		/*font-weight: 500;*/
+		-webkit-tap-highlight-color: transparent;
+		-webkit-touch-callout: none;
+	}
+	.menu-link.menu-open {
+		color: #999;
+	}
+	.menu-link:hover {
+		text-decoration: underline;
+	}
+
+	.logo {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -45%);
+		-webkit-tap-highlight-color: transparent;
+		-webkit-touch-callout: none;
+		line-height: 1;
+		text-decoration: none;
+		font-weight: bold;
+		color: #000;
+		font-size: 25px;
 	}
 
 	ul {
+		display: block;
 		margin: 0;
 		padding: 0;
+		list-style: none;
 	}
 
-	/* clearfix */
-	ul::after {
-		content: '';
-		display: block;
-		clear: both;
+	.primary {
+		margin: 0 0 0.5em 0;
 	}
 
-	li {
-		display: block;
-		float: left;
-	}
-
-	.selected {
+	.primary li {
 		position: relative;
-		display: inline-block;
-	}
-
-	.selected::after {
-		position: absolute;
-		content: '';
-		width: calc(100% - 1em);
-		height: 2px;
-		background-color: rgb(255,62,0);
 		display: block;
-		bottom: -1px;
 	}
 
-	a {
+	/**/
+
+	.primary li a {
+		display: block;
+		font-size: 25px;
+		/*font-weight: 500;*/
+		padding: 0 0 0.75em 0;
 		text-decoration: none;
-		padding: 1em 0.5em;
-		display: block;
+		line-height: 1;
+	}
+
+	.primary a:hover,
+	.logo:hover {
+		text-decoration: underline;
+	}
+
+	.secondary {
+			font-family: Helvetica, sans-serif;
+			padding-bottom: 2em;
+	}
+
+	.secondary :global(.guide-toc > li) {
+		margin-bottom: 1.5em !important;
+	}
+
+	@media (max-width: 450px) {
+		.dropdown select {
+			max-width: 60px;
+		}
+	}
+	@media (max-width: 500px) {
+		.dropdown li:before {
+			content: '';
+		}
+	}
+	@media (min-width: 1100px) {
+		.dropdown {
+			left: calc((100vw - 800px) / 2) !important;
+			transform: translate(0, 0) !important;
+		}
+	}
+
+	@media (min-width: 645px) {
+		.mousecatcher, .menu-link {
+			display: none;
+		}
+
+		.dropdown {
+			top: 1rem;
+			left: 50%;
+			transform: translate(-50%, 0);
+			right: auto;
+		}
+
+		.dropdown li:before {
+			content: 'View example...';
+			margin-right: 0.25em;
+		}
+
+		.container {
+			height: 3.5em;
+		}
+
+		nav {
+			width: 100%;
+			height: 3.5em;
+			padding: 0 1.5em 0 0;
+			transform: none;
+			transition: none;
+			height: 0;
+		}
+
+		.primary {
+			position: fixed;
+			top: 1rem;
+			right: 1.5rem;
+			margin: 0;
+		}
+
+		.primary li {
+			display: inline-block;
+			position: relative;
+			padding: 0 1em;
+		}
+
+		.primary li:first-child::after {
+			position: absolute;
+			top: -2px;
+			right: -3px;
+			/*transform: translate(0, -50%);*/
+			content: '|';
+			font-size: 25px;
+		}
+
+		.primary li:last-child::after {
+			content: '';
+		}
+
+		.secondary {
+			display: none;
+		}
+
+		.logo {
+			position: absolute;
+			top: 1rem;
+			left: 1.5rem;
+			text-decoration: none;
+			/*font-size: 1.5em;*/
+			/*font-weight: 700;*/
+			transform: none;
+		}
+
 	}
 </style>
 
-<nav>
-	<ul>
-		<li><a class:selected='{segment === undefined}' href='.'>home</a></li>
-		<li><a class:selected='{segment === "about"}' href='about'>about</a></li>
+<div class='{open ? "open": "closed"} mousecatcher'></div>
+<div class='container'>
+	<span class="menu-link {open ? "menu-open": "menu-closed"}">{open ? 'Close' : 'Menu'}</span>
+	<a href='.' class='logo'>Layer Cake</a>
+</div>
 
-		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
-		     the blog data when we hover over the link or tap it on a touchscreen -->
-		<li><a rel=prefetch class:selected='{segment === "blog"}' href='blog'>blog</a></li>
+<ul class="dropdown">
+	<li>
+		<select>
+			<option selected="{segment === undefined}" value="">All</option>
+			{#each examples as example}
+				<option value="example/{example.slug}" selected="{slug === example.slug}">{slimName(example.title)}</option>
+			{/each}
+		</select>
+	</li>
+</ul>
+
+<nav>
+	<ul class='primary'>
+		<li><a rel='prefetch' class='{segment === "guide" ? "active": ""}' href='guide'>Guide</a></li>
+		<li><a href='https://github.com/mhkeller/layercake'>GitHub</a></li>
 	</ul>
+
+	<div class='secondary'>
+		<!-- <GuideContents/> -->
+	</div>
 </nav>
