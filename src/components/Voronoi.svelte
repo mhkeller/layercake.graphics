@@ -17,8 +17,6 @@
 
 	$: uniquePoints = uniques(points, d => d.join(), false);
 
-	$: console.log(uniquePoints)
-
 	$: voronoi = Delaunay.from(points).voronoi([0, 0, $width, $height]);
 
 </script>
