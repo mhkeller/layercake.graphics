@@ -7,14 +7,10 @@
 	let visible = false;
 	let found = {};
 
-	function mousemove (e) {
+	function findItem (e) {
 		found = finder.find(e.layerX, e.layerY, 300) || {};
 
 		visible = Object.keys(found).length > 0;
-	}
-
-	function mouseout () {
-		visible = false;
 	}
 
 	$: finder = quadtree()
@@ -37,8 +33,8 @@
 
 <div
 	class="bg"
-	on:mousemove="{mousemove}"
-	on:mouseout="{mouseout}"
+	on:mousemove="{findItem}"
+	on:mouseout="{() => visible = false}"
 ></div>
 <slot
 	x={$xGet(found)}
