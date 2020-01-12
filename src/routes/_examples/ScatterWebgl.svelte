@@ -30,7 +30,16 @@
 		</Webgl>
 
 		<Html>
-			<QuadTree {diameter}/>
+			<QuadTree
+				let:x
+				let:y
+				let:visible
+			>
+				<div
+					class="circle"
+					style="top:{y}px;left:{x}px;display: { visible ? 'block' : 'none' };"
+				></div>
+			</QuadTree>
 		</Html>
 	</LayerCake>
 </div>
@@ -39,5 +48,16 @@
 	.chart-container {
 		width: 100%;
 		height: 100%;
+	}
+
+	.circle {
+		position: absolute;
+		border-radius: 50%;
+		background-color: #fff;
+		border: 1px solid #000;
+		transform: translate(-50%, -50%);
+		pointer-events: none;
+		width: 9px;
+		height: 9px;
 	}
 </style>
