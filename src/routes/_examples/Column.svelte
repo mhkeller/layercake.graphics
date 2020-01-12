@@ -7,7 +7,7 @@ import AxisX from '../../components/AxisXScaleBand.svelte';
 import AxisY from '../../components/AxisY.svelte';
 import Annotations from '../../components/Annotations.svelte';
 import Arrows from '../../components/Arrows.svelte';
-// import DefArrowhead from '../../components/DefArrowhead.html';
+import DefArrowhead from '../../components/DefArrowhead.svelte';
 
 const annotations = [
 	{
@@ -52,6 +52,7 @@ const annotations = [
 			data={groups}
 	>
 		<Svg>
+			<DefArrowhead/>
 			<Column/>
 			<AxisX
 				gridlines={false}
@@ -66,7 +67,7 @@ const annotations = [
 		</Html>
 
 		<Svg>
-			<!-- <Arrows {annotations}/> -->
+			<Arrows {annotations}/>
 		</Svg>
 
 	</LayerCake>
