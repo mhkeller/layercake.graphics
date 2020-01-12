@@ -5,12 +5,12 @@
 	const { data, xGet, yGet, width, height } = getContext('LayerCake');
 
 	let visible = false;
-	let highlight = {};
+	let found = {};
 
 	function mousemove (e) {
-		highlight = finder.find(e.layerX, e.layerY, 300) || {};
+		found = finder.find(e.layerX, e.layerY, 300) || {};
 
-		visible = Object.keys(highlight).length > 0;
+		visible = Object.keys(found).length > 0;
 	}
 
 	function mouseout () {
@@ -41,7 +41,8 @@
 	on:mouseout="{mouseout}"
 ></div>
 <slot
-	x={$xGet(highlight)}
-	y={$yGet(highlight)}
+	x={$xGet(found)}
+	y={$yGet(found)}
+	found={found}
 	visible={visible}
 ></slot>
