@@ -51,8 +51,8 @@ const annotations = [
 			yDomain={[0, null]}
 			data={groups}
 	>
+
 		<Svg>
-			<DefArrowhead/>
 			<Column/>
 			<AxisX
 				gridlines={false}
@@ -67,9 +67,9 @@ const annotations = [
 		</Html>
 
 		<Svg>
+			<DefArrowhead/>
 			<Arrows {annotations}/>
 		</Svg>
-
 	</LayerCake>
 
 </div>
