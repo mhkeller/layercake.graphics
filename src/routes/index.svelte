@@ -57,7 +57,7 @@
 		width: 80px;
 		height: 80px;
 		margin-right: 17px;
-		background: url('layercake-logo-128.png');
+		background: url('/layercake-logo-128.png');
 		background-size: contain;
 		background-repeat: no-repeat;
 	}
