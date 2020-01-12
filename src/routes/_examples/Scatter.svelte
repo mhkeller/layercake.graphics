@@ -3,7 +3,7 @@
 	import points from '../../data/points.js';
 	import Scatter from '../../components/Scatter.svelte';
 	import ScatterCanvas from '../../components/ScatterCanvas.svelte';
-	// import Voronoi from '../../components/Voronoi.svelte';
+	import Voronoi from '../../components/Voronoi.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 
@@ -41,6 +41,7 @@
 				{r}
 				fill={color}
 			/>
+			<Voronoi/>
 		</Svg>
 	</LayerCake>
 </div>
