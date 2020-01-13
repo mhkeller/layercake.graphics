@@ -2,35 +2,6 @@
 	import examples from './_examples.js';
 </script>
 
-<svelte:head>
-	<title>Layer Cake</title>
-	<meta name="og:title" content="Layer Cake">
-	<meta name="twitter:title" content="Layer Cake">
-
-</svelte:head>
-
-<div class="main">
-	<div class="logo-container">
-		<div id="logo"></div>
-		<h1>Layer Cake</h1>
-	</div>
-
-	<div id="dek">
-		<p>Layer Cake is a graphics framework built on top of <a href="https://svelte.dev" target="_blank" rel="noopener">Svelte</a>. In its basic usage, it measures your target div and your data and creates scales that <span class="strong">stay synced</span> on layout changes. Using its component methods, you can then use these scales to organize multiple, <span class="strong">mostly-reusable Svelte components</span>, whether they be SVG, HTML, Canvas or WebGl. Since they all share the same coordinate space, you can build your graphic one layer at a time.</p>
-
-		<p>Read the <a href="guide" rel=prefetch>guide</a> or see some examples below:</p>
-	</div>
-
-	<div id="gallery">
-		{#each examples as example}
-			<div class="gallery-item">
-				<h4 class="title"><a rel=prefetch href="example/{example.slug}">{example.title}</a></h4>
-				<svelte:component this="{example.component}"/>
-			</div>
-		{/each}
-	</div>
-</div>
-
 <style>
 	.main {
 		position: relative;
@@ -125,3 +96,31 @@
 	}
 </style>
 
+<svelte:head>
+	<title>Layer Cake</title>
+	<meta name="og:title" content="Layer Cake">
+	<meta name="twitter:title" content="Layer Cake">
+
+</svelte:head>
+
+<div class="main">
+	<div class="logo-container">
+		<div id="logo"></div>
+		<h1>Layer Cake</h1>
+	</div>
+
+	<div id="dek">
+		<p>Layer Cake is a graphics framework built on top of <a href="https://svelte.dev" target="_blank" rel="noopener">Svelte</a>. In its basic usage, it measures your target div and your data and creates scales that <span class="strong">stay synced</span> on layout changes. Using its component methods, you can then use these scales to organize multiple, <span class="strong">mostly-reusable Svelte components</span>, whether they be SVG, HTML, Canvas or WebGl. Since they all share the same coordinate space, you can build your graphic one layer at a time.</p>
+
+		<p>Read the <a href="guide" rel=prefetch>guide</a> or see some examples below:</p>
+	</div>
+
+	<div id="gallery">
+		{#each examples as example}
+			<div class="gallery-item">
+				<h4 class="title"><a rel=prefetch href="example/{example.slug}">{example.title}</a></h4>
+				<svelte:component this="{example.component}"/>
+			</div>
+		{/each}
+	</div>
+</div>

@@ -14,10 +14,33 @@
 </script>
 
 <script>
+	import marked from 'marked';
+	import hljs from 'highlight.js';
+	// import 'svelte-highlight/styles/github.css';
+	import hljsDefineSvelte from '../../modules/hljsDefineSvelte.js';
+
+	hljs.registerLanguage('svelte', hljsDefineSvelte);
+	// console.log('keys', Object.keys(hljsSvelte));
+	hljsDefineSvelte(hljs);
+
 	import examples from '../_examples.js';
 
 	export let slug;
-	// export let data;
+	export let data;
+
+	let active = 'index';
+
+	const renderer = new marked.Renderer();
+	function markdownToHtml (text) {
+		return marked(text, { renderer });
+	}
+
+	function highlight (str, title) {
+		const ext = title.split('.')[1];
+		return hljs.highlight(ext, str).value;
+	}
+
+	const pages = [data.main]/*.concat(data.components).concat(data.modules).concat(data.componentModules)*/;
 
 	const exampleLookup = new Map();
 	examples.forEach(exmpl => {
@@ -25,19 +48,14 @@
 	});
 
 	const example = exampleLookup.get(slug);
+
+	function cleanTitle (title) {
+		const parts = title.split('/');
+		const cleaned = parts[parts.length - 1].split('.')[0].toLowerCase();
+		return cleaned;
+	}
+
 </script>
-
-<svelte:head>
-	<title>{example.title}</title>
-</svelte:head>
-
-<div class="main">
-	<h1>{example.title}</h1>
-
-	<div class="chart-hero">
-		<svelte:component this={example.component} />
-	</div>
-</div>
 
 <style>
 	.main {
@@ -55,4 +73,173 @@
 		margin: 1.5em 0 2em 0;
 		position: relative;
 	}
+
+	.dek {
+		width: calc(100% - 80px);
+	}
+
+	.dek :global(p a) {
+		color: #f0c;
+		text-decoration: none;
+	}
+
+	.dek :global(p a:hover) {
+		text-decoration: underline;
+	}
+
+	#pages {
+		margin-top: 50px;
+	}
+
+	#pages.has-dek {
+		margin-top: 35px;
+	}
+
+	.dek {
+		width: calc(100% - 80px);
+	}
+
+	.dek :global(p a) {
+		color: #f0c;
+		text-decoration: none;
+	}
+
+	.dek :global(p a:hover) {
+		text-decoration: underline;
+	}
+
+	#contents-container {
+		position: relative;
+		border-left: 3px solid #ccc;
+		margin-top: 7px;
+	}
+
+	pre {
+		margin-top: 7px 0 0 0;
+		padding-left: 14px;
+		overflow-x: auto;
+	}
+
+	#page-nav {
+		margin: 0;
+		padding: 0;
+	}
+
+	.tab {
+		display: inline-block;
+		vertical-align: top;
+		margin-right: 14px;
+		margin-bottom: 8px;
+		border-bottom: 2px solid transparent;
+		color: #ccc;
+	}
+
+	.tab:hover {
+		border-bottom: 2px solid #aaa;
+		cursor: pointer;
+	}
+
+	:global(.tab.active) {
+		color: #000;
+		pointer-events: none;
+		border-bottom: 2px solid #000;
+	}
+
+
+	.copy {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 20px;
+		height: 35px;
+		opacity: 0.25;
+		background-image: url(copy.svg);
+		background-repeat: no-repeat;
+		background-size: contain;
+		cursor: pointer;
+	}
+
+	.copy:hover {
+		opacity: 1;
+	}
+
+	.copy:active {
+		opacity: 0.7;
+	}
+
+	.copy:hover:before {
+		display: block;
+	}
+
+	.copy:before {
+		content: 'Copy to clipboard';
+		position: absolute;
+		top: -7px;
+		right: 0;
+		background-color: #000;
+		border-radius: 2px;
+		color: #fff;
+		display: none;
+		font-size: 13px;
+		padding: 3px 5px;
+		white-space: nowrap;
+		transform: translate(0%, -100%);
+	}
+
+	@media (max-width: 750px) {
+		.copy {
+			transform: translate(0, -80%);
+		}
+	}
+	@media (max-width: 475px) {
+		#pages {
+			margin-top: 21px;
+		}
+		.tab {
+			margin-top: 8px;
+			margin-bottom: 0;
+		}
+		.download {
+			display: none;
+		}
+		.dek {
+			width: 100%;
+		}
+	}
 </style>
+
+<svelte:head>
+	<title>{example.title}</title>
+	<link rel='stylesheet' href='hljs.css'>
+</svelte:head>
+
+<div class="main">
+	<h1>{example.title}</h1>
+
+	<div class="chart-hero">
+		<svelte:component this={example.component} />
+	</div>
+
+	{#if data.dek}
+		<div class="dek">
+			{@html markdownToHtml(data.dek)}
+		</div>
+	{/if}
+
+	<div id="pages" class="{data.dek ? 'has-dek' : ''}">
+		<ul id="page-nav">
+			{#each pages as page}
+				<li class="tab {active === cleanTitle(page.title) ? 'active' : ''}">{page.title}</li>
+			{/each}
+		</ul>
+		<div id="contents-container">
+			<div class="copy"></div>
+			{#each pages as page}
+				<div class="contents" style="display: {active === cleanTitle(page.title) ? 'block' : 'none'};">
+					<pre>{@html highlight(page.contents, page.title)}</pre>
+				</div>
+			{/each}
+		</div>
+	</div>
+
+</div>
