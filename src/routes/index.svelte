@@ -45,7 +45,7 @@
 			<Labels/>
 		</Html>
 	</LayerCake>
-</div>`.replace(/\t/g, '  ');
+</div>`.trim().replace(/\t/g, '  ');
 
 </script>
 
