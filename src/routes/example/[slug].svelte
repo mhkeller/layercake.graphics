@@ -16,7 +16,8 @@
 <script>
 	import marked from 'marked';
 	import hljs from 'highlight.js';
-	// import 'svelte-highlight/styles/github.css';
+
+	import DownloadBtn from '../../components/DownloadBtn.svelte';
 	import hljsDefineSvelte from '../../modules/hljsDefineSvelte.js';
 
 	hljs.registerLanguage('svelte', hljsDefineSvelte);
@@ -240,6 +241,13 @@
 
 	<div class="chart-hero">
 		<svelte:component this={example.component} />
+	</div>
+
+	<div class="download">
+		<DownloadBtn
+			{data}
+			slug='{slug}'
+		/>
 	</div>
 
 	{#if data.dek}
