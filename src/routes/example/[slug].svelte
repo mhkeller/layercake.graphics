@@ -36,11 +36,12 @@
 	}
 
 	function highlight (str, title) {
-		const ext = title.split('.')[1];
+		const parts = title.split('.');
+		const ext = parts[parts.length - 1];
 		return hljs.highlight(ext, str).value;
 	}
 
-	const pages = [data.main]/*.concat(data.components).concat(data.modules).concat(data.componentModules)*/;
+	const pages = [data.main].concat(data.components).concat(data.modules).concat(data.componentModules);
 
 	const exampleLookup = new Map();
 	examples.forEach(exmpl => {
@@ -229,7 +230,10 @@
 	<div id="pages" class="{data.dek ? 'has-dek' : ''}">
 		<ul id="page-nav">
 			{#each pages as page}
-				<li class="tab {active === cleanTitle(page.title) ? 'active' : ''}">{page.title}</li>
+				<li
+					class="tab {active === cleanTitle(page.title) ? 'active' : ''}"
+					on:click="{() => active = cleanTitle(page.title)}"
+				>{page.title}</li>
 			{/each}
 		</ul>
 		<div id="contents-container">

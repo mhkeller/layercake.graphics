@@ -1,13 +1,30 @@
 import * as fs from 'fs';
 
-function cleanMain (example) {
+function getComponentJsPaths (example) {
+	return example.match(/\.\.\/.+\.js/gm);
+}
 
+function cleanContents (str) {
+	return str.replace(/\t/g, '  ').trim();
+}
+
+function getJsPaths (example) {
+	return example.match(/\.\/.+\.js/gm)
+		.map(d => d.replace('../../', ''));
+}
+
+function cleanMain (example) {
 	const cleaned = example
 		.replace(/\t/g, '  ')
 		.replace(/\.\.\/\.\.\//g, './')
 		.trim();
 
 	return cleaned;
+}
+
+function getComponentPaths (example) {
+	return example.match(/\.\.\/.+svelte/gm)
+		.map(d => d.replace('../../', ''));
 }
 
 export function get(req, res, next) {
@@ -40,7 +57,32 @@ export function get(req, res, next) {
 	const dekPath = `src/content/examples/${slug}.md`;
 	const dek = fs.existsSync(dekPath) ? fs.readFileSync(dekPath, 'utf-8') : '';
 
-	const response = { main, dek };
+	const components = getComponentPaths(example)
+		.map(d => {
+			return {
+				title: `./${d}`,
+				contents: cleanContents(fs.readFileSync(`src/${d}`, 'utf-8'))
+			};
+		});
+
+	const modules = getJsPaths(example)
+		.map(d => {
+			return {
+				title: d.replace('../', ''),
+				contents: cleanContents(fs.readFileSync(d.replace('../', 'src/'), 'utf-8'))
+			};
+		});
+
+	const componentModulesMatches = getComponentJsPaths(components.map(d => d.contents).join(''));
+	const componentModules = componentModulesMatches === null ? [] : componentModulesMatches
+		.map(d => {
+			return {
+				title: d.replace('../', './'),
+				contents: cleanContents(fs.readFileSync(d.replace('../', 'src/'), 'utf-8'))
+			};
+		});
+
+	const response = { main, dek, components, modules, componentModules };
 
 	res.writeHead(200, {
 		'Content-Type': 'application/json'
