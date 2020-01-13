@@ -8,9 +8,9 @@
 	hljsDefineSvelte(hljs);
 
 	const codeExample = `<script>
-	import { LayerCake, Svg, Html, Canvas }
+	import { LayerCake, Svg, Html, Canvas } from 'layercake';
 	import AxisX from './components/AxisX.svelte';
-	import AsixY from './components/AsixY.svelte';
+	import AxisY from './components/AxisY.svelte';
 	import Line from './components/Line.svelte';
 	import Scatter from './components/Scatter.svelte';
 	import Labels from './components/Labels.svelte';
