@@ -1,5 +1,52 @@
 <script>
+	import hljs from 'highlight.js';
 	import examples from './_examples.js';
+	import hljsDefineSvelte from '../modules/hljsDefineSvelte.js';
+
+	hljs.registerLanguage('svelte', hljsDefineSvelte);
+
+	hljsDefineSvelte(hljs);
+
+	const codeExample = `<script>
+	import { LayerCake, Svg, Html, Canvas }
+	import AxisX from './components/AxisX.svelte';
+	import AsixY from './components/AsixY.svelte';
+	import Line from './components/Line.svelte';
+	import Scatter from './components/Scatter.svelte';
+	import Labels from './components/Labels.svelte';
+
+	const data = [{ x: 0, y: 1 }, { x: 1, y: 2 }];
+<\/script>
+
+<style>
+	.chart-container {
+		width: 100%;
+		height: 500px;
+	}
+</style>
+
+<div class="chart-container">
+	<LayerCake
+		x='x'
+		y='x'
+		{data}
+	>
+		<Svg>
+			<AxisX/>
+			<AxisY/>
+			<Line color='#f0c'/>
+		</Svg>
+
+		<Canvas>
+			<Scatter color='#0fc'/>
+		</Canvas>
+
+		<Html>
+			<Labels/>
+		</Html>
+	</LayerCake>
+</div>`.replace(/\t/g, '  ');
+
 </script>
 
 <style>
@@ -94,12 +141,23 @@
 			padding: 1em;
 		}
 	}
+
+	.code-example {
+		border-left: 3px solid #ccc;
+		margin-bottom: 35px;
+	}
+
+	pre {
+		padding-left: 14px;
+		overflow-x: auto;
+	}
 </style>
 
 <svelte:head>
 	<title>Layer Cake</title>
 	<meta name="og:title" content="Layer Cake">
 	<meta name="twitter:title" content="Layer Cake">
+	<link rel='stylesheet' href='hljs.css'>
 
 </svelte:head>
 
@@ -113,6 +171,10 @@
 		<p>Layer Cake is a graphics framework built on top of <a href="https://svelte.dev" target="_blank" rel="noopener">Svelte</a>. In its basic usage, it measures your target div and your data and creates scales that <span class="strong">stay synced</span> on layout changes. Using its component methods, you can then use these scales to organize multiple, <span class="strong">mostly-reusable Svelte components</span>, whether they be SVG, HTML, Canvas or WebGl. Since they all share the same coordinate space, you can build your graphic one layer at a time.</p>
 
 		<p>Read the <a href="guide" rel=prefetch>guide</a> or see some examples below:</p>
+	</div>
+
+	<div class="code-example">
+		<pre>{@html hljs.highlight('svelte', codeExample).value}</pre>
 	</div>
 
 	<div id="gallery">

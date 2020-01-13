@@ -19,8 +19,8 @@ import AxisYScaleBand from '../../components/AxisYScaleBand.svelte';
 <div class="chart-container">
 	<LayerCake
 		padding={{ top: 0, right: 20, bottom: 20, left: 30 }}
-		x={'value'}
-		y={'year'}
+		x='value'
+		y='year'
 		yScale={scaleBand().paddingInner([0.05]).round(true)}
 		yDomain={['1979', '1980', '1981', '1982', '1983']}
 		xDomain={[0, null]}
