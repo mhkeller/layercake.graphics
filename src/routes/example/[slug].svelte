@@ -21,7 +21,6 @@
 	import hljsDefineSvelte from '../../modules/hljsDefineSvelte.js';
 
 	hljs.registerLanguage('svelte', hljsDefineSvelte);
-	// console.log('keys', Object.keys(hljsSvelte));
 	hljsDefineSvelte(hljs);
 
 	import examples from '../_examples.js';
