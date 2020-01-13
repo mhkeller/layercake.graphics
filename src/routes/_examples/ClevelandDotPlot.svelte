@@ -9,6 +9,12 @@
 	const seriesColors = ['#f0c', '#00bbff', '#00e047', '#ff7a33'];
 </script>
 
+<style>
+	.chart-container {
+		width: 100%;
+		height: 100%;
+	}
+</style>
 
 <div class="chart-container">
 	<LayerCake
@@ -33,11 +39,3 @@
 	</LayerCake>
 
 </div>
-
-
-<style>
-	.chart-container {
-		width: 100%;
-		height: 100%;
-	}
-</style>

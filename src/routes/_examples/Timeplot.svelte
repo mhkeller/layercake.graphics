@@ -35,6 +35,13 @@
 
 </script>
 
+<style>
+	.chart-container {
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
 <div class="chart-container">
 	<LayerCake
 		padding={{ top: 0, right: 15, bottom: 20, left: 75 }}
@@ -46,6 +53,7 @@
 		xPadding={[padding, padding]}
 		data={daysJson}
 	>
+
 		<Svg>
 			<AxisX
 				ticks={[0, 4, 8, 12, 16, 20, 24].map(d => d * 60 * 60)}
@@ -61,10 +69,3 @@
 
 	</LayerCake>
 </div>
-
-<style>
-	.chart-container {
-		width: 100%;
-		height: 100%;
-	}
-</style>

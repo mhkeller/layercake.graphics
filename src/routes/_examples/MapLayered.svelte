@@ -7,8 +7,14 @@
 	import MapCanvas from '../../components/MapCanvas.svelte';
 
 	const geojson = feature(usStates, usStates.objects.collection);
-
 </script>
+
+<style>
+	.chart-container {
+		width: 100%;
+		height: 100%;
+	}
+</style>
 
 <div class="chart-container">
 	<LayerCake
@@ -29,10 +35,3 @@
 		</Svg>
 	</LayerCake>
 </div>
-
-<style>
-	.chart-container {
-		width: 100%;
-		height: 100%;
-	}
-</style>

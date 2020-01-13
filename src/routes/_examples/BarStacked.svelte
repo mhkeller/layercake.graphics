@@ -25,6 +25,13 @@
 	const seriesColors = ['#00bbff', '#8bcef6', '#c4e2ed', '#f7f6e3'];
 </script>
 
+<style>
+	.chart-container {
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
 <div class="chart-container">
 	<LayerCake
 		padding={{ top: 0, right: 0, bottom: 20, left: 30 }}
@@ -52,10 +59,3 @@
 	</LayerCake>
 
 </div>
-
-<style>
-	.chart-container {
-		width: 100%;
-		height: 100%;
-	}
-</style>

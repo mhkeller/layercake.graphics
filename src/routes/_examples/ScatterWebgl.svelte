@@ -8,8 +8,25 @@
 
 	const diameter = 6;
 	const padding = 6;
-
 </script>
+
+<style>
+	.chart-container {
+		width: 100%;
+		height: 100%;
+	}
+
+	.circle {
+		position: absolute;
+		border-radius: 50%;
+		background-color: #fff;
+		border: 1px solid #000;
+		transform: translate(-50%, -50%);
+		pointer-events: none;
+		width: 9px;
+		height: 9px;
+	}
+</style>
 
 <div class="chart-container">
 	<LayerCake
@@ -43,21 +60,3 @@
 		</Html>
 	</LayerCake>
 </div>
-
-<style>
-	.chart-container {
-		width: 100%;
-		height: 100%;
-	}
-
-	.circle {
-		position: absolute;
-		border-radius: 50%;
-		background-color: #fff;
-		border: 1px solid #000;
-		transform: translate(-50%, -50%);
-		pointer-events: none;
-		width: 9px;
-		height: 9px;
-	}
-</style>

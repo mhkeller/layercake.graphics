@@ -23,26 +23,6 @@
 	let scale = 'individual';
 </script>
 
-<div class="input-container">
-	<label><input type="radio" bind:group={scale} value="individual"/>Individual scale</label>
-	<label><input type="radio" bind:group={scale} value="shared"/>Shared scale</label>
-</div>
-
-
-<div class="group-container">
-	{#each pointSeries as data}
-		<div class="chart-container">
-			<ChartWrapper
-				{data}
-				{fullExtents}
-				{scale}
-				{extentGetters}
-			/>
-		</div>
-	{/each}
-
-</div>
-
 <style>
 	.group-container {
 		height: 90%;
@@ -64,3 +44,21 @@
 		height: 30%;
 	}
 </style>
+
+<div class="input-container">
+	<label><input type="radio" bind:group={scale} value="individual"/>Individual scale</label>
+	<label><input type="radio" bind:group={scale} value="shared"/>Shared scale</label>
+</div>
+
+<div class="group-container">
+	{#each pointSeries as data}
+		<div class="chart-container">
+			<ChartWrapper
+				{data}
+				{fullExtents}
+				{scale}
+				{extentGetters}
+			/>
+		</div>
+	{/each}
+</div>

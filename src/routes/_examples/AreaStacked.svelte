@@ -33,6 +33,13 @@
 	}
 </script>
 
+<style>
+	.chart-container {
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
 <div class="chart-container">
 	<LayerCake
 		padding={{ top: 0, right: 0, bottom: 20, left: 17 }}
@@ -55,10 +62,3 @@
 		</Svg>
 	</LayerCake>
 </div>
-
-<style>
-	.chart-container {
-		width: 100%;
-		height: 100%;
-	}
-</style>

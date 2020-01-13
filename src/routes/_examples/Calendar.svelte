@@ -27,6 +27,23 @@
 	const sortedData = byMonthByDate.sort((a, b) => a.key - b.key);
 </script>
 
+<style>
+	.chart-container {
+		display: inline-block;
+		position: relative;
+		vertical-align: top;
+		height: 100%;
+		margin-top: 25px;
+	}
+	.chart-container:before {
+		content: attr(data-month);
+		position: absolute;
+		top: 0;
+		left: 0;
+		transform: translate(0, -100%);
+	}
+</style>
+
 {#each sortedData as month, i}
 	<div
 		class="chart-container"
@@ -48,21 +65,3 @@
 		</LayerCake>
 	</div>
 {/each}
-
-<style>
-	.chart-container {
-		display: inline-block;
-		position: relative;
-		vertical-align: top;
-		height: 100%;
-		margin-top: 25px;
-	}
-	.chart-container:before {
-		content: attr(data-month);
-		position: absolute;
-		top: 0;
-		left: 0;
-		transform: translate(0, -100%);
-	}
-
-</style>

@@ -56,6 +56,27 @@
 		return cleaned;
 	}
 
+	function copyToClipboard () {
+		const text = pages.filter(d => cleanTitle(d.title) === active)[0].contents;
+		if (window.clipboardData && window.clipboardData.setData) {
+			return window.clipboardData.setData('Text', text);
+		} else if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+			const textarea = document.createElement('textarea');
+			textarea.textContent = text;
+			textarea.style.position = 'fixed';
+			document.body.appendChild(textarea);
+			textarea.select();
+			try {
+				return document.execCommand('copy');
+			} catch (ex) {
+				console.warn('Copy to clipboard failed.', ex);
+				return false;
+			} finally {
+				document.body.removeChild(textarea);
+			}
+		}
+	}
+
 </script>
 
 <style>
@@ -154,7 +175,7 @@
 		width: 20px;
 		height: 35px;
 		opacity: 0.25;
-		background-image: url(copy.svg);
+		background-image: url(/copy.svg);
 		background-repeat: no-repeat;
 		background-size: contain;
 		cursor: pointer;
@@ -237,7 +258,10 @@
 			{/each}
 		</ul>
 		<div id="contents-container">
-			<div class="copy"></div>
+			<div
+				class="copy"
+				on:click={copyToClipboard}
+			></div>
 			{#each pages as page}
 				<div class="contents" style="display: {active === cleanTitle(page.title) ? 'block' : 'none'};">
 					<pre>{@html highlight(page.contents, page.title)}</pre>

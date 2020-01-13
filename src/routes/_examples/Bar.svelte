@@ -9,6 +9,13 @@ import AxisYScaleBand from '../../components/AxisYScaleBand.svelte';
 
 </script>
 
+<style>
+	.chart-container {
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
 <div class="chart-container">
 	<LayerCake
 		padding={{ top: 0, right: 20, bottom: 20, left: 30 }}
@@ -31,10 +38,3 @@ import AxisYScaleBand from '../../components/AxisYScaleBand.svelte';
 	</LayerCake>
 
 </div>
-
-<style>
-	.chart-container {
-		width: 100%;
-		height: 100%;
-	}
-</style>

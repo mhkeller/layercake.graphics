@@ -7,6 +7,13 @@
 	import AxisRadial from '../../components/AxisRadial.svelte';
 </script>
 
+<style>
+	.chart-container {
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
 <div class="chart-container">
 	<LayerCake
 		padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
@@ -22,10 +29,3 @@
 		</Svg>
 	</LayerCake>
 </div>
-
-<style>
-	.chart-container {
-		width: 100%;
-		height: 100%;
-	}
-</style>

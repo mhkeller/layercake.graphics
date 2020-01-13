@@ -10,9 +10,14 @@
 	const r = 3;
 	const padding = 10;
 	const color = '#fff';
-
-	// TODO, voronoi
 </script>
+
+<style>
+	.chart-container {
+		width: 100%;
+		height: 100%;
+	}
+</style>
 
 <div class="chart-container">
 	<LayerCake
@@ -45,10 +50,3 @@
 		</Svg>
 	</LayerCake>
 </div>
-
-<style>
-	.chart-container {
-		width: 100%;
-		height: 100%;
-	}
-</style>

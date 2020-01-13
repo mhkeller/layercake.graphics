@@ -5,8 +5,17 @@
 	import Area from '../../components/Area.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
-
 </script>
+
+<style>
+	.chart-container {
+		width: 100%;
+		height: 100%;
+		/* You can also set through styles
+			padding: 0 10px 20px 25px;
+		*/
+	}
+</style>
 
 <div class="chart-container">
 	<LayerCake
@@ -24,13 +33,3 @@
 		</Svg>
 	</LayerCake>
 </div>
-
-<style>
-	.chart-container {
-		width: 100%;
-		height: 100%;
-		/* You can also set through styles
-			padding: 0 10px 20px 25px;
-		*/
-	}
-</style>

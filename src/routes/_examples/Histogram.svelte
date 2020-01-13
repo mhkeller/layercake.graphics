@@ -16,8 +16,14 @@
 		.thresholds(thresholds(domain, binCount));
 
 	$: bins = hist(unemployment);
-
 </script>
+
+<style>
+	.chart-container {
+		width: 100%;
+		height: 100%;
+	}
+</style>
 
 <div class="input-container" style="position: absolute;right:10px;z-index: 9;">
 	<input
@@ -56,10 +62,3 @@
 		</Svg>
 	</LayerCake>
 </div>
-
-<style>
-	.chart-container {
-		width: 100%;
-		height: 100%;
-	}
-</style>
