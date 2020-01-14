@@ -4,18 +4,13 @@
 	import GuideContents from './GuideContents.svelte';
 	import examples from '../routes/_examples.js';
 
-	// export let path;
 	export let segment;
-	// export let slug = '';
-	let slug = '';
 	export let sections;
+	let slug = '';
 
 	const { page } = stores();
 	$: path = $page.path;
 	$: slug = path.split('/').pop();
-
-	$: console.log('slug', slug);
-	$: console.log('path', path);
 
 	let basePath = '/';
 	let open = false;
@@ -28,8 +23,6 @@
 		open = false;
 		goto(this.value || '/');
 	}
-
-	// $: (path, loadPage());
 
 	function toggleOpen () {
 		// if the menu is closing, scroll back to the top *after* it
