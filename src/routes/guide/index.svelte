@@ -5,6 +5,7 @@
 		});
 	}
 </script>
+
 <script>
 	import GuideContents from '../../components/GuideContents.svelte';
 

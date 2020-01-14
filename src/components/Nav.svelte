@@ -1,13 +1,54 @@
 <script>
+	import { goto } from '@sapper/app';
+
+	import GuideContents from './GuideContents.svelte';
 	import examples from '../routes/_examples.js';
 
+	// export let page;
 	export let segment;
 	export let slug = '';
+	export let sections;
 
-	let basePath = '/';
+	let page;
+
+	$: console.log('slug', slug);
+	$: console.log('page', page);
+
+	// let basePath = '/';
 	let open = false;
 
+	let nav;
+
 	const slimName = d => d.split(' (')[0];
+
+	function loadPage () {
+		console.log('loading page', page);
+		open = false;
+		if (page) {
+			goto(page);
+		}
+	}
+
+	// $: (page, loadPage());
+
+	function toggleOpen () {
+		// if the menu is closing, scroll back to the top *after* it
+		// shuts. otherwise, scroll back to the top immediately
+		// (just in case the user reopened before it happened).
+		// The reason we don't just do it when the menu opens is
+		// that the scrollbar visibly flashes
+		if (open) {
+			setTimeout(() => {
+				if (!open) {
+					nav.scrollTop = 0;
+				}
+			}, 350);
+		} else {
+			nav.scrollTop = 0;
+		}
+
+		open = !open;
+	}
 
 </script>
 
@@ -87,7 +128,7 @@
 	}
 
 	.open {
-		transform: translate(0,0);
+		transform: translate(0, 0);
 		transition: transform 0.3s cubic-bezier(.17,.67,.24,.99);
 		overflow-y: auto;
 	}
@@ -258,15 +299,15 @@
 	}
 </style>
 
-<div class='{open ? "open": "closed"} mousecatcher'></div>
+<div class='{open ? "open" : "closed"} mousecatcher' on:click="{() => open = false}"></div>
 <div class='container'>
-	<span class="menu-link {open ? "menu-open": "menu-closed"}">{open ? 'Close' : 'Menu'}</span>
+	<span class="menu-link {open ? "menu-open" : "menu-closed"}" on:click='{toggleOpen}'>{open ? 'Close' : 'Menu'}</span>
 	<a href='.' class='logo'>Layer Cake</a>
 </div>
 
 <ul class="dropdown">
 	<li>
-		<select>
+		<select on:input={loadPage} bind:value="{page}">
 			<option selected="{segment === undefined}" value="">All</option>
 			{#each examples as example}
 				<option value="example/{example.slug}" selected="{slug === example.slug}">{slimName(example.title)}</option>
@@ -275,13 +316,13 @@
 	</li>
 </ul>
 
-<nav>
+<nav bind:this={nav} class='{open ? "open" : "closed"}'>
 	<ul class='primary'>
-		<li><a rel='prefetch' class='{segment === "guide" ? "active": ""}' href='guide'>Guide</a></li>
+		<li><a rel='prefetch' class='{segment === "guide" ? "active" : ""}' href='guide'>Guide</a></li>
 		<li><a href='https://github.com/mhkeller/layercake'>GitHub</a></li>
 	</ul>
 
 	<div class='secondary'>
-		<!-- <GuideContents/> -->
+		<GuideContents {sections} />
 	</div>
 </nav>
