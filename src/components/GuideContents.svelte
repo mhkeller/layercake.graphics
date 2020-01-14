@@ -1,4 +1,5 @@
 <script>
+	export let open;
 	export let sections = [];
 
 	const guideSections = sections.map(section => {
@@ -8,6 +9,10 @@
 			slug: section.slug
 		};
 	});
+
+	function close () {
+		open = false;
+	}
 
 // export default {
 // 	oncreate () {
@@ -68,9 +73,9 @@
 <ul class='guide-toc'>
 	{#each guideSections as section}
 		<li>
-			<a class='section' href='guide#{section.slug}'>{section.metadata.title}</a>
+			<a class='section' href='/guide#{section.slug}' on:click='{close}'>{section.metadata.title}</a>
 			{#each section.subsections as subsection}
-				<a class='subsection' href='guide#{subsection.slug}'>{subsection.title}</a>
+				<a class='subsection' href='/guide#{subsection.slug}' on:click='{close}'>{subsection.title}</a>
 			{/each}
 		</li>
 	{/each}

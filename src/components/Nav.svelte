@@ -22,14 +22,12 @@
 	const slimName = d => d.split(' (')[0];
 
 	function loadPage () {
-		console.log('loading page', page);
+		// console.log('loading page', page);
 		open = false;
 		if (page) {
 			goto(page);
 		}
 	}
-
-	// $: (page, loadPage());
 
 	function toggleOpen () {
 		// if the menu is closing, scroll back to the top *after* it
@@ -46,7 +44,6 @@
 		} else {
 			nav.scrollTop = 0;
 		}
-
 		open = !open;
 	}
 
@@ -318,11 +315,11 @@
 
 <nav bind:this={nav} class='{open ? "open" : "closed"}'>
 	<ul class='primary'>
-		<li><a rel='prefetch' class='{segment === "guide" ? "active" : ""}' href='guide'>Guide</a></li>
+		<li><a rel='prefetch' class='{segment === "guide" ? "active" : ""}' href='guide' on:click='{() => open = false}'>Guide</a></li>
 		<li><a href='https://github.com/mhkeller/layercake'>GitHub</a></li>
 	</ul>
 
 	<div class='secondary'>
-		<GuideContents {sections} />
+		<GuideContents {sections} bind:open={open} />
 	</div>
 </nav>
