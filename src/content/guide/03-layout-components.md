@@ -8,31 +8,58 @@ You must wrap your chart components in these layout components for them to appea
 
 The Canvas and Webgl layout components do the same and also create the canvas contexts that are then available on the LayerCake context object.
 
+### Html
+
 ```html
+<!-- { filename: 'App.svelte' } -->
 <script>
-  import { LayerCake, Html, Svg, Canvas, Webgl } from 'layercake';
+  import { LayerCake, Html } from 'layercake';
 </script>
 
-<LayerCake
-  x='x'
-  y='y'
-  {data}
->
+<LayerCake ...>
   <Html>
-    <myHtmlComponent/>
   </Html>
+</LayerCake>
+```
 
+### Svg
+
+```html
+<!-- { filename: 'App.svelte' } -->
+<script>
+  import { LayerCake, Svg } from 'layercake';
+</script>
+
+<LayerCake ...>
   <Svg>
-    <mySvgComponent/>
   </Svg>
+</LayerCake>
+```
 
+### Canvas
+
+```html
+<!-- { filename: 'App.svelte' } -->
+<script>
+  import { LayerCake, Canvas } from 'layercake';
+</script>
+
+<LayerCake ...>
   <Canvas>
-    <myCanvasComponent/>
   </Canvas>
-  </Svg>
+</LayerCake>
+```
 
+### WebGl
+
+```html
+<!-- { filename: 'App.svelte' } -->
+<script>
+  import { LayerCake, WebGl } from 'layercake';
+</script>
+
+<LayerCake ...>
   <WebGl>
-    <myWebGlComponent/>
   </WebGl>
 </LayerCake>
 ```
