@@ -1,20 +1,18 @@
 <script>
-	import { goto } from '@sapper/app';
+	import { goto, stores } from '@sapper/app';
 
 	import GuideContents from './GuideContents.svelte';
 	import examples from '../routes/_examples.js';
 
-	// export let page;
 	export let segment;
-	export let slug = '';
 	export let sections;
+	let slug = '';
 
-	let page;
+	const { page } = stores();
+	$: path = $page.path;
+	$: slug = path.split('/').pop();
 
-	$: console.log('slug', slug);
-	$: console.log('page', page);
-
-	// let basePath = '/';
+	let basePath = '/';
 	let open = false;
 
 	let nav;
@@ -22,11 +20,8 @@
 	const slimName = d => d.split(' (')[0];
 
 	function loadPage () {
-		// console.log('loading page', page);
 		open = false;
-		if (page) {
-			goto(page);
-		}
+		goto(this.value || '/');
 	}
 
 	function toggleOpen () {
@@ -304,7 +299,7 @@
 
 <ul class="dropdown">
 	<li>
-		<select on:input={loadPage} bind:value="{page}">
+		<select on:change={loadPage} value="{$page.path}">
 			<option selected="{segment === undefined}" value="">All</option>
 			{#each examples as example}
 				<option value="example/{example.slug}" selected="{slug === example.slug}">{slimName(example.title)}</option>

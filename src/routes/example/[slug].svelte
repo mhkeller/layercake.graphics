@@ -41,14 +41,14 @@
 		return hljs.highlight(ext, str).value;
 	}
 
-	const pages = [data.main].concat(data.components).concat(data.modules).concat(data.componentModules);
+	$: pages = [data.main].concat(data.components).concat(data.modules).concat(data.componentModules);
 
 	const exampleLookup = new Map();
 	examples.forEach(exmpl => {
 		exampleLookup.set(exmpl.slug, exmpl);
 	});
 
-	const example = exampleLookup.get(slug);
+	$: example = exampleLookup.get(slug);
 
 	function cleanTitle (title) {
 		const parts = title.split('/');
