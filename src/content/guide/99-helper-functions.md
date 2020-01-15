@@ -4,67 +4,6 @@ title: Helper functions
 
 Layer Cake exposes some commonly-used helper functions. If you don't use them, they will be tree-shaken so there's no added bloat!
 
-### newDiv(className: `String`[, styles: `Object`, parent: `DOM Node`])
-
-Easily create new divs. If you pass a DOM node as the third argument it will attach it to that object.
-
-Handy when creating small multiples. You can put your cake inside a loop and append a new [target](/guide#target) div for every chart.
-
-```js
-import { default as Layercake, newDiv } from 'layercake';
-
-const container = document.getElementById('container');
-
-const styles = {
-  position: 'relative'
-};
-
-const myDiv = newDiv('my-div', styles, container);
-
-// Or attach yourself
-const myDiv = container.appendChild(newDiv('my-div', styles));
-```
-
-With small multiples:
-
-```js
-import {default as Layercake, newDiv} from 'layercake';
-import AxisX from './components/AxisX.html'
-import AxisY from './components/AxisY.html'
-import Scatter from './components/Scatter.html'
-
-const container = document.getElementById('container');
-
-const styles = {
-  position: 'relative',
-  display: 'inline-block'
-};
-
-const datasets = [
-  [data-1...],
-  [data-2...],
-  [data-3...]
-];
-
-datasets.forEach(data => {
-  const target = newDiv('my-div', styles, container);
-
-  const myCake = new LayerCake({
-    target,
-    data,
-    x: 'myX',
-    y: 'myY'
-  })
-    .svgLayers([
-      { component: AxisX },
-      { component: AxisY },
-      { component: Scatter }
-    ]);
-
-  myCake.render();
-});
-```
-
 ### flatten(data: `Array`)
 
 Flatten an array one-level down. Handy for preparing data from stacked layouts whose extents can easily be calculated.
@@ -123,7 +62,7 @@ Becomes...
 ]
 ```
 
-### scaleCanvas(ctx: `Canvas Context`, width: `Number`, height: `Number`)
+### scaleCanvas(ctx: `Canvas 2d Context`, width: `Number`, height: `Number`)
 
 Scale your canvas size to retina screens. This function will modify the canvas, if necessary, and return an object with the new `width` and `height` as properties.
 
