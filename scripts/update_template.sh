@@ -4,8 +4,8 @@ cd `dirname $0`/..
 rm -rf scripts/svelte-app
 node_modules/.bin/degit sveltejs/template scripts/svelte-app
 
-# remove src (will be recreated client-side) and node_modules
-rm -rf scripts/svelte-app/src
+# remove App.svelte (will be recreated client-side) and node_modules
+rm -rf scripts/svelte-app/src/App.svelte
 rm -rf scripts/svelte-app/node_modules
 
 # build svelte-app.json

@@ -32,7 +32,6 @@
 		const files = await (await window.fetch(`/svelte-app.json?${cacheBust}`)).json();
 		const depsLookup = await (await window.fetch(`/deps.json?${cacheBust}`)).json();
 
-		// TODO, set up with new svelte example
 		if (imports.length > 0) {
 			const idx = files.findIndex(({ path }) => path === 'package.json');
 			const pkg = JSON.parse(files[idx].data);
@@ -41,6 +40,8 @@
 			imports.forEach(mod => {
 				if (mod === 'layercake') {
 					devDeps[mod] = depsLookup[mod];
+				} else if (mod === 'svelte') {
+					return;
 				} else {
 					deps[mod] = depsLookup[mod];
 				}
@@ -48,7 +49,7 @@
 					window.alert(`Missing dependency, add "${mod}" to layercake.graphic's package.json`);
 				}
 			});
-			pkg.dependencies = deps;
+			Object.assign(pkg.dependencies, deps);
 			Object.assign(pkg.devDependencies, devDeps);
 			files[idx].data = JSON.stringify(pkg, null, '  ');
 		}
@@ -57,7 +58,7 @@
 		files.push(...data.modules.map(mod => ({ path: `src/${mod.title.replace('./', '')}`, data: mod.contents })));
 		files.push(...data.componentModules.map(mod => ({ path: `src/${mod.title.replace('../', '')}`, data: mod.contents })));
 		files.push({
-			path: `src/index.svelte`,
+			path: `src/App.svelte`,
 			data: data.main.contents
 		});
 		downloadBlob(doNotZip.toAuto(files.filter(Boolean)), `layercake-${slug}.zip`);
