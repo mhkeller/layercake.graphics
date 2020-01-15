@@ -31,15 +31,15 @@ Often you want to get the x value from a row in your data and scale it like so: 
 Here's an example from a simple SVG line path generator:
 
 ```js
-computed: {
-  path: ({ $data, $xGet, $yGet }) => {
-    return 'M' + $data
-      .map(function (d, i) {
-        return $xGet(d) + ',' + $yGet(d);
-      })
-      .join('L');
-  }
-}
+import { getContext } from 'svelte';
+
+const { data, xGet, yGet } = getContext('LayerCake');
+
+$: path=  'M' + $data
+  .map(d => {
+    return $xGet(d) + ',' + $yGet(d);
+  })
+  .join('L');
 ```
 
 ### yGet(d: `Object`)

@@ -13,11 +13,11 @@ A list of data items. This is available on the store as `$data`.
 The key in each row of data that corresponds to the x-field. This can be a string or an accessor function. This property gets converted to an accessor function available on the store as `$x`.
 
 ```js
-const myCake = new LayerCake({
-  x: 'myX',
+<LayerCake
+  x='myX'
   // equivalent to...
-  x: (d) => d.myX
-});
+  x={ d => d.myX }
+>
 ```
 
 You can also give this value an array of strings or arrays of functions. While it may seem counter-intuitive to have more than one x- or y-accessor, this is the case in stacked layouts and Cleveland dot plots. See the [Stacked bar](/examples/BarStacked), [Stacked area](/examples/AreaStacked), [Stacked colummn](/examples/ColumnStacked) or [Cleveland dot plot](/examples/ClevelandDotPlot) for complete examples.
@@ -33,7 +33,7 @@ const data = [
 ];
 
 const stack = d3.stack()
-    .keys(['apples', 'bananas', 'cherries', 'dates']);
+  .keys(['apples', 'bananas', 'cherries', 'dates']);
 
 const series = stack(data);
 ```
@@ -52,10 +52,10 @@ The data is now an array of values. The `month` values you can't see because sne
 The x- and y-accessors would then look like this:
 
 ```js
-const myCake = new LayerCake({
-  x: [0, 1],
-  y: d => d.data.month
-});
+<LayerCake
+  x={ [0, 1] }
+  y={ d => d.data.month }
+>
 ```
 
 Calls to `x(dataRow)` in this scenario will return the two-value array. Calls to `xGet(dataRow)` will return a two-value array, mapped through the [xScale](/guide#xscale).
@@ -73,11 +73,11 @@ Same as [x](/guide#x) but for the r scale. The accessor function is available on
 An object that can specify `top`, `right`, `bottom`, or `left` padding in pixels. Any unspecified values are filled in as `0`. Padding operates like CSS `box-sizing: border-box;` where values are subtracted from the target container's width and height, the same as [a D3 margin convention](https://bl.ocks.org/mbostock/3019563).
 
 ```js
-const myCake = new LayerCake({
-  padding: { top: 20, right: 10, bottom: 0, left: 0 },
+<LayerCake
+  padding={ { top: 20, right: 10, bottom: 0, left: 0 } }
   // equivalent to...
-  padding: { top: 20, right: 10 }
-});
+  padding={ { top: 20, right: 10 } }
+>
 ```
 
 > Another way to set padding is to add it via normal CSS on your [target](/guide#target) div. The target element is assigned CSS of `box-sizing: border-box;` so padding settings won't affect the width or height. If you set any padding via CSS, the padding object will be ignored.
@@ -101,11 +101,11 @@ Same as [xScale](/guide#xscale) but for the r scale. The default is `d3.scaleSqr
 Set a min or max on the x scale. If you want to inherit the value from the data's extent, set that value to `null`.
 
 ```js
-const myCake = new LayerCake({
-  xDomain: [0, 100], // Fixes the x scale's domain
+<LayerCake
+  xDomain={ [0, 100] } // Fixes the x scale's domain
   // or..
-  xDomain: [0, null], // Fixes the min but allows the max to be whatever is in the data
-});
+  xDomain={ [0, null] } // Fixes the min but allows the max to be whatever is in the data
+>
 ```
 
 ### yDomain `Array:[min: Number, max: Number]`
@@ -129,16 +129,16 @@ Reverse the default y domain. By default this is `true` and the domain is `[heig
 Override the default y range of `[0, width]` by setting it here to an array or function with argument `({ width, height})` that returns an array. This setting is ignored if you set `reverseX` to `true`.
 
 ```js
-const myCake = new LayerCake({
-  xRange: [1, 100]
-});
+<LayerCake
+  xRange={ [1, 100] }
+>
 ```
 It can also be a function:
 
 ```js
-const myCake = new LayerCake({
-  xRange: ({ width, height }) => [0, width / 2]
-});
+<LayerCake
+  xRange={ ({ width, height }) => [0, width / 2] }
+>
 ```
 
 ### yRange `Function|Array:[min: Number, max: Number]`
@@ -154,9 +154,9 @@ Same as [xRange](/guide#xrange) but for the r scale. Override the default y rang
 Assign a pixel value to add to the min or max of the x scale. This will increase the scales domain by the scale unit equivalent of the provided pixels. It uses D3 scale's [invert function](https://github.com/d3/d3-scale#continuous_invert), so this only applies to continuous scales like `scaleLinear`. This is useful for adding extra space to a scatter plot so that your circles don't interfere with your y axis.
 
 ```js
-const myCake = new LayerCake({
-  xPadding: [10, 10], // Add ten pixels of data units to both sides of the scale's domain
-});
+<LayerCake
+  xPadding= { [10, 10] } // Add ten pixels of data units to both sides of the scale's domain
+>
 ```
 
 ### yPadding `Array:[leftPixels: Number, rightPixels: Number]`
@@ -188,6 +188,17 @@ In order for Layer Cake to measure the extents of your data, it needs a flat arr
 Here's an example showing passing different data formats for extent calculation versus what is used by layer components.
 
 ```js
+const data = [
+  {
+    key: 'apples',
+    values: [{month: new Date(2015, 3, 1), value: 3840}, ...]
+  },
+  {
+    key: 'bananas',
+    values: [{month: new Date(2015, 3, 1), value: 1920}, ...]
+  },
+];
+
 const flatData = [
   {month: new Date(2015, 3, 1), value: 3840, group: 'apples'},
   {month: new Date(2015, 2, 1), value: 1600, group: 'apples'},
@@ -200,22 +211,20 @@ const flatData = [
   {month: new Date(2015, 0, 1), value: 480, group:  'bananas'}
 ];
 
-const data = [
-  {
-    key: 'apples',
-    values: [{month: new Date(2015, 3, 1), value: 3840}, ...]
-  },
-  {
-    key: 'bananas',
-    values: [{month: new Date(2015, 3, 1), value: 1920}, ...]
-  },
-];
+<LayerCake
+  x='month'
+  y='value'
+  {data}
+  {flatData}
+>
+```
 
-const myCake = new LayerCake({
-    target,
-    x: 'month',
-    y: 'value',
-    data,
-    flatData
-  });
+### custom `Object`
+
+Any extra configuration values you want available on the LayerCake context. This could be useful for color lookups or additional constants.
+
+```html
+<LayerCake
+  custom={ { size: 10, names: ['a', 'b', 'c'] } }
+>
 ```

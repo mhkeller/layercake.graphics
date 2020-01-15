@@ -16,10 +16,19 @@ The Canvas and Webgl layout components do the same and also create the canvas co
   import { LayerCake, Html } from 'layercake';
 </script>
 
-<LayerCake ...>
-  <Html>
-  </Html>
-</LayerCake>
+<style>
+  .chart-container {
+    width: 100%;
+    height: 300px;
+  }
+</style>
+
+<div class="chart-container">
+  <LayerCake ...>
+    <Html>
+    </Html>
+  </LayerCake>
+</div>
 ```
 
 ### Svg
@@ -30,10 +39,20 @@ The Canvas and Webgl layout components do the same and also create the canvas co
   import { LayerCake, Svg } from 'layercake';
 </script>
 
-<LayerCake ...>
-  <Svg>
-  </Svg>
-</LayerCake>
+<style>
+  .chart-container {
+    width: 100%;
+    height: 300px;
+  }
+</style>
+
+<div class="chart-container"
+  <LayerCake ...>
+    <Svg>
+    </Svg>
+  </LayerCake>
+</div>
+
 ```
 
 ### Canvas
@@ -44,10 +63,19 @@ The Canvas and Webgl layout components do the same and also create the canvas co
   import { LayerCake, Canvas } from 'layercake';
 </script>
 
-<LayerCake ...>
-  <Canvas>
-  </Canvas>
-</LayerCake>
+<style>
+  .chart-container {
+    width: 100%;
+    height: 300px;
+  }
+</style>
+
+<div class="chart-container"
+  <LayerCake ...>
+    <Canvas>
+    </Canvas>
+  </LayerCake>
+</div>
 ```
 
 ### WebGl
@@ -58,8 +86,17 @@ The Canvas and Webgl layout components do the same and also create the canvas co
   import { LayerCake, WebGl } from 'layercake';
 </script>
 
-<LayerCake ...>
-  <WebGl>
-  </WebGl>
-</LayerCake>
+<style>
+  .chart-container {
+    width: 100%;
+    height: 300px;
+  }
+</style>
+
+<div class="chart-container"
+  <LayerCake ...>
+    <WebGl>
+    </WebGl>
+  </LayerCake>
+</div>
 ```
