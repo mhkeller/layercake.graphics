@@ -1,5 +1,7 @@
 <script>
+	import { afterUpdate } from 'svelte';
 	export let open;
+	export let activeGuideSection;
 	export let sections = [];
 
 	const guideSections = sections.map(section => {
@@ -13,21 +15,6 @@
 	function close () {
 		open = false;
 	}
-
-// export default {
-// 	oncreate () {
-// 		const onhashchange = () => {
-// 			this.store.set({ activeGuideSection: window.location.hash.slice(1) });
-// 		};
-
-// 		window.addEventListener('hashchange', onhashchange, false);
-// 		this.on('destroy', () => {
-// 			window.removeEventListener('hashchange', onhashchange, false);
-// 		});
-
-// 		onhashchange();
-// 	}
-// };
 </script>
 
 <style>
@@ -73,9 +60,17 @@
 <ul class='guide-toc'>
 	{#each guideSections as section}
 		<li>
-			<a class='section' href='/guide#{section.slug}' on:click='{close}'>{section.metadata.title}</a>
+			<a
+				class='section {section.slug === activeGuideSection ? "active": ""}'
+				href='/guide#{section.slug}'
+				on:click='{close}'
+			>{section.metadata.title}</a>
 			{#each section.subsections as subsection}
-				<a class='subsection' href='/guide#{subsection.slug}' on:click='{close}'>{subsection.title}</a>
+				<a
+					class='subsection {subsection.slug === activeGuideSection ? "active": ""}'
+					href='/guide#{subsection.slug}'
+					on:click='{close}'
+				>{subsection.title}</a>
 			{/each}
 		</li>
 	{/each}

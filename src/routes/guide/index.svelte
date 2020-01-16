@@ -7,83 +7,64 @@
 </script>
 
 <script>
+	import { afterUpdate } from 'svelte';
 	import GuideContents from '../../components/GuideContents.svelte';
 
 	export let sections;
 
-	// 	preload () {
-// 		return this.fetch(`api/guide`).then(r => r.json()).then(sections => {
-// 			return { sections };
-// 		});
-// 	},
+	let container;
+	let positions = [];
+	let lastId = 'introduction';
+	let activeGuideSection;
 
+	let anchors = [];
+	afterUpdate(() => {
+		if (typeof window !== 'undefined') {
+			anchors = container.querySelectorAll('[id]');
+			lastId = window.location.hash.slice(1);
+			activeGuideSection = lastId;
 
-// export default {
-// 	components: {
-// 		GuideContents: '../../components/GuideContents.html'
-// 	},
+			onresize();
+			onscroll();
 
-// 	preload () {
-// 		return this.fetch(`api/guide`).then(r => r.json()).then(sections => {
-// 			return { sections };
-// 		});
-// 	},
+			window.addEventListener('scroll', onscroll, true);
+			window.addEventListener('resize', onresize, true);
 
-// 	oncreate () {
-// 		const anchors = this.refs.container.querySelectorAll('[id]');
-// 		let positions;
+			// wait for fonts to load...
+			const timeouts = [
+				setTimeout(onresize, 1000),
+				setTimeout(onresize, 5000)
+			];
+		}
+	});
 
-// 		const onresize = () => {
-// 			const { top } = this.refs.container.getBoundingClientRect();
-// 			positions = [].map.call(anchors, anchor => {
-// 				return anchor.getBoundingClientRect().top - top;
-// 			});
-// 		};
+	function onresize () {
+		if (container) {
+			const { top } = container.getBoundingClientRect();
+			positions = [].map.call(anchors, anchor => {
+				return anchor.getBoundingClientRect().top - top;
+			});
+		}
+	}
 
-// 		let lastId = window.location.hash.slice(1);
+	function onscroll () {
+		const top = -window.scrollY;
 
-// 		const onscroll = () => {
-// 			const top = -window.scrollY;
+		let i = anchors.length;
+		while (i--) {
+			if (positions[i] + top < 100) {
+				const anchor = anchors[i];
+				const { id } = anchor;
 
-// 			let i = anchors.length;
-// 			while (i--) {
-// 				if (positions[i] + top < 100) {
-// 					const anchor = anchors[i];
-// 					const { id } = anchor;
-
-// 					if (id !== lastId) {
-// 						// console.log('setting', id);
-// 						this.store.set({ activeGuideSection: id });
-// 						this.fire('scroll', id);
-
-// 						lastId = id;
-// 					}
-
-// 					return;
-// 				}
-// 			}
-// 		};
-
-// 		window.addEventListener('scroll', onscroll, true);
-// 		window.addEventListener('resize', onresize, true);
-
-// 		// wait for fonts to load...
-// 		const timeouts = [
-// 			setTimeout(onresize, 1000),
-// 			setTimeout(onresize, 5000)
-// 		];
-
-// 		this.on('destroy', () => {
-// 			window.removeEventListener('scroll', onscroll, true);
-// 			window.removeEventListener('resize', onresize, true);
-
-// 			timeouts.forEach(timeout => clearTimeout(timeout));
-// 		});
-
-// 		onresize();
-// 		onscroll();
-// 	}
-// };
+				if (id !== lastId) {
+					activeGuideSection = id;
+					// this.fire('scroll', id);
+					lastId = id;
+				}
+				return;
+			}
+		}
+	}
 </script>
 
 <style>
@@ -196,10 +177,6 @@
 		font-weight: normal;
 	}
 
-/*	section :global(h3 .arguments) {
-		font-style: italic;
-	}
-*/
 	section :global(p) {
 		margin: 0 0 1em 0;
 		font-family: Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -362,10 +339,10 @@
 </svelte:head>
 
 <sidebar>
-	<GuideContents {sections}/>
+	<GuideContents {sections} bind:activeGuideSection/>
 </sidebar>
 
-<div id="container" class='content'>
+<div id="container" class='content' bind:this={container}>
 	{#each sections as section}
 		<section id='{section.slug}'>
 			<h2>
