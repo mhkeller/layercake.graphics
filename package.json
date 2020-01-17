@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",
-    "export": "sapper export docs --legacy --basepath 'layercake-three.graphics'",
+    "export": "sapper export docs --legacy",
     "start": "node __sapper__/build",
     "preexport": "npm run update_template && npm run build",
     "update_template": "sh ./scripts/update_template.sh",
