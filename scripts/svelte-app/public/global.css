@@ -43,6 +43,10 @@ input:disabled {
 	color: #ccc;
 }
 
+input[type="range"] {
+	height: 0;
+}
+
 button {
 	color: #333;
 	background-color: #f4f4f4;
