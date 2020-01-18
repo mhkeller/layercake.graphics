@@ -20,7 +20,6 @@ export default {
 		input: config.client.input(),
 		output: config.client.output(),
 		plugins: [
-			dsv(),
 			replace({
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
@@ -36,6 +35,7 @@ export default {
 				browser: true,
 				dedupe
 			}),
+			dsv(),
 			commonjs(),
 
 			legacy && babel({
@@ -67,7 +67,6 @@ export default {
 		input: config.server.input(),
 		output: config.server.output(),
 		plugins: [
-			dsv(),
 			replace({
 				'process.browser': false,
 				'process.env.NODE_ENV': JSON.stringify(mode)
@@ -79,6 +78,7 @@ export default {
 			resolve({
 				dedupe
 			}),
+			dsv(),
 			commonjs()
 		],
 		external: Object.keys(pkg.dependencies).concat(
@@ -97,6 +97,7 @@ export default {
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
+			dsv(),
 			commonjs(),
 			!dev && terser()
 		],

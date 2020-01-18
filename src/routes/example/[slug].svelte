@@ -37,11 +37,12 @@
 
 	function highlight (str, title) {
 		const parts = title.split('.');
-		const ext = parts[parts.length - 1];
+		let ext = parts[parts.length - 1];
+		if (ext === 'csv') ext = 'diff'
 		return hljs.highlight(ext, str).value;
 	}
 
-	$: pages = [data.main].concat(data.components).concat(data.modules).concat(data.componentModules);
+	$: pages = [data.main].concat(data.components).concat(data.modules).concat(data.componentModules).concat(data.csvs);
 
 	const exampleLookup = new Map();
 	examples.forEach(exmpl => {

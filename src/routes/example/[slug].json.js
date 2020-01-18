@@ -9,7 +9,16 @@ function cleanContents (str) {
 }
 
 function getJsPaths (example) {
-	return example.match(/\.\/.+\.js/gm)
+	const match = example.match(/\.\/.+\.js/gm)
+	if (match) {
+		return match.map(d => d.replace('../../', ''));
+	} else {
+		return [];
+	}
+}
+
+function getCsvPaths (example) {
+	return example.match(/\.\/.+\.csv/gm)
 		.map(d => d.replace('../../', ''));
 }
 
@@ -73,6 +82,14 @@ export function get(req, res, next) {
 			};
 		});
 
+	const csvs = getCsvPaths(example)
+		.map(d => {
+			return {
+				title: d.replace('../', ''),
+				contents: cleanContents(fs.readFileSync(d.replace('../', 'src/'), 'utf-8'))
+			};
+		});
+
 	const componentModulesMatches = getComponentJsPaths(components.map(d => d.contents).join(''));
 	const componentModules = componentModulesMatches === null ? [] : componentModulesMatches
 		.map(d => {
@@ -82,7 +99,7 @@ export function get(req, res, next) {
 			};
 		});
 
-	const response = { main, dek, components, modules, componentModules };
+	const response = { main, dek, components, modules, componentModules, csvs };
 
 	res.writeHead(200, {
 		'Content-Type': 'application/json'

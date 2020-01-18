@@ -1,11 +1,15 @@
 <script>
 	import { LayerCake, Svg, Canvas } from 'layercake';
-	import points from '../../data/points.js';
+	import points from '../../data/points.csv';
 	import Scatter from '../../components/Scatter.svelte';
 	import ScatterCanvas from '../../components/ScatterCanvas.svelte';
 	import Voronoi from '../../components/Voronoi.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
+
+	points.forEach(row => {
+		row.myY = +row.myY;
+	});
 
 	const r = 3;
 	const padding = 10;
