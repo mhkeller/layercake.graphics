@@ -1,1 +1,1 @@
-A canvas layer and an SVG layer that share a common projection. Because the projection is a shared element, we set it on the store as opposed to in the map component such as the [other map example](/examples/MapSvg).
+A canvas layer and an SVG layer that share a common projection. Because the projection is a shared element, we set it on the store as opposed to in the map component such as the [other map example](/example/MapSvg).
