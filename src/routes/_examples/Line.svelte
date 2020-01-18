@@ -1,10 +1,15 @@
 <script>
 	import { LayerCake, Svg } from 'layercake';
-	import points from '../../data/points.js';
+	import points from '../../data/points.csv';
+
 	import Line from '../../components/Line.svelte';
 	import Area from '../../components/Area.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
+
+	points.forEach(row => {
+		row.myY = +row.myY;
+	});
 </script>
 
 <style>

@@ -3,12 +3,18 @@
 	import { stack } from 'd3-shape';
 	import { scaleBand } from 'd3-scale';
 
-	import fruit from '../../data/fruitOrdinal.js';
+	import fruit from '../../data/fruitOrdinal.csv';
 	import ColumnStacked from '../../components/ColumnStacked.svelte';
 	import AxisXScaleBand from '../../components/AxisXScaleBand.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 
 	const seriesNames = Object.keys(fruit[0]).filter(d => d !== 'year');
+
+	fruit.forEach(row => {
+		seriesNames.forEach(name => {
+			row[name] = +row[name];
+		});
+	});
 
 	const stackData = stack()
 		.keys(seriesNames);

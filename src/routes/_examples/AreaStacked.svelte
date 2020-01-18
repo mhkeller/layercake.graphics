@@ -1,13 +1,19 @@
 <script>
 	import { LayerCake, Svg, flatten } from 'layercake';
 	import { stack } from 'd3-shape';
-	// import fruit from '../../data/fruit.csv';
-	import fruit from '../../data/fruit.js';
+	import fruit from '../../data/fruit.csv';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 	import AreaStacked from '../../components/AreaStacked.svelte';
 
 	const seriesNames = Object.keys(fruit[0]).filter(d => d !== 'month');
+
+	fruit.forEach(row => {
+		row.month = new Date(row.month);
+		seriesNames.forEach(name => {
+			row[name] = +row[name];
+		});
+	});
 
 	const seriesColors = ['#ff00cc', '#ff7ac7', '#ffb3c0', '#ffe4b8'];
 

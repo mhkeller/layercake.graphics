@@ -1,7 +1,8 @@
 <script>
 	import { LayerCake, Svg, Html } from 'layercake';
 	import { scaleBand } from 'd3-scale';
-	import groups from '../../data/groups.js';
+	import groups from '../../data/groups.csv';
+
 	import Column from '../../components/Column.svelte';
 	import AxisX from '../../components/AxisXScaleBand.svelte';
 	import AxisY from '../../components/AxisY.svelte';
@@ -39,6 +40,10 @@
 			}]
 		}
 	];
+
+	groups.forEach(row => {
+		row.value = +row.value;
+	});
 </script>
 
 <style>
@@ -51,8 +56,8 @@
 <div class="chart-container">
 	<LayerCake
 			padding={{ top: 0, right: 0, bottom: 20, left: 20 }}
-			x={'year'}
-			y={'value'}
+			x='year'
+			y='value'
 			xScale={scaleBand().paddingInner([0.02]).round(true)}
 			xDomain={['1979', '1980', '1981', '1982', '1983']}
 			yDomain={[0, null]}

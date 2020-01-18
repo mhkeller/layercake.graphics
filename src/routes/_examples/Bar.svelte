@@ -1,12 +1,15 @@
 <script>
-import { LayerCake, Svg } from 'layercake';
-import { scaleBand } from 'd3-scale';
+	import { LayerCake, Svg } from 'layercake';
+	import { scaleBand } from 'd3-scale';
 
-import groups from '../../data/groups.js';
-import Bar from '../../components/Bar.svelte';
-import AxisX from '../../components/AxisX.svelte';
-import AxisYScaleBand from '../../components/AxisYScaleBand.svelte';
+	import groups from '../../data/groups.csv';
+	import Bar from '../../components/Bar.svelte';
+	import AxisX from '../../components/AxisX.svelte';
+	import AxisYScaleBand from '../../components/AxisYScaleBand.svelte';
 
+	groups.forEach(row => {
+		row.value = +row.value;
+	});
 </script>
 
 <style>

@@ -1,6 +1,6 @@
 <script>
 	import { LayerCake, Svg, Webgl, Html } from 'layercake';
-	import points from '../../data/points.js';
+	import points from '../../data/points.csv';
 	import ScatterWebgl from '../../components/ScatterWebgl.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
@@ -8,6 +8,10 @@
 
 	const diameter = 6;
 	const padding = 6;
+
+	points.forEach(row => {
+		row.myY = +row.myY;
+	});
 </script>
 
 <style>

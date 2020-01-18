@@ -1,11 +1,11 @@
 <script>
-	import { LayerCake, Svg } from 'layercake';
+	import { LayerCake, Svg, Html } from 'layercake';
 
-	import fruit from '../../data/fruit.js';
+	import fruit from '../../data/fruit.csv';
 	import MultiLine from '../../components/MultiLine.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
-	// import LineLabels from '../../components/LineLabels.Svelte';
+	import Labels from '../../components/Labels.svelte';
 	// import Tooltip from '../../components/Tooltip.Svelte';
 
 	const fruitLong = Object.keys(fruit[0]).map(key => {
@@ -13,7 +13,7 @@
 		return {
 			key,
 			values: fruit.map(d => {
-				return { key, month: d.month, value: d[key] };
+				return { key, month: new Date(d.month), value: +d[key] };
 			})
 		};
 	}).filter(d => d);
@@ -65,5 +65,9 @@
 
 			<MultiLine/>
 		</Svg>
+
+		<Html>
+			<Labels/>
+		</Html>
 	</LayerCake>
 </div>

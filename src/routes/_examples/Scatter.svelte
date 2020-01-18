@@ -1,5 +1,6 @@
 <script>
 	import { LayerCake, Svg, Canvas } from 'layercake';
+
 	import points from '../../data/points.csv';
 	import Scatter from '../../components/Scatter.svelte';
 	import ScatterCanvas from '../../components/ScatterCanvas.svelte';
