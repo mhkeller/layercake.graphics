@@ -9,6 +9,7 @@
 
 	const codeExample = `<script>
 	import { LayerCake, Svg, Html, Canvas } from 'layercake';
+
 	import AxisX from './components/AxisX.svelte';
 	import AxisY from './components/AxisY.svelte';
 	import Line from './components/Line.svelte';
@@ -28,7 +29,7 @@
 <div class="chart-container">
 	<LayerCake
 		x='x'
-		y='x'
+		y='y'
 		{data}
 	>
 		<Svg>
