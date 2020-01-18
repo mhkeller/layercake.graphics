@@ -56,7 +56,7 @@ export default function () {
 		.readdirSync(`src/content/guide`)
 		.filter(file => file[0] !== '.' && path.extname(file) === '.md')
 		.map(file => {
-			const markdown = fs.readFileSync(`src/content/guide/${file}`, 'utf-8');
+			const markdown = fs.readFileSync(`src/content/guide/${file}`, 'utf-8').replace(/\t/g, '  ');
 
 			const { content, metadata } = processMarkdown(markdown);
 
@@ -73,7 +73,7 @@ export default function () {
 			};
 
 			renderer.code = (source, lang) => {
-				source = source.replace(/^ +/gm, match => match.split('    ').join('\t'));
+				// source = source.replace(/^ +/gm, match => match.split('    ').join('\t'));
 
 				const lines = source.split('\n');
 
