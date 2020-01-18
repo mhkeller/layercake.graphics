@@ -9,17 +9,19 @@ function cleanContents (str) {
 }
 
 function getJsPaths (example) {
-	const match = example.match(/\.\/.+\.js/gm)
+	const match = example.match(/\.\/.+\.js/gm);
 	if (match) {
 		return match.map(d => d.replace('../../', ''));
-	} else {
-		return [];
 	}
+	return [];
 }
 
 function getCsvPaths (example) {
-	return example.match(/\.\/.+\.csv/gm)
-		.map(d => d.replace('../../', ''));
+	const match = example.match(/\.\/.+\.csv/gm);
+	if (match) {
+		return match.map(d => d.replace('../../', ''));
+	}
+	return [];
 }
 
 function cleanMain (example) {
