@@ -1,6 +1,7 @@
 <script>
 	import { LayerCake, Svg, flatten } from 'layercake';
 	import { stack } from 'd3-shape';
+	// import fruit from '../../data/fruit.csv';
 	import fruit from '../../data/fruit.js';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
