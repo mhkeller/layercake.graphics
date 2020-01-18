@@ -1,17 +1,16 @@
 <script>
 	import { LayerCake, Svg, calcExtents } from 'layercake';
 	import { timeDay } from 'd3-time';
-	import { csvParse } from 'd3-dsv';
 	import { scaleBand } from 'd3-scale';
 
-	import days from '../../data/days.js';
+	import days from '../../data/days.csv';
 	import ScatterScaleBand from '../../components/ScatterScaleBand.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisYScaleBand from '../../components/AxisYScaleBand.svelte';
 
 	const r = 4;
 	const padding = 2;
-	const daysJson = csvParse(days, row => {
+	const daysTransformed = days.map(row => {
 		const parts = row.timestring.split('T');
 		const time = parts[1].replace('Z', '').split(':').map(d => +d);
 		row.seconds = time[0] * 60 * 60 + time[1] * 60 + time[2];
@@ -22,7 +21,7 @@
 	 * Generate a range of days in between the min and max
 	 * in case we are missing any in our data so we can show empty days for them
 	 */
-	const extents = calcExtents(daysJson, [
+	const extents = calcExtents(daysTransformed, [
 		{ field: 'x', accessor: d => d.timestring }
 	]);
 
@@ -51,7 +50,7 @@
 		yDomain={allDays}
 		yScale={scaleBand().paddingInner([0.05]).round(true)}
 		xPadding={[padding, padding]}
-		data={daysJson}
+		data={daysTransformed}
 	>
 
 		<Svg>

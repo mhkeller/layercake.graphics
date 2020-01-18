@@ -1,14 +1,13 @@
 <script>
 	import { LayerCake, Svg } from 'layercake';
 	import { nest } from 'd3-collection';
-	import { csvParse } from 'd3-dsv';
-	import dates from '../../data/dates.js';
+	import dates from '../../data/dates.csv';
 
 	import CalendarMonth from '../../components/CalendarMonth.svelte';
 
 	const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-	const datesJson = csvParse(dates, row => {
+	const datesTransformed = dates.map(row => {
 		row.date = new Date(row.timestring);
 		return row;
 	});
@@ -22,7 +21,7 @@
 	const byMonthByDate = nest()
 		.key(d => d.date.getUTCMonth())
 		.key(d => d.timestring.split('T')[0])
-		.entries(datesJson);
+		.entries(datesTransformed);
 
 	const sortedData = byMonthByDate.sort((a, b) => a.key - b.key);
 </script>

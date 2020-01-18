@@ -20,10 +20,13 @@ export default {
 		input: config.client.input(),
 		output: config.client.output(),
 		plugins: [
+			dsv(),
 			replace({
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
+
+
 			svelte({
 				dev,
 				hydratable: true,
@@ -54,9 +57,7 @@ export default {
 
 			!dev && terser({
 				module: true
-			}),
-
-			dsv()
+			})
 		],
 
 		onwarn,
@@ -66,6 +67,7 @@ export default {
 		input: config.server.input(),
 		output: config.server.output(),
 		plugins: [
+			dsv(),
 			replace({
 				'process.browser': false,
 				'process.env.NODE_ENV': JSON.stringify(mode)
