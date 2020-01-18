@@ -20,7 +20,7 @@ The key in each row of data that corresponds to the x-field. This can be a strin
 >
 ```
 
-You can also give this value an array of strings or arrays of functions. While it may seem counter-intuitive to have more than one x- or y-accessor, this is the case in stacked layouts and Cleveland dot plots. See the [Stacked bar](/examples/BarStacked), [Stacked area](/examples/AreaStacked), [Stacked colummn](/examples/ColumnStacked) or [Cleveland dot plot](/examples/ClevelandDotPlot) for complete examples.
+You can also give this value an array of strings or arrays of functions. While it may seem counter-intuitive to have more than one x- or y-accessor, this is the case in stacked layouts and Cleveland dot plots. See the [Stacked bar](/example/BarStacked), [Stacked area](/example/AreaStacked), [Stacked colummn](/example/ColumnStacked) or [Cleveland dot plot](/example/ClevelandDotPlot) for complete examples.
 
 Here's an overview using the `d3.stack()` to make a horizontal bar chart, which will have two values for the x-accessor.
 
@@ -86,7 +86,7 @@ An object that can specify `top`, `right`, `bottom`, or `left` padding in pixels
 
 Pass in an instantiated D3 scale if you want to override the default `d3.scaleLinear()` or you want to add extra options.
 
-See the [Column chart](/examples/Column) for an example of passing in a `d3.scaleBand()` to override the default.
+See the [Column chart](/example/Column) for an example of passing in a `d3.scaleBand()` to override the default.
 
 ### yScale `d3.scaleLinear()`
 

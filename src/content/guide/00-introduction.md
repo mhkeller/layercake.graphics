@@ -150,7 +150,7 @@ Our DOM now looks something like this:
 
 ### More layer types
 
-We just saw how to add SVG layers with the `.svgLayers` method. You also have `htmlLayers` and `canvasLayers`. For the SVG and HTML groups, every item in the array will create a new DOM element to render into, `<g>` for SVG and `<div>` for HTML. For Canvas, since there's no DOM equivalent, each layer renders into the same Canvas context. See the [Scatter canvas](examples/Scatter) example for details.
+We just saw how to add SVG layers with the `.svgLayers` method. You also have `htmlLayers` and `canvasLayers`. For the SVG and HTML groups, every item in the array will create a new DOM element to render into, `<g>` for SVG and `<div>` for HTML. For Canvas, since there's no DOM equivalent, each layer renders into the same Canvas context. See the [Scatter canvas](example/Scatter) example for details.
 
 Layers are rendered in the order they appear and you can call these methods multiple times to create a new layout group.
 

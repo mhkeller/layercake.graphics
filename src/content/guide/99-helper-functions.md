@@ -66,7 +66,7 @@ Becomes...
 
 Scale your canvas size to retina screens. This function will modify the canvas, if necessary, and return an object with the new `width` and `height` as properties.
 
-Such as in the [Scatter canvas](/examples/Scatter) example:
+Such as in the [Scatter canvas](/example/Scatter) example:
 
 ```html
 <!-- { filename: 'Scatter.html' } -->
