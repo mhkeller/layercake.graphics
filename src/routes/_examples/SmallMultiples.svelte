@@ -33,6 +33,10 @@
 		margin-bottom: 7px;
 	}
 
+	label {
+		cursor: pointer;
+	}
+
 	input {
 		margin-right: 7px;
 	}
