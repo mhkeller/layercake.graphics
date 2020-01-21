@@ -6,15 +6,15 @@ title: Introduction
 
 Layer Cake is a graphics framework, built on top of [Svelte](https://svelte.technology) that removes the boilerplate from making responsive web graphics. it gives you common elements, like a coordinate system and scales, for you to start creating your own dataviz layers, like axes, plots and annotations.
 
-Give it some data and a target DOM element and Layer Cake will create a [Svelte store](https://svelte.technology/guide#state-management) that includes scales bound to your element's dimensions and the data's extents. Layer Cake also includes higher level methods to organize multiple SVG, HTML and Canvas layers that use these scales.
+Layer Cake is described as a framework and not a library because unlike Vega or HighCharts, it doesn't automatically create, for example, a scatter chart for you. It gives you the scales and the DOM element to encode chart elements from your data. This is because every chart ends up being custom in one way or another. Other libraries handle this usually by creating a complex JSON specification but learning that is a big investment and often mentally taxing.
 
-By breaking a part a graphic into layers, you can more easily reuse components from project to project. It also lets you easily move between web languages (SVG, Canvas, HTML, WebGL) by giving you a common coordinate system. You may be using Canvas for a scatterplot, SVG for axes and HTML for annotations but they all read from a common store and appear seamless to the viewer. You can choose the best technology for that part of the graphic without worrying about how it will interact with other elements.
+The idea behind a Layer Cake chart is you can start from a basic scatter, line or bar chart template but because those chart layers live in your project, you can customize them however you want.
 
-> Layer Cake uses D3 scales. See more in the [xScale](/guide#xscale), [yScale](/guide#yscale) and [rScale](/guide#rscale) sections of the [Store API](/guide#store-api).
+By breaking a part a graphic into layers, you can more easily reuse components from project to project. It also lets you easily move between web languages (SVG, Canvas, HTML, WebGl) by giving you a common coordinate system they can all use. That way, you can choose the best format for each element without worrying superimposing different elements on top of one another.
 
 Layer Cake is more about having a system to organize your own custom components than it is a high-level charting library. It doesn't have any built-in concepts or strong opinions about how your data should be structured.
 
-> See the [`flatData`](/guide#flatdata) option in the [Store API](/guide#store-api) section and the [`flatten`](/guide#flatten) helper function for more info about data structure.
+> Layer Cake uses D3 scales. See more in the [xScale](/guide#xscale), [yScale](/guide#yscale) and [rScale](/guide#rscale) sections of the [Component API](/guide#component-api).
 
 ### Getting started
 
@@ -24,73 +24,21 @@ Install Layer Cake in your `devDependencies` alongside Svelte.
 npm install --save-dev layercake
 ```
 
-The easiest way to get started is to clone down or use [degit](https://github.com/rich-harris/degit) to grab the starter template at [github.com/mhkeller/layercake-template](https://github.com/mhkeller/layercake-template).
+The easiest way to get started is to clone down, or use [degit](https://github.com/rich-harris/degit) to grab the starter template at [https://github.com/mhkeller/layercake-template](https://github.com/mhkeller/layercake-template).
 
-The important files are like your `index.html` which has the DOM element we want to render into and the cake configuration in `main.js`:
-
-```bash
-my-app
- ├── index.html
- └── js
-   └── main.js
+```sh
+degit mhkeller/layercake-template my-chart
+cd my-chart
 ```
+
+The `App.svelte` file in this example is your main Svelte component. You can render a LayerCake inside a DOM element like so.
 
 ```html
-<!-- { filename: 'index.html' } -->
-<!-- The target div needs to have a width and a height -->
-<div id="chart-target" style="width: 100%; height: 300px;"></div>
-```
-
-```js
-/* { filename: 'js/main.js' } */
-import { LayerCake } from 'layercake';
-
-// Define some data
-const points = [
-  {x: 0, y: 1},
-  {x: 10, y: 5},
-  {x: 15, y: 10}
-];
-
-// Instantiate the cake, point it to our target div
-// and which keys to look for on the data
-<LayerCake
-  data={ points }
-  x='x'
-  y='y'
->
-```
-
-> Each of the chart examples on the home page can be run locally by clicking into them and clicking `Download`. If you are using Layer Cake within Sapper, the code here in `main.js` would go inside your components `oncreate()` method, which is how this examples site is built.
-
-The `myCake` variable is a Svelte Store that just computed different properties to use in our chart. Because we gave Layer Cake values for `x` and `y`, it has measured the extent of our data's x- and y-dimensions and created `xScale` and `yScale` properties. It has also measured our DOM element as well as created x- and y-accessors so, for a given row of our data we can compute the value in our coordinate system.
-
-```js
-const { x, y, xScale, yScale } = myCake.get();
-
-points.forEach(d => {
-  const firstPoint = [xScale(x(d)), yScale(y(d))];
-});
-```
-
-> You can also use the shorthand `[xGet(d), yGet(d)]`. See the [Store API](/guide#store-api) section for a full list of computed properties.
-
-Because Layer Cake has bound the target DOM element's dimensions to your scales, all computed properties will update on resize automatically.
-
-### Layer components
-
-While it's perfectly fine to use Layer Cake as a store and implement the rest of your project your own way, the library also comes with higher-level methods to create graphic layers and lay them out in a common coordinate space.
-
-To do this, pass a list of Svelte components to any of the `.svgLayers`, `.htmlLayers`, `.canvasLayers` or `.webglLayers` methods. When you've added all the layers to your cake, run `.render()`.
-
-Here's an example creating an SVG scatter plot using the above data.
-
-```html
-<!-- { filename: 'App.svelte' } -->
+<!-- { filename: 'js/App.svelte' } -->
 <script>
-  import { LayerCake, Svg } from 'layercake';
-  import Scatter from './components/Scatter.svelte';
+  import { LayerCake } from 'layercake';
 
+  // Define some data
   const points = [
     {x: 0, y: 1},
     {x: 10, y: 5},
@@ -98,81 +46,52 @@ Here's an example creating an SVG scatter plot using the above data.
   ];
 </script>
 
+<style>
+  .chart-container {
+    width: 100%;
+    height: 300px;
+  }
+</style>
+
 <div class="chart-container">
   <LayerCake
+    data={ points }
     x='x'
     y='y'
-    data={ points }
   >
-    <Svg>
-      <!-- You can expose properties on your chart components to make them more reusable -->
-      <Scatter fill={'blue'} r={3} />
-    </Svg>
+    <!-- Components go here -->
   </LayerCake>
 </div>
 ```
 
-```html
-<!-- { filename: '/components/Scatter.svelte' } -->
-<script>
-  import { getContext } from 'svelte';
+> Each of the chart examples on the home page can be run locally going to their page and clicking `Download`.
 
-  const { data, xGet, yGet } = getContext('LayerCake');
+### Layout components
 
-  export let fill = '#000';
-  export let r = 5;
-</script>
-
-<g>
-  {#each $data as d}
-    <circle cx='{$xGet(d)}' cy='{yGet(d)}' fill='{fill}' r='{r}' />
-  {/each}
-</g>
-```
-
-> We've defined the circle's fill color and radius size in `main.js` using the `opts` field. You could very well hardcode these values into your layer component. Passing in values from `mains.js` is shown here to give an example of how you can make your components more reusable. For example, you could use the same layer component to render small multiples, but pass in a color to highlight one of them.
-
-Our DOM now looks something like this:
-
-```html
-<svg width="<el width>" height="<el height>">
-  <!-- One main g to wrap all layers -->
-  <g>
-    <!-- Scatter g -->
-    <g>
-      <circle cx="..." cy="..." r="..." fill="blue"/>
-      <circle cx="..." cy="..." r="..." fill="blue"/>
-      <circle cx="..." cy="..." r="..." fill="blue"/>
-    </g>
-  </g>
-</svg
-```
-
-### More layer types
-
-We just saw how to add SVG layers with the `.svgLayers` method. You also have `htmlLayers` and `canvasLayers`. For the SVG and HTML groups, every item in the array will create a new DOM element to render into, `<g>` for SVG and `<div>` for HTML. For Canvas, since there's no DOM equivalent, each layer renders into the same Canvas context. See the [Scatter canvas](example/Scatter) example for details.
-
-Layers are rendered in the order they appear and you can call these methods multiple times to create a new layout group.
+Within the `LayerCake` component, you'll want to add at least one layout component, kind of like a wrapper. It can be `Svg`, `Html`, `Canvas` or `WebGl`. Within any of these is where you'll put your own custom layer components. Here's an example with a few different layout elements working together.
 
 ```html
 <script>
 /* { filename: 'App.svelte' } */
-import { LayerCake, Svg, Canvas, Html }  from 'layercake';
+  import { LayerCake, Svg, Canvas, Html }  from 'layercake';
 
-import ScatterCanvas from './components/ScatterCanvas.html';
-import AxisX from './components/AxisX.html';
-import AxisY from './components/AxisY.html';
-import Annotations from './components/Annotations.html';
+  // These are components that live in your project that
+  // you can customize as you see fit
+  import ScatterCanvas from './components/ScatterCanvas.html';
+  import AxisX from './components/AxisX.html';
+  import AxisY from './components/AxisY.html';
+  import Annotations from './components/Annotations.html';
 
-const blurbs = [
-  { x: 10, y: 20, text: 'Look at this value!'}
-];
+  // Set up some data
+  const points = [
+    {x: 0, y: 1},
+    {x: 10, y: 5},
+    {x: 15, y: 10}
+  ];
 
-const points = [
-  {x: 0, y: 1},
-  {x: 10, y: 5},
-  {x: 15, y: 10}
-];
+  const annotationBlurbs = [
+    { x: 10, y: 20, text: 'Look at this value!'}
+  ];
 </script>
 
 <style>
@@ -189,7 +108,7 @@ const points = [
     data={points}
   >
     <Canvas>
-      <Scatter fill={'blue'} r={3}/>
+      <ScatterCanvas fill={'blue'} r={3}/>
     </Canvas>
 
     <Svg>
@@ -198,12 +117,104 @@ const points = [
     </Svg>
 
     <Html>
-      <Annotations {blurbs} />
+      <Annotations blurbs={annotationBlurbs} />
     </Html>
 
     <!-- If you wanted to, you could add another <Svg> again... -->
   </LayerCake>
 </div>
+```
+
+### Layer components
+
+The only components the Layer Cake module exports are `LayerCake` and those layout components, everything else that actually draws your chart is up to you to create. Inside those layer components you can access the scales and other values derived from your data. You do this with Svelte's [`getContext`](https://svelte.dev/docs#getContext) function.
+
+Here's an example starting with a similar `App.svelte` file to the example above. We're creating a scatter chart in SVG.
+
+```html
+<!-- { filename: 'App.svelte' } -->
+<script>
+  import { LayerCake, Svg } from 'layercake';
+  import Scatter from './components/Scatter.svelte';
+
+  const points = [
+    {x: 0, y: 1},
+    {x: 10, y: 5},
+    {x: 15, y: 10}
+  ];
+</script>
+
+<style>
+  .chart-container {
+    width: 100%;
+    height: 300px;
+  }
+</style>
+
+<div class="chart-container">
+  <LayerCake
+    x='x'
+    y='y'
+    data={ points }
+  >
+    <Svg>
+      <!-- You can expose properties on your chart components to make them more reusable -->
+      <Scatter fill={'blue'} r={3} />
+    </Svg>
+  </LayerCake>
+</div>
+```
+
+This is what the scatter component looks like:
+
+```html
+<!-- { filename: '/components/Scatter.svelte' } -->
+<script>
+  // Import the getContext function from svelte
+  import { getContext } from 'svelte';
+
+  // Access the context using the 'LayerCake' keyword
+  // Grab some helpful functions
+  const { data, x, xScale, y, yScale } = getContext('LayerCake');
+
+  export let fill = '#000';
+  export let r = 5;
+</script>
+
+<g>
+  {#each $data as d}
+    <circle cx='{ $xScale($x(d)) }' cy='{ $yScale($y(d)) }' {fill} {r} />
+  {/each}
+</g>
+```
+
+> You *could* hardcode the radius and fill in the component but exposing those variables to your App makes this component more reusable from project to project. Or, within a project, you could use the same layer component to render different charts of varying color.
+
+A few notes on this component:
+
+1. Everything that you export from `getContext('LayerCake')` is a [Svelte store](https://svelte.dev/docs#svelte_store) so to use them in the template, they are prefixed with `$`.
+2. This example is a bit verbose because we're calling our accessor functions and then our scale functions. You can more easily combine this with the built-in `xGet` and `yGet` functions. Like so:
+
+```html
+<!-- { filename: '/components/Scatter.svelte' } -->
+<script>
+  // Import the getContext function from svelte
+  import { getContext } from 'svelte';
+
+  // Access the context using the 'LayerCake' keyword
+  // Grab some helpful functions
+  const { data, xGet, yGet } = getContext('LayerCake');
+
+  // Customizable defaults
+  export let fill = '#000';
+  export let r = 5;
+</script>
+
+<g>
+  {#each $data as d}
+    <circle cx='{ $xGet(d) }' cy='{ $yGet(d) }' {fill} {r} />
+  {/each}
+</g>
 ```
 
 > Many common chart types have example pages. See the gallery at <https://layercake.graphics> or use the dropdown menu at the top of the page to navigate to one.
@@ -212,10 +223,10 @@ const points = [
 
 You can also use Layer Cake to simply arrange SVG, HTML, Canvas and WebGL elements on top of one another, sharing the same dimensions. For example, this would be handy if you have some SVG artwork that you want to put on top of an HTML video player.
 
-Here's an example just setting the `target` value.
+Here's an example that doesn't set any properties on the `LayerCake` component:
 
 ```html
-/* { filename: 'App.Svelte' } */
+<!-- { filename: 'App.Svelte' } -->
 <script>
   import { LayerCake, Svg, Html } from 'layercake';
   import Frame from './components/Frame.html';

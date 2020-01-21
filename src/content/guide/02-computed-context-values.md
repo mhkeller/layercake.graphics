@@ -1,5 +1,5 @@
 ---
-title: Computed Context Properties
+title: Computed context values
 ---
 
 Some convenience functions and other internal properties are exposed to the user on the store in case they're handy.

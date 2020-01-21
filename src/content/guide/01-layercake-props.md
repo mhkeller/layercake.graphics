@@ -1,21 +1,29 @@
 ---
-title: LayerCake property API
+title: LayerCake props
 ---
 
-These are the options you can pass into `new LayerCake()`. You can also set your own custom values and they will be normal store properties. Many of the examples do this to set color scales or other values that will be used across components, for instance. To make sure the names don't conflict, the examples suffix any custom properties with an underscore, but it's not required.
+These are the props you can set on the `LayerCake` component itself. You set them all like so:
+
+```html
+<Layercake
+  foo='foo'
+  bar='bar'
+>
+</LayerCake>
+```
 
 ### data `Array`
 
-A list of data items. This is available on the store as `$data`.
+A list of data items. If this is not a flat data array of objects, you'll also need to set [flatData](/guide#flatdata).
 
 ### x `String|Function|Array`
 
-The key in each row of data that corresponds to the x-field. This can be a string or an accessor function. This property gets converted to an accessor function available on the store as `$x`.
+The key in each row of data that corresponds to the x-field. This can be a string or an accessor function. This property gets converted to a function when you access it through the context.
 
 ```js
 <LayerCake
   x='myX'
-  // equivalent to...
+  // is equivalent to...
   x={ d => d.myX }
 >
 ```
@@ -62,11 +70,11 @@ Calls to `x(dataRow)` in this scenario will return the two-value array. Calls to
 
 ### y `String|Function|Array`
 
-Same as [x](/guide#x) but for the y scale. The accessor function is available on the store as `$y`.
+Same as [x](/guide#x) but for the y scale.
 
 ### r `String|Function|Array`
 
-Same as [x](/guide#x) but for the r scale. The accessor function is available on the store as `$r`.
+Same as [x](/guide#x) but for the r scale.
 
 ### padding `Object`
 
@@ -84,7 +92,7 @@ An object that can specify `top`, `right`, `bottom`, or `left` padding in pixels
 
 ### xScale `d3.scaleLinear()`
 
-Pass in an instantiated D3 scale if you want to override the default `d3.scaleLinear()` or you want to add extra options.
+The D3 scale that should be used for the x-dimension. Pass in an instantiated D3 scale if you want to override the default `d3.scaleLinear()` or you want to add extra options.
 
 See the [Column chart](/example/Column) for an example of passing in a `d3.scaleBand()` to override the default.
 
@@ -116,17 +124,21 @@ Same as [xDomain](/guide#xdomain) but for the y scale.
 
 Same as [xDomain](/guide#xdomain) but for the r scale.
 
-### reverseX `Boolean=false`
+### xReverse `Boolean=false`
 
 Reverse the default x domain. By default this is `false` and the domain is `[0, width]`.
 
-### reverseY `Boolean=true`
+### yReverse `Boolean=true`
 
 Reverse the default y domain. By default this is `true` and the domain is `[height, 0]`.
 
+### rReverse `Boolean=false`
+
+Reverse the default r domain. By default this is `false` and the domain is `[1, 25]`.
+
 ### xRange `Function|Array:[min: Number, max: Number]`
 
-Override the default y range of `[0, width]` by setting it here to an array or function with argument `({ width, height})` that returns an array. This setting is ignored if you set `reverseX` to `true`.
+Override the default y range of `[0, width]` by setting it here to an array or function with argument `({ width, height})` that returns an array. This setting is ignored if you set `xReverse` to `true`.
 
 ```js
 <LayerCake
@@ -143,11 +155,11 @@ It can also be a function:
 
 ### yRange `Function|Array:[min: Number, max: Number]`
 
-Same as [xRange](/guide#xrange) but for the y scale. Override the default y range of `[0, height]` by setting it here to an array or function with argument `({ width, height})` that returns an array. This setting is ignored if you set `reverseY` to `true`.
+Same as [xRange](/guide#xrange) but for the y scale. Override the default y range of `[0, height]` by setting it here to an array or function with argument `({ width, height})` that returns an array. This setting is ignored if you set `yReverse` to `true`.
 
 ### rRange `Function|Array:[min: Number, max: Number]`
 
-Same as [xRange](/guide#xrange) but for the r scale. Override the default y range of `[1, 25]` by setting it here to an array or function with argument `({ width, height})` that returns an array. The r scale defaults to `d3.scaleSqrt` so make sure you don't use a zero in your range.
+Same as [xRange](/guide#xrange) but for the r scale. Override the default y range of `[1, 25]` by setting it here to an array or function with argument `({ width, height})` that returns an array. The r scale defaults to `d3.scaleSqrt` so make sure you don't use a zero in your range.  This setting is ignored if you set `rReverse` to `true`.
 
 ### xPadding `Array:[leftPixels: Number, rightPixels: Number]`
 
@@ -181,7 +193,7 @@ Same as [xNice](/guide#xpadding) but for the r domain.
 
 ### flatData `Array`
 
-In order for Layer Cake to measure the extents of your data, it needs a flat array of items that the x, y and r accessors can find. If your data is not flat (often the case if your renderers prefer a more nested format), you can tell it to measure extents against a flat version. This *will not* change the shape of the data that gets passed to components — it is only for extent calculation.
+In order for Layer Cake to measure the extents of your data, it needs a flat array of items that the x, y and r accessors can find. If your data is not flat (often the case if your renderers prefer a nested format), you can tell it to measure extents against a flat version. This *will not* change the shape of the data that gets passed to components — it is only for extent calculation.
 
 > The library also exports a flattening function to handle common use cases if you need to flatten your data and you don't already have a flat version. See the [flatten](/guide#flatten) helper function for more info.
 
@@ -191,24 +203,24 @@ Here's an example showing passing different data formats for extent calculation 
 const data = [
   {
     key: 'apples',
-    values: [{month: new Date(2015, 3, 1), value: 3840}, ...]
+    values: [{month: '2015-03-01', value: 3840}, ...]
   },
   {
     key: 'bananas',
-    values: [{month: new Date(2015, 3, 1), value: 1920}, ...]
+    values: [{month: '2015-03-01', value: 1920}, ...]
   },
 ];
 
 const flatData = [
-  {month: new Date(2015, 3, 1), value: 3840, group: 'apples'},
-  {month: new Date(2015, 2, 1), value: 1600, group: 'apples'},
-  {month: new Date(2015, 1, 1), value: 640, group:  'apples'},
-  {month: new Date(2015, 0, 1), value: 320, group:  'apples'},
+  {month: '2015-03-01', value: 3840, group: 'apples'},
+  {month: '2015-02-01', value: 1600, group: 'apples'},
+  {month: '2015-01-01', value: 640, group:  'apples'},
+  {month: '2015-00-01', value: 320, group:  'apples'},
 
-  {month: new Date(2015, 3, 1), value: 1920, group: 'bananas'},
-  {month: new Date(2015, 2, 1), value: 1440, group: 'bananas'},
-  {month: new Date(2015, 1, 1), value: 960, group:  'bananas'},
-  {month: new Date(2015, 0, 1), value: 480, group:  'bananas'}
+  {month: '2015-03-01', value: 1920, group: 'bananas'},
+  {month: '2015-02-01', value: 1440, group: 'bananas'},
+  {month: '2015-01-01', value: 960, group:  'bananas'},
+  {month: '2015-00-01', value: 480, group:  'bananas'}
 ];
 
 <LayerCake
