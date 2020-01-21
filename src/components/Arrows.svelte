@@ -1,9 +1,7 @@
 <script>
 	import { getContext, onMount } from 'svelte';
 
-	import swoopyArrow from '../modules/swoopyArrow.js';
-	import getElPosition from '../modules/getElPosition.js';
-	import parseCssValue from '../modules/parseCssValue.js';
+	import { swoopyArrow, getElPosition, parseCssValue } from '../modules/arrowUtils.js';
 
 	export let annotations = [];
 
