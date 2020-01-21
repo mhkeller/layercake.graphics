@@ -185,6 +185,10 @@
 		line-height: 1.5;
 	}
 
+	sectoin :global(li) {
+		font-weight: 300;
+	}
+
 	section :global(a) {
 		text-decoration: none;
 		color: #ff3e00;

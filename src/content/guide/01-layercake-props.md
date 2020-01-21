@@ -16,14 +16,20 @@ These are the props you can set on the `LayerCake` component itself. You set the
 
 A list of data items. If this is not a flat data array of objects, you'll also need to set [flatData](/guide#flatdata).
 
+```html
+<LayerCake
+  data={ myData }
+>
+```
+
 ### x `String|Function|Array`
 
 The key in each row of data that corresponds to the x-field. This can be a string or an accessor function. This property gets converted to a function when you access it through the context.
 
-```js
+```html
 <LayerCake
   x='myX'
-  // is equivalent to...
+  <!-- is equivalent to... -->
   x={ d => d.myX }
 >
 ```
@@ -59,7 +65,7 @@ The data is now an array of values. The `month` values you can't see because sne
 
 The x- and y-accessors would then look like this:
 
-```js
+```html
 <LayerCake
   x={ [0, 1] }
   y={ d => d.data.month }
@@ -80,7 +86,7 @@ Same as [x](/guide#x) but for the r scale.
 
 An object that can specify `top`, `right`, `bottom`, or `left` padding in pixels. Any unspecified values are filled in as `0`. Padding operates like CSS `box-sizing: border-box;` where values are subtracted from the target container's width and height, the same as [a D3 margin convention](https://bl.ocks.org/mbostock/3019563).
 
-```js
+```html
 <LayerCake
   padding={ { top: 20, right: 10, bottom: 0, left: 0 } }
   // equivalent to...
@@ -108,7 +114,7 @@ Same as [xScale](/guide#xscale) but for the r scale. The default is `d3.scaleSqr
 
 Set a min or max on the x scale. If you want to inherit the value from the data's extent, set that value to `null`.
 
-```js
+```html
 <LayerCake
   xDomain={ [0, 100] } // Fixes the x scale's domain
   // or..
@@ -140,14 +146,14 @@ Reverse the default r domain. By default this is `false` and the domain is `[1, 
 
 Override the default y range of `[0, width]` by setting it here to an array or function with argument `({ width, height})` that returns an array. This setting is ignored if you set `xReverse` to `true`.
 
-```js
+```html
 <LayerCake
   xRange={ [1, 100] }
 >
 ```
 It can also be a function:
 
-```js
+```html
 <LayerCake
   xRange={ ({ width, height }) => [0, width / 2] }
 >
@@ -165,7 +171,7 @@ Same as [xRange](/guide#xrange) but for the r scale. Override the default y rang
 
 Assign a pixel value to add to the min or max of the x scale. This will increase the scales domain by the scale unit equivalent of the provided pixels. It uses D3 scale's [invert function](https://github.com/d3/d3-scale#continuous_invert), so this only applies to continuous scales like `scaleLinear`. This is useful for adding extra space to a scatter plot so that your circles don't interfere with your y axis.
 
-```js
+```html
 <LayerCake
   xPadding= { [10, 10] } // Add ten pixels of data units to both sides of the scale's domain
 >
@@ -199,36 +205,51 @@ In order for Layer Cake to measure the extents of your data, it needs a flat arr
 
 Here's an example showing passing different data formats for extent calculation versus what is used by layer components.
 
-```js
-const data = [
-  {
-    key: 'apples',
-    values: [{month: '2015-03-01', value: 3840}, ...]
-  },
-  {
-    key: 'bananas',
-    values: [{month: '2015-03-01', value: 1920}, ...]
-  },
-];
+```html
+<script>
+  import { LayerCake } from 'LayerCake';
 
-const flatData = [
-  {month: '2015-03-01', value: 3840, group: 'apples'},
-  {month: '2015-02-01', value: 1600, group: 'apples'},
-  {month: '2015-01-01', value: 640, group:  'apples'},
-  {month: '2015-00-01', value: 320, group:  'apples'},
+  const data = [
+    {
+      key: 'apples',
+      values: [{month: '2015-03-01', value: 3840}, ...]
+    },
+    {
+      key: 'bananas',
+      values: [{month: '2015-03-01', value: 1920}, ...]
+    },
+  ];
 
-  {month: '2015-03-01', value: 1920, group: 'bananas'},
-  {month: '2015-02-01', value: 1440, group: 'bananas'},
-  {month: '2015-01-01', value: 960, group:  'bananas'},
-  {month: '2015-00-01', value: 480, group:  'bananas'}
-];
+  const flatData = [
+    {month: '2015-03-01', value: 3840, group: 'apples'},
+    {month: '2015-02-01', value: 1600, group: 'apples'},
+    {month: '2015-01-01', value: 640, group:  'apples'},
+    {month: '2015-00-01', value: 320, group:  'apples'},
 
-<LayerCake
-  x='month'
-  y='value'
-  {data}
-  {flatData}
->
+    {month: '2015-03-01', value: 1920, group: 'bananas'},
+    {month: '2015-02-01', value: 1440, group: 'bananas'},
+    {month: '2015-01-01', value: 960, group:  'bananas'},
+    {month: '2015-00-01', value: 480, group:  'bananas'}
+  ];
+</script>
+
+<style>
+  .chart-container {
+    width: 100%;
+    height: 300px;
+  }
+</style>
+
+<div class="chart-container">
+  <LayerCake
+    x='month'
+    y='value'
+    {data}
+    {flatData}
+  >
+    <!-- Components go here -->
+  </LayerCake>
+</div>
 ```
 
 ### custom `Object`

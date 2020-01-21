@@ -168,7 +168,7 @@ Here's an example starting with a similar `App.svelte` file to the example above
 This is what the scatter component looks like:
 
 ```html
-<!-- { filename: '/components/Scatter.svelte' } -->
+<!-- { filename: './components/Scatter.svelte' } -->
 <script>
   // Import the getContext function from svelte
   import { getContext } from 'svelte';
@@ -192,11 +192,11 @@ This is what the scatter component looks like:
 
 A few notes on this component:
 
-1. Everything that you export from `getContext('LayerCake')` is a [Svelte store](https://svelte.dev/docs#svelte_store) so to use them in the template, they are prefixed with `$`.
-2. This example is a bit verbose because we're calling our accessor functions and then our scale functions. You can more easily combine this with the built-in `xGet` and `yGet` functions. Like so:
+1. Everything that you export from `getContext('LayerCake')` is a [Svelte store](https://svelte.dev/docs#svelte_store) so prefix them with `$` in the template.
+2. This example is a bit verbose because we're calling our accessor functions and then our scale functions. You can combine these two steps with the built-in `xGet` and `yGet` functions. Like so:
 
 ```html
-<!-- { filename: '/components/Scatter.svelte' } -->
+<!-- { filename: './components/Scatter.svelte' } -->
 <script>
   // Import the getContext function from svelte
   import { getContext } from 'svelte';
