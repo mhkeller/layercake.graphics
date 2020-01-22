@@ -11,8 +11,7 @@
 	const seriesNames = Object.keys(fruit[0]).filter(d => d !== 'month');
 
 	fruit.forEach(row => {
-		const parts = row.month.split('-');
-		row.month = new Date(Date.UTC(+parts[0], +parts[1] + 1, +parts[2]));
+		row.month = new Date(row.month);
 		seriesNames.forEach(name => {
 			row[name] = +row[name];
 		});
