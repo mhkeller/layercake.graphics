@@ -8,6 +8,10 @@ You must wrap your chart components in these layout components for them to appea
 
 The Canvas and Webgl layout components do the same and also create the canvas contexts that are then available on the LayerCake context object.
 
+## Options
+
+All layout components let you set a `zIndex` property to fine-tune their layering. This is useful if you want your layers to build in a certain order but have a different appearance than their DOM order.
+
 ### Html
 
 ```html
@@ -25,7 +29,7 @@ The Canvas and Webgl layout components do the same and also create the canvas co
 
 <div class="chart-container">
   <LayerCake ...>
-    <Html>
+    <Html zIndex={1}> <!-- Optional z-index -->
     </Html>
   </LayerCake>
 </div>
@@ -48,7 +52,7 @@ The Canvas and Webgl layout components do the same and also create the canvas co
 
 <div class="chart-container"
   <LayerCake ...>
-    <Svg>
+    <Svg zIndex={2}> <!-- Optional z-index -->
     </Svg>
   </LayerCake>
 </div>
@@ -72,7 +76,7 @@ The Canvas and Webgl layout components do the same and also create the canvas co
 
 <div class="chart-container"
   <LayerCake ...>
-    <Canvas>
+    <Canvas zIndex={3}> <!-- Optional z-index -->
     </Canvas>
   </LayerCake>
 </div>
@@ -95,7 +99,7 @@ The Canvas and Webgl layout components do the same and also create the canvas co
 
 <div class="chart-container"
   <LayerCake ...>
-    <WebGl>
+    <WebGl zIndex={4}> <!-- Optional z-index -->
     </WebGl>
   </LayerCake>
 </div>
