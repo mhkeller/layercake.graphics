@@ -294,7 +294,7 @@
 <div class='{open ? "open" : "closed"} mousecatcher' on:click="{() => open = false}"></div>
 <div class='container'>
 	<span class="menu-link {open ? "menu-open" : "menu-closed"}" on:click='{toggleOpen}'>{open ? 'Close' : 'Menu'}</span>
-	<a href='.' class='logo'>Layer Cake</a>
+	<a href='.' rel=prefetch class='logo'>Layer Cake</a>
 </div>
 
 <ul class="dropdown">
