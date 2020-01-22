@@ -15,10 +15,10 @@
 	function textAnchor(i) {
 		if (snapTicks === true) {
 			if (i === 0) {
-				return 'start';
+				return 'end';
 			}
 			if (i === tickVals.length - 1) {
-				return 'end';
+				return 'start';
 			}
 		}
 		return 'middle';

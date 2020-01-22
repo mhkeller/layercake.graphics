@@ -6,18 +6,26 @@
 
 	let visible = false;
 	let found = {};
+	let e = {};
 
-	function findItem (e) {
-		found = finder.find(e.layerX, e.layerY, 300) || {};
+	export let dataset;
+	export let x = 'x';
+	export let y = 'y';
 
+	$: xGetter = x === 'x' ? $xGet : $yGet;
+	$: yGetter = y === 'y' ? $yGet : $xGet;
+
+	function findItem (evt) {
+		e = evt;
+		found = finder.find(evt[`layer${x.toUpperCase()}`], evt[`layer${y.toUpperCase()}`], 300) || {};
 		visible = Object.keys(found).length > 0;
 	}
 
 	$: finder = quadtree()
 		.extent([[-1, -1], [$width + 1, $height + 1]])
-		.x($xGet)
-		.y($yGet)
-		.addAll($data);
+		.x(xGetter)
+		.y(yGetter)
+		.addAll(dataset || $data);
 
 </script>
 
@@ -37,8 +45,9 @@
 	on:mouseout="{() => visible = false}"
 ></div>
 <slot
-	x={$xGet(found)}
-	y={$yGet(found)}
-	found={found}
-	visible={visible}
+	x={xGetter(found) || 0}
+	y={yGetter(found) || 0}
+	{found}
+	{visible}
+	{e}
 ></slot>

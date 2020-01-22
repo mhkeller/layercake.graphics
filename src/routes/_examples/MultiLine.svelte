@@ -6,14 +6,24 @@
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 	import Labels from '../../components/Labels.svelte';
-	// import Tooltip from '../../components/Tooltip.Svelte';
+	import Tooltip from '../../components/Tooltip.svelte';
+
+	const seriesNames = Object.keys(fruit[0]).filter(d => d !== 'month');
+
+	fruit.forEach(row => {
+		const parts = row.month.split('-');
+		row.month = new Date(Date.UTC(+parts[0], +parts[1] + 1, +parts[2]));
+		seriesNames.forEach(name => {
+			row[name] = +row[name];
+		});
+	});
 
 	const fruitLong = Object.keys(fruit[0]).map(key => {
 		if (key === 'month') return null;
 		return {
 			key,
 			values: fruit.map(d => {
-				return { key, month: new Date(d.month), value: +d[key] };
+				return { key, month: d.month, value: d[key] };
 			})
 		};
 	}).filter(d => d);
@@ -26,7 +36,7 @@
 
 	function formatTickX (d) {
 		const date = new Date(d);
-		return `${monthNames[date.getMonth()]} ${date.getDate()}`;
+		return `${monthNames[date.getUTCMonth()]} ${date.getUTCDate()}`;
 	}
 
 	function formatTickY (d) {
@@ -56,8 +66,9 @@
 		<Svg>
 			<AxisX
 				gridlines={false}
-				tickNumber={3}
+				ticks={fruit.map(d => d.month)}
 				formatTick={formatTickX}
+				snapTicks={true}
 			/>
 			<AxisY
 				formatTick={formatTickY}
@@ -68,6 +79,9 @@
 
 		<Html>
 			<Labels/>
+			<Tooltip
+				dataset={ fruit }
+			/>
 		</Html>
 	</LayerCake>
 </div>
