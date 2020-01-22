@@ -2,7 +2,7 @@ cd `dirname $0`/..
 
 # fetch svelte-app
 rm -rf scripts/svelte-app
-node_modules/.bin/degit sveltejs/template scripts/svelte-app
+node_modules/.bin/degit mhkeller/layercake-template#example-template scripts/svelte-app
 
 # remove App.svelte (will be recreated client-side) and node_modules
 rm -rf scripts/svelte-app/src/App.svelte

@@ -185,7 +185,7 @@
 		line-height: 1.5;
 	}
 
-	sectoin :global(li) {
+	section :global(li) {
 		font-weight: 300;
 	}
 

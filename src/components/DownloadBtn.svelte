@@ -57,6 +57,7 @@
 		files.push(...data.components.map(component => ({ path: `src/${component.title.replace('./', '')}`, data: component.contents })));
 		files.push(...data.modules.map(mod => ({ path: `src/${mod.title.replace('./', '')}`, data: mod.contents })));
 		files.push(...data.componentModules.map(mod => ({ path: `src/${mod.title.replace('../', '')}`, data: mod.contents })));
+		files.push(...data.csvs.map(mod => ({ path: `src/${mod.title.replace('../', '')}`, data: mod.contents })));
 		files.push({
 			path: `src/App.svelte`,
 			data: data.main.contents
