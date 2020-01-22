@@ -18,13 +18,14 @@ svg.svelte-1wqugfi{position:absolute;top:0;left:0}
 .chart-container.svelte-ivcd9i{width:100%;height:100%}
 .path-line.svelte-tqv5lw{fill:none;stroke-linejoin:round;stroke-linecap:round;stroke-width:3px}
 .label.svelte-x0qwpz{position:absolute;transform:translate(-100%, -100%)translateY(1px);font-size:13px}
+.bg.svelte-19xh5jy{position:absolute;top:0;right:0;bottom:0;left:0}
+.tooltip.svelte-1y0cxvq{position:absolute;font-size:13px;pointer-events:none;border:1px solid #ccc;background:rgba(255, 255, 255, 0.85);transform:translate(-50%, -100%);padding:5px;transition:left 250ms ease-out, top 250ms ease-out;z-index:15}
 .chart-container.svelte-ivcd9i{width:100%;height:100%}
 .chart-container.svelte-ivcd9i{width:100%;height:100%}
 .group-rect.svelte-1kcnhy6{fill:#00bbff}
 .tick.svelte-1rw5vez.svelte-1rw5vez{font-size:.725em;font-weight:200}.tick.svelte-1rw5vez line.svelte-1rw5vez{stroke:#aaa;stroke-dasharray:2}.tick.svelte-1rw5vez text.svelte-1rw5vez{fill:#666}.tick.tick-0.svelte-1rw5vez line.svelte-1rw5vez{stroke-dasharray:0}.y-axis.svelte-1rw5vez .tick text.svelte-1rw5vez{text-anchor:end}
 .chart-container.svelte-ivcd9i{width:100%;height:100%}
 .chart-container.svelte-ivcd9i{width:100%;height:100%}
-.bg.svelte-19xh5jy{position:absolute;top:0;right:0;bottom:0;left:0}
 .chart-container.svelte-9xtvsg{width:100%;height:100%}.circle.svelte-9xtvsg{position:absolute;border-radius:50%;background-color:#fff;border:1px solid #000;transform:translate(-50%, -50%);pointer-events:none;width:9px;height:9px}
 line.svelte-i8pjl7{stroke-width:1px;stroke:#000}circle.svelte-i8pjl7{stroke:#000;stroke-width:1px}
 .chart-container.svelte-ivcd9i{width:100%;height:100%}
