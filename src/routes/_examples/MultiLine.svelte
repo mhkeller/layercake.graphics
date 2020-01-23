@@ -56,8 +56,8 @@
 <div class="chart-container">
 	<LayerCake
 		padding={{ top: 7, right: 10, bottom: 20, left: 25 }}
-		x={'month'}
-		y={'value'}
+		x='month'
+		y='value'
 		flatData={flatten(fruitLong)}
 		yDomain={[0, null]}
 		data={fruitLong}
