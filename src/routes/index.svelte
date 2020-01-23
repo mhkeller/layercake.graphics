@@ -127,12 +127,26 @@
 	}
 	.title a{
 		text-decoration: underline;
+		max-width: 415px;
 	}
 	.title a:hover {
 		color: #ff3e00;
 	}
 	.strong {
 		font-weight: bold;
+	}
+	.edit-repl {
+		text-decoration: none !important;
+		font-size: 12px;
+		text-transform: lowercase;
+		font-family: monospace;
+		color: rgba(0,0,0,0.5);
+		background-color: #f0f0f0;
+		padding: 2px 5px;
+		margin-left: 7px;
+	}
+	.edit-repl:hover {
+		text-decoration: underline;
 	}
 	@media (max-width: 895px) {
 		:global(#sapper) {
@@ -181,7 +195,7 @@
 	<div id="gallery">
 		{#each examples as example}
 			<div class="gallery-item">
-				<h4 class="title"><a rel=prefetch href="example/{example.slug}">{example.title}</a></h4>
+				<h4 class="title"><a rel=prefetch href="example/{example.slug}">{example.title}</a> <a class="edit-repl" href="https://svelte.dev/repl/{example.replPath}" target="_blank" rel="nofollow">Edit</a></h4>
 				<svelte:component this="{example.component}"/>
 			</div>
 		{/each}

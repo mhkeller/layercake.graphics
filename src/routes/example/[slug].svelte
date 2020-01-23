@@ -209,6 +209,11 @@
 		transform: translate(0%, -100%);
 	}
 
+	.side-btns {
+		float: right;
+		color: #000;
+	}
+
 	@media (max-width: 750px) {
 		.copy {
 			transform: translate(0, -80%);
@@ -228,6 +233,10 @@
 		.dek {
 			width: 100%;
 		}
+		.side-btns {
+			float: none;
+			width: 100%;
+		}
 	}
 </style>
 
@@ -237,17 +246,19 @@
 </svelte:head>
 
 <div class="main">
-	<h1>{example.title}</h1>
+	<h1>{example.title} <a class="edit-repl" target="_blank" rel="nofollow" href="https://svelte.dev/repl{example.replPath}">edit</a></h1>
 
 	<div class="chart-hero">
 		<svelte:component this={example.component} />
 	</div>
 
-	<div class="download">
-		<DownloadBtn
-			{data}
-			slug='{slug}'
-		/>
+	<div class="side-btns">
+		<div class="download">
+			<DownloadBtn
+				{data}
+				slug='{slug}'
+			/>
+		</div>
 	</div>
 
 	{#if data.dek}
