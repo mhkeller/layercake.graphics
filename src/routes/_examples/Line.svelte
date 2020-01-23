@@ -16,9 +16,6 @@
 	.chart-container {
 		width: 100%;
 		height: 100%;
-		/* You can also set through styles
-			padding: 0 10px 20px 25px;
-		*/
 	}
 </style>
 
