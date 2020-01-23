@@ -11,7 +11,7 @@
 	points.forEach(row => {
 		seriesNames.forEach(name => {
 			row[name] = +row[name];
-		})
+		});
 	});
 </script>
 
