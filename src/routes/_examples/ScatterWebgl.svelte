@@ -1,5 +1,5 @@
 <script>
-	import { LayerCake, Svg, Webgl, Html } from 'layercake';
+	import { LayerCake, Svg, WebGL, Html } from 'layercake';
 	import points from '../../data/points.csv';
 	import ScatterWebgl from '../../components/ScatterWebgl.svelte';
 	import AxisX from '../../components/AxisX.svelte';
@@ -46,9 +46,9 @@
 			<AxisY/>
 		</Svg>
 
-		<Webgl>
+		<WebGL>
 			<ScatterWebgl {diameter}/>
-		</Webgl>
+		</WebGL>
 
 		<Html>
 			<QuadTree
