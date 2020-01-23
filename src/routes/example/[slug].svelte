@@ -194,6 +194,26 @@
 		display: block;
 	}
 
+	.edit-repl {
+		text-decoration: none !important;
+		/* font-size: 12px; */
+		text-transform: lowercase;
+		font-family: monospace;
+		color: rgba(0,0,0,0.5);
+		background-color: #f0f0f0;
+		padding: 2px 5px;
+		margin-left: 7px;
+		font-size: 19px;
+		vertical-align: top;
+		position: relative;
+		top: 3px;
+	}
+
+	.edit-repl:hover {
+		text-decoration: underline;
+		color: #ff3e00;
+	}
+
 	.copy:before {
 		content: 'Copy to clipboard';
 		position: absolute;
@@ -207,11 +227,6 @@
 		padding: 3px 5px;
 		white-space: nowrap;
 		transform: translate(0%, -100%);
-	}
-
-	.side-btns {
-		float: right;
-		color: #000;
 	}
 
 	@media (max-width: 750px) {
@@ -233,10 +248,6 @@
 		.dek {
 			width: 100%;
 		}
-		.side-btns {
-			float: none;
-			width: 100%;
-		}
 	}
 </style>
 
@@ -246,19 +257,17 @@
 </svelte:head>
 
 <div class="main">
-	<h1>{example.title} <a class="edit-repl" target="_blank" rel="nofollow" href="https://svelte.dev/repl{example.replPath}">edit</a></h1>
+	<h1>{example.title} <a class="edit-repl" href="https://svelte.dev/repl/{example.replPath}" target="_blank" rel="nofollow">Edit</a></h1>
 
 	<div class="chart-hero">
 		<svelte:component this={example.component} />
 	</div>
 
-	<div class="side-btns">
-		<div class="download">
-			<DownloadBtn
-				{data}
-				slug='{slug}'
-			/>
-		</div>
+	<div class="download">
+		<DownloadBtn
+			{data}
+			slug='{slug}'
+		/>
 	</div>
 
 	{#if data.dek}
