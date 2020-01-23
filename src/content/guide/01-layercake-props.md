@@ -146,18 +146,26 @@ Same as [xDomain](/guide#xdomain) but for the r scale.
 
 Reverse the default x domain. By default this is `false` and the domain is `[0, width]`.
 
+This is ignored if you set [xRange](xRange).
+
 ### yReverse `Boolean=true`
 
 Reverse the default y domain. By default this is `true` and the domain is `[height, 0]`.
 Reverse the default x domain. By default this is `false` and the domain is `[0, width]`.
 
+This is ignored if you set [yRange](yRange).
+
 ### zReverse `Boolean=false`
 
 Reverse the default z domain. By default this is `false` and the domain is `[0, width]`.
 
+This is ignored if you set [zRange](zRange).
+
 ### rReverse `Boolean=false`
 
 Reverse the default r domain. By default this is `false` and the domain is `[1, 25]`.
+
+This is ignored if you set [rRange](rRange).
 
 ### xRange `Function|Array:[min: Number, max: Number]`
 
