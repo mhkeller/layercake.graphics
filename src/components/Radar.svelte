@@ -11,6 +11,9 @@
 		.x((d, i) => d * Math.cos(angleSlice * i - Math.PI / 2))
 		.y((d, i) => d * Math.sin(angleSlice * i - Math.PI / 2));
 
+	$: cx = (circleR, i) => circleR * Math.cos(angleSlice * i - Math.PI / 2)
+	$: cy = (circleR, i) => circleR * Math.sin(angleSlice * i - Math.PI / 2)
+
 	/* The non-D3 line generator way. Use `d={path}` in the template below */
 	// $: path = 'M' + $data
 	// 	.map(d => {
@@ -40,14 +43,13 @@
 		<!-- Plot each dots -->
 		{#each $rGet(row) as circleR, i}
 			<circle
-				cx="{circleR * Math.cos(angleSlice * i - Math.PI / 2)}"
-				cy="{circleR * Math.sin(angleSlice * i - Math.PI / 2)}"
+				cx={cx(circleR, i)}
+				cy={cy(circleR, i)}
 				r="4.5"
 				fill="#f0c"
 				stroke="#fff"
 				stroke-width="1"
-			>
-			</circle>
+			></circle>
 		{/each}
 	{/each}
 </g>

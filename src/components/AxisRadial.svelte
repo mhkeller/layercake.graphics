@@ -25,7 +25,7 @@
 >
 	<circle
 		cx="0"
-		cy="y"
+		cy="0"
 		r="{max}"
 		stroke="#ccc"
 		stroke-width="1"
