@@ -78,6 +78,10 @@ Calls to `x(dataRow)` in this scenario will return the two-value array. Calls to
 
 Same as [x](/guide#x) but for the y scale.
 
+### z `String|Function|Array`
+
+Same as [x](/guide#x) but for the z scale.
+
 ### r `String|Function|Array`
 
 Same as [x](/guide#x) but for the r scale.
@@ -106,6 +110,10 @@ See the [Column chart](/example/Column) for an example of passing in a `d3.scale
 
 Same as [xScale](/guide#xscale) but for the y scale. The default is `d3.scaleLinear()`.
 
+### zScale `d3.scaleLinear()`
+
+Same as [xScale](/guide#xscale) but for the z scale. The default is `d3.scaleLinear()`.
+
 ### rScale `d3.scaleSqrt()`
 
 Same as [xScale](/guide#xscale) but for the r scale. The default is `d3.scaleSqrt()`.
@@ -126,6 +134,10 @@ Set a min or max on the x scale. If you want to inherit the value from the data'
 
 Same as [xDomain](/guide#xdomain) but for the y scale.
 
+### zDomain `Array:[min: Number, max: Number]`
+
+Same as [xDomain](/guide#xdomain) but for the z scale.
+
 ### rDomain `Array:[min: Number, max: Number]`
 
 Same as [xDomain](/guide#xdomain) but for the r scale.
@@ -137,6 +149,11 @@ Reverse the default x domain. By default this is `false` and the domain is `[0, 
 ### yReverse `Boolean=true`
 
 Reverse the default y domain. By default this is `true` and the domain is `[height, 0]`.
+Reverse the default x domain. By default this is `false` and the domain is `[0, width]`.
+
+### zReverse `Boolean=false`
+
+Reverse the default z domain. By default this is `false` and the domain is `[0, width]`.
 
 ### rReverse `Boolean=false`
 
@@ -144,7 +161,9 @@ Reverse the default r domain. By default this is `false` and the domain is `[1, 
 
 ### xRange `Function|Array:[min: Number, max: Number]`
 
-Override the default y range of `[0, width]` by setting it here to an array or function with argument `({ width, height})` that returns an array. This setting is ignored if you set `xReverse` to `true`.
+Override the default y range of `[0, width]` by setting it here to an array or function with argument `({ width, height})` that returns an array.
+
+This overrides setting [xReverse](/guide#xreverse) to `true`.
 
 ```html
 <LayerCake
@@ -161,11 +180,21 @@ It can also be a function:
 
 ### yRange `Function|Array:[min: Number, max: Number]`
 
-Same as [xRange](/guide#xrange) but for the y scale. Override the default y range of `[0, height]` by setting it here to an array or function with argument `({ width, height})` that returns an array. This setting is ignored if you set `yReverse` to `true`.
+Same as [xRange](/guide#xrange) but for the y scale. Override the default y range of `[0, height]` by setting it here to an array or function with argument `({ width, height})` that returns an array.
+
+This overrides setting [yReverse](/guide#yreverse) to `true`.
+
+### zRange `Function|Array:[min: Number, max: Number]`
+
+Same as [xRange](/guide#xrange) but for the z scale. Override the default z range of `[0, width]` by setting it here to an array or function with argument `({ width, height})` that returns an array.
+
+This overrides setting [zReverse](/guide#zreverse) to `true`.
 
 ### rRange `Function|Array:[min: Number, max: Number]`
 
-Same as [xRange](/guide#xrange) but for the r scale. Override the default y range of `[1, 25]` by setting it here to an array or function with argument `({ width, height})` that returns an array. The r scale defaults to `d3.scaleSqrt` so make sure you don't use a zero in your range.  This setting is ignored if you set `rReverse` to `true`.
+Same as [xRange](/guide#xrange) but for the r scale. Override the default y range of `[1, 25]` by setting it here to an array or function with argument `({ width, height})` that returns an array. The r scale defaults to `d3.scaleSqrt` so make sure you don't use a zero in your range.
+
+This overrides setting [rReverse](/guide#rreverse) to `true`.
 
 ### xPadding `Array:[leftPixels: Number, rightPixels: Number]`
 

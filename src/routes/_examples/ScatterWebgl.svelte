@@ -23,12 +23,11 @@
 	.circle {
 		position: absolute;
 		border-radius: 50%;
-		background-color: #fff;
-		border: 1px solid #000;
+		background-color: rgba(171,0, 214);
 		transform: translate(-50%, -50%);
 		pointer-events: none;
-		width: 9px;
-		height: 9px;
+		width: 10px;
+		height: 10px;
 	}
 </style>
 
