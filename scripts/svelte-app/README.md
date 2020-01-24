@@ -1,4 +1,4 @@
-Layer Cake Example
+Layer Cake example
 ===
 
 This is a starter example for using [Layer Cake](https://layercake.graphics).
@@ -17,3 +17,5 @@ Your app will be running at [localhost:5000](http://localhost:5000).
 ```sh
 npm run dev
 ```
+
+Your app will be running at [localhost:3000](http://localhost:3000).
