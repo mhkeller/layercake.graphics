@@ -206,7 +206,7 @@
 		font-size: 19px;
 		vertical-align: top;
 		position: relative;
-		top: 3px;
+		top: 4px;
 	}
 
 	.edit-repl:hover {
