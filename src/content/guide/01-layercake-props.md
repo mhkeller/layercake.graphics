@@ -218,6 +218,10 @@ Assign a pixel value to add to the min or max of the x scale. This will increase
 
 Same as [xPadding](/guide#xpadding) but for the y domain.
 
+### zPadding `Array:[leftPixels: Number, rightPixels: Number]`
+
+Same as [xPadding](/guide#xpadding) but for the z domain.
+
 ### rPadding `Array:[leftPixels: Number, rightPixels: Number]`
 
 Same as [xPadding](/guide#xpadding) but for the r domain.
@@ -229,6 +233,10 @@ Applies D3's [scale.nice()](https://github.com/d3/d3-scale#continuous_nice) to t
 ### yNice `Boolean=false`
 
 Same as [xNice](/guide#xpadding) but for the y domain.
+
+### zNice `Boolean=false`
+
+Same as [xNice](/guide#xpadding) but for the z domain.
 
 ### rNice `Boolean=false`
 

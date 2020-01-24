@@ -64,7 +64,7 @@ The `App.svelte` file in this example is your main Svelte component. You can ren
 </div>
 ```
 
-> Each of the chart examples on the home page can be run locally going to their page and clicking `Download`.
+> Each of the [chart examples](https://layercake.graphics) can be downloaded or edited live in the browser by clicking on the "Download" or "Edit" buttons, respectively.
 
 ### Layout components
 

@@ -12,6 +12,7 @@ A list containing an object for each key that is set. This used internally but i
 [
   { field: 'x', accessor: <function> },
   { field: 'y', accessor: <function> },
+  { field: 'z', accessor: <function> },
   { field: 'r', accessor: <function> }
 ]
 ```
@@ -46,6 +47,10 @@ For example, if the extent of the data is `[10, 100]` and you set the xDomain pr
 
 Same as xDomain above but for the y domain.
 
+### zDomain `Array:[min: Number, max: Number]`
+
+Same as xDomain above but for the z domain.
+
 ### rDomain `Array:[min: Number, max: Number]`
 
 Same as xDomain above but for the r domain.
@@ -54,12 +59,13 @@ Same as xDomain above but for the r domain.
 
 An object containing has a key for x, y or r (if any are set), whose value is two-value array representing the min and max values for that field in the data.
 
-This value could differ from the domain of your scale if you are manually setting a limit on your scale by setting any of the `xDomain`, `yDomain` or `rDomain` settings. This is used internally to set domain things but it's also useful as a reference if you want to toggle between an arbitrary domain and the measured extents of the data, such as in the [small multiples example](/example/SmallMultiples).
+This value could differ from the domain of your scale if you are manually setting a limit on your scale by setting any of the `xDomain`, `yDomain`, `zDomain` or `rDomain` settings. This is used internally to set domain things but it's also useful as a reference if you want to toggle between an arbitrary domain and the measured extents of the data, such as in the [small multiples example](/example/SmallMultiples).
 
 ```js
 {
   x: [0, 235],
   y: [0, 80],
+  z: [0, 90],
   r: [0, 35]
 }
 ```
@@ -94,18 +100,26 @@ $: path=  'M' + $data
 
 Same as [xGet](/guide#xget) but for the y scale.
 
+### zGet(d: `Object`)
+
+Same as [xGet](/guide#xget) but for the z scale.
+
 ### rGet(d: `Object`)
 
 Same as [xGet](/guide#xget) but for the r scale.
 
 ### xScale(d: `Object`)
 
-The calculated scale for the x-dimension.
+The calculated scale for the x dimension.
 
 ### yScale(d: `Object`)
 
-Same as the above but for the y-dimension.
+Same as the above but for the y dimension.
+
+### zScale(d: `Object`)
+
+Same as the above but for the z dimension.
 
 ### rScale(d: `Object`)
 
-Same as the above but for the r-dimension.
+Same as the above but for the r dimension.
