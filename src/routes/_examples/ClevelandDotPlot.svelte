@@ -1,6 +1,7 @@
 <script>
 	import { LayerCake, Svg } from 'layercake';
 	import { scaleBand } from 'd3-scale';
+
 	import fruit from '../../data/fruitOrdinal.csv';
 	import ClevelandDotPlot from '../../components/ClevelandDotPlot.svelte';
 	import AxisX from '../../components/AxisX.svelte';

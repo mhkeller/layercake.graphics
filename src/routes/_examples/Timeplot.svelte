@@ -4,7 +4,7 @@
 	import { scaleBand } from 'd3-scale';
 
 	import days from '../../data/days.csv';
-	import ScatterScaleBand from '../../components/ScatterScaleBand.svelte';
+	import ScatterSvgScaleBand from '../../components/ScatterSvgScaleBand.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisYScaleBand from '../../components/AxisYScaleBand.svelte';
 
@@ -17,6 +17,7 @@
 		row.day = parts[0];
 		return row;
 	});
+
 	/* --------------------------------------------
 	 * Generate a range of days in between the min and max
 	 * in case we are missing any in our data so we can show empty days for them
@@ -24,7 +25,6 @@
 	const extents = calcExtents(daysTransformed, [
 		{ field: 'x', accessor: d => d.timestring }
 	]);
-
 
 	const minDate = extents.x[0].split('T')[0].split('-').map(d => +d);
 	const maxDate = extents.x[1].split('T')[0].split('-').map(d => +d);
@@ -57,10 +57,9 @@
 			<AxisX
 				ticks={[0, 4, 8, 12, 16, 20, 24].map(d => d * 60 * 60)}
 				formatTick={d => `${Math.floor(d / 60 / 60)}:00`}
-
 			/>
 			<AxisYScaleBand/>
-			<ScatterScaleBand
+			<ScatterSvgScaleBand
 				{r}
 				fill={'rgba(255, 204, 0, 0.75)'}
 			/>

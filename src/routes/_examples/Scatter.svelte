@@ -2,7 +2,7 @@
 	import { LayerCake, Svg, Canvas } from 'layercake';
 
 	import points from '../../data/points.csv';
-	import Scatter from '../../components/Scatter.svelte';
+	import ScatterSvg from '../../components/ScatterSvg.svelte';
 	import ScatterCanvas from '../../components/ScatterCanvas.svelte';
 	import Voronoi from '../../components/Voronoi.svelte';
 	import AxisX from '../../components/AxisX.svelte';
@@ -27,8 +27,8 @@
 <div class="chart-container">
 	<LayerCake
 		padding={{ top: 10, right: 5, bottom: 20, left: 25 }}
-		x={'myX'}
-		y={'myY'}
+		x='myX'
+		y='myY'
 		xPadding={[padding, padding]}
 		yPadding={[padding, padding]}
 		data={points}
@@ -47,7 +47,7 @@
 		</Canvas>
 
 		<Svg>
-			<Scatter
+			<ScatterSvg
 				{r}
 				fill={color}
 			/>

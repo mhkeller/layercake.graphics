@@ -1,6 +1,7 @@
 <script>
 	import { LayerCake, Svg } from 'layercake';
 	import { histogram, extent } from 'd3-array';
+
 	import unemployment from '../../data/unemployment.js';
 	import ColumnLinear from '../../components/ColumnLinear.svelte';
 	import AxisX from '../../components/AxisX.svelte';
@@ -22,6 +23,10 @@
 	.chart-container {
 		width: 100%;
 		height: 100%;
+	}
+
+	input {
+		height: auto;
 	}
 </style>
 

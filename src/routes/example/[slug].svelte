@@ -257,7 +257,7 @@
 </svelte:head>
 
 <div class="main">
-	<h1>{example.title} <a class="edit-repl" href="https://svelte.dev/repl/{example.replPath}" target="_blank" rel="nofollow">Edit</a></h1>
+	<h1>{example.title}<a class="edit-repl" href="https://svelte.dev/repl/{example.replPath}" target="_blank" rel="nofollow">Edit</a></h1>
 
 	<div class="chart-hero">
 		<svelte:component this={example.component} />

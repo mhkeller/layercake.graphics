@@ -1,5 +1,6 @@
 <script>
 	import { calcExtents, flatten } from 'layercake';
+
 	import pointSeries from '../../data/pointSeries.js';
 	import ChartWrapper from '../../components/ChartWrapper.svelte';
 

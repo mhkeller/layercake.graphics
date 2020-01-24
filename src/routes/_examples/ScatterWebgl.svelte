@@ -1,7 +1,7 @@
 <script>
 	import { LayerCake, Svg, WebGL, Html } from 'layercake';
 	import points from '../../data/points.csv';
-	import ScatterWebgl from '../../components/ScatterWebgl.svelte';
+	import ScatterWebGL from '../../components/ScatterWebGL.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 	import QuadTree from '../../components/QuadTree.svelte';
@@ -46,7 +46,7 @@
 		</Svg>
 
 		<WebGL>
-			<ScatterWebgl {diameter}/>
+			<ScatterWebGL {diameter}/>
 		</WebGL>
 
 		<Html>
