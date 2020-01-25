@@ -151,4 +151,4 @@ In the component, you access the canvas context with `const { gl } = getContext(
 
 > Since the `gl` value is a normal WebGL context, the underlying canvas element is accessible under `gl.canvas`.
 
-See the [WebGL scatter chart](/example/ScatterWebGL) for a working example.
+See the [WebGL scatter chart](/example/ScatterWebgl) for a working example.
