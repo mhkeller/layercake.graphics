@@ -187,7 +187,7 @@
 	<div id="dek">
 		<p>Layer Cake is a graphics framework built on top of <a href="https://svelte.dev" target="_blank" rel="noopener">Svelte</a>. It measures your target div and your data and creates scales that <span class="strong">stay synced</span> on layout changes. Use these scales to organize multiple, <span class="strong">mostly-reusable Svelte components</span>, whether they be SVG, HTML, Canvas or WebGL. Since they all share the same coordinate space, you can build your graphic one layer at a time.</p>
 
-		<p>Read the <a href="guide" rel=prefetch>guide</a> or try the <a href="https://github.com/mhkeller/layercake-template" target="_blank" rel="nofollow">starter template</a> that comes with example components. See more examples below and edit them live. Here's a sample of what the code looks like:</p>
+		<p>Read the <a href="guide" rel=prefetch>guide</a> or try the <a href="https://github.com/mhkeller/layercake-template" target="_blank" rel="nofollow">starter template</a> that comes with example components. See the examples below and even edit them live. Here's a sample of what the code looks like:</p>
 	</div>
 
 	<div class="code-example">
