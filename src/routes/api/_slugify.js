@@ -27,8 +27,11 @@ export default function slugger (string, maintainCase) {
 	}
 	slugs[slug] += 1;
 
-	if (slugs[slug] > 1) {
-		return `${slug}-${slugs[slug]}`;
+	// Not sure why these numbers go really high
+	// so do some weird substractions and things to make
+	// them turn out correctly
+	if (slugs[slug] > 3) {
+		return `${slug}-${slugs[slug] - 2}`;
 	}
 
 	return slug;

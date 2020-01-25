@@ -184,7 +184,7 @@
 		color: #181818;
 		line-height: 1.5;
 		position: relative;
-		z-index: 99;
+		z-index: 11;
 	}
 
 	section :global(li) {

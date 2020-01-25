@@ -65,6 +65,8 @@ All layout components let you set a `zIndex` property to fine-tune their layerin
 <!-- { filename: 'App.svelte' } -->
 <script>
   import { LayerCake, Canvas } from 'layercake';
+
+  import CanvasLayer from './components/CanvasLayer.svelte'
 </script>
 
 <style>
@@ -77,9 +79,50 @@ All layout components let you set a `zIndex` property to fine-tune their layerin
 <div class="chart-container"
   <LayerCake ...>
     <Canvas zIndex={3}> <!-- Optional z-index -->
+      <CanvasLayer/>
     </Canvas>
   </LayerCake>
 </div>
+```
+
+In the component, you access the canvas context with `const { ctx } = getContext('ctx');`. This value is on a different context from the `getContext('LayerCake')` one because you could have multiple canvas layers and there wouldn't be an easy way to grab the right one.
+
+> Since the `ctx` value is a normal 2d context, the underlying canvas element is accessible under `ctx.canvas`.
+
+Here's an example showing a scatter plot.
+
+```html
+<!-- { filename: './components/CanvasLayer.svelte' } -->
+<script>
+	import { getContext } from 'svelte';
+	import { scaleCanvas } from 'layercake';
+
+	const { data, xGet, yGet, width, height } = getContext('LayerCake');
+	const { ctx } = getContext('ctx');
+
+	$: {
+		if ($ctx) {
+			/* --------------------------------------------
+			 * If you were to have multiple canvas layers
+			 * maybe for some artistic layering purposes
+			 * put these reset functions in the first layer, not each one
+			 * since they should only run once per update
+			 */
+			scaleCanvas($ctx, $width, $height);
+			$ctx.clearRect(0, 0, $width, $height);
+
+			/* --------------------------------------------
+			 * Draw the scatterplot
+			 */
+			$data.forEach(d => {
+				$ctx.beginPath();
+				$ctx.arc($xGet(d), $yGet(d), 5, 0, 2 * Math.PI, false);
+				$ctx.fillStyle = '#f0c';
+				$ctx.fill();
+			});
+		}
+	}
+</script>
 ```
 
 ### WebGL
@@ -104,3 +147,8 @@ All layout components let you set a `zIndex` property to fine-tune their layerin
   </LayerCake>
 </div>
 ```
+In the component, you access the canvas context with `const { gl } = getContext('gl');`. This value is on a different context from the `getContext('LayerCake')` one because you could have multiple WebGL layers and there wouldn't be an easy way to grab the right one.
+
+> Since the `gl` value is a normal WebGL context, the underlying canvas element is accessible under `gl.canvas`.
+
+See the [WebGL scatter chart](/example/ScatterWebGL) for a working example.

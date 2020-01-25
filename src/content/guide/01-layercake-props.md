@@ -76,15 +76,15 @@ Calls to `x(dataRow)` in this scenario will return the two-value array. Calls to
 
 ### y `String|Function|Array`
 
-Same as [x](/guide#x) but for the y scale.
+Same as [x](/guide#x) but for the y dimension.
 
 ### z `String|Function|Array`
 
-Same as [x](/guide#x) but for the z scale.
+Same as [x](/guide#x) but for the z dimension.
 
 ### r `String|Function|Array`
 
-Same as [x](/guide#x) but for the r scale.
+Same as [x](/guide#x) but for the r dimension.
 
 ### padding `Object`
 
