@@ -19,7 +19,7 @@ A list containing an object for each key that is set. This used internally but i
 
 ### box `Object`
 
-A bounding box object of the [target](/guide#target) element with `top`, `right`, `bottom`, `left`, `width` and `height` numbers in pixels. Useful for creating tooltips.
+A bounding box object of the parent container with `top`, `right`, `bottom`, `left`, `width` and `height` numbers in pixels. Useful for creating tooltips.
 
 ### containerWidth `Number`
 

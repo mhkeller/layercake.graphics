@@ -92,8 +92,8 @@
 	h2 {
 		padding: 4rem 0 0 0;
 		margin: -3rem 0 1.05rem 0;
-		font-size: 2.4em;
-		font-weight: 400;
+		font-size: 2.3em;
+		font-weight: bold;
 		pointer-events: none;
 	}
 
@@ -183,6 +183,8 @@
 		font-weight: 300;
 		color: #181818;
 		line-height: 1.5;
+		position: relative;
+		z-index: 99;
 	}
 
 	section :global(li) {

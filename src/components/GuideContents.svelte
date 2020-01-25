@@ -49,7 +49,9 @@
 		/*font-weight: 500;*/
 		color:#727272;
 		font-size: 1em;
-		margin: 0 0 0.15em 0;
+		margin: 0;
+		padding-top: 0.075em;
+		padding-bottom: 0.075em;
 	}
 
 	.section.active, .subsection.active {
