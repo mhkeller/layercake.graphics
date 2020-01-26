@@ -300,7 +300,7 @@
 <ul class="dropdown">
 	<li>
 		<select on:change={loadPage} value="{$page.path}">
-			<option selected="{segment === undefined}" value="">All</option>
+			<option selected="{slug === ''}" value="">All</option>
 			{#each examples as example}
 				<option value="example/{example.slug}" selected="{slug === example.slug}">{slimName(example.title)}</option>
 			{/each}
