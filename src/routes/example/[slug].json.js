@@ -34,8 +34,11 @@ function cleanMain (example) {
 }
 
 function getComponentPaths (example) {
-	return example.match(/\.\.\/.+svelte/gm)
-		.map(d => d.replace('../../', ''));
+	const match = example.match(/\.?\.\/.+svelte/gm);
+	if (match) {
+		return match.map(d => d.replace('../../', ''));
+	}
+	return [];
 }
 
 export function get(req, res, next) {
@@ -101,7 +104,24 @@ export function get(req, res, next) {
 			};
 		});
 
-	const response = { main, dek, components, modules, componentModules, csvs };
+	const componentComponentMatches = getComponentPaths(components.map(d => d.contents).join(''));
+	const componentComponents = componentComponentMatches === null ? [] : componentComponentMatches
+		.map(d => {
+			return {
+				title: d.replace('./', './components/'),
+				contents: cleanContents(fs.readFileSync(d.replace('./', 'src/components/'), 'utf-8'))
+			};
+		});
+
+	const response = {
+		main,
+		dek,
+		components,
+		modules,
+		componentModules,
+		componentComponents,
+		csvs
+	};
 
 	res.writeHead(200, {
 		'Content-Type': 'application/json'
