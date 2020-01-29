@@ -90,6 +90,7 @@
 		position: relative;
 		height: 140px;
 		margin-bottom: 60px;
+		overflow: hidden;
 	}
 	@media (max-width: 650px) {
 		.gallery-item {
