@@ -29,6 +29,31 @@ The width of the parent container, the div element that contains the `<LayerCake
 
 The height of the parent container, the div element that contains the `<LayerCake>` component.
 
+### extents `Object`
+
+An object containing has a key for x, y or r (if any are set), whose value is two-value array representing the min and max values for that field in the data.
+
+This value could differ from the domain of your scale if you are manually setting a limit on your scale by setting any of the `xDomain`, `yDomain`, `zDomain` or `rDomain` settings. This is used internally to set domain things but it's also useful as a reference if you want to toggle between an arbitrary domain and the measured extents of the data, such as in the [small multiples example](/example/SmallMultiples).
+
+```js
+{
+  x: [0, 235],
+  y: [0, 80],
+  z: [0, 90],
+  r: [0, 35]
+}
+```
+
+### originalSettings `Object`
+
+A copy of some of the original properties set on the `<LayerCake>` component.
+
+Some of these properties get changed by the time they end up on the context object. For example, the [x](/guide#x), [y](/guide#y), [z](/guide#z) and [r](/guide#r) properties can be strings or arrays but when they're exposed on the context, they are always a function. Sometimes, it's useful to refer to those original props such as in the [Cleveland Dot Plot example](/example/ClevelandDotPlot), which uses the x accessor shorthand of providing a list of keys.
+
+Or, [xDomain](/guide#xdomain) and the other domain props can be used to set manual limits on the min or max of the domain scale. This can be different from what gets set on the context [xDomain](/guide#xdomain) if the prop value contained any `null` values. If you want to refer to the original value for any reason, it's set on this object.
+
+Having access to this field can help you not repeat yourself in specifying things twice or in scenarios where Layer Cake is doing a transformation on that original value, like in accessors or domain inputs, and you want to know about the original value.
+
 ### width `Number`
 
 The width of the drawable space for the chart. This is the [width](/guide#width) of the parent container taking into account any margin.
@@ -94,31 +119,6 @@ Same as [xDomain](/guide#xdomain-2) above but for the z domain.
 ### rDomain `Array:[min: Number, max: Number]`
 
 Same as [xDomain](/guide#xdomain-2) above but for the r domain.
-
-### extents `Object`
-
-An object containing has a key for x, y or r (if any are set), whose value is two-value array representing the min and max values for that field in the data.
-
-This value could differ from the domain of your scale if you are manually setting a limit on your scale by setting any of the `xDomain`, `yDomain`, `zDomain` or `rDomain` settings. This is used internally to set domain things but it's also useful as a reference if you want to toggle between an arbitrary domain and the measured extents of the data, such as in the [small multiples example](/example/SmallMultiples).
-
-```js
-{
-  x: [0, 235],
-  y: [0, 80],
-  z: [0, 90],
-  r: [0, 35]
-}
-```
-
-### originalSettings `Object`
-
-A copy of some of the original properties set on the `<LayerCake>` component.
-
-Some of these properties get changed by the time they end up on the context object. For example, the [x](/guide#x), [y](/guide#y), [z](/guide#z) and [r](/guide#r) properties can be strings or arrays but when they're exposed on the context, they are always a function. Sometimes, it's useful to refer to those original props such as in the [Cleveland Dot Plot example](/example/ClevelandDotPlot), which uses the x accessor shorthand of providing a list of keys.
-
-Or, [xDomain](/guide#xdomain) and the other domain props can be used to set manual limits on the min or max of the domain scale. This can be different from what gets set on the context [xDomain](/guide#xdomain) if the prop value contained any `null` values. If you want to refer to the original value for any reason, it's set on this object.
-
-Having access to this field can help you not repeat yourself in specifying things twice or in scenarios where Layer Cake is doing a transformation on that original value, like in accessors or domain inputs, and you want to know about the original value.
 
 ### xGet(d: `Object`)
 

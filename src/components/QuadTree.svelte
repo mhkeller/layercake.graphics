@@ -8,7 +8,7 @@
 	let found = {};
 	let e = {};
 
-	export let dataset;
+	export let dataset = undefined;
 	export let x = 'x';
 	export let y = 'y';
 

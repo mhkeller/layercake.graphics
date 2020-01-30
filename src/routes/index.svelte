@@ -58,6 +58,7 @@
 		padding: 1.5em 2em 2em 2em;
 		margin: 0 auto;
 		box-sizing: border-box;
+		overflow: hidden;
 	}
 
 	h1 {
@@ -90,7 +91,6 @@
 		position: relative;
 		height: 140px;
 		margin-bottom: 60px;
-		overflow: hidden;
 	}
 	@media (max-width: 650px) {
 		.gallery-item {

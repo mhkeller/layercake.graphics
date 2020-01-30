@@ -242,6 +242,14 @@ Same as [xNice](/guide#xpadding) but for the z domain.
 
 Same as [xNice](/guide#xpadding) but for the r domain.
 
+### width `Number=350`
+
+The chart will actually render before the container width is measured and you'll get a flash of a chart before it adjusts itself. You can set a default width here that it will render to for that moment. It might be better to just now show the chart during this period but including this option for now. Defaults to `350`.
+
+### height `Number=250`
+
+Same as [width](/guide/#width) above but for the height. Default is `250`.
+
 ### flatData `Array`
 
 In order for Layer Cake to measure the extents of your data, it needs a flat array of items that the x, y and r accessors can find. If your data is not flat (often the case if your renderers prefer a nested format), you can tell it to measure extents against a flat version. This *will not* change the shape of the data that gets passed to components — it is only for extent calculation.

@@ -42,6 +42,7 @@
 		color: #333;
 		font-size: 1.2rem;
 		margin: 0 0 0.15em 0;
+		line-height: 1.5rem;
 	}
 
 	.subsection {

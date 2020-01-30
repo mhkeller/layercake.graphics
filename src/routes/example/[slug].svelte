@@ -88,6 +88,7 @@
 		padding: 1.5em 2em 2em 2em;
 		margin: 0 auto;
 		box-sizing: border-box;
+		overflow: hidden;
 	}
 
 	.chart-hero {
@@ -95,7 +96,6 @@
 		height: 200px;
 		margin: 1.5em 0 2em 0;
 		position: relative;
-		overflow: hidden;
 	}
 
 	.dek {

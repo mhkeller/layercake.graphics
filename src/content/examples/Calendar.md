@@ -1,1 +1,1 @@
-Another small multiple example that generates the full date range for that month and puts each month inside its own div. This includes some extra stuff calculating the CSS the `styles` object. You could also put this stuff in normal CSS, which is probably a better idea. We do it in the JavaScript here since having styles work with this examples site and the downloaded version needs a little more work 😳.
+Another small multiple example that generates the full date range for that month and puts each month inside its own div.
