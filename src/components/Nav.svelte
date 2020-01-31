@@ -17,6 +17,8 @@
 
 	let nav;
 
+	$: console.log('slug', slug);
+
 	const slimName = d => d.split(' (')[0];
 
 	function loadPage () {
