@@ -10,15 +10,12 @@
 
 	const { page } = stores();
 	$: path = $page.path;
-	$: slug = path.split('/').pop();
+	$: slug = path.replace(/\/$/, '').split('/').pop();
 
 	let basePath = '/';
 	let open = false;
 
 	let nav;
-
-	$: console.log('slug', slug);
-	$: console.log('page', $page);
 
 	const slimName = d => d.split(' (')[0];
 
