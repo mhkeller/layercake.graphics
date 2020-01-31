@@ -8,7 +8,7 @@ import MultiLine from './_examples/MultiLine.svelte';
 import MapLayered from './_examples/MapLayered.svelte';
 import Bar from './_examples/Bar.svelte';
 import BarStacked from './_examples/BarStacked.svelte';
-import ScatterWebGL from './_examples/ScatterWebGL.svelte';
+import ScatterWebGL from './_examples/ScatterWebgl.svelte';
 import ClevelandDotPlot from './_examples/ClevelandDotPlot.svelte';
 import Histogram from './_examples/Histogram.svelte';
 import SmallMultiples from './_examples/SmallMultiples.svelte';
