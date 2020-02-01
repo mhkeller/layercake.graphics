@@ -103,7 +103,7 @@
 	}
 
 	.dek :global(p a) {
-		color: #f0c;
+		color: #ff3e00;
 		text-decoration: none;
 	}
 
@@ -124,7 +124,7 @@
 	}
 
 	.dek :global(p a) {
-		color: #f0c;
+		color: #ff3e00;
 		text-decoration: none;
 	}
 
