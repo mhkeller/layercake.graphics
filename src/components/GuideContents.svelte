@@ -1,7 +1,7 @@
 <script>
 	import { afterUpdate } from 'svelte';
 	export let open;
-	export let activeGuideSection;
+	export let activeGuideSection = undefined;
 	export let sections = [];
 
 	const guideSections = sections.map(section => {
