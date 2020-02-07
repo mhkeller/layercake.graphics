@@ -301,7 +301,7 @@
 	<li>
 		<select on:change={loadPage} value="{$page.path}">
 			<option selected="{slug === ''}" value="">All</option>
-			{#each examples as example}
+			{#each examples.sort((a, b) => a.title < b.title ? -1 : 1) as example}
 				<option value="example/{example.slug}" selected="{slug === example.slug}">{slimName(example.title)}</option>
 			{/each}
 		</select>

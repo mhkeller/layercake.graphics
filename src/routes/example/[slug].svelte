@@ -6,7 +6,7 @@
 		const data = await res.json();
 
 		if (res.status === 200) {
-			return { slug: params.slug, data };
+			return { slug: params.slug, data, active: 'index' };
 		} else {
 			this.error(res.status, data.message);
 		}
@@ -28,7 +28,7 @@
 	export let slug;
 	export let data;
 
-	let active = 'index';
+	export let active = 'index';
 
 	const renderer = new marked.Renderer();
 	function markdownToHtml (text) {
