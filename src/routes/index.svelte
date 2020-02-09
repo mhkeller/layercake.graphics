@@ -1,6 +1,7 @@
 <script>
 	import hljs from 'highlight.js';
 	import examples from './_examples.js';
+	import examplesSsr from './_examples_ssr.js';
 	import hljsDefineSvelte from '../modules/hljsDefineSvelte.js';
 
 	hljs.registerLanguage('svelte', hljsDefineSvelte);
@@ -197,6 +198,20 @@
 
 	<div id="gallery">
 		{#each examples as example}
+			<div class="gallery-item">
+				<h4 class="title"><a rel=prefetch href="example/{example.slug}">{example.title}</a> <a class="edit-repl" href="https://svelte.dev/repl/{example.replPath}" target="_blank" rel="nofollow">Edit</a></h4>
+				<svelte:component this="{example.component}"/>
+			</div>
+		{/each}
+	</div>
+
+	<div class="section-hed">
+		<h2>Server-side render examples</h2>
+		<p>The same examples above using a technique that renders them scaled without any client-side JavaScript.</p>
+	</div>
+
+	<div id="ssr-gallery">
+		{#each examplesSsr as example}
 			<div class="gallery-item">
 				<h4 class="title"><a rel=prefetch href="example/{example.slug}">{example.title}</a> <a class="edit-repl" href="https://svelte.dev/repl/{example.replPath}" target="_blank" rel="nofollow">Edit</a></h4>
 				<svelte:component this="{example.component}"/>
