@@ -1,4 +1,4 @@
-import LineSsr from './_examples_ssr/LineSsr.svelte';
+import Line from './_examples_ssr/Line.svelte';
 // import Scatter from './_examples_ssr/Scatter.svelte';
 // import MapSvg from './_examples_ssr/MapSvg.svelte';
 // import Column from './_examples_ssr/Column.svelte';
@@ -17,7 +17,7 @@ import LineSsr from './_examples_ssr/LineSsr.svelte';
 // import Radar from './_examples_ssr/Radar.svelte';
 
 export default [
-	{ replPath: '', title: 'Line + area', slug: 'LineSsr', component: LineSsr },
+	{ replPath: '', title: 'Line + area', slug: 'Line', component: Line },
 	// { replPath: '', title: 'WebGL Scatter (svg axes, quadtree hover)', slug: 'ScatterWebgl', component: ScatterWebGL },
 	// { replPath: '', title: 'Map (svg)', slug: 'MapSvg', component: MapSvg },
 	// { replPath: '', title: 'Multilayer map (canvas + svg)', slug: 'MapLayered', component: MapLayered },
