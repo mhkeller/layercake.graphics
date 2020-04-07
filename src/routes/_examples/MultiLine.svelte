@@ -25,24 +25,16 @@
 
 	const parseDate = timeParse('%Y-%m-%d');
 
-	data.forEach(row => {
-		row[xKey] = parseDate(row[xKey]);
-		seriesNames.forEach(name => {
-			row[name] = +row[name];
-		});
-	});
-
-	const dataLong = Object.keys(data[0]).map(key => {
-		if (key === xKey) return null;
+	const dataLong = seriesNames.map(key => {
 		return {
 			key,
 			values: data.map(d => {
-				const obj = { key, value: d[key] };
-				obj[xKey] = d[xKey];
+				const obj = { key, value: +d[key] };
+				obj[xKey] = parseDate(d[xKey]);
 				return obj;
 			})
 		};
-	}).filter(d => d);
+	})
 
 	// Make a flat array of the `values` of our nested series
 	// we can pluck the `value` field from each item in the array to measure extents
@@ -72,7 +64,7 @@
 <div class="chart-container">
 	<LayerCake
 		padding={{ top: 7, right: 10, bottom: 20, left: 25 }}
-		x='month'
+		x={xKey}
 		y='value'
 		flatData={flatten(dataLong)}
 		yDomain={[0, null]}
@@ -81,7 +73,7 @@
 		<Svg>
 			<AxisX
 				gridlines={false}
-				ticks={data.map(d => d[xKey]).sort((a, b) => a - b)}
+				ticks={data.map(d => parseDate(d[xKey])).sort((a, b) => a - b)}
 				formatTick={formatTickX}
 				snapTicks={true}
 			/>

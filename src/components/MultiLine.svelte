@@ -1,7 +1,7 @@
 <script>
 	import { getContext } from 'svelte';
 
-	const { data, xGet, yGet } = getContext('LayerCake');
+	const { data, xGet, yGet, xScale, yScale, xDomain, yDomain } = getContext('LayerCake');
 
 	export let colorScale = d => '#000';
 
