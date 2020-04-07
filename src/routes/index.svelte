@@ -206,7 +206,7 @@
 	</div>
 
 	<div class="section-hed">
-		<h2>Server-side render examples</h2>
+		<h2>Server-side rendering examples</h2>
 		<p>The same examples above using a technique that renders them scaled without any client-side JavaScript.</p>
 	</div>
 
