@@ -31,7 +31,7 @@
 			<div class="line vertical" style='left:{$xScale(tick)}%;top: 0;bottom: 0;'></div>
 		{/if}
 		<div class='tick tick-{ tick }' style='left:{$xScale(tick)}%;top:100%;'>
-			<div class="text" style='transform: translate({textAnchor(i)}, 16px)'>{formatTick(tick)}</div>
+			<div class="text" style='transform: translate({textAnchor(i)}, 7px)'>{formatTick(tick)}</div>
 		</div>
 	{/each}
 	{#if baseline === true}
@@ -55,7 +55,7 @@
 	}
 
 	.line.vertical {
-		border-left: 1px dotted #aaa;
+		border-left: 1px dashed #aaa;
 	}
 
 	.line.horizontal {
