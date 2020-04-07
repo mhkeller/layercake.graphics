@@ -70,6 +70,7 @@
 				gridlines={false}
 			/>
 			<AxisY
+				ticks={4}
 				gridlines={false}
 			/>
 		</Svg>

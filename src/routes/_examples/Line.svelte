@@ -29,7 +29,9 @@
 	>
 		<Svg>
 			<AxisX/>
-			<AxisY/>
+			<AxisY
+				ticks={4}
+			/>
 			<Line/>
 			<Area/>
 		</Svg>
