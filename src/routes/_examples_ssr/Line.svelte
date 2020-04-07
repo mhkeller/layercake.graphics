@@ -5,7 +5,7 @@
 	import Line from '../../components/Line.svelte';
 	import Area from '../../components/Area.svelte';
 	import AxisX from '../../components/AxisXHtml.svelte';
-	// import AxisY from '../../ssrComponents/AxisY.svelte';
+	import AxisY from '../../components/AxisYHtml.svelte';
 
 	points.forEach(row => {
 		row.myY = +row.myY;
@@ -31,13 +31,12 @@
 		data={points}
 	>
 		<Html>
-				<AxisX
-					gridlines={true}
-					baseline={true}
+				<AxisX/>
+				<AxisY
+					ticks={4}
 				/>
 		</Html>
 		<SvgSsr>
-			<!-- <AxisY/> -->
 			<Line/>
 			<Area/>
 		</SvgSsr>

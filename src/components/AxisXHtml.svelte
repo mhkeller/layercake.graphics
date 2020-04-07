@@ -8,9 +8,8 @@
 	export let baseline = false;
 	export let snapTicks = false;
 	export let ticks = undefined;
-	export let tickNumber = undefined;
 
-	$: tickVals = ticks || $xScale.ticks(tickNumber);
+	$: tickVals = Array.isArray(ticks) ? ticks : $xScale.ticks(ticks);
 
 	function textAnchor(i) {
 		if (snapTicks === true) {
@@ -28,21 +27,22 @@
 <div class='axis x-axis'>
 	{#each tickVals as tick, i}
 		{#if gridlines !== false}
-			<div class="line vertical" style='left:{$xScale(tick)}%;top: 0;bottom: 0;'></div>
+			<div class="gridline" style='left:{$xScale(tick)}%;top: 0;bottom: 0;'></div>
 		{/if}
 		<div class='tick tick-{ tick }' style='left:{$xScale(tick)}%;top:100%;'>
 			<div class="text" style='transform: translate({textAnchor(i)}, 7px)'>{formatTick(tick)}</div>
 		</div>
 	{/each}
 	{#if baseline === true}
-		<div class="line baseline horizontal" style='top: 100%;width: 100%;'></div>
+		<div class="baseline" style='top: 100%;width: 100%;'></div>
 	{/if}
 </div>
 
 <style>
 	.axis,
 	.tick,
-	.line {
+	.gridline,
+	.baseline {
 		position: absolute;
 	}
 	.axis {
@@ -54,24 +54,15 @@
 		font-weight: 200;
 	}
 
-	.line.vertical {
+	.gridline {
 		border-left: 1px dashed #aaa;
 	}
 
-	.line.horizontal {
+	.baseline {
 		border-top: 1px solid #aaa;
 	}
 
 	.tick .text {
 		color: #666;
 	}
-
-	/* line,
-	.tick line {
-		stroke-dasharray: 2;
-	}
-
-	.baseline {
-		stroke-dasharray: 0;
-	} */
 </style>
