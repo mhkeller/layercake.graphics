@@ -4,7 +4,7 @@
 	import groups from '../../data/groups.csv';
 
 	import Column from '../../components/Column.svelte';
-	import AxisXScaleBand from '../../components/AxisXScaleBand.svelte';
+	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 	import Annotations from '../../components/Annotations.svelte';
 	import Arrows from '../../components/Arrows.svelte';
@@ -66,7 +66,9 @@
 
 		<Svg>
 			<Column/>
-			<AxisXScaleBand
+			<AxisX
+				ticks={scale => scale.domain()}
+				tickDx={scale => scale.bandwidth() / 2}
 				gridlines={false}
 			/>
 			<AxisY

@@ -1,22 +1,37 @@
 <script>
 	import { getContext } from 'svelte';
 
-	const { padding, yScale } = getContext('LayerCake');
+	const { padding, xRange, xScale, yScale } = getContext('LayerCake');
 
 	export let ticks = undefined;
 	export let gridlines = true;
 	export let formatTick = d => d;
+	export let tickX = '0';
+	export let tickY = '';
+	export let tickDx = '0';
+	export let tickDy = '-4';
+	export let textAnchor = 'start';
 
-	$: tickVals = Array.isArray(ticks) ? ticks : $yScale.ticks(ticks);
+	$: tickVals = Array.isArray(ticks) ? ticks : typeof ticks === 'function' ? ticks($yScale) : $yScale.ticks(ticks);
 </script>
 
 <g class='axis y-axis' transform='translate(-{$padding.left}, 0)'>
 	{#each tickVals as tick, i}
-		<g class='tick tick-{tick}' transform='translate(0, {$yScale(tick)})'>
+		<g class='tick tick-{tick}' transform='translate({$xRange[0]}, {$yScale(tick)})'>
 			{#if gridlines !== false}
-				<line x2='100%'></line>
+				<line
+					x2='100%'
+					y1={typeof tickY === 'function' ? tickY($yScale) : tickY}
+					y2={typeof tickY === 'function' ? tickY($yScale) : tickY}
+				></line>
 			{/if}
-			<text y='-4'>{formatTick(tick)}</text>
+			<text
+				x={typeof tickX === 'function' ? tickX($xScale) : tickX}
+				y={typeof tickY === 'function' ? tickY($yScale) : tickY}
+				dx='{typeof tickDx === 'function' ? tickDx($xScale) : tickDx}'
+				dy='{typeof tickDy === 'function' ? tickDy($yScale) : tickDy}'
+				style="text-anchor:{textAnchor};"
+			>{formatTick(tick)}</text>
 		</g>
 	{/each}
 </g>
@@ -34,7 +49,6 @@
 
 	.tick text {
 		fill: #666;
-		text-anchor: start;
 	}
 
 	.tick.tick-0 line {

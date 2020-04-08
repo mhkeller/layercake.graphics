@@ -4,7 +4,7 @@
 	import { scaleBand } from 'd3-scale';
 
 	import days from '../../data/days.csv';
-	import ScatterSvgScaleBand from '../../components/ScatterSvgScaleBand.svelte';
+	import ScatterSvg from '../../components/ScatterSvg.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisYScaleBand from '../../components/AxisYScaleBand.svelte';
 
@@ -59,9 +59,10 @@
 				formatTick={d => `${Math.floor(d / 60 / 60)}:00`}
 			/>
 			<AxisYScaleBand/>
-			<ScatterSvgScaleBand
+			<ScatterSvg
 				{r}
 				fill={'rgba(255, 204, 0, 0.75)'}
+				dy={scale => scale.bandwidth() / 2}
 			/>
 		</Svg>
 
