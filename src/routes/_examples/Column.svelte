@@ -55,13 +55,13 @@
 
 <div class="chart-container">
 	<LayerCake
-			padding={{ top: 0, right: 0, bottom: 20, left: 20 }}
-			x='year'
-			y='value'
-			xScale={scaleBand().paddingInner([0.02]).round(true)}
-			xDomain={['1979', '1980', '1981', '1982', '1983']}
-			yDomain={[0, null]}
-			data={groups}
+		padding={{ top: 0, right: 0, bottom: 20, left: 20 }}
+		x='year'
+		y='value'
+		xScale={scaleBand().paddingInner([0.02]).round(true)}
+		xDomain={['1979', '1980', '1981', '1982', '1983']}
+		yDomain={[0, null]}
+		data={groups}
 	>
 
 		<Svg>

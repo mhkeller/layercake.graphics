@@ -1,10 +1,10 @@
 <script>
 	import { getContext } from 'svelte';
 
-	const { data, xGet, yGet, height, xScale } = getContext('LayerCake');
+	const { data, xGet, yGet, yRange, xScale } = getContext('LayerCake');
 
 	$: columnHeight = d => {
-		return $height - $yGet(d);
+		return $yRange[0] - $yGet(d);
 	};
 
 	/* --------------------------------------------
