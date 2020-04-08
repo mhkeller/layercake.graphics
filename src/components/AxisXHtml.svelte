@@ -8,8 +8,12 @@
 	export let baseline = false;
 	export let snapTicks = false;
 	export let ticks = undefined;
+	export let tickX = 0;
+	export let tickY = 7;
+	export let tickDx = 0;
+	export let tickDy = 0;
 
-	$: tickVals = Array.isArray(ticks) ? ticks : $xScale.ticks(ticks);
+	$: tickVals = Array.isArray(ticks) ? ticks : typeof ticks === 'function' ? ticks($xScale) : $xScale.ticks(ticks);
 
 	function textAnchor(i) {
 		if (snapTicks === true) {
@@ -29,8 +33,12 @@
 		{#if gridlines !== false}
 			<div class="gridline" style='left:{$xScale(tick)}%;top: 0;bottom: 0;'></div>
 		{/if}
-		<div class='tick tick-{ tick }' style='left:{$xScale(tick)}%;top:100%;'>
-			<div class="text" style='transform: translate({textAnchor(i)}, 7px)'>{formatTick(tick)}</div>
+		<div
+			class='tick tick-{ tick }'
+			style='left:{$xScale(tick) + (typeof tickDx === 'function' ? tickDx($xScale) : tickDx)}%;top:100%;'>
+			<div
+				class="text"
+				style='transform: translate({textAnchor(i)}, {tickY}px)'>{formatTick(tick)}</div>
 		</div>
 	{/each}
 	{#if baseline === true}
@@ -64,5 +72,6 @@
 
 	.tick .text {
 		color: #666;
+		position: relative;
 	}
 </style>

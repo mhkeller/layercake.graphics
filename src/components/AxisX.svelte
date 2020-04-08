@@ -36,9 +36,9 @@
 			{/if}
 			<text
 				x={typeof tickX === 'function' ? tickX($xScale) : tickX}
-				y={typeof tickY === 'function' ? tickY($yScale) : tickY}
+				y={tickY}
 				dx='{typeof tickDx === 'function' ? tickDx($xScale) : tickDx}'
-				dy='{typeof tickDy === 'function' ? tickDy($yScale) : tickDy}'
+				dy='{tickDy}'
 				text-anchor='{textAnchor(i)}'>{formatTick(tick)}</text>
 		</g>
 	{/each}
