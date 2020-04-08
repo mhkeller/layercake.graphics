@@ -21,7 +21,7 @@
 
 <div class="chart-container">
 	<LayerCake
-		padding={{ top: 0, right: 20, bottom: 20, left: 30 }}
+		padding={{ top: 0, bottom: 20, left: 30 }}
 		x='value'
 		y='year'
 		yScale={scaleBand().paddingInner([0.05]).round(true)}

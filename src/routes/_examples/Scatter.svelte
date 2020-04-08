@@ -36,7 +36,9 @@
 
 		<Svg>
 			<AxisX/>
-			<AxisY/>
+			<AxisY
+				ticks={4}
+			/>
 		</Svg>
 
 		<Canvas>

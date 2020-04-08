@@ -60,6 +60,7 @@
 				formatTick={formatTickX}
 			/>
 			<AxisY
+				ticks={4}
 				formatTick={formatTickY}
 			/>
 			<AreaStacked

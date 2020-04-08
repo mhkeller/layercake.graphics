@@ -8,17 +8,20 @@
 	export let baseline = false;
 	export let snapTicks = false;
 	export let ticks = undefined;
-	export let tickNumber = undefined;
+	export let tickX = '0';
+	export let tickY = '16';
+	export let tickDx = '0';
+	export let tickDy = '0';
 
-	$: tickVals = ticks || $xScale.ticks(tickNumber);
+	$: tickVals = Array.isArray(ticks) ? ticks : typeof ticks === 'function' ? ticks($xScale) : $xScale.ticks(ticks);
 
 	function textAnchor(i) {
 		if (snapTicks === true) {
 			if (i === 0) {
-				return 'end';
+				return 'start';
 			}
 			if (i === tickVals.length - 1) {
-				return 'start';
+				return 'end';
 			}
 		}
 		return 'middle';
@@ -31,7 +34,12 @@
 			{#if gridlines !== false}
 				<line y1='{$height * -1}' y2='0' x1='0' x2='0'></line>
 			{/if}
-			<text y='16' text-anchor='{textAnchor(i)}'>{formatTick(tick)}</text>
+			<text
+				x={typeof tickX === 'function' ? tickX($xScale) : tickX}
+				y={typeof tickY === 'function' ? tickY($yScale) : tickY}
+				dx='{typeof tickDx === 'function' ? tickDx($xScale) : tickDx}'
+				dy='{typeof tickDy === 'function' ? tickDy($yScale) : tickDy}'
+				text-anchor='{textAnchor(i)}'>{formatTick(tick)}</text>
 		</g>
 	{/each}
 	{#if baseline === true}

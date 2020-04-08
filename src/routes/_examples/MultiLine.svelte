@@ -1,6 +1,7 @@
 <script>
 	import { LayerCake, Svg, Html } from 'layercake';
 	import { scaleOrdinal } from 'd3-scale';
+	import { timeParse, timeFormat } from 'd3-time-format';
 
 	import data from '../../data/fruit.csv';
 	import MultiLine from '../../components/MultiLine.svelte';
@@ -22,37 +23,28 @@
 		'#ff00cc'
 	];
 
-	data.forEach(row => {
-		row[xKey] = new Date(row[xKey]);
-		seriesNames.forEach(name => {
-			row[name] = +row[name];
-		});
-	});
+	const parseDate = timeParse('%Y-%m-%d');
 
-	const dataLong = Object.keys(data[0]).map(key => {
-		if (key === 'month') return null;
+	const dataLong = seriesNames.map(key => {
 		return {
 			key,
 			values: data.map(d => {
-				return { key, month: d[xKey], value: d[key] };
+				const obj = { key, value: +d[key] };
+				obj[xKey] = parseDate(d[xKey]);
+				return obj;
 			})
 		};
-	}).filter(d => d);
+	})
 
 	// Make a flat array of the `values` of our nested series
 	// we can pluck the `value` field from each item in the array to measure extents
-	const flatten = data => data.reduce((store, group) => store.concat(group.values), []);
-
-	const monthNames = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
+	const flatten = data => data.reduce((memo, group) => memo.concat(group.values), []);
 
 	const colorScale = scaleOrdinal()
     .domain(seriesNames)
     .range(seriesColors);
 
-	function formatTickX (d) {
-		const date = new Date(d);
-		return `${monthNames[date.getUTCMonth()]} ${date.getUTCDate()}`;
-	}
+	const formatTickX = timeFormat('%b. %e');
 
 	function formatTickY (d) {
 		if (d > 999) {
@@ -72,7 +64,7 @@
 <div class="chart-container">
 	<LayerCake
 		padding={{ top: 7, right: 10, bottom: 20, left: 25 }}
-		x='month'
+		x={xKey}
 		y='value'
 		flatData={flatten(dataLong)}
 		yDomain={[0, null]}
@@ -81,11 +73,12 @@
 		<Svg>
 			<AxisX
 				gridlines={false}
-				ticks={data.map(d => d[xKey])}
+				ticks={data.map(d => parseDate(d[xKey])).sort((a, b) => a - b)}
 				formatTick={formatTickX}
 				snapTicks={true}
 			/>
 			<AxisY
+				ticks={4}
 				formatTick={formatTickY}
 			/>
 

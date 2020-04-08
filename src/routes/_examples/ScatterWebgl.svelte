@@ -42,7 +42,9 @@
 	>
 		<Svg>
 			<AxisX/>
-			<AxisY/>
+			<AxisY
+				ticks={5}
+			/>
 		</Svg>
 
 		<WebGL>
