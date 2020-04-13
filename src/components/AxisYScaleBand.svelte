@@ -11,7 +11,7 @@
 
 <g class='axis y-axis'>
 	{#each $yScale.domain() as tick}
-		<g class='tick tick-{tick}' transform='translate({$xScale.range()[0]}, {$yScale(tick)})'>
+		<g class='tick tick-{tick}' transform='translate({$xRange[0]}, {$yScale(tick)})'>
 			{#if gridlines !== false}
 				<line x2='100%' y1={halfBandwidth} y2={halfBandwidth}></line>
 			{/if}

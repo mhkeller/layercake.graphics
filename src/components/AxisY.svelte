@@ -8,11 +8,19 @@
 	export let formatTick = d => d;
 	export let tickX = '0';
 	export let tickY = '';
-	export let tickDx = '0';
-	export let tickDy = '-4';
-	export let textAnchor = 'start';
+	export let tickDx = undefined;
+	export let tickDy = undefined;
+	export let textAnchor = typeof $yScale.bandwidth === 'function'  ? 'end' : 'start';
 
-	$: tickVals = Array.isArray(ticks) ? ticks : typeof ticks === 'function' ? ticks($yScale) : $yScale.ticks(ticks);
+	let tickVals;
+
+	$: if (typeof $yScale.bandwidth === 'function') {
+		tickVals = $yScale.domain();
+	} else if (Array.isArray(ticks)) {
+		tickVals = ticks;
+	} else {
+		tickVals = $yScale.ticks(ticks);
+	}
 </script>
 
 <g class='axis y-axis' transform='translate(-{$padding.left}, 0)'>
@@ -21,15 +29,15 @@
 			{#if gridlines !== false}
 				<line
 					x2='100%'
-					y1={typeof tickY === 'function' ? tickY($yScale) : tickY}
-					y2={typeof tickY === 'function' ? tickY($yScale) : tickY}
+					y1="{typeof tickY === 'function' ? tickY($yScale) : typeof tickY === 'undefined' && typeof $yScale.bandwidth === 'function' ? ($yScale.bandwidth() / 2) : tickY || '-4'}"
+					y2="{typeof tickY === 'function' ? tickY($yScale) : typeof tickY === 'undefined' && typeof $yScale.bandwidth === 'function' ? ($yScale.bandwidth() / 2) : tickY || '-4'}"
 				></line>
 			{/if}
 			<text
-				x={typeof tickX === 'function' ? tickX($xScale) : tickX}
-				y={typeof tickY === 'function' ? tickY($yScale) : tickY}
-				dx='{typeof tickDx === 'function' ? tickDx($xScale) : tickDx}'
-				dy='{typeof tickDy === 'function' ? tickDy($yScale) : tickDy}'
+				x='{typeof tickX === 'function' ? tickX($xScale) : typeof tickX === 'undefined' && typeof $yScale.bandwidth === 'function' ? '-5' : tickX || '0'}'
+				y='{typeof tickY === 'function' ? tickY($yScale) : typeof tickY === 'undefined' && typeof $yScale.bandwidth === 'function' ? (4 + ($yScale.bandwidth() / 2)) : tickY || '-4'}'
+				dx={typeof tickDx === 'function' ? tickDx($xScale) : tickDx}
+				dy={typeof tickDy === 'function' ? tickDy($yScale) : tickDy}
 				style="text-anchor:{textAnchor};"
 			>{formatTick(tick)}</text>
 		</g>
