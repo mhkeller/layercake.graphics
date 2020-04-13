@@ -3,6 +3,7 @@
 
 	const { width, height, xScale, yScale } = getContext('LayerCake');
 
+
 	export let gridlines = true;
 	export let formatTick = d => d;
 	export let baseline = false;
@@ -13,7 +14,15 @@
 	export let tickDx = '0';
 	export let tickDy = '0';
 
-	$: tickVals = Array.isArray(ticks) ? ticks : typeof ticks === 'function' ? ticks($xScale) : $xScale.ticks(ticks);
+	let tickVals;
+
+	$: if (typeof $xScale.bandwidth === 'function') {
+		tickVals = $xScale.domain();
+	} else if (Array.isArray(ticks)) {
+		tickVals = ticks;
+	} else {
+		tickVals = $xScale.ticks(ticks);
+	}
 
 	function textAnchor(i) {
 		if (snapTicks === true) {
@@ -37,7 +46,7 @@
 			<text
 				x={typeof tickX === 'function' ? tickX($xScale) : tickX}
 				y={typeof tickY === 'function' ? tickY($yScale) : tickY}
-				dx='{typeof tickDx === 'function' ? tickDx($xScale) : tickDx}'
+				dx='{typeof tickDx === 'function' ? tickDx($xScale) : typeof $xScale.bandwidth === 'function' ? ($xScale.bandwidth() / 2) : tickDx}'
 				dy='{typeof tickDy === 'function' ? tickDy($yScale) : tickDy}'
 				text-anchor='{textAnchor(i)}'>{formatTick(tick)}</text>
 		</g>
