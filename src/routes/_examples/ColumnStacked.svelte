@@ -52,8 +52,6 @@
 	>
 		<Svg>
 			<AxisX
-				ticks={scale => scale.domain()}
-				tickDx={scale => scale.bandwidth() / 2}
 				gridlines={false}
 			/>
 			<AxisY
