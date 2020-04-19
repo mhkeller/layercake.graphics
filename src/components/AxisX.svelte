@@ -8,10 +8,10 @@
 	export let baseline = false;
 	export let snapTicks = false;
 	export let ticks = undefined;
-	export let tickX = undefined;
-	export let tickY = '16';
-	export let tickDx = '0';
-	export let tickDy = '0';
+	export let xTick = undefined;
+	export let yTick = 16;
+	export let dxTick = 0;
+	export let dyTick = 0;
 
 	$: isBandwidth = typeof $xScale.bandwidth === 'function';
 
@@ -40,10 +40,10 @@
 				<line y1='{$height * -1}' y2='0' x1='0' x2='0'></line>
 			{/if}
 			<text
-				x="{tickX || isBandwidth ? $xScale.bandwidth() / 2 : 0 }"
-				y='{tickY}'
-				dx='{tickDx}'
-				dy='{tickDy}'
+				x="{xTick || isBandwidth ? $xScale.bandwidth() / 2 : 0 }"
+				y='{yTick}'
+				dx='{dxTick}'
+				dy='{dyTick}'
 				text-anchor='{textAnchor(i)}'>{formatTick(tick)}</text>
 		</g>
 	{/each}

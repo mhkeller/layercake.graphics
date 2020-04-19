@@ -5,7 +5,7 @@
 	import groups from '../../data/groups.csv';
 	import Bar from '../../components/Bar.svelte';
 	import AxisX from '../../components/AxisX.svelte';
-	import AxisYScaleBand from '../../components/AxisYScaleBand.svelte';
+	import AxisY from '../../components/AxisY.svelte';
 
 	groups.forEach(row => {
 		row.value = +row.value;
@@ -35,7 +35,9 @@
 				baseline={true}
 				snapTicks={true}
 			/>
-			<AxisYScaleBand gridlines={false}/>
+			<AxisY
+				gridlines={false}
+			/>
 			<Bar/>
 		</Svg>
 	</LayerCake>

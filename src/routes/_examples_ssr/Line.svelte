@@ -4,11 +4,14 @@
 
 	import Line from '../../components/Line.svelte';
 	import Area from '../../components/Area.svelte';
-	import AxisX from '../../components/AxisXHtml.svelte';
-	import AxisY from '../../components/AxisYHtml.svelte';
+	import AxisX from '../../components/AxisX.html.svelte';
+	import AxisY from '../../components/AxisY.html.svelte';
+
+	const xKey = 'myX';
+	const yKey = 'myY';
 
 	points.forEach(row => {
-		row.myY = +row.myY;
+		row[yKey] = +row[yKey];
 	});
 </script>
 
@@ -23,8 +26,8 @@
 	<LayerCake
 		ssr={true}
 		padding={{ right: 10, bottom: 20, left: 25 }}
-		x={'myX'}
-		y={d => d.myY}
+		x={xKey}
+		y={d => d[yKey]}
 		yDomain={[0, null]}
 		xRange={[0, 100]}
 		yRange={[100, 0]}

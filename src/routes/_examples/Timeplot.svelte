@@ -6,7 +6,7 @@
 	import days from '../../data/days.csv';
 	import ScatterSvg from '../../components/ScatterSvg.svelte';
 	import AxisX from '../../components/AxisX.svelte';
-	import AxisYScaleBand from '../../components/AxisYScaleBand.svelte';
+	import AxisY from '../../components/AxisY.svelte';
 
 	const r = 4;
 	const padding = 2;
@@ -58,7 +58,7 @@
 				ticks={[0, 4, 8, 12, 16, 20, 24].map(d => d * 60 * 60)}
 				formatTick={d => `${Math.floor(d / 60 / 60)}:00`}
 			/>
-			<AxisYScaleBand/>
+			<AxisY/>
 			<ScatterSvg
 				{r}
 				fill={'rgba(255, 204, 0, 0.75)'}

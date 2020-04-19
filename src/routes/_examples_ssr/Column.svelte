@@ -4,8 +4,8 @@
 	import groups from '../../data/groups.csv';
 
 	import Column from '../../components/Column.svelte';
-	import AxisX from '../../components/AxisXHtml.svelte';
-	import AxisY from '../../components/AxisYHtml.svelte';
+	import AxisX from '../../components/AxisX.html.svelte';
+	import AxisY from '../../components/AxisY.html.svelte';
 	import Annotations from '../../components/Annotations.svelte';
 	import Arrows from '../../components/Arrows.svelte';
 	import DefArrowhead from '../../components/DefArrowhead.svelte';
@@ -73,13 +73,11 @@
 
 		<Html>
 			<AxisX
-				ticks={scale => scale.domain()}
-				tickDx={scale => scale.bandwidth() / 2}
 				gridlines={false}
 			/>
 			<AxisY
-				gridlines={false}
 				ticks={4}
+				gridlines={false}
 			/>
 			<Annotations {annotations}/>
 		</Html>

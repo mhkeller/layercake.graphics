@@ -6,7 +6,7 @@
 	import fruit from '../../data/fruitOrdinal.csv';
 	import BarStacked from '../../components/BarStacked.svelte';
 	import AxisX from '../../components/AxisX.svelte';
-	import AxisYScaleBand from '../../components/AxisYScaleBand.svelte';
+	import AxisY from '../../components/AxisY.svelte';
 
 	const seriesNames = Object.keys(fruit[0]).filter(d => d !== 'year');
 
@@ -55,7 +55,7 @@
 				snapTicks={true}
 				formatTick={formatTickX}
 			/>
-			<AxisYScaleBand
+			<AxisY
 				gridlines={false}
 			/>
 			<BarStacked

@@ -8,12 +8,15 @@
 	export let baseline = false;
 	export let snapTicks = false;
 	export let ticks = undefined;
-	export let tickX = 0;
-	export let tickY = 7;
-	export let tickDx = 0;
-	export let tickDy = 0;
+	export let yTick = 7;
+	export let dyTick = 0;
 
-	$: tickVals = Array.isArray(ticks) ? ticks : typeof ticks === 'function' ? ticks($xScale) : $xScale.ticks(ticks);
+	$: isBandwidth = typeof $xScale.bandwidth === 'function';
+
+	$: tickVals = Array.isArray(ticks) ? ticks :
+		isBandwidth ?
+			$xScale.domain() :
+			$xScale.ticks(ticks);
 
 	function textAnchor(i) {
 		if (snapTicks === true) {
@@ -35,10 +38,10 @@
 		{/if}
 		<div
 			class='tick tick-{ tick }'
-			style='left:{$xScale(tick) + (typeof tickDx === 'function' ? tickDx($xScale) : tickDx)}%;top:100%;'>
+			style='left:{$xScale(tick) + (isBandwidth ? $xScale.bandwidth() / 2 : 0)}%;top:100%;'>
 			<div
 				class="text"
-				style='transform: translate({textAnchor(i)}, {tickY}px)'>{formatTick(tick)}</div>
+				style='transform: translate({textAnchor(i)}, {(yTick + dyTick)}px)'>{formatTick(tick)}</div>
 		</div>
 	{/each}
 	{#if baseline === true}
