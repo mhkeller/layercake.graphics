@@ -14,6 +14,7 @@
 	 * Set what is our x key to separate it from the other series
 	 */
 	const xKey = 'month';
+	const yKey = 'value';
 
 	const seriesNames = Object.keys(data[0]).filter(d => d !== xKey);
 	const seriesColors = [
@@ -31,12 +32,12 @@
 			values: data.map(d => {
 				return {
 					key,
-					value: +d[key],
-					[xKey]: parseDate(d[xKey])
+					[yKey]: +d[key],
+					[xKey]: typeof d[xKey] === 'string' ? parseDate(d[xKey]) : d[xKey] // Conditional required for sapper
 				};
 			})
 		};
-	})
+	});
 
 	// Make a flat array of the `values` of our nested series
 	// we can pluck the `value` field from each item in the array to measure extents
@@ -69,7 +70,7 @@
 	<LayerCake
 		padding={{ top: 7, right: 10, bottom: 20, left: 25 }}
 		x={xKey}
-		y='value'
+		y={yKey}
 		flatData={flatten(dataLong)}
 		yDomain={[0, null]}
 		data={dataLong}
