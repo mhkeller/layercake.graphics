@@ -29,16 +29,20 @@
 		return {
 			key,
 			values: data.map(d => {
-				const obj = { key, value: +d[key] };
-				obj[xKey] = parseDate(d[xKey]);
-				return obj;
+				return {
+					key,
+					value: +d[key],
+					[xKey]: parseDate(d[xKey])
+				};
 			})
 		};
 	})
 
 	// Make a flat array of the `values` of our nested series
 	// we can pluck the `value` field from each item in the array to measure extents
-	const flatten = data => data.reduce((memo, group) => memo.concat(group.values), []);
+	const flatten = data => data.reduce((memo, group) => {
+		return memo.concat(group.values);
+	}, []);
 
 	const colorScale = scaleOrdinal()
     .domain(seriesNames)
