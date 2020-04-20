@@ -6,7 +6,7 @@ import Column from './_examples_ssr/Column.svelte';
 import ColumnStacked from './_examples_ssr/ColumnStacked.svelte';
 // import MultiLine from './_examples_ssr/MultiLine.svelte';
 // import MapLayered from './_examples_ssr/MapLayered.svelte';
-// import Bar from './_examples_ssr/Bar.svelte';
+import Bar from './_examples_ssr/Bar.svelte';
 // import BarStacked from './_examples_ssr/BarStacked.svelte';
 // import ScatterWebGL from './_examples_ssr/ScatterWebgl.svelte';
 // import ClevelandDotPlot from './_examples_ssr/ClevelandDotPlot.svelte';
@@ -23,7 +23,7 @@ export default [
 	// { replPath: '', title: 'Multilayer map (canvas + svg)', slug: 'MapLayered', component: MapLayered },
 	{ replPath: '', title: 'Column annotated', slug: 'Column', component: Column },
 	{ replPath: '', title: 'Stacked column', slug: 'ColumnStacked', component: ColumnStacked },
-	// { replPath: '', title: 'Bar', slug: 'Bar', component: Bar },
+	{ replPath: '', title: 'Bar', slug: 'Bar', component: Bar },
 	// { replPath: '', title: 'Stacked bar', slug: 'BarStacked', component: BarStacked },
 	// { replPath: '', title: 'Multiline (html labels + quadtree tooltip)', slug: 'MultiLine', component: MultiLine },
 	// { replPath: '', title: 'Stacked area', slug: 'AreaStacked', component: AreaStacked },

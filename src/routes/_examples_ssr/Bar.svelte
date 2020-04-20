@@ -1,11 +1,11 @@
 <script>
-	import { LayerCake, Svg } from 'layercake';
+	import { LayerCake, SvgSsr, Html } from 'layercake';
 	import { scaleBand } from 'd3-scale';
 
 	import groups from '../../data/groups.csv';
 	import Bar from '../../components/Bar.svelte';
-	import AxisX from '../../components/AxisX.svelte';
-	import AxisYScaleBand from '../../components/AxisYScaleBand.svelte';
+	import AxisX from '../../components/AxisX.html.svelte';
+	import AxisY from '../../components/AxisY.html.svelte';
 
 	groups.forEach(row => {
 		row.value = +row.value;
@@ -27,17 +27,21 @@
 		yScale={scaleBand().paddingInner([0.05]).round(true)}
 		yDomain={['1979', '1980', '1981', '1982', '1983']}
 		xDomain={[0, null]}
+		xRange={[0, 100]}
+		yRange={[100, 0]}
 		data={groups}
 	>
-		<Svg>
+		<Html>
 			<AxisX
 				gridlines={true}
 				baseline={true}
 				snapTicks={true}
 			/>
-			<AxisYScaleBand gridlines={false}/>
+			<AxisY gridlines={false}/>
+		</Html>
+		<SvgSsr>
 			<Bar/>
-		</Svg>
+		</SvgSsr>
 	</LayerCake>
 
 </div>
