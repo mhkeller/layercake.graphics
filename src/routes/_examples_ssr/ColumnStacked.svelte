@@ -1,12 +1,12 @@
 <script>
-	import { LayerCake, Svg, flatten, uniques } from 'layercake';
+	import { LayerCake, SvgSsr, Html, flatten, uniques } from 'layercake';
 	import { stack } from 'd3-shape';
 	import { scaleBand } from 'd3-scale';
 
 	import fruit from '../../data/fruitOrdinal.csv';
 	import ColumnStacked from '../../components/ColumnStacked.svelte';
-	import AxisXS from '../../components/AxisXS.svelte';
-	import AxisY from '../../components/AxisY.svelte';
+	import AxisX from '../../components/AxisX.html.svelte';
+	import AxisY from '../../components/AxisY.html.svelte';
 
 	const seriesNames = Object.keys(fruit[0]).filter(d => d !== 'year');
 
@@ -44,24 +44,29 @@
  			padding={{ top: 0, right: 0, bottom: 20, left: 20 }}
  			x={d => d.data.year}
  			y={[0, 1]}
- 			xScale={scaleBand().paddingInner([0.02]).round(true)}
+ 			xScale={scaleBand().paddingInner([0.028]).round(true)}
  			xDomain={uniques(fruit, 'year')}
  			flatData={flatten(series)}
+			xRange={[0, 100]}
+			yRange={[100, 0]}
  			data={series}
  			custom={{ seriesNames }}
 	>
-		<Svg>
-			<AxisXS
+		<Html>
+			<AxisX
 				gridlines={false}
 			/>
 			<AxisY
+				ticks={4}
 				gridlines={false}
 				formatTick={formatTickY}
 			/>
+		</Html>
+		<SvgSsr>
 			<ColumnStacked
 				{seriesColors}
 			/>
-		</Svg>
+		</SvgSsr>
 	</LayerCake>
 
 </div>
