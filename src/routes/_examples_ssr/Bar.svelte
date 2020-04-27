@@ -21,6 +21,7 @@
 
 <div class="chart-container">
 	<LayerCake
+		ssr={true}
 		padding={{ top: 0, right: 20, bottom: 20, left: 30 }}
 		x='value'
 		y='year'

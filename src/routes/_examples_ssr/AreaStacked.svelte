@@ -1,9 +1,9 @@
 <script>
-	import { LayerCake, Svg, flatten } from 'layercake';
+	import { LayerCake, SvgSsr, Html, flatten } from 'layercake';
 	import { stack } from 'd3-shape';
 	import fruit from '../../data/fruit.csv';
-	import AxisX from '../../components/AxisX.svelte';
-	import AxisY from '../../components/AxisY.svelte';
+	import AxisX from '../../components/AxisX.html.svelte';
+	import AxisY from '../../components/AxisY.html.svelte';
 	import AreaStacked from '../../components/AreaStacked.svelte';
 
 	const seriesNames = Object.keys(fruit[0]).filter(d => d !== 'month');
@@ -49,23 +49,28 @@
 
 <div class="chart-container">
 	<LayerCake
+		ssr={true}
 		padding={{ top: 0, right: 0, bottom: 20, left: 17 }}
 		x={d => d.data.month}
 		y={[0, 1]}
+		xRange={[0, 100]}
+		yRange={[100, 0]}
 		flatData={flatten(series)}
 		data={series}
 	>
-		<Svg>
+		<Html>
 			<AxisX
 				formatTick={formatTickX}
 			/>
 			<AxisY
 				formatTick={formatTickY}
 			/>
+		</Html>
+		<SvgSsr>
 			<AreaStacked
 				{seriesColors}
 				{seriesNames}
 			/>
-		</Svg>
+		</SvgSsr>
 	</LayerCake>
 </div>
