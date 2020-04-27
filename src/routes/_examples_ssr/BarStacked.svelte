@@ -1,12 +1,12 @@
 <script>
-	import { LayerCake, Svg, flatten } from 'layercake';
+	import { LayerCake, SvgSsr, Html, flatten } from 'layercake';
 	import { stack } from 'd3-shape';
 	import { scaleBand } from 'd3-scale';
 
 	import fruit from '../../data/fruitOrdinal.csv';
 	import BarStacked from '../../components/BarStacked.svelte';
-	import AxisX from '../../components/AxisX.svelte';
-	import AxisYScaleBand from '../../components/AxisYScaleBand.svelte';
+	import AxisX from '../../components/AxisX.html.svelte';
+	import AxisY from '../../components/AxisY.html.svelte';
 
 	const seriesNames = Object.keys(fruit[0]).filter(d => d !== 'year');
 
@@ -47,21 +47,25 @@
 		yDomain={['2016', '2017', '2018', '2019']}
 		flatData={flatten(series)}
 		data={series}
+		xRange={[0, 100]}
+		yRange={[100, 0]}
 		custom={{ seriesNames }}
 	>
-		<Svg>
+		<Html>
 			<AxisX
 				baseline={true}
 				snapTicks={true}
 				formatTick={formatTickX}
 			/>
-			<AxisYScaleBand
+			<AxisY
 				gridlines={false}
 			/>
+		</Html>
+		<SvgSsr>
 			<BarStacked
 				{seriesColors}
 			/>
-		</Svg>
+		</SvgSsr>
 	</LayerCake>
 
 </div>

@@ -7,7 +7,7 @@
 	export let gridlines = true;
 	export let formatTick = d => d;
 	export let xTick = -4;
-	// export let yTick = 0;
+	export let yTick = 2;
 	// export let dxTick = 0;
 	// export let dyTick = -4;
 	// export let textAnchor = 'start';
@@ -28,7 +28,7 @@
 			{/if}
 			<div
 				class="text"
-				style='top:{isBandwidth ? 2 : -1}px;left:{isBandwidth ? ($padding.left + xTick) : 0}px;transform: translate({isBandwidth ? '-100%' : 0}, {isBandwidth ? $yScale.bandwidth() / 2 : '-100'}%);'
+				style='top:{isBandwidth ? yTick : yTick - 3 }px;left:{isBandwidth ? ($padding.left + xTick) : 0}px;transform: translate({isBandwidth ? '-100%' : 0}, {isBandwidth ? Math.floor($yScale.bandwidth() / 2) : '-100'}%);'
 			>{formatTick(tick)}</div>
 		</div>
 	{/each}
@@ -47,7 +47,7 @@
 		height: 100%;
 	}
 	.tick {
-		font-size: 12px;
+		font-size: 13px;
 		width: 100%;
 	}
 
