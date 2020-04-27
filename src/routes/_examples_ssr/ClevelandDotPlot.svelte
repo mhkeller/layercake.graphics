@@ -1,11 +1,11 @@
 <script>
-	import { LayerCake, Svg } from 'layercake';
+	import { LayerCake, Html } from 'layercake';
 	import { scaleBand } from 'd3-scale';
 
 	import fruit from '../../data/fruitOrdinal.csv';
-	import ClevelandDotPlot from '../../components/ClevelandDotPlot.svelte';
-	import AxisX from '../../components/AxisX.svelte';
-	import AxisYScaleBand from '../../components/AxisYScaleBand.svelte';
+	import ClevelandDotPlot from '../../components/ClevelandDotPlot.html.svelte';
+	import AxisX from '../../components/AxisX.html.svelte';
+	import AxisY from '../../components/AxisY.html.svelte';
 
 	const seriesColors = ['#f0c', '#00bbff', '#00e047', '#ff7a33'];
 
@@ -27,6 +27,7 @@
 
 <div class="chart-container">
 	<LayerCake
+		ssr={true}
 		padding={{ right: 10, bottom: 20, left: 30 }}
 		x={['apples', 'bananas', 'cherries', 'dates']}
 		y={'year'}
@@ -34,17 +35,19 @@
 		yDomain={['2016', '2017', '2018', '2019']}
 		xDomain={[0, null]}
 		xPadding={[10, 0]}
+		xRange={[0, 100]}
+		yRange={[100, 0]}
 		data={fruit}
 	>
-		<Svg>
+		<Html>
 			<AxisX/>
-			<AxisYScaleBand
+			<AxisY
 				gridlines={false}
 			/>
 			<ClevelandDotPlot
 				{seriesColors}
 			/>
-		</Svg>
+		</Html>
 	</LayerCake>
 
 </div>

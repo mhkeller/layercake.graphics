@@ -9,7 +9,7 @@ import ColumnStacked from './_examples_ssr/ColumnStacked.svelte';
 import Bar from './_examples_ssr/Bar.svelte';
 import BarStacked from './_examples_ssr/BarStacked.svelte';
 // import ScatterWebGL from './_examples_ssr/ScatterWebgl.svelte';
-// import ClevelandDotPlot from './_examples_ssr/ClevelandDotPlot.svelte';
+import ClevelandDotPlot from './_examples_ssr/ClevelandDotPlot.svelte';
 // import Histogram from './_examples_ssr/Histogram.svelte';
 // import SmallMultiples from './_examples_ssr/SmallMultiples.svelte';
 // import Calendar from './_examples_ssr/Calendar.svelte';
@@ -28,7 +28,7 @@ export default [
 	// { replPath: '', title: 'Multiline (html labels + quadtree tooltip)', slug: 'MultiLine', component: MultiLine },
 	{ replPath: '', title: 'Stacked area', slug: 'AreaStacked', component: AreaStacked },
 	// { replPath: '', title: 'Scatter (svg + canvas + voronoi)', slug: 'Scatter', component: Scatter },
-	// { replPath: '', title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
+	{ replPath: '', title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
 	// { replPath: '', title: 'Calendar (one cake per month)', slug: 'Calendar', component: Calendar },
 	// { replPath: '', title: 'Time of day plot', slug: 'Timeplot', component: Timeplot },
 	// { replPath: '', title: 'Histogram (variable bins)', slug: 'Histogram', component: Histogram },

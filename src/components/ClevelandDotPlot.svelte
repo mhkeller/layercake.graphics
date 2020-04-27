@@ -5,6 +5,7 @@
 	const { data, xGet, yGet, yScale, originalSettings } = getContext('LayerCake');
 
 	export let seriesColors;
+	export let r = 5;
 
 	$: midHeight = $yScale.bandwidth() / 2;
 
@@ -14,9 +15,9 @@
 
 </script>
 
-<g class="dot-group">
+<g class="dot-plot">
 	{#each $data as row}
-		<g>
+		<g class="dot-row">
 			<line
 				x1="{Math.min(...$xGet(row))}"
 				y1="{$yGet(row) + midHeight}"
@@ -28,7 +29,7 @@
 				<circle
 					cx="{circleX}"
 					cy="{$yGet(row) + midHeight}"
-					r="5"
+					r="{r}"
 					fill="{colorScale($originalSettings.x[i])}"
 				></circle>
 			{/each}

@@ -47,7 +47,7 @@
 		height: 100%;
 	}
 	.tick {
-		font-size: 13px;
+		font-size: 12px;
 		width: 100%;
 	}
 
