@@ -6,11 +6,11 @@
 	export let ticks = 4;
 	export let gridlines = true;
 	export let formatTick = d => d;
-	export let xTick = 0;
-	export let yTick = 0;
-	export let dxTick = 0;
-	export let dyTick = -4;
-	export let textAnchor = 'start';
+	export let xTick = -4;
+	// export let yTick = 0;
+	// export let dxTick = 0;
+	// export let dyTick = -4;
+	// export let textAnchor = 'start';
 
 	$: isBandwidth = typeof $yScale.bandwidth === 'function';
 
@@ -20,20 +20,15 @@
 			$yScale.ticks(ticks);
 </script>
 
-<div class='axis y-axis' style='transform:translate({-$padding.left}px, 0)'>
+<div class='axis y-axis' style='transform:translate(-{$padding.left}px, 0)'>
 	{#each tickVals as tick, i}
-		<div class='tick tick-{tick}' style='transform:translate({$xRange[0] + (isBandwidth ? $padding.left : 0)}%, {$yScale(tick)}%)'>
+		<div class='tick tick-{i}' style='top:{$yScale(tick)}%;left:{$xRange[0]}}%;'>
 			{#if gridlines !== false}
-				<div class="gridline" style='top:{$yScale(tick)}%;left: 0;right: 0;'></div>
+				<div class="gridline" style='top:0;left:0;right:-{$padding.left + $padding.right}px;'></div>
 			{/if}
 			<div
-			/// TODO
 				class="text"
-				x='{xTick}'
-				y='{yTick + (isBandwidth ? $yScale.bandwidth() / 2 : 0)}'
-				dx='{isBandwidth ? -5 : dxTick}'
-				dy='{isBandwidth ? 4 : dyTick}'
-				style="text-anchor:{isBandwidth ? 'end' : textAnchor};"
+				style='top:{isBandwidth ? 2 : -1}px;left:{isBandwidth ? ($padding.left + xTick) : 0}px;transform: translate({isBandwidth ? '-100%' : 0}, {isBandwidth ? $yScale.bandwidth() / 2 : '-100'}%);'
 			>{formatTick(tick)}</div>
 		</div>
 	{/each}
@@ -43,7 +38,8 @@
 	.axis,
 	.tick,
 	.gridline,
-	.baseline {
+	.baseline,
+	.text {
 		position: absolute;
 	}
 	.axis {
@@ -51,16 +47,19 @@
 		height: 100%;
 	}
 	.tick {
-		font-size: .725em;
-		font-weight: 200;
+		font-size: 12px;
+		width: 100%;
 	}
 
 	.gridline {
 		border-top: 1px dashed #aaa;
 	}
 
+	.tick-0 .gridline {
+		border-top-style: solid;
+	}
+
 	.tick .text {
 		color: #666;
-		position: relative;
 	}
 </style>

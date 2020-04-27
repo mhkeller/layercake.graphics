@@ -1,7 +1,7 @@
 <script>
 	import { getContext } from 'svelte';
 
-	const { width, height, xScale, yScale } = getContext('LayerCake');
+	const { width, height, xScale, yScale, padding } = getContext('LayerCake');
 
 	export let gridlines = true;
 	export let formatTick = d => d;
@@ -34,7 +34,7 @@
 <div class='axis x-axis'>
 	{#each tickVals as tick, i}
 		{#if gridlines !== false}
-			<div class="gridline" style='left:{$xScale(tick)}%;top: 0;bottom: 0;'></div>
+			<div class="gridline" style='left:{$xScale(tick)}%;top: -{$padding.top}px;bottom: 0;'></div>
 		{/if}
 		<div
 			class='tick tick-{ tick }'
