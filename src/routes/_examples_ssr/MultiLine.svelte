@@ -1,13 +1,13 @@
 <script>
-	import { LayerCake, Svg, Html } from 'layercake';
+	import { LayerCake, SvgSsr, Html } from 'layercake';
 	import { scaleOrdinal } from 'd3-scale';
 
 	import data from '../../data/fruit.csv';
 	import MultiLine from '../../components/MultiLine.svelte';
-	import AxisX from '../../components/AxisX.svelte';
-	import AxisY from '../../components/AxisY.svelte';
+	import AxisX from '../../components/AxisX.html.svelte';
+	import AxisY from '../../components/AxisY.html.svelte';
 	import Labels from '../../components/Labels.svelte';
-	import Tooltip from '../../components/Tooltip.svelte';
+	// import Tooltip from '../../components/Tooltip.svelte';
 
 	/* --------------------------------------------
 	 * Set what is our x key to separate it from the other series
@@ -71,6 +71,9 @@
 
 <div class="chart-container">
 	<LayerCake
+		ssr={true}
+		xRange={[0, 100]}
+		yRange={[100, 0]}
 		padding={{ top: 7, right: 10, bottom: 20, left: 25 }}
 		x='month'
 		y='value'
@@ -78,7 +81,7 @@
 		yDomain={[0, null]}
 		data={dataLong}
 	>
-		<Svg>
+		<Html>
 			<AxisX
 				gridlines={false}
 				ticks={data.map(d => d[xKey])}
@@ -88,17 +91,18 @@
 			<AxisY
 				formatTick={formatTickY}
 			/>
-
+		</Html>
+		<SvgSsr>
 			<MultiLine
 				{colorScale}
 			/>
-		</Svg>
+		</SvgSsr>
 
 		<Html>
 			<Labels/>
-			<Tooltip
+			<!-- <Tooltip
 				dataset={ data }
-			/>
+			/> -->
 		</Html>
 	</LayerCake>
 </div>

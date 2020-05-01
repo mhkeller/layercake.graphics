@@ -1,5 +1,4 @@
 <script>
-	import { style } from 'layercake';
 	import { getContext } from 'svelte';
 	import { scaleOrdinal } from 'd3-scale';
 
@@ -21,23 +20,23 @@
 		<div class="dot-row">
 			<div
 				class="line"
-				style={style({
-					left: Math.min(...$xGet(row)) + '%',
-					top: ($yGet(row) + midHeight) + '%',
-					right: (100 - Math.max(...$xGet(row))) + '%'
-				})}
+				style="
+					left: {Math.min(...$xGet(row))}%;
+					top: {$yGet(row) + midHeight}%;
+					right: {100 - Math.max(...$xGet(row))}%;
+				"
 			></div>
 
 			{#each $xGet(row) as circleX, i}
 				<div
 					class="circle"
-					style={style({
-						left: circleX + '%',
-						top: ($yGet(row) + midHeight) + '%',
-						width: (r * 2) + 'px',
-						height: (r * 2) + 'px',
-						background: colorScale($originalSettings.x[i])
-					})}
+					style="
+						left: {circleX}%;
+						top: {$yGet(row) + midHeight}%;
+						width: {r * 2}px;
+						height: {r * 2}px;
+						background: {colorScale($originalSettings.x[i])};
+					"
 				></div>
 			{/each}
 		</div>

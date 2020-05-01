@@ -4,7 +4,7 @@ import Line from './_examples_ssr/Line.svelte';
 import Column from './_examples_ssr/Column.svelte';
 import AreaStacked from './_examples_ssr/AreaStacked.svelte';
 import ColumnStacked from './_examples_ssr/ColumnStacked.svelte';
-// import MultiLine from './_examples_ssr/MultiLine.svelte';
+import MultiLine from './_examples_ssr/MultiLine.svelte';
 // import MapLayered from './_examples_ssr/MapLayered.svelte';
 import Bar from './_examples_ssr/Bar.svelte';
 import BarStacked from './_examples_ssr/BarStacked.svelte';
@@ -25,7 +25,7 @@ export default [
 	{ replPath: '', title: 'Stacked column', slug: 'ColumnStacked', component: ColumnStacked },
 	{ replPath: '', title: 'Bar', slug: 'Bar', component: Bar },
 	{ replPath: '', title: 'Stacked bar', slug: 'BarStacked', component: BarStacked },
-	// { replPath: '', title: 'Multiline (html labels + quadtree tooltip)', slug: 'MultiLine', component: MultiLine },
+	{ replPath: '', title: 'Multiline (html labels + quadtree tooltip)', slug: 'MultiLine', component: MultiLine },
 	{ replPath: '', title: 'Stacked area', slug: 'AreaStacked', component: AreaStacked },
 	// { replPath: '', title: 'Scatter (svg + canvas + voronoi)', slug: 'Scatter', component: Scatter },
 	{ replPath: '', title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },

@@ -25,7 +25,7 @@ export default [
 	// { replPath: 'f38656e90d0644cfb460206005c492e5?version=3.17.3', title: 'Stacked column', slug: 'ColumnStacked', component: ColumnStacked },
 	// { replPath: '91fe94cac36c4829903238382563bc81?version=3.17.3', title: 'Bar', slug: 'Bar', component: Bar },
 	// { replPath: '8d2e9a75cb0e4bf7abb86cb65915a93c?version=3.17.3', title: 'Stacked bar', slug: 'BarStacked', component: BarStacked },
-	// { replPath: 'cc8d7b6ace40433da8d694f2877258a8?version=3.17.3', title: 'Multiline (html labels + quadtree tooltip)', slug: 'MultiLine', component: MultiLine },
+	{ replPath: 'cc8d7b6ace40433da8d694f2877258a8?version=3.17.3', title: 'Multiline (html labels + quadtree tooltip)', slug: 'MultiLine', component: MultiLine },
 	// { replPath: 'e6ae831e723646c8a01a039b3eeb33cb?version=3.17.3', title: 'Stacked area', slug: 'AreaStacked', component: AreaStacked },
 	// { replPath: 'd9a9c151058d4e3eb74a4eed60eabb54?version=3.17.3', title: 'Scatter (svg + canvas + voronoi)', slug: 'Scatter', component: Scatter },
 	// { replPath: 'f9f33add37d440f78b24092c7ba8154d?version=3.17.3', title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
