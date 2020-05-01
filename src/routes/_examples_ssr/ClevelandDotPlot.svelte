@@ -28,15 +28,15 @@
 <div class="chart-container">
 	<LayerCake
 		ssr={true}
+		xRange={[0, 100]}
+		yRange={[100, 0]}
 		padding={{ right: 10, bottom: 20, left: 30 }}
 		x={['apples', 'bananas', 'cherries', 'dates']}
 		y={'year'}
 		yScale={scaleBand().paddingInner([0.05]).round(true)}
 		yDomain={['2016', '2017', '2018', '2019']}
 		xDomain={[0, null]}
-		xPadding={[10, 0]}
-		xRange={[0, 100]}
-		yRange={[100, 0]}
+		xPadding={[2, 0]}
 		data={fruit}
 	>
 		<Html>
