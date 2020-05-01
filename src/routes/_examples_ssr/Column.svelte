@@ -1,5 +1,5 @@
 <script>
-	import { LayerCake, SvgSsr, Html } from 'layercake';
+	import { LayerCake, Svg, SvgSsr, Html } from 'layercake';
 	import { scaleBand } from 'd3-scale';
 	import groups from '../../data/groups.csv';
 
@@ -56,14 +56,15 @@
 <div class="chart-container">
 	<LayerCake
 		ssr={true}
+		xRange={[0, 100]}
+		yRange={[100, 0]}
+		position='absolute'
 		padding={{ top: 0, right: 0, bottom: 20, left: 20 }}
 		x='year'
 		y='value'
 		xScale={scaleBand().paddingInner([0.028]).round(true)}
 		xDomain={['1979', '1980', '1981', '1982', '1983']}
 		yDomain={[0, null]}
-		xRange={[0, 100]}
-		yRange={[100, 0]}
 		data={groups}
 	>
 
@@ -82,10 +83,25 @@
 			<Annotations {annotations}/>
 		</Html>
 
-		<!-- <Svg>
-			<DefArrowhead/>
-			<Arrows {annotations}/>
-		</Svg> -->
 	</LayerCake>
 
+	<!--
+		Add a second cake for the arrows that is rendered once the page is loaded
+		since the arrows are hard to draw within the viewbox
+	-->
+	<LayerCake
+		position='absolute'
+		padding={{ top: 0, right: 0, bottom: 20, left: 20 }}
+		x='year'
+		y='value'
+		xScale={scaleBand().paddingInner([0.028]).round(true)}
+		xDomain={['1979', '1980', '1981', '1982', '1983']}
+		yDomain={[0, null]}
+		data={groups}
+	>
+		<Svg>
+			<DefArrowhead/>
+			<Arrows {annotations}/>
+		</Svg>
+	</LayerCake>
 </div>
