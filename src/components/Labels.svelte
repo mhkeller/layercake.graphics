@@ -18,7 +18,10 @@
 {#each $data as group}
 	<div
     class="label"
-    style="top:{top(group.values) * 100}%;left:{left(group.values) * 100}%;"
+    style="
+      top:{top(group.values) * 100}%;
+      left:{left(group.values) * 100}%;
+    "
   >{pretty(group.key)}</div>
 {/each}
 
