@@ -23,9 +23,9 @@
 
 <div class='axis y-axis' style='transform:translate(-{$padding.left}px, 0)'>
 	{#each tickVals as tick, i}
-		<div class='tick tick-{i}' style='top:{$yScale(tick)}%;left:{$xRange[0]}}%;'>
+		<div class='tick tick-{i}' style='top:{$yScale(tick) + (isBandwidth ? $yScale.bandwidth () / 2 : 0)}%;left:{$xRange[0]}%;'>
 			{#if gridlines !== false}
-				<div class="gridline" style='top:0;left:0;right:-{$padding.right}px;'></div>
+				<div class="gridline" style='top:0;left:{$padding.left}px;right:-{$padding.left + $padding.right}px;'></div>
 			{/if}
 			{#if baseline !== false && i === 0}
 				<div class="gridline baseline" style='top:0;left:0;right:-{$padding.right}px;'></div>
@@ -33,9 +33,9 @@
 			<div
 				class="text"
 				style='
-					top:{isBandwidth ? yTick : yTick - 3 }px;
+					top:{yTick - 3}px;
 					left:{isBandwidth ? ($padding.left + xTick) : 0}px;
-					transform: translate({isBandwidth ? '-100%' : 0}, {isBandwidth ? Math.floor($yScale.bandwidth() / 2) : '-100'}%);
+					transform: translate({isBandwidth ? '-100%' : 0}, {isBandwidth ? -50 - Math.floor($yScale.bandwidth() / -2) : '-100'}%);
 				'
 			>{formatTick(tick)}</div>
 		</div>
@@ -57,6 +57,7 @@
 	.tick {
 		font-size: 12px;
 		width: 100%;
+		font-weight: 100;
 	}
 
 	.gridline {
