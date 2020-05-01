@@ -4,8 +4,11 @@
 
   const { data, x, y, xScale, yScale, xRange, yRange } = getContext('LayerCake');
 
+  /* --------------------------------------------
+	 * Title case the first letter
+	 */
 	function pretty (val) {
-    return val.charAt(0).toUpperCase() + val.slice(1, val.length);
+    return val.replace(/^\w/, d => d.toUpperCase());
   }
 
   /* --------------------------------------------
