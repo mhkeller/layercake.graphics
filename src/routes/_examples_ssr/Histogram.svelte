@@ -3,7 +3,7 @@
 	import { histogram, extent } from 'd3-array';
 
 	import unemployment from '../../data/unemployment.js';
-	import ColumnLinear from '../../components/ColumnLinear.svelte';
+	import Column from '../../components/Column.svelte';
 	import AxisX from '../../components/AxisX.html.svelte';
 	import AxisY from '../../components/AxisY.html.svelte';
 	import thresholds from '../../modules/thresholds.js';
@@ -49,6 +49,7 @@
 		padding={{ top: 20, right: 5, bottom: 20, left: 31 }}
 		x={['x0', 'x1']}
 		y={'length'}
+		xDomain={domain}
 		yDomain={[0, null]}
 		data={bins}
 	>
@@ -64,7 +65,7 @@
 			/>
 		</Html>
 		<SvgSsr>
-			<ColumnLinear
+			<Column
 				fill={'#fff'}
 				stroke={'#000'}
 				strokeWidth={1}

@@ -3,7 +3,7 @@
 	import { histogram, extent } from 'd3-array';
 
 	import unemployment from '../../data/unemployment.js';
-	import ColumnLinear from '../../components/ColumnLinear.svelte';
+	import Column from '../../components/Column.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 	import thresholds from '../../modules/thresholds.js';
@@ -59,7 +59,7 @@
 				gridlines={false}
 				ticks={3}
 			/>
-			<ColumnLinear
+			<Column
 				fill={'#fff'}
 				stroke={'#000'}
 				strokeWidth={1}
