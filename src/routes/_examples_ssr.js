@@ -13,7 +13,7 @@ import ClevelandDotPlot from './_examples_ssr/ClevelandDotPlot.svelte';
 // import Histogram from './_examples_ssr/Histogram.svelte';
 // import SmallMultiples from './_examples_ssr/SmallMultiples.svelte';
 // import Calendar from './_examples_ssr/Calendar.svelte';
-// import Timeplot from './_examples_ssr/Timeplot.svelte';
+import Timeplot from './_examples_ssr/Timeplot.svelte';
 // import Radar from './_examples_ssr/Radar.svelte';
 
 export default [
@@ -30,7 +30,7 @@ export default [
 	// { replPath: '', title: 'Scatter (svg + canvas + voronoi)', slug: 'Scatter', component: Scatter },
 	{ replPath: '', title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
 	// { replPath: '', title: 'Calendar (one cake per month)', slug: 'Calendar', component: Calendar },
-	// { replPath: '', title: 'Time of day plot', slug: 'Timeplot', component: Timeplot },
+	{ replPath: '', title: 'Time of day plot', slug: 'Timeplot', component: Timeplot },
 	// { replPath: '', title: 'Histogram (variable bins)', slug: 'Histogram', component: Histogram },
 	// { replPath: '', title: 'Small multiples (animated domain transition)', slug: 'SmallMultiples', component: SmallMultiples },
 	// { replPath: '', title: 'Radar chart', slug: 'Radar', component: Radar }

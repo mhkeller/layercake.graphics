@@ -1,15 +1,16 @@
 <script>
-	import { LayerCake, Svg, calcExtents } from 'layercake';
+	import { LayerCake, SvgSsr, Html, calcExtents } from 'layercake';
 	import { timeDay } from 'd3-time';
 	import { scaleBand } from 'd3-scale';
 
 	import days from '../../data/days.csv';
-	import ScatterSvgScaleBand from '../../components/ScatterSvgScaleBand.svelte';
-	import AxisX from '../../components/AxisX.svelte';
-	import AxisYScaleBand from '../../components/AxisYScaleBand.svelte';
+	import AxisX from '../../components/AxisX.html.svelte';
+	import AxisY from '../../components/AxisY.html.svelte';
+	import Scatter from '../../components/Scatter.html.svelte';
 
 	const r = 4;
 	const padding = 2;
+
 	const daysTransformed = days.map(row => {
 		const parts = row.timestring.split('T');
 		const time = parts[1].replace('Z', '').split(':').map(d => +d);
@@ -43,6 +44,9 @@
 
 <div class="chart-container">
 	<LayerCake
+		ssr={true}
+		xRange={[0, 100]}
+		yRange={[100, 0]}
 		padding={{ top: 0, right: 15, bottom: 20, left: 75 }}
 		x={'seconds'}
 		y={'day'}
@@ -52,18 +56,16 @@
 		xPadding={[padding, padding]}
 		data={daysTransformed}
 	>
-
-		<Svg>
+		<Html>
 			<AxisX
 				ticks={[0, 4, 8, 12, 16, 20, 24].map(d => d * 60 * 60)}
 				formatTick={d => `${Math.floor(d / 60 / 60)}:00`}
 			/>
-			<AxisYScaleBand/>
-			<ScatterSvgScaleBand
+			<AxisY/>
+			<Scatter
 				{r}
 				fill={'rgba(255, 204, 0, 0.75)'}
 			/>
-		</Svg>
-
+		</Html>
 	</LayerCake>
 </div>
