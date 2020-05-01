@@ -2,7 +2,7 @@
 	import { calcExtents, flatten } from 'layercake';
 
 	import pointSeries from '../../data/pointSeries.js';
-	import ChartWrapper from '../../components/ChartWrapper.svelte';
+	import SmallMultipleWrapper from '../../components/SmallMultipleWrapper.svelte';
 
 	/* --------------------------------------------
 	 * Grab the extents of the full dataset
@@ -58,7 +58,7 @@
 <div class="group-container">
 	{#each pointSeries as data}
 		<div class="chart-container">
-			<ChartWrapper
+			<SmallMultipleWrapper
 				{data}
 				{fullExtents}
 				{scale}

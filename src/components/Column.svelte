@@ -28,6 +28,6 @@
 			{fill}
 			stroke="{stroke}"
 			stroke-width="{strokeWidth}"
-		></rect>
+		/>
 	{/each}
 </g>

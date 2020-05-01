@@ -126,6 +126,7 @@
 	}
 	.title {
 		margin-bottom: 9px;
+		white-space: nowrap;
 	}
 	.title a{
 		text-decoration: underline;

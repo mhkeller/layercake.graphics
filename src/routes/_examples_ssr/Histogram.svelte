@@ -1,11 +1,11 @@
 <script>
-	import { LayerCake, Svg } from 'layercake';
+	import { LayerCake, SvgSsr, Html } from 'layercake';
 	import { histogram, extent } from 'd3-array';
 
 	import unemployment from '../../data/unemployment.js';
 	import ColumnLinear from '../../components/ColumnLinear.svelte';
-	import AxisX from '../../components/AxisX.svelte';
-	import AxisY from '../../components/AxisY.svelte';
+	import AxisX from '../../components/AxisX.html.svelte';
+	import AxisY from '../../components/AxisY.html.svelte';
 	import thresholds from '../../modules/thresholds.js';
 
 	let binCount = 40;
@@ -43,13 +43,16 @@
 
 <div class="chart-container">
 	<LayerCake
-		padding={{ top: 20, right: 5, bottom: 20, left: 30 }}
+		ssr={true}
+		xRange={[0, 100]}
+		yRange={[100, 0]}
+		padding={{ top: 20, right: 5, bottom: 20, left: 31 }}
 		x={['x0', 'x1']}
 		y={'length'}
 		yDomain={[0, null]}
 		data={bins}
 	>
-		<Svg>
+		<Html>
 			<AxisX
 				gridlines={false}
 				baseline={true}
@@ -59,11 +62,13 @@
 				gridlines={false}
 				ticks={3}
 			/>
+		</Html>
+		<SvgSsr>
 			<ColumnLinear
 				fill={'#fff'}
 				stroke={'#000'}
 				strokeWidth={1}
 			/>
-		</Svg>
+		</SvgSsr>
 	</LayerCake>
 </div>

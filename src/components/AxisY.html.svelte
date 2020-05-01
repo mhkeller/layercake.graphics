@@ -25,10 +25,10 @@
 	{#each tickVals as tick, i}
 		<div class='tick tick-{i}' style='top:{$yScale(tick) + (isBandwidth ? $yScale.bandwidth () / 2 : 0)}%;left:{$xRange[0]}%;'>
 			{#if gridlines !== false}
-				<div class="gridline" style='top:0;left:{$padding.left}px;right:-{$padding.left + $padding.right}px;'></div>
+				<div class="gridline" style='top:0;left:{isBandwidth ? $padding.left : 0}px;right:-{$padding.left + $padding.right}px;'></div>
 			{/if}
 			{#if baseline !== false && i === 0}
-				<div class="gridline baseline" style='top:0;left:0;right:-{$padding.right}px;'></div>
+				<div class="gridline baseline" style='top:0;left:{isBandwidth ? $padding.left : 0};right:-{$padding.left + $padding.right}px;'></div>
 			{/if}
 			<div
 				class="text"

@@ -1,0 +1,44 @@
+<script>
+	import { LayerCake, SvgSsr, calcExtents } from 'layercake';
+	import { tweened } from 'svelte/motion';
+	import * as eases from 'svelte/easing';
+
+	import Line from './Line.svelte';
+
+	export let data;
+	export let fullExtents;
+	export let scale;
+	export let extentGetters;
+
+	const tweenOptions = {
+		duration: 300,
+		easing: eases.cubicInOut
+	};
+
+	const xDomain = tweened(undefined, tweenOptions);
+	const yDomain = tweened(undefined, tweenOptions);
+
+	const extents = calcExtents(data, extentGetters);
+
+	$: xDomain.set(scale === 'shared' ? fullExtents.x : extents.x);
+	$: yDomain.set(scale === 'shared' ? fullExtents.y : extents.y);
+
+</script>
+
+<LayerCake
+	ssr={true}
+	xRange={[0, 100]}
+	yRange={[100, 0]}
+	padding={{ top: 2, right: 6, bottom: 2, left: 6 }}
+	x={extentGetters.find(d => d.field === 'x').accessor}
+	y={extentGetters.find(d => d.field === 'y').accessor}
+	{data}
+	xDomain={$xDomain}
+	yDomain={$yDomain}
+>
+	<SvgSsr>
+		<Line
+			stroke={'#000'}
+		/>
+	</SvgSsr>
+</LayerCake>
