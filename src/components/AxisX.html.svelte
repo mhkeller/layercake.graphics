@@ -37,7 +37,7 @@
 			<div class="gridline" style='left:{$xScale(tick)}%;top: -{$padding.top}px;bottom: 0;'></div>
 		{/if}
 		<div
-			class='tick tick-{ tick }'
+			class='tick tick-{ i }'
 			style='left:{$xScale(tick) + (isBandwidth ? $xScale.bandwidth() / 2 : 0)}%;top:100%;'>
 			<div
 				class="text"
@@ -76,5 +76,6 @@
 	.tick .text {
 		color: #666;
 		position: relative;
+		white-space: nowrap;
 	}
 </style>
