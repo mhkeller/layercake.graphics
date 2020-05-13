@@ -1,6 +1,7 @@
 <script>
 	import { LayerCake, SvgSsr, Html } from 'layercake';
 	import { scaleOrdinal } from 'd3-scale';
+	import { timeParse, timeFormat } from 'd3-time-format';
 
 	import data from '../../data/fruit.csv';
 	import MultiLine from '../../components/MultiLine.svelte';
@@ -13,6 +14,7 @@
 	 * Set what is our x key to separate it from the other series
 	 */
 	const xKey = 'month';
+	const yKey = 'value';
 
 	const seriesNames = Object.keys(data[0]).filter(d => d !== xKey);
 	const seriesColors = [
@@ -22,37 +24,33 @@
 		'#ff00cc'
 	];
 
-	data.forEach(row => {
-		row[xKey] = new Date(row[xKey]);
-		seriesNames.forEach(name => {
-			row[name] = +row[name];
-		});
-	});
+	const parseDate = timeParse('%Y-%m-%d');
 
-	const dataLong = Object.keys(data[0]).map(key => {
-		if (key === 'month') return null;
+	const dataLong = seriesNames.map(key => {
 		return {
 			key,
 			values: data.map(d => {
-				return { key, month: d[xKey], value: d[key] };
+				return {
+					key,
+					[yKey]: +d[key],
+					[xKey]: typeof d[xKey] === 'string' ? parseDate(d[xKey]) : d[xKey] // Conditional required for sapper
+				};
 			})
 		};
-	}).filter(d => d);
+	});
+
 
 	// Make a flat array of the `values` of our nested series
 	// we can pluck the `value` field from each item in the array to measure extents
-	const flatten = data => data.reduce((store, group) => store.concat(group.values), []);
-
-	const monthNames = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
+	const flatten = data => data.reduce((memo, group) => {
+		return memo.concat(group.values);
+	}, []);
 
 	const colorScale = scaleOrdinal()
     .domain(seriesNames)
     .range(seriesColors);
 
-	function formatTickX (d) {
-		const date = new Date(d);
-		return `${monthNames[date.getUTCMonth()]} ${date.getUTCDate()}`;
-	}
+	const formatTickX = timeFormat('%b. %e');
 
 	function formatTickY (d) {
 		if (d > 999) {
@@ -75,8 +73,8 @@
 		xRange={[0, 100]}
 		yRange={[100, 0]}
 		padding={{ top: 7, right: 10, bottom: 20, left: 25 }}
-		x='month'
-		y='value'
+		x={xKey}
+		y={yKey}
 		flatData={flatten(dataLong)}
 		yDomain={[0, null]}
 		data={dataLong}
@@ -84,7 +82,7 @@
 		<Html>
 			<AxisX
 				gridlines={false}
-				ticks={data.map(d => d[xKey])}
+				ticks={data.map(d => parseDate(d[xKey])).sort((a, b) => a - b)}
 				formatTick={formatTickX}
 				snapTicks={true}
 			/>

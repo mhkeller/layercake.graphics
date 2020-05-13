@@ -17,21 +17,9 @@
 		isBandwidth ?
 			$xScale.domain() :
 			$xScale.ticks(ticks);
-
-	function textAnchor(i) {
-		if (snapTicks === true) {
-			if (i === 0) {
-				return '100%';
-			}
-			if (i === tickVals.length - 1) {
-				return '-100%';
-			}
-		}
-		return '-50%';
-	}
 </script>
 
-<div class='axis x-axis'>
+<div class='axis x-axis' class:snapTicks>
 	{#each tickVals as tick, i}
 		{#if gridlines !== false}
 			<div class="gridline" style='left:{$xScale(tick)}%;top: -{$padding.top}px;bottom: 0;'></div>
@@ -41,7 +29,7 @@
 			style='left:{$xScale(tick) + (isBandwidth ? $xScale.bandwidth() / 2 : 0)}%;top:100%;'>
 			<div
 				class="text"
-				style='transform: translate({textAnchor(i)}, {(yTick + dyTick)}px)'>{formatTick(tick)}</div>
+				style='top:{(yTick + dyTick)}px;'>{formatTick(tick)}</div>
 		</div>
 	{/each}
 	{#if baseline === true}
@@ -77,5 +65,12 @@
 		color: #666;
 		position: relative;
 		white-space: nowrap;
+		transform: translateX(-50%);
+	}
+	.axis.snapTicks .tick:last-child {
+		transform: translateX(-50%);
+	}
+	.axis.snapTicks .tick:first-child {
+		transform: translateX(50%);
 	}
 </style>
