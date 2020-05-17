@@ -84,9 +84,11 @@ Within the `LayerCake` component, you'll want to add at least one layout compone
 
   // Set up some data
   const points = [
-    {x: 0, y: 1},
-    {x: 10, y: 5},
-    {x: 15, y: 10}
+    {x: 0, y: 0},
+    {x: 5, y: 10},
+    {x: 10, y: 20},
+    {x: 15, y: 30},
+    {x: 20, y: 40}
   ];
 
   const annotationBlurbs = [
