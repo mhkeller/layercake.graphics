@@ -138,9 +138,11 @@ Here's an example starting with a similar `App.svelte` file to the example above
   import Scatter from './components/Scatter.svelte';
 
   const points = [
-    {x: 0, y: 1},
-    {x: 10, y: 5},
-    {x: 15, y: 10}
+    {x: 0, y: 0},
+    {x: 5, y: 10},
+    {x: 10, y: 20},
+    {x: 15, y: 30},
+    {x: 20, y: 40}
   ];
 </script>
 
@@ -229,8 +231,8 @@ Here's an example that doesn't set any properties on the `LayerCake` component:
 <!-- { filename: 'App.Svelte' } -->
 <script>
   import { LayerCake, Svg, Html } from 'layercake';
-  import Frame from './components/Frame.html';
-  import VideoPlayer from './components/VideoPlayer.html';
+  import Frame from './components/Frame.svelte';
+  import VideoPlayer from './components/VideoPlayer.svelte';
 </script>
 
 <style>
