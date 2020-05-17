@@ -77,10 +77,10 @@ Within the `LayerCake` component, you'll want to add at least one layout compone
 
   // These are components that live in your project that
   // you can customize as you see fit
-  import ScatterCanvas from './components/ScatterCanvas.html';
-  import AxisX from './components/AxisX.html';
-  import AxisY from './components/AxisY.html';
-  import Annotations from './components/Annotations.html';
+  import ScatterCanvas from './components/ScatterCanvas.svelte';
+  import AxisX from './components/AxisX.svelte';
+  import AxisY from './components/AxisY.svelte';
+  import Annotations from './components/Annotations.svelte';
 
   // Set up some data
   const points = [
