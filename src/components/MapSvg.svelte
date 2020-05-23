@@ -2,7 +2,7 @@
 	import { getContext } from 'svelte';
 	import * as geo from 'd3-geo';
 
-	const { data, width, height } = getContext('LayerCake');
+	const { data, width, height, aspectRatio } = getContext('LayerCake');
 
 	export let projectionName = 'geoAlbersUsa';
 
@@ -13,7 +13,7 @@
 	export let features = $data.features;
 
 	$: projection = geo[projectionName]()
-		.fitSize([$width, $height], $data);
+		.fitSize([100, 100 / $aspectRatio], $data);
 
 	$: geoPath = geo.geoPath(projection);
 

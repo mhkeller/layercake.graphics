@@ -1,6 +1,6 @@
 import Line from './_examples_ssr/Line.svelte';
 // import Scatter from './_examples_ssr/Scatter.svelte';
-// import MapSvg from './_examples_ssr/MapSvg.svelte';
+import MapSvg from './_examples_ssr/MapSvg.svelte';
 import Column from './_examples_ssr/Column.svelte';
 import AreaStacked from './_examples_ssr/AreaStacked.svelte';
 import ColumnStacked from './_examples_ssr/ColumnStacked.svelte';
@@ -19,7 +19,7 @@ import Timeplot from './_examples_ssr/Timeplot.svelte';
 export default [
 	{ replPath: '', title: 'Line + area', slug: 'Line', component: Line },
 	// { replPath: '', title: 'WebGL Scatter (svg axes, quadtree hover)', slug: 'ScatterWebgl', component: ScatterWebGL },
-	// { replPath: '', title: 'Map (svg)', slug: 'MapSvg', component: MapSvg },
+	{ replPath: '', title: 'Map (svg)', slug: 'MapSvg', component: MapSvg },
 	// { replPath: '', title: 'Multilayer map (canvas + svg)', slug: 'MapLayered', component: MapLayered },
 	{ replPath: '', title: 'Column annotated', slug: 'Column', component: Column },
 	{ replPath: '', title: 'Stacked column', slug: 'ColumnStacked', component: ColumnStacked },

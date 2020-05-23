@@ -1,9 +1,9 @@
 <script>
-	import { LayerCake, Svg } from 'layercake';
+	import { LayerCake, SvgSsr } from 'layercake';
 	import { feature } from 'topojson';
 	import usStates from '../../data/us-states.topojson.js';
 
-	import MapSvg from '../../components/MapSvg.svelte';
+	import Map from '../../components/MapSvg.svelte';
 
 	const geojson = feature(usStates, usStates.objects.collection);
 </script>
@@ -17,12 +17,16 @@
 
 <div class="chart-container">
 	<LayerCake
+		ssr={true}
 		data={geojson}
+		let:aspectRatio
 	>
-		<Svg>
-			<MapSvg
+		<SvgSsr
+			viewBox={`0 0 100 ${100 / aspectRatio}`}
+		>
+			<Map
 				projectionName={'geoAlbersUsa'}
 			/>
-		</Svg>
+		</SvgSsr>
 	</LayerCake>
 </div>
