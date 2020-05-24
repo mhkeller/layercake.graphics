@@ -42,14 +42,13 @@
 <div class="chart-container">
 	<LayerCake
 		ssr={true}
+		percentScale={true}
 		padding={{ top: 0, right: 0, bottom: 20, left: 20 }}
 		x={d => d.data.year}
 		y={[0, 1]}
 		xScale={scaleBand().paddingInner([0.028]).round(true)}
 		xDomain={uniques(fruit, 'year')}
 		flatData={flatten(series)}
-		xRange={[0, 100]}
-		yRange={[100, 0]}
 		data={series}
 		custom={{ seriesNames }}
 	>

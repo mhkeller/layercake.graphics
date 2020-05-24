@@ -50,11 +50,10 @@
 <div class="chart-container">
 	<LayerCake
 		ssr={true}
+		percentScale={true}
 		padding={{ top: 0, right: 0, bottom: 20, left: 17 }}
 		x={d => d.data.month}
 		y={[0, 1]}
-		xRange={[0, 100]}
-		yRange={[100, 0]}
 		flatData={flatten(series)}
 		data={series}
 	>

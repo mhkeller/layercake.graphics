@@ -41,6 +41,7 @@
 <div class="chart-container">
 	<LayerCake
 		ssr={true}
+		percentScale={true}
 		padding={{ top: 0, right: 0, bottom: 20, left: 30 }}
 		y={d => d.data.year}
 		x={[0, 1]}
@@ -48,8 +49,6 @@
 		yDomain={['2016', '2017', '2018', '2019']}
 		flatData={flatten(series)}
 		data={series}
-		xRange={[0, 100]}
-		yRange={[100, 0]}
 		custom={{ seriesNames }}
 	>
 		<Html>

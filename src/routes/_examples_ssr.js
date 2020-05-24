@@ -17,21 +17,21 @@ import Timeplot from './_examples_ssr/Timeplot.svelte';
 // import Radar from './_examples_ssr/Radar.svelte';
 
 export default [
-	// { replPath: '', title: 'Line + area', slug: 'Line', component: Line },
+	{ replPath: '', title: 'Line + area', slug: 'Line', component: Line },
 		// { replPath: '', title: 'WebGL Scatter (svg axes, quadtree hover)', slug: 'ScatterWebgl', component: ScatterWebGL },
 	{ replPath: '', title: 'Map (svg)', slug: 'MapSvg', component: MapSvg },
 		// { replPath: '', title: 'Multilayer map (canvas + svg)', slug: 'MapLayered', component: MapLayered },
-	// { replPath: '', title: 'Column annotated', slug: 'Column', component: Column },
-	// { replPath: '', title: 'Stacked column', slug: 'ColumnStacked', component: ColumnStacked },
-	// { replPath: '', title: 'Bar', slug: 'Bar', component: Bar },
-	// { replPath: '', title: 'Stacked bar', slug: 'BarStacked', component: BarStacked },
-	// { replPath: '', title: 'Multiline (html labels + quadtree tooltip)', slug: 'MultiLine', component: MultiLine },
-	// { replPath: '', title: 'Stacked area', slug: 'AreaStacked', component: AreaStacked },
+	{ replPath: '', title: 'Column annotated', slug: 'Column', component: Column },
+	{ replPath: '', title: 'Stacked column', slug: 'ColumnStacked', component: ColumnStacked },
+	{ replPath: '', title: 'Bar', slug: 'Bar', component: Bar },
+	{ replPath: '', title: 'Stacked bar', slug: 'BarStacked', component: BarStacked },
+	{ replPath: '', title: 'Multiline (html labels + quadtree tooltip)', slug: 'MultiLine', component: MultiLine },
+	{ replPath: '', title: 'Stacked area', slug: 'AreaStacked', component: AreaStacked },
 		// { replPath: '', title: 'Scatter (svg + canvas + voronoi)', slug: 'Scatter', component: Scatter },
-	// { replPath: '', title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
-	// { replPath: '', title: 'Calendar (one cake per month)', slug: 'Calendar', component: Calendar },
-	// { replPath: '', title: 'Time of day plot', slug: 'Timeplot', component: Timeplot },
-	// { replPath: '', title: 'Histogram (variable bins)', slug: 'Histogram', component: Histogram },
-	// { replPath: '', title: 'Small multiples (animated domain transition)', slug: 'SmallMultiples', component: SmallMultiples },
+	{ replPath: '', title: 'Cleveland dot plot', slug: 'ClevelandDotPlot', component: ClevelandDotPlot },
+	{ replPath: '', title: 'Calendar (one cake per month)', slug: 'Calendar', component: Calendar },
+	{ replPath: '', title: 'Time of day plot', slug: 'Timeplot', component: Timeplot },
+	{ replPath: '', title: 'Histogram (variable bins)', slug: 'Histogram', component: Histogram },
+	{ replPath: '', title: 'Small multiples (animated domain transition)', slug: 'SmallMultiples', component: SmallMultiples },
 		// { replPath: '', title: 'Radar chart', slug: 'Radar', component: Radar }
 ];

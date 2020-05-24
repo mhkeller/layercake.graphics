@@ -44,8 +44,7 @@
 <div class="chart-container">
 	<LayerCake
 		ssr={true}
-		xRange={[0, 100]}
-		yRange={[100, 0]}
+		percentScale={true}
 		padding={{ top: 20, right: 5, bottom: 20, left: 31 }}
 		x={['x0', 'x1']}
 		y={'length'}

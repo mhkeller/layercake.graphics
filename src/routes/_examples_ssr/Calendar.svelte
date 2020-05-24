@@ -51,7 +51,7 @@
 	>
 		<LayerCake
 			ssr={true}
-			xRange={[0, 100]}
+			percentScale={true}
 			padding={{ top: 1, right: 1, bottom: 1, left: 1 }}
 			x={'key'}
 			r={d => d.values.length}

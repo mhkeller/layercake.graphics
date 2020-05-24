@@ -25,12 +25,11 @@
 <div class="chart-container">
 	<LayerCake
 		ssr={true}
+		percentScale={true}
 		padding={{ right: 10, bottom: 20, left: 25 }}
 		x={xKey}
 		y={d => d[yKey]}
 		yDomain={[0, null]}
-		xRange={[0, 100]}
-		yRange={[100, 0]}
 		data={points}
 	>
 		<Html>
