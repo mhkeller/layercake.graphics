@@ -1,10 +1,13 @@
 <script>
 	import { getContext } from 'svelte';
-	import * as geo from 'd3-geo';
+	import { geoPath } from 'd3-geo';
 
-	const { data, width, height, aspectRatio } = getContext('LayerCake');
+	const { data, width, height, percentScale, aspectRatio } = getContext('LayerCake');
 
-	export let projectionName = 'geoAlbersUsa';
+	/* --------------------------------------------
+	 * Require a D3 projection function
+	 */
+	export let projection;
 
 	/* --------------------------------------------
 	 * Add this in case you want to plot only a subset of the features
@@ -12,10 +15,12 @@
 	 */
 	export let features = $data.features;
 
-	$: projection = geo[projectionName]()
-		.fitSize([100, 100 / $aspectRatio], $data);
+	$: fitSizeRange = $percentScale === true ? [100, 100 / $aspectRatio] : [$width, $height];
 
-	$: geoPath = geo.geoPath(projection);
+	$: projectionFn = projection()
+		.fitSize(fitSizeRange, $data);
+
+	$: geoPathFn = geoPath(projectionFn);
 
 	function fillRandom(random) {
 		const colors = ['#ffdecc', '#ffc09c', '#ffa06b', '#ff7a33'];
@@ -29,7 +34,7 @@
 		<path
 			class="feature-path"
 			fill="{fillRandom(Math.random())}"
-			d="{geoPath(feature)}"
+			d="{geoPathFn(feature)}"
 		></path>
 	{/each}
 </g>

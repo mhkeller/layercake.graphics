@@ -3,7 +3,7 @@
 	import { feature } from 'topojson';
 	import usStates from '../../data/us-states.topojson.js';
 
-	import MapSvg from '../../components/MapSvg.svelte';
+	import Map from '../../components/Map.svg.svelte';
 
 	const geojson = feature(usStates, usStates.objects.collection);
 </script>
@@ -20,7 +20,7 @@
 		data={geojson}
 	>
 		<Svg>
-			<MapSvg
+			<Map
 				projectionName={'geoAlbersUsa'}
 			/>
 		</Svg>

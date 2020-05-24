@@ -3,7 +3,7 @@
 	import { feature } from 'topojson';
 
 	import usStates from '../../data/us-states.topojson.js';
-	import MapSvg from '../../components/MapSvg.svelte';
+	import MapSvg from '../../components/Map.svg.svelte';
 	import MapCanvas from '../../components/MapCanvas.svelte';
 
 	const geojson = feature(usStates, usStates.objects.collection);
