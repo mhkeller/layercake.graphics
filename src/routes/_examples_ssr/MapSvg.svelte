@@ -19,7 +19,7 @@
 <div class="chart-container">
 	<LayerCake
 		ssr={true}
-		percentScale={true}
+		percentRange={true}
 		data={geojson}
 		let:aspectRatio
 	>

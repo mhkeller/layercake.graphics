@@ -1,10 +1,11 @@
 <script>
 	import { LayerCake, Svg, Canvas } from 'layercake';
 	import { feature } from 'topojson';
+	import { geoAlbersUsa } from 'd3-geo';
 
 	import usStates from '../../data/us-states.topojson.js';
 	import MapSvg from '../../components/Map.svg.svelte';
-	import MapCanvas from '../../components/MapCanvas.svelte';
+	import MapCanvas from '../../components/Map.canvas.svelte';
 
 	const geojson = feature(usStates, usStates.objects.collection);
 </script>
@@ -23,13 +24,13 @@
 
 		<Canvas>
 			<MapCanvas
-				projectionName={'geoAlbersUsa'}
+				projection={geoAlbersUsa}
 			/>
 		</Canvas>
 
 		<Svg>
 			<MapSvg
-				projectionName={'geoAlbersUsa'}
+				projection={geoAlbersUsa}
 				features={ geojson.features.slice(40, 50) }
 			/>
 		</Svg>

@@ -27,7 +27,7 @@
 
 <LayerCake
 	ssr={true}
-	percentScale={true}
+	percentRange={true}
 	padding={{ top: 2, right: 6, bottom: 2, left: 6 }}
 	x={extentGetters.find(d => d.field === 'x').accessor}
 	y={extentGetters.find(d => d.field === 'y').accessor}

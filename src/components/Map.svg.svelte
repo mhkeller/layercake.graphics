@@ -2,7 +2,7 @@
 	import { getContext } from 'svelte';
 	import { geoPath } from 'd3-geo';
 
-	const { data, width, height, percentScale, aspectRatio } = getContext('LayerCake');
+	const { data, width, height, percentRange, aspectRatio } = getContext('LayerCake');
 
 	/* --------------------------------------------
 	 * Require a D3 projection function
@@ -15,7 +15,7 @@
 	 */
 	export let features = $data.features;
 
-	$: fitSizeRange = $percentScale === true ? [100, 100 / $aspectRatio] : [$width, $height];
+	$: fitSizeRange = $percentRange === true ? [100, 100 / $aspectRatio] : [$width, $height];
 
 	$: projectionFn = projection()
 		.fitSize(fitSizeRange, $data);

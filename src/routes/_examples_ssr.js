@@ -5,7 +5,7 @@ import Column from './_examples_ssr/Column.svelte';
 import AreaStacked from './_examples_ssr/AreaStacked.svelte';
 import ColumnStacked from './_examples_ssr/ColumnStacked.svelte';
 import MultiLine from './_examples_ssr/MultiLine.svelte';
-// import MapLayered from './_examples_ssr/MapLayered.svelte';
+import MapLayered from './_examples_ssr/MapLayered.svelte';
 import Bar from './_examples_ssr/Bar.svelte';
 import BarStacked from './_examples_ssr/BarStacked.svelte';
 // import ScatterWebGL from './_examples_ssr/ScatterWebgl.svelte';
@@ -20,7 +20,7 @@ export default [
 	{ replPath: '', title: 'Line + area', slug: 'Line', component: Line },
 		// { replPath: '', title: 'WebGL Scatter (svg axes, quadtree hover)', slug: 'ScatterWebgl', component: ScatterWebGL },
 	{ replPath: '', title: 'Map (svg)', slug: 'MapSvg', component: MapSvg },
-		// { replPath: '', title: 'Multilayer map (canvas + svg)', slug: 'MapLayered', component: MapLayered },
+	{ replPath: '', title: 'Multilayer map (canvas + svg)', slug: 'MapLayered', component: MapLayered },
 	{ replPath: '', title: 'Column annotated', slug: 'Column', component: Column },
 	{ replPath: '', title: 'Stacked column', slug: 'ColumnStacked', component: ColumnStacked },
 	{ replPath: '', title: 'Bar', slug: 'Bar', component: Bar },

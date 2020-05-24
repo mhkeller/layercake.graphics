@@ -1,16 +1,18 @@
 <script>
-	import { LayerCake, Svg, Canvas } from 'layercake';
+	import { LayerCake, SvgSsr, Canvas } from 'layercake';
 	import { feature } from 'topojson';
+	import { geoAlbersUsa } from 'd3-geo';
 
 	import usStates from '../../data/us-states.topojson.js';
-	import MapSvg from '../../components/MapSvg.svelte';
-	import MapCanvas from '../../components/MapCanvas.svelte';
+	import MapSvg from '../../components/Map.svg.svelte';
+	import MapCanvas from '../../components/Map.canvas.svelte';
 
 	const geojson = feature(usStates, usStates.objects.collection);
 </script>
 
 <style>
 	.chart-container {
+		position: relative;
 		width: 100%;
 		height: 100%;
 	}
@@ -18,20 +20,30 @@
 
 <div class="chart-container">
 	<LayerCake
+		position={'absolute'}
 		data={geojson}
 	>
-
 		<Canvas>
 			<MapCanvas
-				projectionName={'geoAlbersUsa'}
+				projection={geoAlbersUsa}
 			/>
 		</Canvas>
+	</LayerCake>
 
-		<Svg>
+	<LayerCake
+		position={'absolute'}
+		ssr={true}
+		percentRange={true}
+		data={geojson}
+		let:aspectRatio
+	>
+		<SvgSsr
+			viewBox={`0 0 100 ${100 / aspectRatio}`}
+		>
 			<MapSvg
-				projectionName={'geoAlbersUsa'}
+				projection={geoAlbersUsa}
 				features={ geojson.features.slice(40, 50) }
 			/>
-		</Svg>
+		</SvgSsr>
 	</LayerCake>
 </div>

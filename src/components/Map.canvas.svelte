@@ -1,18 +1,20 @@
 <script>
-	import * as geo from 'd3-geo';
 	import { getContext } from 'svelte';
 	import { scaleCanvas } from 'layercake';
+	import { geoPath } from 'd3-geo';
 
-	const { data, width, height } = getContext('LayerCake');
+	const { data, width, height, percentRange, aspectRatio } = getContext('LayerCake');
 
 	const { ctx } = getContext('ctx');
 
-	export let projectionName = 'geoAlbersUsa';
+	export let projection;
 
-	$: projection = geo[projectionName]()
-		.fitSize([$width, $height], $data);
+	$: fitSizeRange = $percentRange === true ? [100, 100 / $aspectRatio] : [$width, $height];
 
-	$: geoPath = geo.geoPath(projection);
+	$: projectionFn = projection()
+		.fitSize(fitSizeRange, $data);
+
+	$: geoPathFn = geoPath(projectionFn);
 
 	$: {
 		if ($ctx && geoPath) {
@@ -21,8 +23,8 @@
 
 			$ctx.beginPath();
 			// Set the context here since setting it in `$: geoPath` is a circular reference
-			geoPath.context($ctx);
-			geoPath($data);
+			geoPathFn.context($ctx);
+			geoPathFn($data);
 			$ctx.fillStyle = '#fff';
 			$ctx.fill();
 			$ctx.lineWidth = 1;

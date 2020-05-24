@@ -41,7 +41,7 @@
 <div class="chart-container">
 	<LayerCake
 		ssr={true}
-		percentScale={true}
+		percentRange={true}
 		padding={{ top: 0, right: 0, bottom: 20, left: 30 }}
 		y={d => d.data.year}
 		x={[0, 1]}
