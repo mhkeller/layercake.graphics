@@ -8,6 +8,7 @@
 	import MapCanvas from '../../components/Map.canvas.svelte';
 
 	const geojson = feature(usStates, usStates.objects.collection);
+	const initialAspectRatio = 360 / 140;
 </script>
 
 <style>
@@ -35,6 +36,7 @@
 		ssr={true}
 		percentRange={true}
 		data={geojson}
+		aspectRatio={initialAspectRatio}
 		let:aspectRatio
 	>
 		<SvgSsr
