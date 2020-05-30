@@ -1,5 +1,5 @@
 <script>
-	import { LayerCake, SvgSsr, Html, flatten } from 'layercake';
+	import { LayerCake, ScaledSvg, Html, flatten } from 'layercake';
 	import { stack } from 'd3-shape';
 	import { scaleBand } from 'd3-scale';
 
@@ -61,11 +61,11 @@
 				gridlines={false}
 			/>
 		</Html>
-		<SvgSsr>
+		<ScaledSvg>
 			<BarStacked
 				{seriesColors}
 			/>
-		</SvgSsr>
+		</ScaledSvg>
 	</LayerCake>
 
 </div>

@@ -1,5 +1,5 @@
 <script>
-	import { LayerCake, SvgSsr, Html } from 'layercake';
+	import { LayerCake, ScaledSvg, Html } from 'layercake';
 	import points from '../../data/points.csv';
 
 	import Line from '../../components/Line.svelte';
@@ -38,9 +38,9 @@
 					ticks={4}
 				/>
 		</Html>
-		<SvgSsr>
+		<ScaledSvg>
 			<Line/>
 			<Area/>
-		</SvgSsr>
+		</ScaledSvg>
 	</LayerCake>
 </div>

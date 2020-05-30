@@ -1,5 +1,5 @@
 <script>
-	import { LayerCake, SvgSsr, Html } from 'layercake';
+	import { LayerCake, ScaledSvg, Html } from 'layercake';
 	import { histogram, extent } from 'd3-array';
 
 	import unemployment from '../../data/unemployment.js';
@@ -63,12 +63,12 @@
 				ticks={3}
 			/>
 		</Html>
-		<SvgSsr>
+		<ScaledSvg>
 			<Column
 				fill={'#fff'}
 				stroke={'#000'}
 				strokeWidth={1}
 			/>
-		</SvgSsr>
+		</ScaledSvg>
 	</LayerCake>
 </div>

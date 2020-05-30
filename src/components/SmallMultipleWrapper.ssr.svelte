@@ -1,5 +1,5 @@
 <script>
-	import { LayerCake, SvgSsr, calcExtents } from 'layercake';
+	import { LayerCake, ScaledSvg, calcExtents } from 'layercake';
 	import { tweened } from 'svelte/motion';
 	import * as eases from 'svelte/easing';
 
@@ -35,9 +35,9 @@
 	xDomain={$xDomain}
 	yDomain={$yDomain}
 >
-	<SvgSsr>
+	<ScaledSvg>
 		<Line
 			stroke={'#000'}
 		/>
-	</SvgSsr>
+	</ScaledSvg>
 </LayerCake>

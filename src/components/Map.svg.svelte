@@ -10,7 +10,7 @@
 	export let projection;
 
 	/* --------------------------------------------
-	 * Add this in case you want to plot only a subset of the features
+	 * Add this optional export in case you want to plot only a subset of the features
 	 * while keeping the zoom on the whole geojson feature set
 	 */
 	export let features = $data.features;

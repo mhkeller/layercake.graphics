@@ -1,5 +1,5 @@
 <script>
-	import { LayerCake, Svg, SvgSsr, Html } from 'layercake';
+	import { LayerCake, Svg, ScaledSvg, Html } from 'layercake';
 	import { scaleBand } from 'd3-scale';
 	import groups from '../../data/groups.csv';
 
@@ -68,9 +68,9 @@
 		data={groups}
 	>
 
-		<SvgSsr>
+		<ScaledSvg>
 			<Column/>
-		</SvgSsr>
+		</ScaledSvg>
 
 		<Html>
 			<AxisX

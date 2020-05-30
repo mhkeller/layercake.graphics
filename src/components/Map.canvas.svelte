@@ -9,6 +9,12 @@
 
 	export let projection;
 
+	/* --------------------------------------------
+	 * Add this optional export in case you want to plot only a subset of the features
+	 * while keeping the zoom on the whole geojson feature set
+	 */
+	export let features = $data;
+
 	$: fitSizeRange = $percentRange === true ? [100, 100 / $aspectRatio] : [$width, $height];
 
 	$: projectionFn = projection()
@@ -24,7 +30,7 @@
 			$ctx.beginPath();
 			// Set the context here since setting it in `$: geoPath` is a circular reference
 			geoPathFn.context($ctx);
-			geoPathFn($data);
+			geoPathFn(features);
 			$ctx.fillStyle = '#fff';
 			$ctx.fill();
 			$ctx.lineWidth = 1;

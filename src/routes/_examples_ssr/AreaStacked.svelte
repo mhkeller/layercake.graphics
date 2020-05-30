@@ -1,5 +1,5 @@
 <script>
-	import { LayerCake, SvgSsr, Html, flatten } from 'layercake';
+	import { LayerCake, ScaledSvg, Html, flatten } from 'layercake';
 	import { stack } from 'd3-shape';
 	import fruit from '../../data/fruit.csv';
 	import AxisX from '../../components/AxisX.html.svelte';
@@ -65,11 +65,11 @@
 				formatTick={formatTickY}
 			/>
 		</Html>
-		<SvgSsr>
+		<ScaledSvg>
 			<AreaStacked
 				{seriesColors}
 				{seriesNames}
 			/>
-		</SvgSsr>
+		</ScaledSvg>
 	</LayerCake>
 </div>

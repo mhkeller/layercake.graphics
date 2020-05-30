@@ -1,5 +1,5 @@
 <script>
-	import { LayerCake, SvgSsr, Html } from 'layercake';
+	import { LayerCake, ScaledSvg, Html } from 'layercake';
 	import { scaleBand } from 'd3-scale';
 
 	import groups from '../../data/groups.csv';
@@ -39,9 +39,9 @@
 			/>
 			<AxisY gridlines={false}/>
 		</Html>
-		<SvgSsr>
+		<ScaledSvg>
 			<Bar/>
-		</SvgSsr>
+		</ScaledSvg>
 	</LayerCake>
 
 </div>

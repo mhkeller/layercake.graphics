@@ -1,5 +1,5 @@
 <script>
-	import { LayerCake, SvgSsr, Html, flatten, uniques } from 'layercake';
+	import { LayerCake, ScaledSvg, Html, flatten, uniques } from 'layercake';
 	import { stack } from 'd3-shape';
 	import { scaleBand } from 'd3-scale';
 
@@ -62,11 +62,11 @@
 				formatTick={formatTickY}
 			/>
 		</Html>
-		<SvgSsr>
+		<ScaledSvg>
 			<ColumnStacked
 				{seriesColors}
 			/>
-		</SvgSsr>
+		</ScaledSvg>
 	</LayerCake>
 
 </div>

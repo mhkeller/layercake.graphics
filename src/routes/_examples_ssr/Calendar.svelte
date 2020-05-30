@@ -1,5 +1,5 @@
 <script>
-	import { LayerCake, SvgSsr } from 'layercake';
+	import { LayerCake, ScaledSvg } from 'layercake';
 	import { nest } from 'd3-collection';
 	import dates from '../../data/dates.csv';
 
@@ -57,12 +57,12 @@
 			r={d => d.values.length}
 			data={month.values}
 		>
-			<SvgSsr>
+			<ScaledSvg>
 				<CalendarMonth
 					{seriesColors}
 					calcCellSize={(w, h) => 100 / 7}
 				/>
-			</SvgSsr>
+			</ScaledSvg>
 		</LayerCake>
 	</div>
 {/each}

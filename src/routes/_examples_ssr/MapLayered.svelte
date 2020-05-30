@@ -1,5 +1,5 @@
 <script>
-	import { LayerCake, SvgSsr, Canvas } from 'layercake';
+	import { LayerCake, ScaledSvg, Canvas } from 'layercake';
 	import { feature } from 'topojson';
 	import { geoAlbersUsa } from 'd3-geo';
 
@@ -39,13 +39,13 @@
 		aspectRatio={initialAspectRatio}
 		let:aspectRatio
 	>
-		<SvgSsr
+		<ScaledSvg
 			viewBox={`0 0 100 ${100 / aspectRatio}`}
 		>
 			<MapSvg
 				projection={geoAlbersUsa}
 				features={ geojson.features.slice(40, 50) }
 			/>
-		</SvgSsr>
+		</ScaledSvg>
 	</LayerCake>
 </div>

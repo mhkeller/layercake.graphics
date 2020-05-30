@@ -1,5 +1,5 @@
 <script>
-	import { LayerCake, SvgSsr, Html } from 'layercake';
+	import { LayerCake, ScaledSvg, Html } from 'layercake';
 	import { scaleOrdinal } from 'd3-scale';
 	import { timeParse, timeFormat } from 'd3-time-format';
 
@@ -89,11 +89,11 @@
 				formatTick={formatTickY}
 			/>
 		</Html>
-		<SvgSsr>
+		<ScaledSvg>
 			<MultiLine
 				{colorScale}
 			/>
-		</SvgSsr>
+		</ScaledSvg>
 
 		<Html>
 			<Labels/>
