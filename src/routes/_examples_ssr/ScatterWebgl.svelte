@@ -1,21 +1,27 @@
 <script>
-	import { LayerCake, Svg, WebGL, Html } from 'layercake';
-	import points from '../../data/points.csv';
-	import ScatterWebGL from '../../components/ScatterWebGL.svelte';
-	import AxisX from '../../components/AxisX.svelte';
-	import AxisY from '../../components/AxisY.svelte';
+	import { LayerCake, WebGL, Html } from 'layercake';
+
+	import ScatterWebGL from '../../components/Scatter.webgl.svelte';
+	import AxisX from '../../components/AxisX.html.svelte';
+	import AxisY from '../../components/AxisY.html.svelte';
 	import QuadTree from '../../components/QuadTree.svelte';
+
+	import points from '../../data/points.csv';
+
+	const xKey = 'myX';
+	const yKey = 'myY';
 
 	const diameter = 6;
 	const padding = 6;
 
 	points.forEach(row => {
-		row.myY = +row.myY;
+		row[yKey] = +row[yKey];
 	});
 </script>
 
 <style>
 	.chart-container {
+		position: relative;
 		width: 100%;
 		height: 100%;
 	}
@@ -33,20 +39,31 @@
 
 <div class="chart-container">
 	<LayerCake
+		position={'absolute'}
 		ssr={true}
 		percentRange={true}
-		padding={{ top: 0, right: 5, bottom: 20, left: 25 }}
-		x={'myX'}
-		y={'myY'}
+		padding={{ top: 5, right: 5, bottom: 20, left: 25 }}
+		x={xKey}
+		y={yKey}
 		xPadding={[padding, padding]}
 		yPadding={[padding, padding]}
 		data={points}
 	>
-		<Svg>
+		<Html>
 			<AxisX/>
 			<AxisY/>
-		</Svg>
+		</Html>
+	</LayerCake>
 
+	<LayerCake
+		position={'absolute'}
+		padding={{ top: 0, right: 5, bottom: 20, left: 25 }}
+		x={xKey}
+		y={yKey}
+		xPadding={[padding, padding]}
+		yPadding={[padding, padding]}
+		data={points}
+	>
 		<WebGL>
 			<ScatterWebGL {diameter}/>
 		</WebGL>

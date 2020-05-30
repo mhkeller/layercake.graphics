@@ -8,7 +8,7 @@ import MultiLine from './_examples_ssr/MultiLine.svelte';
 import MapLayered from './_examples_ssr/MapLayered.svelte';
 import Bar from './_examples_ssr/Bar.svelte';
 import BarStacked from './_examples_ssr/BarStacked.svelte';
-// import ScatterWebGL from './_examples_ssr/ScatterWebgl.svelte';
+import ScatterWebGL from './_examples_ssr/ScatterWebgl.svelte';
 import ClevelandDotPlot from './_examples_ssr/ClevelandDotPlot.svelte';
 import Histogram from './_examples_ssr/Histogram.svelte';
 import SmallMultiples from './_examples_ssr/SmallMultiples.svelte';
@@ -18,7 +18,7 @@ import Timeplot from './_examples_ssr/Timeplot.svelte';
 
 export default [
 	{ replPath: '', title: 'Line + area', slug: 'Line', component: Line },
-		// { replPath: '', title: 'WebGL Scatter (svg axes, quadtree hover)', slug: 'ScatterWebgl', component: ScatterWebGL },
+	{ replPath: '', title: 'WebGL Scatter (svg axes, quadtree hover)', slug: 'ScatterWebgl', component: ScatterWebGL },
 	{ replPath: '', title: 'Map (svg)', slug: 'MapSvg', component: MapSvg },
 	{ replPath: '', title: 'Multilayer map (canvas + svg)', slug: 'MapLayered', component: MapLayered },
 	{ replPath: '', title: 'Column annotated', slug: 'Column', component: Column },
