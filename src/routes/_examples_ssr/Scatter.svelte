@@ -1,20 +1,23 @@
 <script>
-	import { LayerCake, Svg, Canvas } from 'layercake';
+	import { LayerCake, ScaledSvg, Html, Canvas } from 'layercake';
 
 	import points from '../../data/points.csv';
-	import ScatterSvg from '../../components/ScatterSvg.svelte';
-	import ScatterCanvas from '../../components/ScatterCanvas.svelte';
-	import Voronoi from '../../components/Voronoi.svelte';
-	import AxisX from '../../components/AxisX.svelte';
-	import AxisY from '../../components/AxisY.svelte';
+	import Scatter from '../../components/Scatter.html.svelte';
+	import AxisX from '../../components/AxisX.html.svelte';
+	import AxisY from '../../components/AxisY.html.svelte';
+
+	const xKey = 'myX';
+	const yKey = 'myY';
 
 	points.forEach(row => {
-		row.myY = +row.myY;
+		row[yKey] = +row[yKey];
 	});
 
-	const r = 3;
-	const padding = 10;
-	const color = '#fff';
+	const r = 4.5;
+	const padding = 2.5;
+	const fill = '#fff';
+	const stroke = '#0cf';
+	const strokeWidth = 1.5;
 </script>
 
 <style>
@@ -29,31 +32,23 @@
 		ssr={true}
 		percentRange={true}
 		padding={{ top: 10, right: 5, bottom: 20, left: 25 }}
-		x='myX'
-		y='myY'
+		x={xKey}
+		y={yKey}
 		xPadding={[padding, padding]}
 		yPadding={[padding, padding]}
 		data={points}
 	>
 
-		<Svg>
+		<Html>
 			<AxisX/>
 			<AxisY/>
-		</Svg>
-
-		<Canvas>
-			<ScatterCanvas
-				r={r * 1.5}
-				fill={'#0cf'}
-			/>
-		</Canvas>
-
-		<Svg>
-			<ScatterSvg
+			<Scatter
 				{r}
-				fill={color}
+				{fill}
+				{stroke}
+				{strokeWidth}
 			/>
-			<Voronoi/>
-		</Svg>
+		</Html>
+
 	</LayerCake>
 </div>

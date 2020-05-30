@@ -5,6 +5,8 @@
 
 	export let r = 5;
 	export let fill = '#000';
+	export let stroke = '#0cf';
+	export let strokeWidth = 0;
 	// export let dx = 0;
 	// export let dy = 0;
 </script>
@@ -19,6 +21,7 @@
 				width: {r * 2}px;
 				height: {r * 2}px;
 				background-color: {fill};
+				border: {strokeWidth}px solid {stroke};
 			"
 		/>
 	{/each}

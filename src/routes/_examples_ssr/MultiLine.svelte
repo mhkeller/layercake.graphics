@@ -86,6 +86,7 @@
 				snapTicks={true}
 			/>
 			<AxisY
+				baseline={true}
 				formatTick={formatTickY}
 			/>
 		</Html>

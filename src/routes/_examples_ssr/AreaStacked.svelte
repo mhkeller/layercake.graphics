@@ -62,6 +62,7 @@
 				formatTick={formatTickX}
 			/>
 			<AxisY
+				baseline={true}
 				formatTick={formatTickY}
 			/>
 		</Html>

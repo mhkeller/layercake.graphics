@@ -4,7 +4,7 @@
 	import { scaleBand } from 'd3-scale';
 
 	import days from '../../data/days.csv';
-	import ScatterSvg from '../../components/ScatterSvg.svelte';
+	import ScatterSvg from '../../components/Scatter.svg.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 
