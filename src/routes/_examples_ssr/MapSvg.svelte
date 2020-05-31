@@ -7,23 +7,23 @@
 	import usStates from '../../data/us-states.topojson.js';
 
 	const geojson = feature(usStates, usStates.objects.collection);
-	const initialAspectRatio = 360 / 140;
+	const aspectRatio = 2.63;
 </script>
 
 <style>
 	.chart-container {
+		position: relative;
 		width: 100%;
-		height: 100%;
 	}
 </style>
 
-<div class="chart-container">
+<div class="chart-container" style="padding-bottom:{100 / aspectRatio}%">
 	<LayerCake
 		ssr={true}
 		percentRange={true}
+		position='absolute'
 		data={geojson}
-		aspectRatio={initialAspectRatio}
-		let:aspectRatio
+		{aspectRatio}
 	>
 		<ScaledSvg
 			viewBox={`0 0 100 ${100 / aspectRatio}`}

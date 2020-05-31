@@ -93,6 +93,11 @@
 		height: 140px;
 		margin-bottom: 60px;
 	}
+
+	.gallery-item.scaled {
+		height: auto;
+	}
+
 	@media (max-width: 650px) {
 		.gallery-item {
 			width: 100%;
@@ -213,7 +218,7 @@
 
 	<div id="ssr-gallery">
 		{#each examplesSsr as example}
-			<div class="gallery-item">
+			<div class="gallery-item" class:scaled={example.title.toLowerCase().includes('map')}>
 				<h4 class="title"><a rel=prefetch href="example-ssr/{example.slug}">{example.title}</a> <a class="edit-repl" href="https://svelte.dev/repl/{example.replPath}" target="_blank" rel="nofollow">Edit</a></h4>
 				<svelte:component this="{example.component}"/>
 			</div>
