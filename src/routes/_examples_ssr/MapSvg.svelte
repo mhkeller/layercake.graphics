@@ -20,16 +20,14 @@
 <div class="chart-container" style="padding-bottom:{100 / aspectRatio}%">
 	<LayerCake
 		ssr={true}
-		percentRange={true}
 		position='absolute'
 		data={geojson}
-		{aspectRatio}
 	>
 		<ScaledSvg
-			viewBox={`0 0 100 ${100 / aspectRatio}`}
+			fixedAspectRatio={aspectRatio}
 		>
 			<Map
-				{aspectRatio}
+				fixedAspectRatio={aspectRatio}
 				projection={geoAlbersUsa}
 			/>
 		</ScaledSvg>

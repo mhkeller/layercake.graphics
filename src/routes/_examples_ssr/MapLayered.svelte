@@ -22,10 +22,10 @@
 	<LayerCake
 		position={'absolute'}
 		data={geojson}
+		{aspectRatio}
 	>
 		<Canvas>
 			<MapCanvas
-				{aspectRatio}
 				projection={geoAlbersUsa}
 			/>
 		</Canvas>
@@ -34,14 +34,13 @@
 	<LayerCake
 		position='absolute'
 		ssr={true}
-		percentRange={true}
 		data={geojson}
 	>
 		<ScaledSvg
-			viewBox={`0 0 100 ${100 / aspectRatio}`}
+			fixedAspectRatio={aspectRatio}
 		>
 			<MapSvg
-				{aspectRatio}
+				fixedAspectRatio={aspectRatio}
 				projection={geoAlbersUsa}
 				features={ geojson.features.slice(40, 50) }
 			/>

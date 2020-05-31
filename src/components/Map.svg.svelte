@@ -2,13 +2,13 @@
 	import { getContext } from 'svelte';
 	import { geoPath } from 'd3-geo';
 
-	const { data, width, height, percentRange } = getContext('LayerCake');
+	const { data, width, height } = getContext('LayerCake');
 
 	/* --------------------------------------------
 	 * Require a D3 projection function
 	 */
 	export let projection;
-	export let aspectRatio = undefined;
+	export let fixedAspectRatio;
 
 	/* --------------------------------------------
 	 * Add this optional export in case you want to plot only a subset of the features
@@ -16,7 +16,7 @@
 	 */
 	export let features = $data.features;
 
-	$: fitSizeRange = $percentRange === true ? [100, 100 / aspectRatio] : [$width, $height];
+	$: fitSizeRange = fixedAspectRatio ? [100, 100 / fixedAspectRatio] : [$width, $height];
 
 	$: projectionFn = projection()
 		.fitSize(fitSizeRange, $data);
