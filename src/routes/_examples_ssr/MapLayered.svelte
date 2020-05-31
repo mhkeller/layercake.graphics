@@ -25,6 +25,7 @@
 	>
 		<Canvas>
 			<MapCanvas
+				{aspectRatio}
 				projection={geoAlbersUsa}
 			/>
 		</Canvas>
@@ -35,12 +36,12 @@
 		ssr={true}
 		percentRange={true}
 		data={geojson}
-		{aspectRatio}
 	>
 		<ScaledSvg
 			viewBox={`0 0 100 ${100 / aspectRatio}`}
 		>
 			<MapSvg
+				{aspectRatio}
 				projection={geoAlbersUsa}
 				features={ geojson.features.slice(40, 50) }
 			/>

@@ -3,7 +3,7 @@
 	import { scaleCanvas } from 'layercake';
 	import { geoPath } from 'd3-geo';
 
-	const { data, width, height, percentRange, aspectRatio } = getContext('LayerCake');
+	const { data, width, height, percentRange } = getContext('LayerCake');
 
 	const { ctx } = getContext('ctx');
 
@@ -15,10 +15,8 @@
 	 */
 	export let features = $data;
 
-	$: fitSizeRange = $percentRange === true ? [100, 100 / $aspectRatio] : [$width, $height];
-
 	$: projectionFn = projection()
-		.fitSize(fitSizeRange, $data);
+		.fitSize([$width, $height], $data);
 
 	$: geoPathFn = geoPath(projectionFn);
 

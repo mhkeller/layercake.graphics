@@ -29,6 +29,7 @@
 			viewBox={`0 0 100 ${100 / aspectRatio}`}
 		>
 			<Map
+				{aspectRatio}
 				projection={geoAlbersUsa}
 			/>
 		</ScaledSvg>
