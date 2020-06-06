@@ -1,21 +1,27 @@
 <script>
 	import { LayerCake, ScaledSvg, Html, flatten } from 'layercake';
 	import { stack } from 'd3-shape';
-	import fruit from '../../data/fruit.csv';
+	import { scaleOrdinal } from 'd3-scale';
+
+	import data from '../../data/fruit.csv';
+
 	import AxisX from '../../components/AxisX.html.svelte';
 	import AxisY from '../../components/AxisY.html.svelte';
 	import AreaStacked from '../../components/AreaStacked.svelte';
 
-	const seriesNames = Object.keys(fruit[0]).filter(d => d !== 'month');
+	const xKey = 'month';
+	const yKey = [0, 1];
+	const zKey = 'key';
 
-	fruit.forEach(row => {
-		row.month = new Date(row.month);
+	const seriesNames = Object.keys(data[0]).filter(d => d !== xKey);
+	const seriesColors = ['#ff00cc', '#ff7ac7', '#ffb3c0', '#ffe4b8'];
+
+	data.forEach(d => {
+		d[xKey] = new Date(d[xKey]);
 		seriesNames.forEach(name => {
-			row[name] = +row[name];
+			d[name] = +d[name];
 		});
 	});
-
-	const seriesColors = ['#ff00cc', '#ff7ac7', '#ffb3c0', '#ffe4b8'];
 
 	/* --------------------------------------------
 	 * Create a stacked data structure
@@ -23,7 +29,7 @@
 	const stackData = stack()
 		.keys(seriesNames);
 
-	const series = stackData(fruit);
+	const series = stackData(data);
 
 	const monthNames = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
 
@@ -52,8 +58,12 @@
 		ssr={true}
 		percentRange={true}
 		padding={{ top: 0, right: 0, bottom: 20, left: 17 }}
-		x={d => d.data.month}
-		y={[0, 1]}
+		x={d => d.data[xKey]}
+		y={yKey}
+		z={zKey}
+		zScale={scaleOrdinal()}
+		zDomain={seriesNames}
+		zRange={seriesColors}
 		flatData={flatten(series)}
 		data={series}
 	>
@@ -67,10 +77,7 @@
 			/>
 		</Html>
 		<ScaledSvg>
-			<AreaStacked
-				{seriesColors}
-				{seriesNames}
-			/>
+			<AreaStacked/>
 		</ScaledSvg>
 	</LayerCake>
 </div>

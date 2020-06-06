@@ -42,7 +42,7 @@
 			<MapSvg
 				fixedAspectRatio={aspectRatio}
 				projection={geoAlbersUsa}
-				features={ geojson.features.slice(40, 50) }
+				features={geojson.features.slice(40, 50)}
 			/>
 		</ScaledSvg>
 	</LayerCake>

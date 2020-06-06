@@ -31,7 +31,7 @@
 		<Svg>
 			<MapSvg
 				projection={geoAlbersUsa}
-				features={ geojson.features.slice(40, 50) }
+				features={geojson.features.slice(40, 50)}
 			/>
 		</Svg>
 	</LayerCake>

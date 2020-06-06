@@ -29,19 +29,15 @@
 		height: 90%;
 		width: 100%;
 	}
-
 	.input-container {
 		margin-bottom: 7px;
 	}
-
 	label {
 		cursor: pointer;
 	}
-
 	input {
 		margin-right: 7px;
 	}
-
 	.chart-container {
 		position: relative;
 		display: inline-block;

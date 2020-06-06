@@ -1,6 +1,8 @@
 <script>
 	import { LayerCake, Svg } from 'layercake';
 	import { feature } from 'topojson';
+	import { geoAlbersUsa } from 'd3-geo';
+
 	import usStates from '../../data/us-states.topojson.js';
 
 	import Map from '../../components/Map.svg.svelte';
@@ -21,7 +23,7 @@
 	>
 		<Svg>
 			<Map
-				projectionName={'geoAlbersUsa'}
+				projection={geoAlbersUsa}
 			/>
 		</Svg>
 	</LayerCake>
