@@ -2,12 +2,13 @@
 	import { LayerCake, Svg, flatten } from 'layercake';
 	import { stack } from 'd3-shape';
 	import { scaleOrdinal } from 'd3-scale';
-
-	import data from '../../data/fruit.csv';
+	import { format, precisionFixed } from 'd3-format';
 
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 	import AreaStacked from '../../components/AreaStacked.svelte';
+
+	import data from '../../data/fruit.csv';
 
 	const xKey = 'month';
 	const yKey = [0, 1];
@@ -38,12 +39,7 @@
 		return `${monthNames[date.getMonth()]} ${date.getDate()}`;
 	}
 
-	function formatTickY (d) {
-		if (d > 999) {
-			return Math.round(d / 1000) + 'k';
-		}
-		return d;
-	}
+	const formatTickY = d => format(`.${precisionFixed(d)}s`)(d);
 </script>
 
 <style>

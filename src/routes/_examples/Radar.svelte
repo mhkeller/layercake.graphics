@@ -2,15 +2,19 @@
 	import { LayerCake, Svg } from 'layercake';
 	import { scaleLinear } from 'd3-scale';
 
-	import points from '../../data/radarScores.csv';
 	import Radar from '../../components/Radar.svelte';
 	import AxisRadial from '../../components/AxisRadial.svelte';
 
-	const seriesNames = Object.keys(points[0]).filter(d => d !== 'name');
+	import data from '../../data/radarScores.csv';
 
-	points.forEach(row => {
+	const seriesKey = 'name';
+	const xKey = ['fastball', 'change', 'slider', 'cutter', 'curve'];
+
+	const seriesNames = Object.keys(data[0]).filter(d => d !== seriesKey);
+
+	data.forEach(d => {
 		seriesNames.forEach(name => {
-			row[name] = +row[name];
+			d[name] = +d[name];
 		});
 	});
 </script>
@@ -25,11 +29,10 @@
 <div class="chart-container">
 	<LayerCake
 		padding={{ top: 30, right: 0, bottom: 7, left: 0 }}
-		r={['fastball', 'change', 'slider', 'cutter', 'curve']}
-		rScale={scaleLinear()}
-		rRange={({ height }) => [0, height / 2]}
-		rDomain={[0, 10]}
-		data={points}
+		x={xKey}
+		xDomain={[0, 10]}
+		xRange={({ height }) => [0, height / 2]}
+		data={data}
 	>
 		<Svg>
 			<AxisRadial/>

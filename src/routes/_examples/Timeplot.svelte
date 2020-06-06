@@ -10,6 +10,7 @@
 
 	const r = 4;
 	const padding = 2;
+
 	const daysTransformed = days.map(row => {
 		const parts = row.timestring.split('T');
 		const time = parts[1].replace('Z', '').split(':').map(d => +d);

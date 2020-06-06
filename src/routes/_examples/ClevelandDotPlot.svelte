@@ -2,10 +2,11 @@
 	import { LayerCake, Svg } from 'layercake';
 	import { scaleBand } from 'd3-scale';
 
-	import fruit from '../../data/fruitOrdinal.csv';
 	import ClevelandDotPlot from '../../components/ClevelandDotPlot.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
+
+	import fruit from '../../data/fruitOrdinal.csv';
 
 	const seriesColors = ['#f0c', '#00bbff', '#00e047', '#ff7a33'];
 

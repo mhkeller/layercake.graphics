@@ -2,6 +2,7 @@
 	import { LayerCake, ScaledSvg, Html } from 'layercake';
 	import { scaleOrdinal } from 'd3-scale';
 	import { timeParse, timeFormat } from 'd3-time-format';
+	import { format, precisionFixed } from 'd3-format';
 
 	import data from '../../data/fruit.csv';
 	import MultiLine from '../../components/MultiLine.svelte';
@@ -15,14 +16,10 @@
 	 */
 	const xKey = 'month';
 	const yKey = 'value';
+	const zKey = 'key';
 
 	const seriesNames = Object.keys(data[0]).filter(d => d !== xKey);
-	const seriesColors = [
-		'#ffe4b8',
-		'#ffb3c0',
-		'#ff7ac7',
-		'#ff00cc'
-	];
+	const seriesColors = ['#ffe4b8', '#ffb3c0', '#ff7ac7', '#ff00cc'];
 
 	const parseDate = timeParse('%Y-%m-%d');
 
@@ -39,25 +36,14 @@
 		};
 	});
 
-
 	// Make a flat array of the `values` of our nested series
 	// we can pluck the `value` field from each item in the array to measure extents
 	const flatten = data => data.reduce((memo, group) => {
 		return memo.concat(group.values);
 	}, []);
 
-	const colorScale = scaleOrdinal()
-    .domain(seriesNames)
-    .range(seriesColors);
-
 	const formatTickX = timeFormat('%b. %e');
-
-	function formatTickY (d) {
-		if (d > 999) {
-			return d / 1000 + 'k';
-		}
-		return d;
-	}
+	const formatTickY = d => format(`.${precisionFixed(d)}s`)(d);
 </script>
 
 <style>
@@ -74,6 +60,10 @@
 		padding={{ top: 7, right: 10, bottom: 20, left: 25 }}
 		x={xKey}
 		y={yKey}
+		z={zKey}
+		zScale={scaleOrdinal()}
+		zDomain={seriesNames}
+		zRange={seriesColors}
 		flatData={flatten(dataLong)}
 		yDomain={[0, null]}
 		data={dataLong}
@@ -91,9 +81,7 @@
 			/>
 		</Html>
 		<ScaledSvg>
-			<MultiLine
-				{colorScale}
-			/>
+			<MultiLine/>
 		</ScaledSvg>
 
 		<Html>

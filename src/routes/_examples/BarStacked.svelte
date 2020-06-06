@@ -1,34 +1,34 @@
 <script>
 	import { LayerCake, Svg, flatten } from 'layercake';
 	import { stack } from 'd3-shape';
-	import { scaleBand } from 'd3-scale';
+	import { scaleBand, scaleOrdinal } from 'd3-scale';
+	import { format, precisionFixed } from 'd3-format';
 
-	import fruit from '../../data/fruitOrdinal.csv';
 	import BarStacked from '../../components/BarStacked.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 
-	const seriesNames = Object.keys(fruit[0]).filter(d => d !== 'year');
+	import data from '../../data/fruitOrdinal.csv';
 
-	fruit.forEach(row => {
+	const xKey = [0, 1];
+	const yKey = 'year';
+	const zKey = 'key';
+
+	const seriesNames = Object.keys(data[0]).filter(d => d !== yKey);
+	const seriesColors = ['#00bbff', '#8bcef6', '#c4e2ed', '#f7f6e3'];
+
+	data.forEach(d => {
 		seriesNames.forEach(name => {
-			row[name] = +row[name];
+			d[name] = +d[name];
 		});
 	});
 
 	const stackData = stack()
 		.keys(seriesNames);
 
-	const series = stackData(fruit);
+	const series = stackData(data);
 
-	function formatTickX (d) {
-		if (d > 999) {
-			return Math.round(d / 1000) + 'k';
-		}
-		return d;
-	}
-
-	const seriesColors = ['#00bbff', '#8bcef6', '#c4e2ed', '#f7f6e3'];
+	const formatTickX = d => format(`.${precisionFixed(d)}s`)(d);
 </script>
 
 <style>
@@ -41,13 +41,16 @@
 <div class="chart-container">
 	<LayerCake
 		padding={{ top: 0, bottom: 20, left: 30 }}
-		y={d => d.data.year}
-		x={[0, 1]}
+		x={xKey}
+		y={d => d.data[yKey]}
+		z={zKey}
 		yScale={scaleBand().paddingInner([0.05]).round(true)}
 		yDomain={['2016', '2017', '2018', '2019']}
+		zScale={scaleOrdinal()}
+		zDomain={seriesNames}
+		zRange={seriesColors}
 		flatData={flatten(series)}
 		data={series}
-		custom={{ seriesNames }}
 	>
 		<Svg>
 			<AxisX
@@ -58,10 +61,7 @@
 			<AxisY
 				gridlines={false}
 			/>
-			<BarStacked
-				{seriesColors}
-			/>
+			<BarStacked/>
 		</Svg>
 	</LayerCake>
-
 </div>

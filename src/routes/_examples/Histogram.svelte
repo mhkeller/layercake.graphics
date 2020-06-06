@@ -8,6 +8,8 @@
 	import AxisY from '../../components/AxisY.svelte';
 	import thresholds from '../../modules/thresholds.js';
 
+	const xKey = ['x0', 'x1'];
+	const yKey = 'length';
 	let binCount = 40;
 
 	const domain = extent(unemployment);
@@ -24,7 +26,6 @@
 		width: 100%;
 		height: 100%;
 	}
-
 	input {
 		height: auto;
 	}
@@ -44,8 +45,8 @@
 <div class="chart-container">
 	<LayerCake
 		padding={{ top: 20, right: 5, bottom: 20, left: 30 }}
-		x={['x0', 'x1']}
-		y={'length'}
+		x={xKey}
+		y={yKey}
 		yDomain={[0, null]}
 		data={bins}
 	>

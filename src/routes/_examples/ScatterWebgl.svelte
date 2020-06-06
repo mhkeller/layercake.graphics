@@ -1,16 +1,21 @@
 <script>
 	import { LayerCake, Svg, WebGL, Html } from 'layercake';
-	import points from '../../data/points.csv';
+
 	import ScatterWebGL from '../../components/Scatter.webgl.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 	import QuadTree from '../../components/QuadTree.svelte';
 
+	import data from '../../data/points.csv';
+
+	const xKey = 'myX';
+	const yKey = 'myY';
+
 	const diameter = 6;
 	const padding = 6;
 
-	points.forEach(row => {
-		row.myY = +row.myY;
+	data.forEach(d => {
+		d[yKey] = +d[yKey];
 	});
 </script>
 
@@ -19,7 +24,6 @@
 		width: 100%;
 		height: 100%;
 	}
-
 	.circle {
 		position: absolute;
 		border-radius: 50%;
@@ -34,11 +38,11 @@
 <div class="chart-container">
 	<LayerCake
 		padding={{ top: 0, right: 5, bottom: 20, left: 25 }}
-		x={'myX'}
-		y={'myY'}
+		x={xKey}
+		y={yKey}
 		xPadding={[padding, padding]}
 		yPadding={[padding, padding]}
-		data={points}
+		data={data}
 	>
 		<Svg>
 			<AxisX/>
@@ -48,7 +52,9 @@
 		</Svg>
 
 		<WebGL>
-			<ScatterWebGL {diameter}/>
+			<ScatterWebGL
+				{diameter}
+			/>
 		</WebGL>
 
 		<Html>

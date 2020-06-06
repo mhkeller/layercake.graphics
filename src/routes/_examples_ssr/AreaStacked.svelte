@@ -2,6 +2,7 @@
 	import { LayerCake, ScaledSvg, Html, flatten } from 'layercake';
 	import { stack } from 'd3-shape';
 	import { scaleOrdinal } from 'd3-scale';
+	import { format, precisionFixed } from 'd3-format';
 
 	import data from '../../data/fruit.csv';
 
@@ -38,12 +39,7 @@
 		return `${monthNames[date.getMonth()]} ${date.getDate()}`;
 	}
 
-	function formatTickY (d) {
-		if (d > 999) {
-			return Math.round(d / 1000) + 'k';
-		}
-		return d;
-	}
+	const formatTickY = d => format(`.${precisionFixed(d)}s`)(d);
 </script>
 
 <style>

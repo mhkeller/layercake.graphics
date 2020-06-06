@@ -21,7 +21,6 @@
 	<LayerCake
 		data={geojson}
 	>
-
 		<Canvas>
 			<MapCanvas
 				projection={geoAlbersUsa}
