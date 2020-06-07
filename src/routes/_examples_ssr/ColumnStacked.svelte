@@ -71,5 +71,4 @@
 			/>
 		</ScaledSvg>
 	</LayerCake>
-
 </div>

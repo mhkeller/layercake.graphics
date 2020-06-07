@@ -11,8 +11,8 @@
 	const xKey = 'myX';
 	const yKey = 'myY';
 
-	data.forEach(row => {
-		row[yKey] = +row[yKey];
+	data.forEach(d => {
+		d[yKey] = +d[yKey];
 	});
 </script>
 

@@ -3,20 +3,24 @@
 	import { timeDay } from 'd3-time';
 	import { scaleBand } from 'd3-scale';
 
-	import days from '../../data/days.csv';
 	import AxisX from '../../components/AxisX.html.svelte';
 	import AxisY from '../../components/AxisY.html.svelte';
 	import Scatter from '../../components/Scatter.html.svelte';
 
+	import data from '../../data/days.csv';
+
+	const xKey = 'seconds';
+	const yKey = 'day';
+
 	const r = 4;
 	const padding = 2;
 
-	const daysTransformed = days.map(row => {
-		const parts = row.timestring.split('T');
+	const daysTransformed = data.map(d => {
+		const parts = d.timestring.split('T');
 		const time = parts[1].replace('Z', '').split(':').map(d => +d);
-		row.seconds = time[0] * 60 * 60 + time[1] * 60 + time[2];
-		row.day = parts[0];
-		return row;
+		d[xKey] = time[0] * 60 * 60 + time[1] * 60 + time[2];
+		d[yKey] = parts[0];
+		return d;
 	});
 
 	/* --------------------------------------------
@@ -47,8 +51,8 @@
 		ssr={true}
 		percentRange={true}
 		padding={{ top: 0, right: 15, bottom: 20, left: 75 }}
-		x={'seconds'}
-		y={'day'}
+		x={xKey}
+		y={yKey}
 		xDomain={[0, 24 * 60 * 60]}
 		yDomain={allDays}
 		yScale={scaleBand().paddingInner([0.05]).round(true)}

@@ -3,6 +3,7 @@
 	import { stack } from 'd3-shape';
 	import { scaleOrdinal } from 'd3-scale';
 	import { format, precisionFixed } from 'd3-format';
+	import { timeFormat } from 'd3-time-format';
 
 	import data from '../../data/fruit.csv';
 
@@ -32,13 +33,7 @@
 
 	const series = stackData(data);
 
-	const monthNames = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
-
-	function formatTickX (d) {
-		const date = new Date(d);
-		return `${monthNames[date.getMonth()]} ${date.getDate()}`;
-	}
-
+	const formatTickX = timeFormat('%b. %-d')
 	const formatTickY = d => format(`.${precisionFixed(d)}s`)(d);
 </script>
 
