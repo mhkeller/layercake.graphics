@@ -8,7 +8,7 @@
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 	import Labels from '../../components/Labels.svelte';
-	import Tooltip from '../../components/Tooltip.svelte';
+	import SharedTooltip from '../../components/SharedTooltip.svelte';
 
 	import data from '../../data/fruit.csv';
 
@@ -83,7 +83,8 @@
 
 		<Html>
 			<Labels/>
-			<Tooltip
+			<SharedTooltip
+				formatTitle={formatTickX}
 				dataset={ data }
 			/>
 		</Html>
