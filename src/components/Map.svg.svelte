@@ -1,5 +1,5 @@
 <script>
-	import { getContext } from 'svelte';
+	import { getContext, createEventDispatcher } from 'svelte';
 	import { geoPath } from 'd3-geo';
 
 	const { data, width, height } = getContext('LayerCake');
@@ -9,6 +9,9 @@
 	 */
 	export let projection;
 
+	/* --------------------------------------------
+	 * Optional aspect ratio
+	 */
 	export let fixedAspectRatio = undefined;
 
 	/* --------------------------------------------
@@ -16,6 +19,11 @@
 	 * while keeping the zoom on the whole geojson feature set
 	 */
 	export let features = $data.features;
+
+	/* --------------------------------------------
+	 * Here's how you would do cross-component hovers
+	 */
+	const dispatch = createEventDispatcher();
 
 	$: fitSizeRange = fixedAspectRatio ? [100, 100 / fixedAspectRatio] : [$width, $height];
 
@@ -29,14 +37,32 @@
 		const index = Math.round(random * (colors.length - 1));
 		return colors[index];
 	}
+	function raise (el) {
+		if (el.nextSibling) el.parentNode.appendChild(el);
+	}
+
+	function handleMousemove(feature) {
+		return function handleMousemoveFn(e) {
+			raise(this);
+			// When the element gets raised, it flashes 0,0 for a second so skip that
+			if (e.layerX !== 0 && e.layerY !== 0) {
+				dispatch('mousemove', { e, props: feature.properties });
+			}
+		}
+	}
 </script>
 
-<g class="map-group">
+<g
+	class="map-group"
+	on:mouseout={(e) => dispatch('mouseout')}
+>
 	{#each features as feature}
 		<path
 			class="feature-path"
 			fill="{fillRandom(Math.random())}"
 			d="{geoPathFn(feature)}"
+			on:mouseover={(e) => dispatch('mousemove', { e, props: feature.properties })}
+			on:mousemove={handleMousemove(feature)}
 		></path>
 	{/each}
 </g>
@@ -45,5 +71,9 @@
 	.feature-path {
 		stroke: #333;
 		stroke-width: 0.5px;
+	}
+	.feature-path:hover {
+		stroke: #000;
+		stroke-width: 2px;
 	}
 </style>
