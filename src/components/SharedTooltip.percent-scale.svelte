@@ -71,7 +71,7 @@
         width:{w}px;
         display: { visible ? 'block' : 'none' };
         top:calc({$yScale(sortResult(found)[0].value)}% - {tooltipOffset}px);
-        left:{x}%;"
+        left:{Math.min(Math.max(w2, (x / 100) * $width), $width - w2)}px;"
       >
         <div class="title">{formatTitle(found[$originalSettings.x])}</div>
         {#each sortResult(found) as row}
