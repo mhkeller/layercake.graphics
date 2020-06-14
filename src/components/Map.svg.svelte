@@ -8,7 +8,8 @@
 	 * Require a D3 projection function
 	 */
 	export let projection;
-	export let fixedAspectRatio;
+
+	export let fixedAspectRatio = undefined;
 
 	/* --------------------------------------------
 	 * Add this optional export in case you want to plot only a subset of the features

@@ -22,7 +22,6 @@
 	<LayerCake
 		position={'absolute'}
 		data={geojson}
-		{aspectRatio}
 	>
 		<Canvas>
 			<MapCanvas

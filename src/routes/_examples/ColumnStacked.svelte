@@ -51,7 +51,6 @@
 			zRange={seriesColors}
  			flatData={flatten(series)}
  			data={series}
- 			custom={{ seriesNames }}
 	>
 		<Svg>
 			<AxisX

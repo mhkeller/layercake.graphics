@@ -10,7 +10,7 @@
   const titleCase = d => d.replace(/^\w/, w => w.toUpperCase());
 
   export let tooltipOffset = 20;
-  export let dataset = undefined;
+  export let dataset;
   export let formatTitle = d => d;
   export let formatKey = d => titleCase(d);
   export let formatValue = d => isNaN(+d) ? d : commas(d);
@@ -64,14 +64,14 @@
   let:found
   let:e
 >
-  {#if visible === true}
+  {#if Object.keys(found).length > 0}
     <div
       class="tooltip"
       style="
         width:{w}px;
         display: { visible ? 'block' : 'none' };
-        top:{$yScale(sortResult(found)[0].value) - tooltipOffset}px;
-        left:{Math.min(Math.max(w2, x), $width - w2)}px;"
+        top:calc({$yScale(sortResult(found)[0].value)}% - {tooltipOffset}px);
+        left:{x}%;"
       >
         <div class="title">{formatTitle(found[$originalSettings.x])}</div>
         {#each sortResult(found) as row}

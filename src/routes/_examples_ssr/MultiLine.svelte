@@ -9,7 +9,7 @@
 	import AxisX from '../../components/AxisX.html.svelte';
 	import AxisY from '../../components/AxisY.html.svelte';
 	import Labels from '../../components/Labels.svelte';
-	// import Tooltip from '../../components/Tooltip.svelte';
+	import SharedTooltip from '../../components/SharedTooltip.percent-scale.svelte';
 
 	/* --------------------------------------------
 	 * Set what is our x key to separate it from the other series
@@ -86,9 +86,10 @@
 
 		<Html>
 			<Labels/>
-			<!-- <Tooltip
-				dataset={ data }
-			/> -->
+			<SharedTooltip
+				formatTitle={formatTickY}
+				dataset={data}
+			/>
 		</Html>
 	</LayerCake>
 </div>

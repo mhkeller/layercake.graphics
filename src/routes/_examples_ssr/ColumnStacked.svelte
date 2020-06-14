@@ -53,7 +53,6 @@
 		zRange={seriesColors}
 		flatData={flatten(series)}
 		data={series}
-		custom={{ seriesNames }}
 	>
 		<Html>
 			<AxisX
@@ -66,9 +65,7 @@
 			/>
 		</Html>
 		<ScaledSvg>
-			<ColumnStacked
-				{seriesColors}
-			/>
+			<ColumnStacked/>
 		</ScaledSvg>
 	</LayerCake>
 </div>
