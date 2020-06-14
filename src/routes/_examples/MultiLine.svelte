@@ -85,7 +85,7 @@
 			<Labels/>
 			<SharedTooltip
 				formatTitle={formatTickX}
-				dataset={ data }
+				dataset={data}
 			/>
 		</Html>
 	</LayerCake>
