@@ -28,10 +28,11 @@
 		return {
 			key,
 			values: data.map(d => {
+				d[xKey] = typeof d[xKey] === 'string' ? parseDate(d[xKey]) : d[xKey]; // Conditional required for sapper
 				return {
 					key,
 					[yKey]: +d[key],
-					[xKey]: typeof d[xKey] === 'string' ? parseDate(d[xKey]) : d[xKey] // Conditional required for sapper
+					[xKey]: d[xKey]
 				};
 			})
 		};
@@ -70,7 +71,7 @@
 		<Svg>
 			<AxisX
 				gridlines={false}
-				ticks={data.map(d => parseDate(d[xKey])).sort((a, b) => a - b)}
+				ticks={data.map(d => d[xKey]).sort((a, b) => a - b)}
 				formatTick={formatTickX}
 				snapTicks={true}
 			/>

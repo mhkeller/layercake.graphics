@@ -2,7 +2,7 @@
   import { getContext } from 'svelte';
   import { format } from 'd3-format';
 
-  import QuadTree from './QuadTree.svelte';
+  import QuadTree from './QuadTree.percent-scale.svelte';
 
   const { data, width, yScale, originalSettings } = getContext('LayerCake');
 
@@ -64,7 +64,7 @@
   let:found
   let:e
 >
-  {#if Object.keys(found).length > 0}
+  {#if visible === true}
     <div
       class="tooltip"
       style="

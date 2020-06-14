@@ -4,12 +4,13 @@
 	import { timeParse, timeFormat } from 'd3-time-format';
 	import { format, precisionFixed } from 'd3-format';
 
-	import data from '../../data/fruit.csv';
 	import MultiLine from '../../components/MultiLine.svelte';
 	import AxisX from '../../components/AxisX.html.svelte';
 	import AxisY from '../../components/AxisY.html.svelte';
 	import Labels from '../../components/Labels.svelte';
 	import SharedTooltip from '../../components/SharedTooltip.percent-scale.svelte';
+
+	import data from '../../data/fruit.csv';
 
 	/* --------------------------------------------
 	 * Set what is our x key to separate it from the other series
@@ -27,10 +28,11 @@
 		return {
 			key,
 			values: data.map(d => {
+				d[xKey] = typeof d[xKey] === 'string' ? parseDate(d[xKey]) : d[xKey]; // Conditional required for sapper
 				return {
 					key,
 					[yKey]: +d[key],
-					[xKey]: typeof d[xKey] === 'string' ? parseDate(d[xKey]) : d[xKey] // Conditional required for sapper
+					[xKey]: d[xKey]
 				};
 			})
 		};
@@ -71,7 +73,7 @@
 		<Html>
 			<AxisX
 				gridlines={false}
-				ticks={data.map(d => parseDate(d[xKey])).sort((a, b) => a - b)}
+				ticks={data.map(d => d[xKey]).sort((a, b) => a - b)}
 				formatTick={formatTickX}
 				snapTicks={true}
 			/>
@@ -80,6 +82,7 @@
 				formatTick={formatTickY}
 			/>
 		</Html>
+
 		<ScaledSvg>
 			<MultiLine/>
 		</ScaledSvg>
@@ -87,7 +90,7 @@
 		<Html>
 			<Labels/>
 			<SharedTooltip
-				formatTitle={formatTickY}
+				formatTitle={formatTickX}
 				dataset={data}
 			/>
 		</Html>

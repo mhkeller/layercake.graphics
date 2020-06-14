@@ -3,7 +3,7 @@
 	import { stack } from 'd3-shape';
 	import { scaleOrdinal } from 'd3-scale';
 	import { format, precisionFixed } from 'd3-format';
-	import { timeFormat } from 'd3-time-format';
+	import { timeParse, timeFormat } from 'd3-time-format';
 
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
@@ -15,11 +15,13 @@
 	const yKey = [0, 1];
 	const zKey = 'key';
 
+	const parseDate = timeParse('%Y-%m-%d');
+
 	const seriesNames = Object.keys(data[0]).filter(d => d !== xKey);
 	const seriesColors = ['#ff00cc', '#ff7ac7', '#ffb3c0', '#ffe4b8'];
 
 	data.forEach(d => {
-		d[xKey] = new Date(d[xKey]);
+		d[xKey] = typeof d[xKey] === 'string' ? parseDate(d[xKey]) : d[xKey];
 		seriesNames.forEach(name => {
 			d[name] = +d[name];
 		});

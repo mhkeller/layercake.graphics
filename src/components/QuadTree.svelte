@@ -11,7 +11,7 @@
 	export let dataset = undefined;
 	export let x = 'x';
 	export let y = 'y';
-	export let searchRadius = 3000;
+	export let searchRadius = undefined;
 
 	$: xGetter = x === 'x' ? $xGet : $yGet;
 	$: yGetter = y === 'y' ? $yGet : $xGet;
