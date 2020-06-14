@@ -1,6 +1,7 @@
 <script>
 	import { getContext, createEventDispatcher } from 'svelte';
 	import { geoPath } from 'd3-geo';
+	import { raise } from 'layercake';
 
 	const { data, width, height } = getContext('LayerCake');
 
@@ -36,9 +37,6 @@
 		const colors = ['#ffdecc', '#ffc09c', '#ffa06b', '#ff7a33'];
 		const index = Math.round(random * (colors.length - 1));
 		return colors[index];
-	}
-	function raise (el) {
-		if (el.nextSibling) el.parentNode.appendChild(el);
 	}
 
 	function handleMousemove(feature) {
