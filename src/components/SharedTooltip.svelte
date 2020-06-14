@@ -7,18 +7,21 @@
   const { data, width, yScale, originalSettings } = getContext('LayerCake');
 
   const commas = format(',');
-  const cap = d => d.replace(/^\w/, w => w.toUpperCase());
+  const titleCase = d => d.replace(/^\w/, w => w.toUpperCase());
 
   export let tooltipOffset = 20;
   export let dataset;
   export let formatTitle = d => d;
-  export let formatKey = d => cap(d);
-  export let formatValue = d => typeof d === 'string' ? d : commas(d);
+  export let formatKey = d => titleCase(d);
+  export let formatValue = d => isNaN(+d) ? d : commas(d);
 
   const w = 150;
   const w2 = w / 2;
   let top = 0;
 
+	/* --------------------------------------------
+	 * Sort the keys by the highest value
+	 */
   function sortResult(result) {
     if (Object.keys(result).length === 0) return [];
     const rows = Object.keys(result).filter(d => d !== $originalSettings.x).map(key => {
