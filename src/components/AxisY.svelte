@@ -3,42 +3,39 @@
 
 	const { padding, xRange, xScale, yScale } = getContext('LayerCake');
 
-	export let ticks = undefined;
+	export let ticks = 4;
 	export let gridlines = true;
 	export let formatTick = d => d;
-	export let tickX = '0';
-	export let tickY = '';
-	export let tickDx = undefined;
-	export let tickDy = undefined;
-	export let textAnchor = typeof $yScale.bandwidth === 'function'  ? 'end' : 'start';
+	export let xTick = 0;
+	export let yTick = 0;
+	export let dxTick = 0;
+	export let dyTick = -4;
+	export let textAnchor = 'start';
 
-	let tickVals;
+	$: isBandwidth = typeof $yScale.bandwidth === 'function';
 
-	$: if (typeof $yScale.bandwidth === 'function') {
-		tickVals = $yScale.domain();
-	} else if (Array.isArray(ticks)) {
-		tickVals = ticks;
-	} else {
-		tickVals = $yScale.ticks(ticks);
-	}
+	$: tickVals = Array.isArray(ticks) ? ticks :
+		isBandwidth ?
+			$yScale.domain() :
+			$yScale.ticks(ticks);
 </script>
 
-<g class='axis y-axis' transform='translate(-{$padding.left}, 0)'>
+<g class='axis y-axis' transform='translate({-$padding.left}, 0)'>
 	{#each tickVals as tick, i}
-		<g class='tick tick-{tick}' transform='translate({$xRange[0]}, {$yScale(tick)})'>
+		<g class='tick tick-{tick}' transform='translate({$xRange[0] + (isBandwidth ? $padding.left : 0)}, {$yScale(tick)})'>
 			{#if gridlines !== false}
 				<line
 					x2='100%'
-					y1="{typeof tickY === 'function' ? tickY($yScale) : typeof tickY === 'undefined' && typeof $yScale.bandwidth === 'function' ? ($yScale.bandwidth() / 2) : tickY || '-4'}"
-					y2="{typeof tickY === 'function' ? tickY($yScale) : typeof tickY === 'undefined' && typeof $yScale.bandwidth === 'function' ? ($yScale.bandwidth() / 2) : tickY || '-4'}"
+					y1={yTick + (isBandwidth ? ($yScale.bandwidth() / 2) : 0)}
+					y2={yTick + (isBandwidth ? ($yScale.bandwidth() / 2) : 0)}
 				></line>
 			{/if}
 			<text
-				x='{typeof tickX === 'function' ? tickX($xScale) : typeof tickX === 'undefined' && typeof $yScale.bandwidth === 'function' ? '-5' : tickX || '0'}'
-				y='{typeof tickY === 'function' ? tickY($yScale) : typeof tickY === 'undefined' && typeof $yScale.bandwidth === 'function' ? (4 + ($yScale.bandwidth() / 2)) : tickY || '-4'}'
-				dx={typeof tickDx === 'function' ? tickDx($xScale) : tickDx}
-				dy={typeof tickDy === 'function' ? tickDy($yScale) : tickDy}
-				style="text-anchor:{textAnchor};"
+				x='{xTick}'
+				y='{yTick + (isBandwidth ? $yScale.bandwidth() / 2 : 0)}'
+				dx='{isBandwidth ? -5 : dxTick}'
+				dy='{isBandwidth ? 4 : dyTick}'
+				style="text-anchor:{isBandwidth ? 'end' : textAnchor};"
 			>{formatTick(tick)}</text>
 		</g>
 	{/each}

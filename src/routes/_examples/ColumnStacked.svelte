@@ -1,35 +1,34 @@
 <script>
 	import { LayerCake, Svg, flatten, uniques } from 'layercake';
 	import { stack } from 'd3-shape';
-	import { scaleBand } from 'd3-scale';
+	import { scaleBand, scaleOrdinal } from 'd3-scale';
+	import { format, precisionFixed } from 'd3-format';
 
-	import fruit from '../../data/fruitOrdinal.csv';
 	import ColumnStacked from '../../components/ColumnStacked.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 
-	const seriesNames = Object.keys(fruit[0]).filter(d => d !== 'year');
+	import data from '../../data/fruitOrdinal.csv';
 
-	fruit.forEach(row => {
+	const xKey = 'year';
+	const yKey = [0, 1];
+	const zKey = 'key';
+
+	const seriesNames = Object.keys(data[0]).filter(d => d !== xKey);
+	const seriesColors = ['#00e047', '#7ceb68', '#b7f486', '#ecfda5'];
+
+	data.forEach(d => {
 		seriesNames.forEach(name => {
-			row[name] = +row[name];
+			d[name] = +d[name];
 		});
 	});
 
 	const stackData = stack()
 		.keys(seriesNames);
 
-	const series = stackData(fruit);
+	const series = stackData(data);
 
-	function formatTickY (d) {
-		if (d > 999) {
-			return Math.round(d / 1000) + 'k';
-		}
-		return d;
-	}
-
-	const seriesColors = ['#00e047', '#7ceb68', '#b7f486', '#ecfda5'];
-
+	const formatTickY = d => format(`.${precisionFixed(d)}s`)(d);
 </script>
 
 <style>
@@ -42,13 +41,16 @@
 <div class="chart-container">
 	<LayerCake
  			padding={{ top: 0, right: 0, bottom: 20, left: 20 }}
- 			x={d => d.data.year}
- 			y={[0, 1]}
+ 			x={d => d.data[xKey]}
+ 			y={yKey}
+ 			z={zKey}
  			xScale={scaleBand().paddingInner([0.02]).round(true)}
- 			xDomain={uniques(fruit, 'year')}
+ 			xDomain={uniques(data, xKey)}
+			zScale={scaleOrdinal()}
+			zDomain={seriesNames}
+			zRange={seriesColors}
  			flatData={flatten(series)}
  			data={series}
- 			custom={{ seriesNames }}
 	>
 		<Svg>
 			<AxisX
@@ -59,9 +61,7 @@
 				gridlines={false}
 				formatTick={formatTickY}
 			/>
-			<ColumnStacked
-				{seriesColors}
-			/>
+			<ColumnStacked/>
 		</Svg>
 	</LayerCake>
 

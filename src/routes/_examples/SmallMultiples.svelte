@@ -1,8 +1,8 @@
 <script>
 	import { calcExtents, flatten } from 'layercake';
 
-	import pointSeries from '../../data/pointSeries.js';
-	import ChartWrapper from '../../components/ChartWrapper.svelte';
+	import SmallMultipleWrapper from '../../components/SmallMultipleWrapper.svelte';
+	import dataSeries from '../../data/pointSeries.js';
 
 	/* --------------------------------------------
 	 * Grab the extents of the full dataset
@@ -12,12 +12,12 @@
 		{ field: 'y', accessor: d => d.y }
 	];
 
-	const fullExtents = calcExtents(flatten(pointSeries), extentGetters);
+	const fullExtents = calcExtents(flatten(dataSeries), extentGetters);
 
 	/* --------------------------------------------
 	 * Sort by the last value
 	 */
-	pointSeries.sort((a, b) => {
+	dataSeries.sort((a, b) => {
 		return b[b.length - 1].y - a[a.length - 1].y;
 	});
 
@@ -29,19 +29,15 @@
 		height: 90%;
 		width: 100%;
 	}
-
 	.input-container {
 		margin-bottom: 7px;
 	}
-
 	label {
 		cursor: pointer;
 	}
-
 	input {
 		margin-right: 7px;
 	}
-
 	.chart-container {
 		position: relative;
 		display: inline-block;
@@ -56,9 +52,9 @@
 </div>
 
 <div class="group-container">
-	{#each pointSeries as data}
+	{#each dataSeries as data}
 		<div class="chart-container">
-			<ChartWrapper
+			<SmallMultipleWrapper
 				{data}
 				{fullExtents}
 				{scale}

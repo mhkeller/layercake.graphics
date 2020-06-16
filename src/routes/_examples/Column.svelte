@@ -1,14 +1,18 @@
 <script>
 	import { LayerCake, Svg, Html } from 'layercake';
 	import { scaleBand } from 'd3-scale';
-	import groups from '../../data/groups.csv';
 
 	import Column from '../../components/Column.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 	import Annotations from '../../components/Annotations.svelte';
 	import Arrows from '../../components/Arrows.svelte';
-	import DefArrowhead from '../../components/DefArrowhead.svelte';
+	import ArrowheadDef from '../../components/ArrowheadDef.svelte';
+
+	import data from '../../data/groups.csv';
+
+	const xKey = 'year';
+	const yKey = 'value';
 
 	const annotations = [
 		{
@@ -41,8 +45,8 @@
 		}
 	];
 
-	groups.forEach(row => {
-		row.value = +row.value;
+	data.forEach(d => {
+		d[yKey] = +d[yKey];
 	});
 </script>
 
@@ -55,22 +59,20 @@
 
 <div class="chart-container">
 	<LayerCake
-			padding={{ top: 0, right: 0, bottom: 20, left: 20 }}
-			x='year'
-			y='value'
-			xScale={scaleBand().paddingInner([0.02]).round(true)}
-			xDomain={['1979', '1980', '1981', '1982', '1983']}
-			yDomain={[0, null]}
-			data={groups}
+		padding={{ top: 0, right: 0, bottom: 20, left: 20 }}
+		x={xKey}
+		y={yKey}
+		xScale={scaleBand().paddingInner([0.02]).round(true)}
+		xDomain={['1979', '1980', '1981', '1982', '1983']}
+		yDomain={[0, null]}
+		data={data}
 	>
-
 		<Svg>
 			<Column/>
 			<AxisX
 				gridlines={false}
 			/>
 			<AxisY
-				ticks={4}
 				gridlines={false}
 			/>
 		</Svg>
@@ -80,9 +82,8 @@
 		</Html>
 
 		<Svg>
-			<DefArrowhead/>
+			<ArrowheadDef/>
 			<Arrows {annotations}/>
 		</Svg>
 	</LayerCake>
-
 </div>

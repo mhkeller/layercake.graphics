@@ -11,13 +11,18 @@
 	export let dataset = undefined;
 	export let x = 'x';
 	export let y = 'y';
+	export let searchRadius = undefined;
 
 	$: xGetter = x === 'x' ? $xGet : $yGet;
 	$: yGetter = y === 'y' ? $yGet : $xGet;
 
 	function findItem (evt) {
 		e = evt;
-		found = finder.find(evt[`layer${x.toUpperCase()}`], evt[`layer${y.toUpperCase()}`], 300) || {};
+
+		const xLayerKey = `layer${x.toUpperCase()}`;
+		const yLayerKey = `layer${y.toUpperCase()}`;
+
+		found = finder.find(evt[xLayerKey], evt[yLayerKey], searchRadius) || {};
 		visible = Object.keys(found).length > 0;
 	}
 

@@ -1,6 +1,7 @@
 <script>
 	import hljs from 'highlight.js';
 	import examples from './_examples.js';
+	import examplesSsr from './_examples_ssr.js';
 	import hljsDefineSvelte from '../modules/hljsDefineSvelte.js';
 
 	hljs.registerLanguage('svelte', hljsDefineSvelte);
@@ -16,7 +17,7 @@
 	import Scatter from './components/Scatter.svelte';
 	import Labels from './components/Labels.svelte';
 
-	const data = [{ x: 0, y: 1 }, { x: 1, y: 2 }];
+	const data = [{ x: 0, y: 1 }, { x: 1, y: 2 }, { x: 2, y: 3 }];
 <\/script>
 
 <style>
@@ -92,6 +93,11 @@
 		height: 140px;
 		margin-bottom: 60px;
 	}
+
+	.gallery-item.scaled {
+		height: auto;
+	}
+
 	@media (max-width: 650px) {
 		.gallery-item {
 			width: 100%;
@@ -125,6 +131,7 @@
 	}
 	.title {
 		margin-bottom: 9px;
+		white-space: nowrap;
 	}
 	.title a{
 		text-decoration: underline;
@@ -186,7 +193,7 @@
 	</div>
 
 	<div id="dek">
-		<p>Layer Cake is a graphics framework built on top of <a href="https://svelte.dev" target="_blank" rel="noopener">Svelte</a>. It measures your target div and your data and creates scales that <span class="strong">stay synced</span> on layout changes. Use these scales to organize multiple, <span class="strong">mostly-reusable Svelte components</span>, whether they be SVG, HTML, Canvas or WebGL. Since they all share the same coordinate space, you can build your graphic one layer at a time.</p>
+		<p>Layer Cake is a graphics framework for <a href="https://svelte.dev" target="_blank" rel="noopener">Svelte</a>. It uses the measurements of your target div and your data extents to create scales that <span class="strong">stay synced</span> on layout changes. Use these scales to organize multiple, <span class="strong">mostly-reusable Svelte components</span>, whether they be SVG, HTML, Canvas or WebGL. Since they all share the same coordinate space, you can build your graphic one layer at a time.</p>
 
 		<p>Read the <a href="guide" rel=prefetch>guide</a> or try the <a href="https://github.com/mhkeller/layercake-template" target="_blank" rel="nofollow">starter template</a> that comes with example components. See the examples below and even edit them live. Here's a sample of what the code looks like:</p>
 	</div>
@@ -199,6 +206,21 @@
 		{#each examples as example}
 			<div class="gallery-item">
 				<h4 class="title"><a rel=prefetch href="example/{example.slug}">{example.title}</a> <a class="edit-repl" href="https://svelte.dev/repl/{example.replPath}" target="_blank" rel="nofollow">Edit</a></h4>
+				<svelte:component this="{example.component}"/>
+			</div>
+		{/each}
+	</div>
+
+	<div class="section-hed">
+		<h2>Server-side rendering examples</h2>
+		<p>Layer Cake has built-in helpers to render your charts server-side without any client-side JavaScript, meaning they appear as soon as the page loads and you avoid flashes of large blank spaces. HTML charts use percentage-based scales and SVG charts take advanage of certain <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/viewBox" target="_blank" rel="nofollow">viewBox</a> and CSS settings that Rich Harris, Svelte's creator, outlined in <a href="https://dev.to/richharris/a-new-technique-for-making-responsive-javascript-free-charts-gmp" target="_blank" rel="nofollow">this blog post</a>.</p>
+		<p>For shapes that are difficult to render using percentages, such as swoopy arrows, Layer Cake makes it easy to superimpose client-side components that will hydrate once JavaScript is available. See the annotated column example below.</p>
+	</div>
+
+	<div id="ssr-gallery">
+		{#each examplesSsr as example}
+			<div class="gallery-item" class:scaled={example.title.toLowerCase().includes('map')}>
+				<h4 class="title"><a rel=prefetch href="example-ssr/{example.slug}">{example.title}</a> <a class="edit-repl" href="https://svelte.dev/repl/{example.replPath}" target="_blank" rel="nofollow">Edit</a></h4>
 				<svelte:component this="{example.component}"/>
 			</div>
 		{/each}

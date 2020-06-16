@@ -1,15 +1,19 @@
 <script>
 	import { LayerCake, Svg, Canvas } from 'layercake';
 
-	import points from '../../data/points.csv';
-	import ScatterSvg from '../../components/ScatterSvg.svelte';
-	import ScatterCanvas from '../../components/ScatterCanvas.svelte';
+	import ScatterSvg from '../../components/Scatter.svg.svelte';
+	import ScatterCanvas from '../../components/Scatter.canvas.svelte';
 	import Voronoi from '../../components/Voronoi.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 
-	points.forEach(row => {
-		row.myY = +row.myY;
+	import data from '../../data/points.csv';
+
+	const xKey = 'myX';
+	const yKey = 'myY';
+
+	data.forEach(d => {
+		d[yKey] = +d[yKey];
 	});
 
 	const r = 3;
@@ -27,13 +31,12 @@
 <div class="chart-container">
 	<LayerCake
 		padding={{ top: 10, right: 5, bottom: 20, left: 25 }}
-		x='myX'
-		y='myY'
+		x={xKey}
+		y={yKey}
 		xPadding={[padding, padding]}
 		yPadding={[padding, padding]}
-		data={points}
+		data={data}
 	>
-
 		<Svg>
 			<AxisX/>
 			<AxisY

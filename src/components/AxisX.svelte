@@ -1,28 +1,24 @@
 <script>
 	import { getContext } from 'svelte';
 
-	const { width, height, xScale, yScale } = getContext('LayerCake');
-
+	const { width, height, xScale, yScale, yRange } = getContext('LayerCake');
 
 	export let gridlines = true;
 	export let formatTick = d => d;
 	export let baseline = false;
 	export let snapTicks = false;
 	export let ticks = undefined;
-	export let tickX = '0';
-	export let tickY = '16';
-	export let tickDx = '0';
-	export let tickDy = '0';
+	export let xTick = undefined;
+	export let yTick = 16;
+	export let dxTick = 0;
+	export let dyTick = 0;
 
-	let tickVals;
+	$: isBandwidth = typeof $xScale.bandwidth === 'function';
 
-	$: if (typeof $xScale.bandwidth === 'function') {
-		tickVals = $xScale.domain();
-	} else if (Array.isArray(ticks)) {
-		tickVals = ticks;
-	} else {
-		tickVals = $xScale.ticks(ticks);
-	}
+	$: tickVals = Array.isArray(ticks) ? ticks :
+		isBandwidth ?
+			$xScale.domain() :
+			$xScale.ticks(ticks);
 
 	function textAnchor(i) {
 		if (snapTicks === true) {
@@ -39,15 +35,15 @@
 
 <g class='axis x-axis'>
 	{#each tickVals as tick, i}
-		<g class='tick tick-{ tick }' transform='translate({$xScale(tick)},{$yScale.range()[0]})'>
+		<g class='tick tick-{ tick }' transform='translate({$xScale(tick)},{$yRange[0]})'>
 			{#if gridlines !== false}
 				<line y1='{$height * -1}' y2='0' x1='0' x2='0'></line>
 			{/if}
 			<text
-				x={typeof tickX === 'function' ? tickX($xScale) : tickX}
-				y={typeof tickY === 'function' ? tickY($yScale) : tickY}
-				dx='{typeof tickDx === 'function' ? tickDx($xScale) : typeof $xScale.bandwidth === 'function' ? ($xScale.bandwidth() / 2) : tickDx}'
-				dy='{typeof tickDy === 'function' ? tickDy($yScale) : tickDy}'
+				x="{xTick || isBandwidth ? $xScale.bandwidth() / 2 : 0 }"
+				y='{yTick}'
+				dx='{dxTick}'
+				dy='{dyTick}'
 				text-anchor='{textAnchor(i)}'>{formatTick(tick)}</text>
 		</g>
 	{/each}

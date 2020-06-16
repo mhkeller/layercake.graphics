@@ -305,6 +305,22 @@ Here's an example showing passing different data formats for extent calculation 
 </div>
 ```
 
+### ssr `Boolean=false`
+
+Set whether this chart should be rendered server side. This is best used in conjunction with the [ScaledSvg](guide#scaledsvg) component or HTML components that are set to use percentage scales since you won't know the size of the container at render time.
+
+Use it in conjunction with [`percentRange={true}`](guide#percentrange) to easily set up your scales for a percent coordinate systems.
+
+### percentRange `Boolean=false`
+
+When rendering charts server side, you pretty much always want your scale range to be `[0, 100]` since you won't be able to base the range off of the target container's width. Use this convenience helper to set the min and max to be out of a hundred.
+
+> The default range for the y-scale will be `[100, 0]` because `yReverse` defaults to `true`. All of the range reverse functions will work as usual with this.
+
+### position `String='relative'`
+
+Determine the positioning of the wrapper div. Set this to `'absolute'` when you want to stack two `<LayerCake>` components on top of one another, such as when you have one that is server-side rendered and one client side like in the [Annotated column](/example-ssr/Column) example.
+
 ### custom `Object`
 
 Any extra configuration values you want available on the LayerCake context. This could be useful for color lookups or additional constants.
