@@ -50,6 +50,7 @@ function getHash (str) {
 }
 
 export const demos = new Map();
+const store = {};
 
 export default function () {
 	return fs
@@ -67,7 +68,7 @@ export default function () {
 			const renderer = new marked.Renderer();
 
 			renderer.heading = function (text, level) {
-				const slug = slugify(text);
+				const slug = slugify(text, null, store);
 				// TODO, better anchor handling maybe with even newer sapper?
 				return `<h${level} id="${slug}">${text}<a href="/guide#${slug}"> </a></h${level}>`;
 			};

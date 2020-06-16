@@ -73,8 +73,8 @@ The `App.svelte` file in this example is your main Svelte component. You can ren
 Within the `LayerCake` component, you'll want to add at least one layout component, kind of like a wrapper. It can be `Svg`, `Html`, `Canvas` or `WebGL`. Within any of these is where you'll put your own custom layer components. Here's an example with a few different layout elements working together.
 
 ```html
+<!-- { filename: 'App.svelte' } -->
 <script>
-/* { filename: 'App.svelte' } */
   import { LayerCake, Svg, Canvas, Html }  from 'layercake';
 
   // These are components that live in your project that

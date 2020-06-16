@@ -5,7 +5,7 @@ import svelte from 'rollup-plugin-svelte';
 import babel from 'rollup-plugin-babel';
 import dsv from '@rollup/plugin-dsv';
 import { terser } from 'rollup-plugin-terser';
-import config from 'sapper/config/rollup.js';
+import config from '@ssgjs/sapper/config/rollup.js';
 import pkg from './package.json';
 
 const mode = process.env.NODE_ENV;
