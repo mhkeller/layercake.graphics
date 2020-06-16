@@ -168,3 +168,13 @@ const uniqueYears = unique(data, 'year', false);
   {year: '1993', x: 7, y: 8}
 */
 ```
+
+### raise(el: `DOM Element`)
+
+Adapted from the [raise](https://github.com/d3/d3-selection#selection_raise) method in d3-selection, this is a convenience function to re-insert the passed in element as the last child of its parent. Equivalent to:
+
+```js
+el.parentNode.appendChild(el);
+```
+
+This is useful for hovering over SVG maps so that the hovered-over feature is not obstructed by neighboring shapes. See how it's used in the [SVG map component](/example/MapSvg).

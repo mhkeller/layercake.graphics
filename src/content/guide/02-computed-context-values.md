@@ -120,6 +120,24 @@ Same as [xDomain](/guide#xdomain-2) above but for the z domain.
 
 Same as [xDomain](/guide#xdomain-2) above but for the r domain.
 
+### xRange `Array:[min: Number, max: Number]`
+
+The range used for the x-scale. This is usually `[0, width]` unless it's been manually set via the [xRange](/guide#) prop.
+
+It's equivalent to calling `$xScale.range()`.
+
+### yRange `Array:[min: Number, max: Number]`
+
+Same as [xRange](/guide#) above but for the y domain.
+
+### zRange `Array:[min: Number, max: Number]`
+
+Same as [xRange](/guide#) above but for the z domain.
+
+### rRange `Array:[min: Number, max: Number]`
+
+Same as [xRange](/guide#) above but for the r domain.
+
 ### xGet(d: `Object`)
 
 Often you want to get the x value from a row in your data and scale it like so: `$xScale($x(d))`. This function is shorthand for doing just that. Super handy!

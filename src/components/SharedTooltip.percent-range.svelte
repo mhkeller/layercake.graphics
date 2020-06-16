@@ -2,7 +2,7 @@
   import { getContext } from 'svelte';
   import { format } from 'd3-format';
 
-  import QuadTree from './QuadTree.percent-scale.svelte';
+  import QuadTree from './QuadTree.percent-range.svelte';
 
   const { data, width, yScale, originalSettings } = getContext('LayerCake');
 

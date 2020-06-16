@@ -8,9 +8,89 @@ You must wrap your chart components in these layout components for them to appea
 
 The Canvas and WebGL layout components do the same and also create the canvas contexts that are then available on the LayerCake context object.
 
-## Options
+### Props
 
-All layout components let you set a `zIndex` property to fine-tune their layering. This is useful if you want your layers to build in a certain order but have a different appearance than their DOM order.
+All layout components take the following props:
+
+* [zIndex](guide#zindex-21) `Number|String`
+* [pointerEvents](guide#pointer-events-27) `Boolean`
+
+The Svg and ScaledSvg layout components also accept:
+
+* [viewBox](guide#viewbox-9) `String`
+
+And ScaledSvg additionally accepts:
+
+* [fixedAspectRatio](guide#fixedaspectratio-9) `Number`
+
+The WebGL Component accepts:
+
+* [contextAttributes](guide#) `Object`
+
+### zIndex `Number|String`
+
+This lets you fine-tune your layering and is useful if you want your layers to build in a certain order but have a different appearance than their DOM order.
+
+```html
+<LayerCake ...>
+  <Svg
+    zIndex=2
+  >
+  </Svg>
+</LayerCake>
+```
+
+### pointerEvents `Boolean`
+
+Useful for tooltip layers that need to be display above chart elements but not capture mouse events. Defaults to no `pointer-events` CSS being set. Set to `false` to set `pointer-events: none;`
+
+```html
+<LayerCake ...>
+  <Html
+    pointerEvents={false}
+  >
+  </Html>
+</LayerCake>
+```
+
+### viewBox `String`
+
+On Svg components, this defaults to `undefined` and `0 0 100 100` for ScaledSvg.
+
+```html
+<LayerCake ...>
+  <Svg
+    viewBox='0 0 100 50'
+  >
+  </Svg>
+</LayerCake>
+```
+
+### fixedAspectRatio `Number`
+
+For ScaledSvg components, you can pass in a set aspect ratio. See the [server-side rendered Map](/examples-ssr/MapSvg) for an example.
+
+```html
+<LayerCake ...>
+  <ScaledSvg
+    fixedAspectRatio={16/9}
+  >
+  </ScaledSvg>
+</LayerCake>
+```
+
+### contextAttributes `Object`
+
+For WebGL components, you can pass in an object that gets passed as the second argument to `canvas.getContext()`. See the [WebGL docs](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext) for more details on what those attributes can be.
+
+```html
+<LayerCake ...>
+  <ScaledSvg
+    fixedAspectRatio={16/9}
+  >
+  </ScaledSvg>
+</LayerCake>
+```
 
 ### Html
 
@@ -30,6 +110,7 @@ All layout components let you set a `zIndex` property to fine-tune their layerin
 <div class="chart-container">
   <LayerCake ...>
     <Html zIndex={1}> <!-- Optional z-index -->
+      ...
     </Html>
   </LayerCake>
 </div>
@@ -50,13 +131,12 @@ All layout components let you set a `zIndex` property to fine-tune their layerin
   }
 </style>
 
-<div class="chart-container"
+<div class="chart-container">
   <LayerCake ...>
     <Svg zIndex={2}> <!-- Optional z-index -->
     </Svg>
   </LayerCake>
 </div>
-
 ```
 
 ### Canvas
@@ -76,7 +156,7 @@ All layout components let you set a `zIndex` property to fine-tune their layerin
   }
 </style>
 
-<div class="chart-container"
+<div class="chart-container">
   <LayerCake ...>
     <Canvas zIndex={3}> <!-- Optional z-index -->
       <CanvasLayer/>
@@ -85,7 +165,7 @@ All layout components let you set a `zIndex` property to fine-tune their layerin
 </div>
 ```
 
-In the component, you access the canvas context with `const { ctx } = getContext('ctx');`. This value is on a different context from the `getContext('LayerCake')` one because you could have multiple canvas layers and there wouldn't be an easy way to grab the right one.
+In the component, you access the canvas context with `const { ctx } = getContext('canvas');`. This value is on a different context from the `getContext('LayerCake')` one because you could have multiple canvas layers and there wouldn't be an easy way to grab the right one. This way, the component always has access to just its parent Canvas component.
 
 > Since the `ctx` value is a normal 2d context, the underlying canvas element is accessible under `ctx.canvas`.
 
@@ -98,7 +178,7 @@ Here's an example showing a scatter plot.
 	import { scaleCanvas } from 'layercake';
 
 	const { data, xGet, yGet, width, height } = getContext('LayerCake');
-	const { ctx } = getContext('ctx');
+	const { ctx } = getContext('canvas');
 
 	$: {
 		if ($ctx) {
@@ -140,7 +220,7 @@ Here's an example showing a scatter plot.
   }
 </style>
 
-<div class="chart-container"
+<div class="chart-container">
   <LayerCake ...>
     <WebGL zIndex={4}> <!-- Optional z-index -->
     </WebGL>
