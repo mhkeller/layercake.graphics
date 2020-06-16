@@ -14,8 +14,6 @@
 	$: slug = path.replace(/\/$/, '').split('/').pop();
 	$: type = path.split('/')[1];
 
-	$: console.log(type, path, path.split('/'), slug);
-
 	let basePath = '/';
 	let open = false;
 
