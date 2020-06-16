@@ -14,7 +14,7 @@ By breaking a part a graphic into layers, you can more easily reuse components f
 
 Layer Cake is more about having a system to organize your own custom components than it is a high-level charting library. It doesn't have any built-in concepts or strong opinions about how your data should be structured.
 
-> Layer Cake uses D3 scales. See more in the [xScale](/guide#xscale), [yScale](/guide#yscale) and [rScale](/guide#rscale) sections of the [Component API](/guide#component-api).
+> Layer Cake uses D3 scales. See more in the [xScale](/guide#xscale-2), [yScale](/guide#yscale-2), [zScale](/guide#zscale-2) and [rScale](/guide#rscale-2) sections of the [Layer Cake Props API](/guide#layercake-props).
 
 ### Getting started
 
@@ -129,7 +129,7 @@ Within the `LayerCake` component, you'll want to add at least one layout compone
 </div>
 ```
 
-> Layout components have a few their own properties that let you customize behavior. Read more in the [layout-components](guide#layout-components) section.
+> Layout components have a few their own properties that let you customize behavior. Read more in the [Layout Components](guide#layout-components) section.
 
 ### Layer components
 

@@ -8,24 +8,22 @@ You must wrap your chart components in these layout components for them to appea
 
 The Canvas and WebGL layout components do the same and also create the canvas contexts that are then available on the LayerCake context object.
 
-## Props
-
 All layout components take the following props:
 
-* [zIndex](guide#zindex) `Number|String`
-* [pointerEvents](guide#pointerevents) `Boolean`
+* [zIndex](guide#zindex-1) `Number|String`
+* [pointerEvents](guide#pointerevents-1) `Boolean`
 
 The Svg and ScaledSvg layout components also accept:
 
-* [viewBox](guide#viewbox) `String`
+* [viewBox](guide#viewbox-1) `String`
 
 And ScaledSvg additionally accepts:
 
-* [fixedAspectRatio](guide#fixedaspectratio) `Number`
+* [fixedAspectRatio](guide#fixedaspectratio-1) `Number`
 
 The WebGL Component accepts:
 
-* [contextAttributes](guide#contextattributes) `Object`
+* [contextAttributes](guide#contextattributes-1) `Object`
 
 ### zIndex `Number|String`
 
