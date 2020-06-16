@@ -51,5 +51,4 @@
 			<ClevelandDotPlot/>
 		</Html>
 	</LayerCake>
-
 </div>

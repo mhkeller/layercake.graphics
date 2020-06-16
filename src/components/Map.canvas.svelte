@@ -5,7 +5,7 @@
 
 	const { data, width, height, percentRange } = getContext('LayerCake');
 
-	const { ctx } = getContext('ctx');
+	const { ctx } = getContext('canvas');
 
 	export let projection;
 

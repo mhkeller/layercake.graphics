@@ -19,7 +19,7 @@ import Radar from './_examples/Radar.svelte';
 export default [
 	{ replPath: 'ad32f9f301484d0cace82272126e9d09?version=3.17.3', title: 'Line + area', slug: 'Line', component: Line },
 	{ replPath: '71cde05fa1e94583be57046207f72c02?version=3.17.3', title: 'WebGL Scatter (svg axes, quadtree hover)', slug: 'ScatterWebgl', component: ScatterWebGL },
-	{ replPath: '1f2f354369104bb4b72c900f22e22ff5?version=3.17.3', title: 'Map (svg)', slug: 'MapSvg', component: MapSvg },
+	{ replPath: '1f2f354369104bb4b72c900f22e22ff5?version=3.17.3', title: 'Map (svg, tooltip)', slug: 'MapSvg', component: MapSvg },
 	{ replPath: 'a8135fcccf3d42e68b1f29be00fc72c6?version=3.17.3', title: 'Multilayer map (canvas + svg)', slug: 'MapLayered', component: MapLayered },
 	{ replPath: '3dcdfc8c7aab4ca5a82f912f377a25e2?version=3.17.3', title: 'Column annotated', slug: 'Column', component: Column },
 	{ replPath: 'f38656e90d0644cfb460206005c492e5?version=3.17.3', title: 'Stacked column', slug: 'ColumnStacked', component: ColumnStacked },

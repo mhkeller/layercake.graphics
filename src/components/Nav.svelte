@@ -3,6 +3,7 @@
 
 	import GuideContents from './GuideContents.svelte';
 	import examples from '../routes/_examples.js';
+	import examplesSsr from '../routes/_examples_ssr.js';
 
 	export let segment;
 	export let sections;
@@ -11,6 +12,9 @@
 	const { page } = stores();
 	$: path = $page.path;
 	$: slug = path.replace(/\/$/, '').split('/').pop();
+	$: type = path.split('/')[1];
+
+	$: console.log(type, path, path.split('/'), slug);
 
 	let basePath = '/';
 	let open = false;
@@ -288,6 +292,9 @@
 			transform: none;
 		}
 
+		option.header {
+			font-weight: bold;
+		}
 	}
 </style>
 
@@ -301,8 +308,15 @@
 	<li>
 		<select on:change={loadPage} value="{$page.path}">
 			<option selected="{slug === ''}" value="">All</option>
+			<option class="header" disabled></option>
+			<option class="header" disabled>Client-side</option>
 			{#each examples.slice().sort((a, b) => a.title < b.title ? -1 : 1) as example}
-				<option value="example/{example.slug}" selected="{slug === example.slug}">{slimName(example.title)}</option>
+				<option value="example/{example.slug}" selected="{type === 'example' && slug === example.slug}">{slimName(example.title)}</option>
+			{/each}
+			<option class="header" disabled></option>
+			<option class="header" disabled>Server-side</option>
+			{#each examplesSsr.slice().sort((a, b) => a.title < b.title ? -1 : 1) as example}
+				<option value="example-ssr/{example.slug}" selected="{type === 'example-ssr' && slug === example.slug}">{slimName(example.title)}</option>
 			{/each}
 		</select>
 	</li>

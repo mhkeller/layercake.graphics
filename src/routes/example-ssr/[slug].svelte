@@ -91,11 +91,23 @@
 		overflow: hidden;
 	}
 
+	.main:before {
+		content: attr(data-label);
+		position: absolute;
+		top: 0;
+		text-transform: uppercase;
+		font-size: 12px;
+	}
+
 	.chart-hero {
 		width: 100%;
 		height: 200px;
-		margin: 1.5em 0 2em 0;
+		margin: 1.5em auto 2em auto;
 		position: relative;
+	}
+
+	.chart-hero[data-slug^="map"] {
+		max-width: 526px;
 	}
 
 	.dek {
@@ -257,10 +269,10 @@
 	<link rel='stylesheet' href='hljs.css'>
 </svelte:head>
 
-<div class="main">
+<div class="main" data-label="Server-side">
 	<h1>{example.title}<a class="edit-repl" href="https://svelte.dev/repl/{example.replPath}" target="_blank" rel="nofollow">Edit</a></h1>
 
-	<div class="chart-hero">
+	<div class="chart-hero" data-slug={slug.toLowerCase()}>
 		<svelte:component this={example.component} />
 	</div>
 

@@ -28,6 +28,7 @@
 		<Svg>
 			<Map
 				projection={geoAlbersUsa}
+
 				on:mousemove={event => evt = hideTooltip= event}
 				on:mouseout={() => hideTooltip = true}
 			/>
