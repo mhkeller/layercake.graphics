@@ -2,7 +2,7 @@
 title: Layout components
 ---
 
-Layer Cake comes with layout components that provide HTML, Svg, Canvas and WebGL containers for your custom components.
+Layer Cake comes with layout components that provide HTML, Svg, ScaledSvg, Canvas and WebGL containers for your custom components.
 
 You must wrap your chart components in these layout components for them to appear. For Html and Svg components, they create a `<div>` and `<g>`, respectively, that is the main element that accounts for any applied margin.
 
@@ -56,7 +56,38 @@ All layout components let you set a `zIndex` property to fine-tune their layerin
     </Svg>
   </LayerCake>
 </div>
+```
 
+### ScaledSvg
+
+Use this when you want to render SVGs server side, using Rich Harris's [Pancake technique](https://dev.to/richharris/a-new-technique-for-making-responsive-javascript-free-charts-gmp).
+
+It's often used in conjunction with props `ssr={true}` and `percentRange={true}`.
+
+```html
+<!-- { filename: 'App.svelte' } -->
+<script>
+  import { LayerCake, ScaledSvg } from 'layercake';
+</script>
+
+<style>
+  .chart-container {
+    width: 100%;
+    height: 300px;
+  }
+</style>
+
+<div class="chart-container"
+  <LayerCake
+    ssr={true}
+    percentRange={true}
+  >
+    <ScaledSvg
+      fixedAspectRatio={16/9} <!-- Optional fixed aspect ratio -->
+    >
+    </ScaledSvg>
+  </LayerCake>
+</div>
 ```
 
 ### Canvas

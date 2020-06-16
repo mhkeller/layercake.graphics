@@ -10,24 +10,50 @@ A list containing an object for each key that is set. This used internally but i
 
 ```js
 [
-  { field: 'x', accessor: <function> },
-  { field: 'y', accessor: <function> },
-  { field: 'z', accessor: <function> },
-  { field: 'r', accessor: <function> }
+  { field: 'x', accessor: '<function>' },
+  { field: 'y', accessor: '<function>' },
+  { field: 'z', accessor: '<function>' },
+  { field: 'r', accessor: '<function>' }
 ]
+```
+
+### aspectRatio `Number`
+
+The aspect ratio of the chart, `width / height`. This is also exposed as a variable on the Layer Cake slot so you can access it with `let:aspectRatio`. For example, you could use it to selectively display some components over others:
+
+```html
+<LayerCake
+  let:aspectRatio
+>
+  {#if aspectRatio > 1}
+    <LayoutOne/>
+  {:else}
+    <LayoutTwo/>
+  {/if}
+</LayerCake>
 ```
 
 ### box `Object`
 
 A bounding box object of the parent container with `top`, `right`, `bottom`, `left`, `width` and `height` numbers in pixels. Useful for creating tooltips.
 
+### config `Object`
+
+A copy of some of the config properties set on the `<LayerCake>` component.
+
+Some of these properties get changed by the time they end up on the context object. For example, the [x](/guide#x), [y](/guide#y), [z](/guide#z) and [r](/guide#r) properties can be strings or arrays but when they're exposed on the context, they are always a function. Sometimes, it's useful to refer to those original props such as in the [Cleveland Dot Plot example](/example/ClevelandDotPlot), which uses the x accessor shorthand of providing a list of keys.
+
+Or, [xDomain](/guide#xdomain) and the other domain props can be used to set manual limits on the min or max of the domain scale. This can be different from what gets set on the context [xDomain](/guide#xdomain) if the prop value contained any `null` values. If you want to refer to the original value for any reason, it's set on this object.
+
+Having access to this field can help you not repeat yourself in specifying things twice or in scenarios where Layer Cake is doing a transformation on that original value, like in accessors or domain inputs, and you want to know about the original value.
+
 ### containerWidth `Number`
 
-The width of the parent container, the div element that contains the `<LayerCake>` component.
+The width of the parent container, the div element that contains the `<LayerCake>` component. This is also exposed as a variable on the Layer Cake slot so you can access it with `let:containerWidth`.
 
 ### containerHeight `Number`
 
-The height of the parent container, the div element that contains the `<LayerCake>` component.
+The height of the parent container, the div element that contains the `<LayerCake>` component. This is also exposed as a variable on the Layer Cake slot so you can access it with `let:containerHeight`.
 
 ### extents `Object`
 
@@ -44,23 +70,13 @@ This value could differ from the domain of your scale if you are manually settin
 }
 ```
 
-### originalSettings `Object`
-
-A copy of some of the original properties set on the `<LayerCake>` component.
-
-Some of these properties get changed by the time they end up on the context object. For example, the [x](/guide#x), [y](/guide#y), [z](/guide#z) and [r](/guide#r) properties can be strings or arrays but when they're exposed on the context, they are always a function. Sometimes, it's useful to refer to those original props such as in the [Cleveland Dot Plot example](/example/ClevelandDotPlot), which uses the x accessor shorthand of providing a list of keys.
-
-Or, [xDomain](/guide#xdomain) and the other domain props can be used to set manual limits on the min or max of the domain scale. This can be different from what gets set on the context [xDomain](/guide#xdomain) if the prop value contained any `null` values. If you want to refer to the original value for any reason, it's set on this object.
-
-Having access to this field can help you not repeat yourself in specifying things twice or in scenarios where Layer Cake is doing a transformation on that original value, like in accessors or domain inputs, and you want to know about the original value.
-
 ### width `Number`
 
-The width of the drawable space for the chart. This is the [width](/guide#width) of the parent container taking into account any margin.
+The width of the drawable space for the chart. This is the [width](/guide#width) of the parent container taking into account any margin. This is also exposed as a variable on the Layer Cake slot so you can access it with `let:width`.
 
 ### height `Number`
 
-The width of the drawable space for the chart. This is the [height](/guide#height) of the parent container taking into account any margin.
+The width of the drawable space for the chart. This is the [height](/guide#height) of the parent container taking into account any margin. This is also exposed as a variable on the Layer Cake slot so you can access it with `let:height`.
 
 ### x `Function`
 
