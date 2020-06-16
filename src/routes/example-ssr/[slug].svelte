@@ -94,7 +94,7 @@
 	.main:before {
 		content: attr(data-label);
 		position: absolute;
-		top: 0;
+		top: 5px;
 		text-transform: uppercase;
 		font-size: 12px;
 	}
