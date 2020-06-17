@@ -6,12 +6,12 @@
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 
-	import groups from '../../data/groups.csv';
+	import data from '../../data/groups.csv';
 
 	const xKey = 'value';
 	const yKey = 'year';
 
-	groups.forEach(d => {
+	data.forEach(d => {
 		d[xKey] = +d[xKey];
 	});
 </script>
@@ -31,7 +31,7 @@
 		yScale={scaleBand().paddingInner([0.05]).round(true)}
 		yDomain={['1979', '1980', '1981', '1982', '1983']}
 		xDomain={[0, null]}
-		data={groups}
+		data={data}
 	>
 		<Svg>
 			<AxisX

@@ -1,7 +1,7 @@
 <script>
 	import { calcExtents, flatten } from 'layercake';
 
-	import SmallMultipleWrapper from '../../components/SmallMultipleWrapper.ssr.svelte';
+	import SmallMultipleWrapper from '../../components/SmallMultipleWrapper.percent-range.svelte';
 
 	import pointSeries from '../../data/pointSeries.js';
 	/* --------------------------------------------

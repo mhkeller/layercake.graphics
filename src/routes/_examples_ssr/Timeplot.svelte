@@ -17,7 +17,7 @@
 
 	const daysTransformed = data.map(d => {
 		const parts = d.timestring.split('T');
-		const time = parts[1].replace('Z', '').split(':').map(d => +d);
+		const time = parts[1].replace('Z', '').split(':').map(q => +q);
 		d[xKey] = time[0] * 60 * 60 + time[1] * 60 + time[2];
 		d[yKey] = parts[0];
 		return d;

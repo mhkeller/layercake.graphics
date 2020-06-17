@@ -6,7 +6,7 @@
 	import AxisY from '../../components/AxisY.html.svelte';
 	import QuadTree from '../../components/QuadTree.svelte';
 
-	import points from '../../data/points.csv';
+	import data from '../../data/points.csv';
 
 	const xKey = 'myX';
 	const yKey = 'myY';
@@ -14,8 +14,8 @@
 	const diameter = 6;
 	const padding = 6;
 
-	points.forEach(row => {
-		row[yKey] = +row[yKey];
+	data.forEach(d => {
+		d[yKey] = +d[yKey];
 	});
 </script>
 
@@ -47,7 +47,7 @@
 		y={yKey}
 		xPadding={[padding, padding]}
 		yPadding={[padding, padding]}
-		data={points}
+		data={data}
 	>
 		<Html>
 			<AxisX/>
@@ -62,7 +62,7 @@
 		y={yKey}
 		xPadding={[padding, padding]}
 		yPadding={[padding, padding]}
-		data={points}
+		data={data}
 	>
 		<WebGL>
 			<ScatterWebGL {diameter}/>

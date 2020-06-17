@@ -1,9 +1,10 @@
 <script>
 	import { LayerCake, ScaledSvg } from 'layercake';
 	import { nest } from 'd3-collection';
-	import dates from '../../data/dates.csv';
 
 	import CalendarMonth from '../../components/CalendarMonth.svelte';
+
+	import dates from '../../data/dates.csv';
 
 	const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 

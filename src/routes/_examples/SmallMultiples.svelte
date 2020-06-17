@@ -2,6 +2,7 @@
 	import { calcExtents, flatten } from 'layercake';
 
 	import SmallMultipleWrapper from '../../components/SmallMultipleWrapper.svelte';
+
 	import dataSeries from '../../data/pointSeries.js';
 
 	/* --------------------------------------------

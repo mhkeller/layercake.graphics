@@ -4,7 +4,6 @@
 	import { geoAlbersUsa } from 'd3-geo';
 
 	import Map from '../../components/Map.svg.svelte';
-	import Tooltip from '../../components/Tooltip.svelte';
 
 	import usStates from '../../data/us-states.topojson.js';
 

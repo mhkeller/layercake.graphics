@@ -21,7 +21,7 @@ export default [
 	{ replPath: '71cde05fa1e94583be57046207f72c02?version=3.17.3', title: 'WebGL Scatter (svg axes, quadtree hover)', slug: 'ScatterWebgl', component: ScatterWebGL },
 	{ replPath: '1f2f354369104bb4b72c900f22e22ff5?version=3.17.3', title: 'Map (svg, tooltip)', slug: 'MapSvg', component: MapSvg },
 	{ replPath: 'a8135fcccf3d42e68b1f29be00fc72c6?version=3.17.3', title: 'Multilayer map (canvas + svg)', slug: 'MapLayered', component: MapLayered },
-	{ replPath: '3dcdfc8c7aab4ca5a82f912f377a25e2?version=3.17.3', title: 'Column annotated', slug: 'Column', component: Column },
+	{ replPath: '666164c95fb9441188aab2622a4e8547?version=3.17.3', title: 'Column annotated', slug: 'Column', component: Column },
 	{ replPath: 'f38656e90d0644cfb460206005c492e5?version=3.17.3', title: 'Stacked column', slug: 'ColumnStacked', component: ColumnStacked },
 	{ replPath: '91fe94cac36c4829903238382563bc81?version=3.17.3', title: 'Bar', slug: 'Bar', component: Bar },
 	{ replPath: '8d2e9a75cb0e4bf7abb86cb65915a93c?version=3.17.3', title: 'Stacked bar', slug: 'BarStacked', component: BarStacked },

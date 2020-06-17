@@ -3,9 +3,10 @@
 	import { feature } from 'topojson';
 	import { geoAlbersUsa } from 'd3-geo';
 
-	import usStates from '../../data/us-states.topojson.js';
 	import MapSvg from '../../components/Map.svg.svelte';
 	import MapCanvas from '../../components/Map.canvas.svelte';
+
+	import usStates from '../../data/us-states.topojson.js';
 
 	const geojson = feature(usStates, usStates.objects.collection);
 </script>

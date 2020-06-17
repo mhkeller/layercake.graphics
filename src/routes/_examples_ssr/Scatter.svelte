@@ -1,16 +1,17 @@
 <script>
 	import { LayerCake, Html } from 'layercake';
 
-	import points from '../../data/points.csv';
 	import Scatter from '../../components/Scatter.html.svelte';
 	import AxisX from '../../components/AxisX.html.svelte';
 	import AxisY from '../../components/AxisY.html.svelte';
 
+	import data from '../../data/points.csv';
+
 	const xKey = 'myX';
 	const yKey = 'myY';
 
-	points.forEach(row => {
-		row[yKey] = +row[yKey];
+	data.forEach(d => {
+		d[yKey] = +d[yKey];
 	});
 
 	const r = 4.5;
@@ -36,7 +37,7 @@
 		y={yKey}
 		xPadding={[padding, padding]}
 		yPadding={[padding, padding]}
-		data={points}
+		data={data}
 	>
 
 		<Html>

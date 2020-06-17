@@ -2,23 +2,24 @@
 	import { LayerCake, Svg } from 'layercake';
 	import { histogram, extent } from 'd3-array';
 
-	import unemployment from '../../data/unemployment.js';
 	import Column from '../../components/Column.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
 	import thresholds from '../../modules/thresholds.js';
 
+	import data from '../../data/unemployment.js';
+
 	const xKey = ['x0', 'x1'];
 	const yKey = 'length';
 	let binCount = 40;
 
-	const domain = extent(unemployment);
+	const domain = extent(data);
 
 	$: hist = histogram()
 		.domain(domain)
 		.thresholds(thresholds(domain, binCount));
 
-	$: bins = hist(unemployment);
+	$: bins = hist(data);
 </script>
 
 <style>

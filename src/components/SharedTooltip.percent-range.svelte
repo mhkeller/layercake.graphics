@@ -4,7 +4,7 @@
 
   import QuadTree from './QuadTree.percent-range.svelte';
 
-  const { data, width, yScale, originalSettings } = getContext('LayerCake');
+  const { data, width, yScale, config } = getContext('LayerCake');
 
   const commas = format(',');
   const titleCase = d => d.replace(/^\w/, w => w.toUpperCase());
@@ -24,7 +24,7 @@
 	 */
   function sortResult(result) {
     if (Object.keys(result).length === 0) return [];
-    const rows = Object.keys(result).filter(d => d !== $originalSettings.x).map(key => {
+    const rows = Object.keys(result).filter(d => d !== $config.x).map(key => {
       return {
         key,
         value: result[key]
@@ -73,7 +73,7 @@
         top:calc({$yScale(sortResult(found)[0].value)}% - {tooltipOffset}px);
         left:{Math.min(Math.max(w2, (x / 100) * $width), $width - w2)}px;"
       >
-        <div class="title">{formatTitle(found[$originalSettings.x])}</div>
+        <div class="title">{formatTitle(found[$config.x])}</div>
         {#each sortResult(found) as row}
           <div class="row"><span class="key">{formatKey(row.key)}:</span> {formatValue(row.value)}</div>
         {/each}

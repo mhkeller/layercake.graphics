@@ -1,17 +1,18 @@
 <script>
 	import { LayerCake, ScaledSvg, Html } from 'layercake';
-	import points from '../../data/points.csv';
 
 	import Line from '../../components/Line.svelte';
 	import Area from '../../components/Area.svelte';
 	import AxisX from '../../components/AxisX.html.svelte';
 	import AxisY from '../../components/AxisY.html.svelte';
 
+	import data from '../../data/points.csv';
+
 	const xKey = 'myX';
 	const yKey = 'myY';
 
-	points.forEach(row => {
-		row[yKey] = +row[yKey];
+	data.forEach(d => {
+		d[yKey] = +d[yKey];
 	});
 </script>
 
@@ -30,7 +31,7 @@
 		x={xKey}
 		y={d => d[yKey]}
 		yDomain={[0, null]}
-		data={points}
+		data={data}
 	>
 		<Html>
 				<AxisX/>
