@@ -295,6 +295,7 @@
 		}
 	}
 </style>
+<!-- svelte-ignore a11y-no-onchange -->
 
 <div class='{open ? "open" : "closed"} mousecatcher' on:click="{() => open = false}"></div>
 <div class='container'>

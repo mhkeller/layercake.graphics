@@ -44,8 +44,20 @@
 		background: rgba(255, 255, 255, 0.85);
 		transform: translate(-50%, -100%);
     padding: 5px;
-    transition: left 250ms ease-out, top 250ms ease-out;
     z-index: 15;
+    pointer-events: none;
+  }
+  .line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    border-left: 1px dotted #666;
+    pointer-events: none;
+  }
+  .tooltip,
+  .line {
+    transition: left 250ms ease-out, top 250ms ease-out;
   }
   .title {
     font-weight: bold;
@@ -65,6 +77,9 @@
   let:e
 >
   {#if visible === true}
+    <div
+      style="left:{x}px;"
+      class="line"></div>
     <div
       class="tooltip"
       style="
