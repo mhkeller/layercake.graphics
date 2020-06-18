@@ -15,6 +15,7 @@ import SmallMultiples from './_examples/SmallMultiples.svelte';
 import Calendar from './_examples/Calendar.svelte';
 import Timeplot from './_examples/Timeplot.svelte';
 import Radar from './_examples/Radar.svelte';
+import CirclePack from './_examples/CirclePack.svelte';
 
 export default [
 	{ replPath: 'ad32f9f301484d0cace82272126e9d09?version=3.17.3', title: 'Line + area', slug: 'Line', component: Line },
@@ -33,5 +34,6 @@ export default [
 	{ replPath: '2c5131bd0b694d54a6211b40afbd3c09?version=3.17.3', title: 'Time of day plot', slug: 'Timeplot', component: Timeplot },
 	{ replPath: '58a15bea15bd46ee8364409c15045a8b?version=3.17.3', title: 'Histogram (variable bins)', slug: 'Histogram', component: Histogram },
 	{ replPath: '1c3297c4347248fc885b215f4907f8b2?version=3.17.3', title: 'Small multiples (animated domain transition)', slug: 'SmallMultiples', component: SmallMultiples },
-	{ replPath: 'cb6bb95b7d1549f7be8d8fc7258ea1da?version=3.17.3', title: 'Radar chart', slug: 'Radar', component: Radar }
+	{ replPath: 'cb6bb95b7d1549f7be8d8fc7258ea1da?version=3.17.3', title: 'Radar chart', slug: 'Radar', component: Radar },
+	{ replPath: '', title: 'Circle pack', slug: 'CirclePack', component: CirclePack }
 ];
