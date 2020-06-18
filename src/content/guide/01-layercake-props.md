@@ -242,6 +242,16 @@ Same as [xNice](/guide#xnice-1) but for the z domain.
 
 Same as [xNice](/guide#xnice-1) but for the r domain.
 
+### extents `Object`
+
+Manually set the extents of the x, y or r scale as a two-dimensional array of the min and max you want. Setting values here will skip any dynamic extent calculation of the data for that dimension.
+
+```html
+<LayerCake
+  extents={{ x: [0, 100], y: [50, 100] }}
+>
+```
+
 ### flatData `Array`
 
 In order for Layer Cake to measure the extents of your data, it needs a flat array of items that the x, y and r accessors can find. If your data is not flat (often the case if your renderers prefer a nested format), you can tell it to measure extents against a flat version. This *will not* change the shape of the data that gets passed to components — it is only for extent calculation.

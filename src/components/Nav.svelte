@@ -295,7 +295,6 @@
 		}
 	}
 </style>
-<!-- svelte-ignore a11y-no-onchange -->
 
 <div class='{open ? "open" : "closed"} mousecatcher' on:click="{() => open = false}"></div>
 <div class='container'>
@@ -305,6 +304,7 @@
 
 <ul class="dropdown">
 	<li>
+		<!-- svelte-ignore a11y-no-onchange -->
 		<select on:change={loadPage} value="{$page.path}">
 			<option selected="{slug === ''}" value="">All</option>
 			<option class="header" disabled></option>
