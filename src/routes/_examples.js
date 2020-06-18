@@ -35,5 +35,5 @@ export default [
 	{ replPath: '58a15bea15bd46ee8364409c15045a8b?version=3.17.3', title: 'Histogram (variable bins)', slug: 'Histogram', component: Histogram },
 	{ replPath: '1c3297c4347248fc885b215f4907f8b2?version=3.17.3', title: 'Small multiples (animated domain transition)', slug: 'SmallMultiples', component: SmallMultiples },
 	{ replPath: 'cb6bb95b7d1549f7be8d8fc7258ea1da?version=3.17.3', title: 'Radar chart', slug: 'Radar', component: Radar },
-	{ replPath: '', title: 'Circle pack', slug: 'CirclePack', component: CirclePack }
+	{ replPath: '5d3d22482b3d400d96c88d7de7ff45b1?version=3.23.2', title: 'Circle pack', slug: 'CirclePack', component: CirclePack }
 ];
