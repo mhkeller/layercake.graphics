@@ -3,14 +3,10 @@
 
 	import CirclePack from '../../components/CirclePack.html.svelte';
 
-  import data from '../../data/fruitGroups.csv';
+  import data from '../../data/familyTree.csv';
 
-	const idKey = 'fruit';
-	const valueKey = 'value';
-
-	data.forEach(d => {
-		d[valueKey] = +d[valueKey];
-	});
+	const idKey = 'name';
+	const parentKey = 'parent';
 </script>
 
 <style>
@@ -28,9 +24,10 @@
 		<Html>
       <CirclePack
         idKey={idKey}
-        valueKey={valueKey}
-				fill='#ff00cc50'
-				stroke='#b96daa'
+        parentKey={parentKey}
+				circlePadding={5}
+				sortBy={(a, b) => b.depth - a.depth}
+				labelVisibilityThreshold={r => false}
       />
 		</Html>
 	</LayerCake>
