@@ -10,7 +10,7 @@ Layer Cake is described as a framework and not a library because unlike Vega or 
 
 The idea behind a Layer Cake chart is you can start from a basic scatter, line or bar chart template but because those chart layers live in your project, you can customize them however you want.
 
-By breaking a part a graphic into layers, you can more easily reuse components from project to project. It also lets you easily move between web languages (SVG, Canvas, HTML, WebGL) by giving you a common coordinate system they can all use. That way, you can choose the best format for each element without worrying superimposing different elements on top of one another.
+By organizing a graphic into layers, you can more easily reuse components from project to project. It also lets you easily move between web languages (SVG, Canvas, HTML, WebGL) by giving you a common coordinate system they can all use. That way, you can choose the best format for each element without worrying superimposing different elements on top of one another.
 
 Layer Cake is more about having a system to organize your own custom components than it is a high-level charting library. It doesn't have any built-in concepts or strong opinions about how your data should be structured.
 
