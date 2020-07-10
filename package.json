@@ -19,6 +19,7 @@
     "d3-collection": "^1.0.7",
     "d3-delaunay": "^5.1.6",
     "d3-dsv": "^1.2.0",
+    "d3-format": "^1.4.4",
     "d3-geo": "^1.11.9",
     "d3-hierarchy": "^1.1.9",
     "d3-quadtree": "^1.0.7",
