@@ -86,7 +86,8 @@ For WebGL components, you can pass in an object that gets passed as the second a
   <WebGL
     contextAttributes={{
       antialias: false,
-      depth: false
+      depth: false,
+      alpha: false
     }}
   >
   </WebGL>
