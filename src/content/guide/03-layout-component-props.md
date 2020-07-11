@@ -83,10 +83,13 @@ For WebGL components, you can pass in an object that gets passed as the second a
 
 ```html
 <LayerCake ...>
-  <ScaledSvg
-    fixedAspectRatio={16/9}
+  <WebGL
+    contextAttributes={{
+      antialias: false,
+      depth: false
+    }}
   >
-  </ScaledSvg>
+  </WebGL>
 </LayerCake>
 ```
 
