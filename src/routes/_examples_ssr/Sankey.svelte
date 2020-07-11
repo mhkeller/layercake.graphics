@@ -1,5 +1,5 @@
 <script>
-  import { LayerCake, Svg } from 'layercake';
+  import { LayerCake, ScaledSvg } from 'layercake';
 
   import Sankey from '../../components/Sankey.svelte';
 
@@ -15,12 +15,16 @@
 
 <div class="chart-container">
   <LayerCake
+    ssr={true}
+    percentRange={true}
 	  {data}
   >
-    <Svg>
+    <ScaledSvg>
       <Sankey
+        nodeWidth={5 / 100}
+        nodePadding={10 / 100}
 				colorNodes={d => '#ab00d6'}
 			/>
-    </Svg>
+    </ScaledSvg>
   </LayerCake>
 </div>
