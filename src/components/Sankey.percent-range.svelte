@@ -9,7 +9,6 @@
 	 */
 	export let colorLinks = d => 'rgba(0, 0, 0, .2)';
 	export let colorNodes = d => '#333';
-	export let colorText = d => '#263238';
 
 	export let nodeWidth = 5;
 	export let nodePadding = 10;
