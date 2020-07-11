@@ -15,14 +15,12 @@
 
 <div class="chart-container">
   <LayerCake
-	ssr={true}
-	percentRange={true}
 	  {data}
   >
-    <ScaledSvg>
+    <Svg>
       <Sankey
 				colorNodes={d => '#ab00d6'}
 			/>
-    </ScaledSvg>
+    </Svg>
   </LayerCake>
 </div>
