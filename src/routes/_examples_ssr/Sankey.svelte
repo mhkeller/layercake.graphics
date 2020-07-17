@@ -1,7 +1,7 @@
 <script>
 	import { LayerCake, ScaledSvg } from 'layercake';
 
-	import Sankey from '../../components/Sankey.svelte';
+	import SankeyWrapper from '../../components/SankeyWrapper.percent-range.svelte';
 
 	import data from '../../data/sankey-data.js';
 </script>
@@ -19,12 +19,10 @@
 		percentRange={true}
 		{data}
 	>
-		<ScaledSvg>
-			<Sankey
-				nodeWidth={5 / 100}
-				nodePadding={10 / 100}
-				colorNodes={d => '#ab00d6'}
-			/>
-		</ScaledSvg>
+		<SankeyWrapper
+			nodeWidth={5}
+			nodePadding={10}
+			colorNodes={d => '#ab00d6'}
+		/>
 	</LayerCake>
 </div>
