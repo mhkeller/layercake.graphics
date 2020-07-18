@@ -16,12 +16,11 @@
 <div class="chart-container">
 	<LayerCake
 		ssr={true}
-		percentRange={true}
+		padding={{ right: 10 }}
 		{data}
 	>
 		<SankeyWrapper
-			nodeWidth={5}
-			nodePadding={10}
+			nodeWidth={1}
 			colorNodes={d => '#ab00d6'}
 		/>
 	</LayerCake>

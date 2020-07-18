@@ -14,6 +14,7 @@ import Histogram from './_examples_ssr/Histogram.svelte';
 import SmallMultiples from './_examples_ssr/SmallMultiples.svelte';
 import Calendar from './_examples_ssr/Calendar.svelte';
 import Timeplot from './_examples_ssr/Timeplot.svelte';
+import Sankey from './_examples_ssr/Sankey.svelte';
 
 export default [
 	{ replPath: 'ac23120460b1409a9e1e6fd328b63b64?version=3.17.3', title: 'Line + area', slug: 'Line', component: Line },
@@ -32,4 +33,5 @@ export default [
 	{ replPath: '3142518ab68f493cad0e327dba5cae1a?version=3.17.3', title: 'Time of day plot', slug: 'Timeplot', component: Timeplot },
 	{ replPath: '74c8fd12be824840bb78bcaa2eea33bb?version=3.17.3', title: 'Histogram (variable bins)', slug: 'Histogram', component: Histogram },
 	{ replPath: '82b6e8a37e9f4eaa8140498c1b1f490d?version=3.17.3', title: 'Small multiples (animated domain transition)', slug: 'SmallMultiples', component: SmallMultiples },
+	{ replPath: '', title: 'Sankey', slug: 'Sankey', component: Sankey },
 ];

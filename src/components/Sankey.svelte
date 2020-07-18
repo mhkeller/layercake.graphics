@@ -32,6 +32,13 @@
 	$: fontSize = $width <= 320 ? '8px' : '12px';
 </script>
 
+<style>
+	text {
+		user-select: none;
+		pointer-events: none;
+	}
+</style>
+
 <g class="sankey-layer">
 	<g class='link-group'>
 		{#each sankeyData.links as d}
@@ -54,12 +61,9 @@
 			<text
 				x={d.x0 < $width / 4 ? d.x1 + 6 : d.x0 - 6}
 				y={(d.y1 + d.y0) / 2}
-				style={`fill: ${colorText(d)};
-								alignment-baseline: 'middle';
-								font-size: ${fontSize};
-								text-anchor: ${d.x0 < $width / 4 ? 'start' : 'end'};
-								pointer-events: 'none';
-								user-select: 'none';`}>
+				style="fill: {colorText(d)};
+							font-size: {fontSize};
+							text-anchor: {d.x0 < $width / 4 ? 'start' : 'end'};">
 				{d.id}
 			</text>
 		{/each}
