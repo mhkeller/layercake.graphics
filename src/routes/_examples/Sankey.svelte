@@ -19,7 +19,7 @@
 	>
 		<Svg>
 			<Sankey
-				colorNodes={d => '#ab00d6'}
+				colorNodes={d => '#989898'}
 			/>
 		</Svg>
 	</LayerCake>
