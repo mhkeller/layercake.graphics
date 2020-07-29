@@ -78,7 +78,7 @@
 		border: none;
 		float: right;
 		cursor: pointer;
-		transform: translateY(-12px);
+		transform: translateY(-6px);
 		width: 215px;
 		text-align: right;
 	}
