@@ -33,7 +33,6 @@
 		const files = await (await window.fetch(`/svelte-app${ssr === true ? '-ssr' : ''}.json?${cacheBust}`)).json();
 		const depsLookup = await (await window.fetch(`/deps.json?${cacheBust}`)).json();
 
-		console.log(imports);
 		if (imports.length > 0) {
 			const idx = files.findIndex(({ path }) => path === 'package.json');
 			const pkg = JSON.parse(files[idx].data);
@@ -65,7 +64,7 @@
 			path: `src/App.svelte`,
 			data: data.main.contents
 		});
-		downloadBlob(toAuto(files.filter(Boolean)), `layercake-${slug}.zip`);
+		downloadBlob(toAuto(files.filter(Boolean)), `layercake-${ssr ? 'ssr-' : ''}${slug}.zip`);
 		downloading = false;
 	}
 </script>
@@ -79,7 +78,9 @@
 		border: none;
 		float: right;
 		cursor: pointer;
-		transform: translateY(-6px);
+		transform: translateY(-12px);
+		width: 215px;
+		text-align: right;
 	}
 	.icon {
 		color: transparent;

@@ -6,7 +6,7 @@ const ssr = process.argv[2].includes('app-ssr') ? '-ssr' : '';
 
 for (const path of process.argv.slice(2)) {
 	if (!path.includes('/.')) {
-		files.push({ path: path.slice(19), data: fs.readFileSync(path).toString() });
+		files.push({ path: path.slice(process.argv[2].includes('app-ssr') ? 23 : 19), data: fs.readFileSync(path).toString() });
 	}
 }
 
