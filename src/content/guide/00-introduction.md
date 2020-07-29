@@ -260,3 +260,9 @@ Here's an example that doesn't set any properties on the `LayerCake` component:
   </LayerCake>
 </div>
 ```
+
+### Server-side rendering
+
+To generate markup server-side, see the [layercake-template-ssr](https://github.com/mhkeller/layercake-template-ssr). The rollup config creates a JavaScript file which then constructs the required HTML and CSS.
+
+You can also use LayerCake in Sapper to create charts that work without JavaScript, which is how the server-side examples on this site work. Just set the [ssr](/guide#ssr) prop to `true` (it's also often useful to set [percentRange](#percentrange-3) to `true` as well) and be sure to check out the examples on the [home page](/) for more info on using percentage-based and [ScaledSvg](/guide#scaledsvg) component.
