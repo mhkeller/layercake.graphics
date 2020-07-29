@@ -5,6 +5,7 @@
 
 	export let data;
 	export let slug;
+	export let ssr = false;
 
 	let downloading = false;
 
@@ -29,9 +30,10 @@
 		downloading = true;
 
 		const cacheBust = new Date().getTime();
-		const files = await (await window.fetch(`/svelte-app.json?${cacheBust}`)).json();
+		const files = await (await window.fetch(`/svelte-app${ssr === true ? '-ssr' : ''}.json?${cacheBust}`)).json();
 		const depsLookup = await (await window.fetch(`/deps.json?${cacheBust}`)).json();
 
+		console.log(imports);
 		if (imports.length > 0) {
 			const idx = files.findIndex(({ path }) => path === 'package.json');
 			const pkg = JSON.parse(files[idx].data);

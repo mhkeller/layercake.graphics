@@ -280,6 +280,7 @@
 		<DownloadBtn
 			{data}
 			slug='{slug}'
+			ssr={true}
 		/>
 	</div>
 
