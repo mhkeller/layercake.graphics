@@ -23,10 +23,10 @@ Your app will be running at [localhost:3000](http://localhost:3000).
 ## Server-side rendering
 
 ```sh
-npm run render
+npm run pre-render
 ```
 
-This uses Rollup to create `build/App.js` and then renders that JavaScript into HTMl and CSS files in the `server-rendered/` directory.
+This uses Rollup to create `build/App.js` and then renders that JavaScript into HTMl and CSS files in the `pre-rendered/` directory.
 
 To view it, run:
 

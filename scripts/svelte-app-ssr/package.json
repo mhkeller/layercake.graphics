@@ -2,11 +2,11 @@
   "name": "layercake-template",
   "version": "1.0.0",
   "scripts": {
-    "render": "rollup -c rollup.server-side.config.js && node render.js",
+    "pre-render": "rollup -c rollup.config-ssr.js && node pre-render.js",
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public",
-    "serve": "sirv server-rendered"
+    "serve": "sirv pre-rendered"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^11.0.0",

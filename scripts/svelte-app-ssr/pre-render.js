@@ -2,11 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const App = require('./build/App.js');
 
-const outDir = 'server-rendered';
+const outDir = 'pre-rendered';
 
 const data = App.render({});
-
-console.log(data);
 
 const html = `<!DOCTYPE html>
 <html lang="en">
