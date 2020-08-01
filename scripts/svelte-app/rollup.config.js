@@ -4,6 +4,9 @@ import commonjs from '@rollup/plugin-commonjs';
 import dsv from '@rollup/plugin-dsv';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import execute from "rollup-plugin-execute";
+import json from "@rollup/plugin-json";
+import config from './config.json';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -18,6 +21,8 @@ export default {
 	plugins: [
 		// Allow for importing csv files as modules
 		dsv(),
+		// And importing json files
+		json(),
 
 		svelte({
 			// enable run-time checks when not in production
@@ -26,7 +31,8 @@ export default {
 			// a separate file — better for performance
 			css: css => {
 				css.write('public/build/bundle.css');
-			}
+			},
+			hydratable: config.hydrate
 		}),
 
 		// If you have external dependencies installed from
@@ -40,6 +46,9 @@ export default {
 		}),
 		commonjs(),
 
+		// Copy the template over
+		execute(`node copy-template.js ${production}`),
+
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
 		!production && serve(),
@@ -51,6 +60,7 @@ export default {
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
 		production && terser()
+
 	],
 	watch: {
 		clearScreen: false

@@ -30,7 +30,7 @@
 		downloading = true;
 
 		const cacheBust = new Date().getTime();
-		const files = await (await window.fetch(`/svelte-app${ssr === true ? '-ssr' : ''}.json?${cacheBust}`)).json();
+		const files = await (await window.fetch(`/svelte-app.json?${cacheBust}`)).json();
 		const depsLookup = await (await window.fetch(`/deps.json?${cacheBust}`)).json();
 
 		if (imports.length > 0) {
