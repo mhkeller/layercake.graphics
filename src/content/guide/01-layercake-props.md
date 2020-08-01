@@ -14,7 +14,7 @@ These are the props you can set on the `LayerCake` component itself. You set the
 
 ### data `Array`
 
-A list of data items. If this is not a flat data array of objects, you'll also need to set [flatData](/guide#flatdata-1).
+A list of data items. If this is not a flat data array of objects, you'll also need to set [flatData](/guide#flatdata).
 
 ```html
 <LayerCake
@@ -72,19 +72,19 @@ The x- and y-accessors would then look like this:
 >
 ```
 
-Calls to `x(dataRow)` in this scenario will return the two-value array. Calls to `xGet(dataRow)` will return a two-value array, mapped through the [xScale](/guide#xscale-3).
+Calls to `x(dataRow)` in this scenario will return the two-value array. Calls to `xGet(dataRow)` will return a two-value array, mapped through the [xScale](/guide#xscale).
 
 ### y `String|Function|Array`
 
-Same as [x](/guide#x-3) but for the y dimension.
+Same as [x](/guide#x) but for the y dimension.
 
 ### z `String|Function|Array`
 
-Same as [x](/guide#x-3) but for the z dimension.
+Same as [x](/guide#x) but for the z dimension.
 
 ### r `String|Function|Array`
 
-Same as [x](/guide#x-3) but for the r dimension.
+Same as [x](/guide#x) but for the r dimension.
 
 ### padding `Object`
 
@@ -108,15 +108,15 @@ See the [Column chart](/example/Column) for an example of passing in a `d3.scale
 
 ### yScale `d3.scaleLinear()`
 
-Same as [xScale](/guide#xscale-2) but for the y scale. The default is `d3.scaleLinear()`.
+Same as [xScale](/guide#xscale) but for the y scale. The default is `d3.scaleLinear()`.
 
 ### zScale `d3.scaleLinear()`
 
-Same as [xScale](/guide#xscale-2) but for the z scale. The default is `d3.scaleLinear()`.
+Same as [xScale](/guide#xscale) but for the z scale. The default is `d3.scaleLinear()`.
 
 ### rScale `d3.scaleSqrt()`
 
-Same as [xScale](/guide#xscale-2) but for the r scale. The default is `d3.scaleSqrt()`.
+Same as [xScale](/guide#xscale) but for the r scale. The default is `d3.scaleSqrt()`.
 
 ### xDomain `Array:[min: Number, max: Number]`
 
@@ -132,46 +132,46 @@ Set a min or max on the x scale. If you want to inherit the value from the data'
 
 ### yDomain `Array:[min: Number, max: Number]`
 
-Same as [xDomain](/guide#xdomain-2) but for the y scale.
+Same as [xDomain](/guide#xdomain) but for the y scale.
 
 ### zDomain `Array:[min: Number, max: Number]`
 
-Same as [xDomain](/guide#xdomain-2) but for the z scale.
+Same as [xDomain](/guide#xdomain) but for the z scale.
 
 ### rDomain `Array:[min: Number, max: Number]`
 
-Same as [xDomain](/guide#xdomain-2) but for the r scale.
+Same as [xDomain](/guide#xdomain) but for the r scale.
 
 ### xReverse `Boolean=false`
 
 Reverse the default x domain. By default this is `false` and the domain is `[0, width]`.
 
-This is ignored if you set [xRange](/guide#xRange-2).
+This is ignored if you set [xRange](/guide#xRange).
 
 ### yReverse `Boolean=true`
 
 Reverse the default y domain. By default this is `true` and the domain is `[height, 0]`.
 Reverse the default x domain. By default this is `false` and the domain is `[0, width]`.
 
-This is ignored if you set [yRange](/guide#yRange-2).
+This is ignored if you set [yRange](/guide#yRange).
 
 ### zReverse `Boolean=false`
 
 Reverse the default z domain. By default this is `false` and the domain is `[0, width]`.
 
-This is ignored if you set [zRange](/guide#zRange-2).
+This is ignored if you set [zRange](/guide#zRange).
 
 ### rReverse `Boolean=false`
 
 Reverse the default r domain. By default this is `false` and the domain is `[1, 25]`.
 
-This is ignored if you set [rRange](/guide#rRange-2).
+This is ignored if you set [rRange](/guide#rRange).
 
 ### xRange `Function|Array:[min: Number, max: Number]`
 
 Override the default y range of `[0, width]` by setting it here to an array or function with argument `({ width, height})` that returns an array.
 
-This overrides setting [xReverse](/guide#xreverse-1) to `true`.
+This overrides setting [xReverse](/guide#xreverse) to `true`.
 
 ```html
 <LayerCake
@@ -188,21 +188,21 @@ It can also be a function:
 
 ### yRange `Function|Array:[min: Number, max: Number]`
 
-Same as [xRange](/guide#xrange-2) but for the y scale. Override the default y range of `[0, height]` by setting it here to an array or function with argument `({ width, height})` that returns an array.
+Same as [xRange](/guide#xrange) but for the y scale. Override the default y range of `[0, height]` by setting it here to an array or function with argument `({ width, height})` that returns an array.
 
-This overrides setting [yReverse](/guide#yreverse-1) to `true`.
+This overrides setting [yReverse](/guide#yreverse) to `true`.
 
 ### zRange `Function|Array:[min: Number, max: Number]`
 
-Same as [xRange](/guide#xrange-2) but for the z scale. Override the default z range of `[0, width]` by setting it here to an array or function with argument `({ width, height})` that returns an array.
+Same as [xRange](/guide#xrange) but for the z scale. Override the default z range of `[0, width]` by setting it here to an array or function with argument `({ width, height})` that returns an array.
 
-This overrides setting [zReverse](/guide#zreverse-1) to `true`.
+This overrides setting [zReverse](/guide#zreverse) to `true`.
 
 ### rRange `Function|Array:[min: Number, max: Number]`
 
-Same as [xRange](/guide#xrange-2) but for the r scale. Override the default y range of `[1, 25]` by setting it here to an array or function with argument `({ width, height})` that returns an array. The r scale defaults to `d3.scaleSqrt` so make sure you don't use a zero in your range.
+Same as [xRange](/guide#xrange) but for the r scale. Override the default y range of `[1, 25]` by setting it here to an array or function with argument `({ width, height})` that returns an array. The r scale defaults to `d3.scaleSqrt` so make sure you don't use a zero in your range.
 
-This overrides setting [rReverse](/guide#rreverse-1) to `true`.
+This overrides setting [rReverse](/guide#rreverse) to `true`.
 
 ### xPadding `Array:[leftPixels: Number, rightPixels: Number]`
 
@@ -216,15 +216,15 @@ Assign a pixel value to add to the min or max of the x scale. This will increase
 
 ### yPadding `Array:[leftPixels: Number, rightPixels: Number]`
 
-Same as [xPadding](/guide#xpadding-1) but for the y domain.
+Same as [xPadding](/guide#xpadding) but for the y domain.
 
 ### zPadding `Array:[leftPixels: Number, rightPixels: Number]`
 
-Same as [xPadding](/guide#xpadding-1) but for the z domain.
+Same as [xPadding](/guide#xpadding) but for the z domain.
 
 ### rPadding `Array:[leftPixels: Number, rightPixels: Number]`
 
-Same as [xPadding](/guide#xpadding-1) but for the r domain.
+Same as [xPadding](/guide#xpadding) but for the r domain.
 
 ### xNice `Boolean=false`
 
@@ -232,15 +232,15 @@ Applies D3's [scale.nice()](https://github.com/d3/d3-scale#continuous_nice) to t
 
 ### yNice `Boolean=false`
 
-Same as [xNice](/guide#xnice-1) but for the y domain.
+Same as [xNice](/guide#xnice) but for the y domain.
 
 ### zNice `Boolean=false`
 
-Same as [xNice](/guide#xnice-1) but for the z domain.
+Same as [xNice](/guide#xnice) but for the z domain.
 
 ### rNice `Boolean=false`
 
-Same as [xNice](/guide#xnice-1) but for the r domain.
+Same as [xNice](/guide#xnice) but for the r domain.
 
 ### extents `Object`
 
@@ -309,9 +309,9 @@ Here's an example showing passing different data formats for extent calculation 
 
 ### ssr `Boolean=false`
 
-Set whether this chart should be rendered server side. This is best used in conjunction with the [ScaledSvg](guide#scaledsvg-1) component or HTML components that are set to use percentage scales since you won't know the size of the container at render time.
+Set whether this chart should be rendered server side. This is best used in conjunction with the [ScaledSvg](guide#scaledsvg) component or HTML components that are set to use percentage scales since you won't know the size of the container at render time.
 
-Use it in conjunction with [`percentRange={true}`](guide#percentrange-1) to easily set up your scales for a percent coordinate systems.
+Use it in conjunction with [`percentRange={true}`](guide#percentrange) to easily set up your scales for a percent coordinate systems.
 
 ### percentRange `Boolean=false`
 

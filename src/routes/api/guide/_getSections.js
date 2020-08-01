@@ -50,9 +50,9 @@ function getHash (str) {
 }
 
 export const demos = new Map();
-const store = {};
 
 export default function () {
+	const store = {};
 	return fs
 		.readdirSync(`src/content/guide`)
 		.filter(file => file[0] !== '.' && path.extname(file) === '.md')

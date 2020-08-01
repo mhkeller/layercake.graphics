@@ -14,7 +14,7 @@ By organizing a graphic into layers, you can more easily reuse components from p
 
 Layer Cake is more about having a system to organize your own custom components than it is a high-level charting library. It doesn't have any built-in concepts or strong opinions about how your data should be structured.
 
-> Layer Cake uses D3 scales. See more in the [xScale](/guide#xscale-2), [yScale](/guide#yscale-2), [zScale](/guide#zscale-2) and [rScale](/guide#rscale-2) sections of the [Layer Cake Props API](/guide#layercake-props).
+> Layer Cake uses D3 scales. See more in the [xScale](/guide#xscale), [yScale](/guide#yscale), [zScale](/guide#zscale) and [rScale](/guide#rscale) sections of the [Layer Cake Props API](/guide#layercake-props).
 
 ### Getting started
 
@@ -263,6 +263,6 @@ Here's an example that doesn't set any properties on the `LayerCake` component:
 
 ### Server-side rendering
 
-To generate markup server-side, see the [layercake-template-ssr](https://github.com/mhkeller/layercake-template-ssr). The rollup config creates a JavaScript file, which then constructs the required HTML and CSS when executed.
+See the [layercake-template](https://github.com/mhkeller/layercake-template) for the rollup config needed to compile LayerCake server-side. In short, it creates a JavaScript file, which then constructs the required HTML and CSS when executed. You have the option of also hydrating that markup with any additiona client-side JavaScript, or building it without any bundled JavaScript.
 
-You can also use LayerCake in Sapper (or similar dev environment) to create charts that work without JavaScript, which is how the server-side examples on this site work. Just set the [ssr](/guide#ssr) prop to `true` (it's also often useful to set [percentRange](#percentrange-3) to `true`, as well). Be sure to check out the examples on the [home page](/) for useful patterns using the [ScaledSvg](/guide#scaledsvg) component and other percentage-based components.
+You can also use LayerCake in Sapper (or similar dev environment) to create charts that work without JavaScript, which is how the server-side examples on this site work. Just set the [ssr](/guide#ssr) prop to `true`. Check out the examples on the [home page](/) for useful patterns using the [percentRange](/guide#percentrange) option, the [ScaledSvg](/guide#scaledsvg) component and other percentage-based components.
