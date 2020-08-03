@@ -1,7 +1,7 @@
 <script>
 	import { LayerCake, ScaledSvg, Html, calcExtents } from 'layercake';
 	import { timeDay } from 'd3-time';
-	import { scaleBand } from 'd3-scale';
+	import { scaleBand, scaleTime } from 'd3-scale';
 
 	import AxisX from '../../components/AxisX.html.svelte';
 	import AxisY from '../../components/AxisY.html.svelte';
@@ -55,6 +55,7 @@
 		y={yKey}
 		xDomain={[0, 24 * 60 * 60]}
 		yDomain={allDays}
+		xScale={scaleTime()}
 		yScale={scaleBand().paddingInner([0.05]).round(true)}
 		xPadding={[padding, padding]}
 		data={daysTransformed}
