@@ -19,6 +19,7 @@
 
 	import DownloadBtn from '../../components/DownloadBtn.svelte';
 	import hljsDefineSvelte from '../../modules/hljsDefineSvelte.js';
+	import cleanTitle from '../../modules/cleanTitle.js';
 
 	hljs.registerLanguage('svelte', hljsDefineSvelte);
 	hljsDefineSvelte(hljs);
@@ -50,12 +51,6 @@
 	});
 
 	$: example = exampleLookup.get(slug);
-
-	function cleanTitle (title) {
-		const parts = title.split('/');
-		const cleaned = parts[parts.length - 1].split('.')[0].toLowerCase();
-		return cleaned;
-	}
 
 	function copyToClipboard () {
 		const text = pages.filter(d => cleanTitle(d.title) === active)[0].contents;
