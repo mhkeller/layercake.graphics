@@ -206,7 +206,9 @@ This overrides setting [rReverse](/guide#rreverse) to `true`.
 
 ### xPadding `Array:[leftPixels: Number, rightPixels: Number]`
 
-Assign a pixel value to add to the min or max of the x scale. This will increase the scales domain by the scale unit equivalent of the provided pixels. It uses D3 scale's [invert function](https://github.com/d3/d3-scale#continuous_invert), so this only applies to continuous scales like `scaleLinear`. This is useful for adding extra space to a scatter plot so that your circles don't interfere with your y axis.
+Assign a pixel value to add to the min or max of the x scale. This will increase the scales domain by the scale unit equivalent of the provided pixels. This is useful for adding extra space to a scatter plot so that your circles don't interfere with your y-axis. It's better than fussing with the range since you don't need to add a magic number to other components, like axes.
+
+It will log out a warning if you try to use it on a scale that has a domain or range that isn't two items, such as ordinal scales.
 
 ```html
 <LayerCake
