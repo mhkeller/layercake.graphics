@@ -22,12 +22,10 @@
 	let brushedData;
 	$: {
 		brushedData = data.slice((extents[0] || 0) * data.length, (extents[1] || 1) * data.length);
-		if (brushedData.length === 0) {
-			brushedData = data.slice(extents[0] * data.length, extents[0] * data.length + 1)
+		if (brushedData.length < 2) {
+			brushedData = data.slice(extents[0] * data.length, extents[0] * data.length + 2)
 		}
 	}
-
-	// $: console.log('filered', brushedData)
 </script>
 
 <style>
@@ -37,7 +35,8 @@
 	}
 	.brush-container {
 		width: 100%;
-		height: 20%;
+		height: 18%;
+		margin-top: 2%;
 	}
 </style>
 
@@ -64,9 +63,10 @@
 
 <div class="brush-container">
 	<LayerCake
+		padding={{ top: 5 }}
 		x={xKey}
 		y={yKey}
-		yDomain={[0, 10]}
+		yDomain={[0, null]}
 		data={data}
 	>
 		<Svg>

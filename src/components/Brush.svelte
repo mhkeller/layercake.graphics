@@ -35,6 +35,8 @@
 				if (e.type === 'touchend') {
 					if (e.changedTouches.length !== 1) return;
 					if (e.changedTouches[0].identifier !== id) return;
+				} else if (e.target === brush) {
+					clear();
 				}
 
 				window.removeEventListener('mousemove', handle_move);
@@ -51,6 +53,11 @@
 			window.addEventListener('touchend', handle_end);
 		};
 	};
+
+	const clear = () => {
+		min = null;
+		max = null;
+	}
 
 	const reset = handler((start, p) => {
 		min = clamp(Math.min(start.p, p), 0, 1);
@@ -77,11 +84,11 @@
 	$: right = 100 * (1 - max);
 </script>
 
-<div bind:this={brush} class="brush-outer" on:mousedown={reset}>
+<div bind:this={brush} class="brush-outer" on:mousedown|stopPropagation={reset} on:touchstart|stopPropagation={reset}>
 	{#if min !== null}
-		<div class="brush-inner" on:mousedown|stopPropagation={move} style="left: {left}%; right: {right}%"></div>
-		<div class="brush-handle" on:mousedown|stopPropagation={adjust_min} style="left: {left}%"></div>
-		<div class="brush-handle" on:mousedown|stopPropagation={adjust_max} style="right: {right}%"></div>
+		<div class="brush-inner" on:mousedown|stopPropagation={move} on:touchstart|stopPropagation={move} style="left: {left}%; right: {right}%"></div>
+		<div class="brush-handle" on:mousedown|stopPropagation={adjust_min} on:touchstart|stopPropagation={adjust_min} style="left: {left}%"></div>
+		<div class="brush-handle" on:mousedown|stopPropagation={adjust_max} on:touchstart|stopPropagation={adjust_max} style="right: {right}%"></div>
 	{/if}
 </div>
 
@@ -89,19 +96,16 @@
 	.brush-outer {
 		position: relative;
 		width: 100%;
-		height: 100%;
+		height: calc(100% + 5px);
+		top: -5px;
 	}
 
 	.brush-inner {
 		position: absolute;
 		height: 100%;
-		/* background-color: #ccc;
-		opacity: 0.75; */
 		cursor: move;
-		/* border: 1px solid #000; */
 		mix-blend-mode: difference;
 		background-color: #f00;
-
 	}
 
 	.brush-handle {
