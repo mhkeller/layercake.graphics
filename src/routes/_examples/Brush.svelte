@@ -9,21 +9,20 @@
 
 	import data from '../../data/points.csv';
 
-	let extents = [null, null];
+	let brushExtents = [null, null];
 
 	const xKey = 'myX';
 	const yKey = 'myY';
 
 	data.forEach(d => {
-		d[xKey] = +d[xKey];
 		d[yKey] = +d[yKey];
 	});
 
 	let brushedData;
 	$: {
-		brushedData = data.slice((extents[0] || 0) * data.length, (extents[1] || 1) * data.length);
+		brushedData = data.slice((brushExtents[0] || 0) * data.length, (brushExtents[1] || 1) * data.length);
 		if (brushedData.length < 2) {
-			brushedData = data.slice(extents[0] * data.length, extents[0] * data.length + 2)
+			brushedData = data.slice(brushExtents[0] * data.length, brushExtents[0] * data.length + 2)
 		}
 	}
 </script>
@@ -35,8 +34,8 @@
 	}
 	.brush-container {
 		width: 100%;
-		height: 18%;
-		margin-top: 2%;
+		height: calc(20% - 5px);
+		margin-top: 5px;
 	}
 </style>
 
@@ -74,7 +73,7 @@
 			<Area/>
 		</Svg>
 		<Html>
-			<Brush bind:min={extents[0]} bind:max={extents[1]}/>
+			<Brush bind:min={brushExtents[0]} bind:max={brushExtents[1]}/>
 		</Html>
 	</LayerCake>
 </div>
