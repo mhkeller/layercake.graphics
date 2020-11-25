@@ -34,8 +34,8 @@
 	}
 	.brush-container {
 		width: 100%;
-		height: calc(20% - 5px);
-		margin-top: 5px;
+		height: calc(20% - 4px);
+		margin-top: 4px;
 	}
 </style>
 
