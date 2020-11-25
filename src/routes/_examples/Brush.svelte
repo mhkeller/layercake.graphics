@@ -1,5 +1,5 @@
 <script>
-	import { LayerCake, Svg, Html, calcExtents } from 'layercake';
+	import { LayerCake, Svg, Html } from 'layercake';
 
 	import Line from '../../components/Line.svelte';
 	import Area from '../../components/Area.svelte';
@@ -19,17 +19,15 @@
 		d[yKey] = +d[yKey];
 	});
 
-	const xDomain = calcExtents(data, [
-		{field: 'x', accessor: d => d[xKey] },
-	]).x;
+	let brushedData;
+	$: {
+		brushedData = data.slice((extents[0] || 0) * data.length, (extents[1] || 1) * data.length);
+		if (brushedData.length === 0) {
+			brushedData = data.slice(extents[0] * data.length, extents[0] * data.length + 1)
+		}
+	}
 
-	$: xExtents = xDomain.map((d, i) => extents[i] === null ? null : xDomain[0] + (xDomain[1] - xDomain[0]) * extents[i]);
-
-	$: filteredData = data.filter(d => {
-		return (d[xKey] > xExtents[0] || xExtents[0] === null) && (d[xKey] < xExtents[1] || xExtents[1] === null);
-	})
-
-	// $: console.log('filered', filteredData)
+	// $: console.log('filered', brushedData)
 </script>
 
 <style>
@@ -49,7 +47,7 @@
 		x={xKey}
 		y={yKey}
 		yDomain={[0, null]}
-		data={filteredData}
+		data={brushedData}
 	>
 		<Svg>
 			<AxisX
@@ -68,7 +66,7 @@
 	<LayerCake
 		x={xKey}
 		y={yKey}
-		yDomain={[0, null]}
+		yDomain={[0, 10]}
 		data={data}
 	>
 		<Svg>
