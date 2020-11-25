@@ -36,7 +36,8 @@
     "polka": "next",
     "regl": "^1.3.13",
     "sirv": "^0.4.0",
-    "topojson": "^3.0.2"
+    "topojson": "^3.0.2",
+    "yootils": "0.0.17"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

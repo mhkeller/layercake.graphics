@@ -18,6 +18,7 @@ import Radar from './_examples/Radar.svelte';
 import CirclePack from './_examples/CirclePack.svelte';
 import CirclePackNested from './_examples/CirclePackNested.svelte';
 import Sankey from './_examples/Sankey.svelte';
+import Brush from './_examples/Brush.svelte';
 
 export default [
 	{ replPath: 'ad32f9f301484d0cace82272126e9d09?version=3.17.3', title: 'Line + area', slug: 'Line', component: Line },
@@ -40,4 +41,5 @@ export default [
 	{ replPath: '5d3d22482b3d400d96c88d7de7ff45b1?version=3.23.2', title: 'Circle pack', slug: 'CirclePack', component: CirclePack },
 	{ replPath: '8ecba3df31e24658bf039a1a4d5daedc?version=3.23.2', title: 'Nested circle pack', slug: 'CirclePackNested', component: CirclePackNested },
 	{ replPath: '0f7f35ffe2f14a25860772897f7a0b5c?version=3.24.0', title: 'Sankey', slug: 'Sankey', component: Sankey },
+	{ replPath: '', title: 'Brush', slug: 'Brush', component: Brush },
 ];
