@@ -1,10 +1,10 @@
 <script>
-	import { LayerCake, Svg, Html } from 'layercake';
+	import { LayerCake, ScaledSvg, Html } from 'layercake';
 
 	import Line from './Line.svelte';
 	import Area from './Area.svelte';
-	import AxisX from './AxisX.svelte';
-	import AxisY from './AxisY.svelte';
+	import AxisX from './AxisX.html.svelte';
+	import AxisY from './AxisY.html.svelte';
 	import Brush from './Brush.svelte';
 
 	export let min = null;
@@ -40,13 +40,15 @@
 <div class="chart-wrapper">
 	<div class="chart-container">
 		<LayerCake
+			ssr={true}
+			percentRange={true}
 			padding={{ right: 10, bottom: 20, left: 25 }}
 			x={xKey}
 			y={yKey}
 			yDomain={[0, null]}
 			data={brushedData}
 		>
-			<Svg>
+			<Html>
 				<AxisX
 					ticks={ticks => {
 						const filtered = ticks.filter(t => t % 1 === 0);
@@ -59,32 +61,36 @@
 				<AxisY
 					ticks={2}
 				/>
+			</Html>
+			<ScaledSvg>
 				<Line
 					stroke='#00e047'
 				/>
 				<Area
 					fill='#00e04710'
 				/>
-			</Svg>
+			</ScaledSvg>
 		</LayerCake>
 	</div>
 
 	<div class="brush-container">
 		<LayerCake
+			ssr={true}
+			percentRange={true}
 			padding={{ top: 5 }}
 			x={xKey}
 			y={yKey}
 			yDomain={[0, null]}
 			data={data}
 		>
-			<Svg>
+			<ScaledSvg>
 				<Line
 					stroke='#00e047'
 				/>
 				<Area
 					fill='#00e04710'
 				/>
-			</Svg>
+			</ScaledSvg>
 			<Html>
 				<Brush
 					bind:min={min}

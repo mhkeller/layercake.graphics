@@ -1,5 +1,5 @@
 <script>
-	import SyncedBrushWrapper from '../../components/SyncedBrushWrapper.svelte';
+	import SyncedBrushWrapper from '../../components/SyncedBrushWrapper.percent-range.svelte';
 
 	import pointsOne from '../../data/points.csv';
 	import pointsTwo from '../../data/pointsTwo.csv';

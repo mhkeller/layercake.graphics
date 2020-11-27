@@ -42,6 +42,6 @@ export default [
 	{ replPath: '5d3d22482b3d400d96c88d7de7ff45b1?version=3.23.2', title: 'Circle pack', slug: 'CirclePack', component: CirclePack },
 	{ replPath: '8ecba3df31e24658bf039a1a4d5daedc?version=3.23.2', title: 'Nested circle pack', slug: 'CirclePackNested', component: CirclePackNested },
 	{ replPath: '0f7f35ffe2f14a25860772897f7a0b5c?version=3.24.0', title: 'Sankey', slug: 'Sankey', component: Sankey },
-	{ replPath: '', title: 'Brush', slug: 'Brush', component: Brush },
-	{ replPath: '', title: 'Synced brush', slug: 'SyncedBrush', component: SyncedBrush },
+	{ replPath: '4e7a8affd4724d03b33493c85e50471c?version=3.30.0', title: 'Brush', slug: 'Brush', component: Brush },
+	{ replPath: '0eaf387a0a564971865fb6176f959940?version=3.30.0', title: 'Synced brush', slug: 'SyncedBrush', component: SyncedBrush },
 ];
