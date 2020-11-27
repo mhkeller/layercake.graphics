@@ -104,8 +104,9 @@
 		position: absolute;
 		height: 100%;
 		cursor: move;
-		mix-blend-mode: difference;
-		background-color: #f00;
+		/* mix-blend-mode: difference; */
+		background-color: #cccccc90;
+		/* border: 1px solid #000; */
 	}
 
 	.brush-handle {

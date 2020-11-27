@@ -19,6 +19,7 @@ import CirclePack from './_examples/CirclePack.svelte';
 import CirclePackNested from './_examples/CirclePackNested.svelte';
 import Sankey from './_examples/Sankey.svelte';
 import Brush from './_examples/Brush.svelte';
+import SyncedBrush from './_examples/SyncedBrush.svelte';
 
 export default [
 	{ replPath: 'ad32f9f301484d0cace82272126e9d09?version=3.17.3', title: 'Line + area', slug: 'Line', component: Line },
@@ -42,4 +43,5 @@ export default [
 	{ replPath: '8ecba3df31e24658bf039a1a4d5daedc?version=3.23.2', title: 'Nested circle pack', slug: 'CirclePackNested', component: CirclePackNested },
 	{ replPath: '0f7f35ffe2f14a25860772897f7a0b5c?version=3.24.0', title: 'Sankey', slug: 'Sankey', component: Sankey },
 	{ replPath: '', title: 'Brush', slug: 'Brush', component: Brush },
+	{ replPath: '', title: 'Synced brush', slug: 'SyncedBrush', component: SyncedBrush },
 ];

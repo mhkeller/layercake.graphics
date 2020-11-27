@@ -34,8 +34,7 @@
 	}
 	.brush-container {
 		width: 100%;
-		height: calc(20% - 4px);
-		margin-top: 4px;
+		height: 20%;
 	}
 </style>
 
@@ -49,13 +48,23 @@
 	>
 		<Svg>
 			<AxisX
-				ticks={ticks => ticks.filter(t => t % 1 === 0)}
+				ticks={ticks => {
+					const filtered = ticks.filter(t => t % 1 === 0);
+					if (filtered.length > 7) {
+						return filtered.filter((t, i) => i % 2 === 0);
+					}
+					return filtered;
+				}}
 			/>
 			<AxisY
 				ticks={4}
 			/>
-			<Line/>
-			<Area/>
+			<Line
+				stroke='#00e047'
+			/>
+			<Area
+				fill='#00e04710'
+			/>
 		</Svg>
 	</LayerCake>
 </div>
@@ -69,8 +78,12 @@
 		data={data}
 	>
 		<Svg>
-			<Line/>
-			<Area/>
+			<Line
+				stroke='#00e047'
+			/>
+			<Area
+				fill='#00e04710'
+			/>
 		</Svg>
 		<Html>
 			<Brush bind:min={brushExtents[0]} bind:max={brushExtents[1]}/>

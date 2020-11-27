@@ -32,6 +32,7 @@
     "emoji-regex": "^8.0.0",
     "golden-fleece": "^1.0.9",
     "highlight.js": "^9.17.1",
+    "indian-ocean": "^4.0.0",
     "marked": "^0.8.0",
     "polka": "next",
     "regl": "^1.3.13",
