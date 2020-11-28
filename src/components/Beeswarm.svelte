@@ -4,25 +4,30 @@
 
 	const { data, xGet, height, zGet } = getContext('LayerCake');
 
-	const r = 7;
-	const pad = .5;
+	export let r;
+	export let spacing;
+	export let xStrength;
+	export let yStrength;
 
 	$: simulation = forceSimulation()
-		.force("x", forceX().x(d => $xGet(d)).strength(.95))
-		.force("y", forceY().y($height / 2).strength(.075))
-		.force("collide", forceCollide(r + pad))
+		.force("x", forceX().x(d => $xGet(d)).strength(xStrength))
+		.force("y", forceY().y($height / 2).strength(yStrength))
+		.force("collide", forceCollide(r + spacing))
 		.stop();
 
-	let positions = []
+	let positions = [];
 
 	$: {
 		const forceData = $data.map((d) => ({ ...d }));
 		
 		simulation.nodes(forceData);
-		simulation.restart();
-		simulation.stop();
 
-		for (var i = 0; i < 120; ++i) simulation.tick();
+		for ( var i = 0, 
+			n = Math.ceil(Math.log(simulation.alphaMin()) / Math.log(1 - simulation.alphaDecay())); 
+			i < n; 
+			++i ) {
+			simulation.tick();
+		} 
 
 		positions = simulation.nodes();
 	}
@@ -34,7 +39,7 @@
 		<circle
 			fill="{$zGet(p)}"
 			stroke="#fff"
-			stroke-width="{pad/2}"
+			stroke-width="{spacing/2}"
 			cx="{p.x}"
 			cy="{p.y}" 
 			r="{r}"

@@ -1,10 +1,10 @@
 <script>
-	import { LayerCake, Svg } from 'layercake';
+	import { LayerCake, Svg, Html } from 'layercake';
 	import { scaleOrdinal } from 'd3-scale';
 
+	import Key from '../../components/Key.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import Beeswarm from '../../components/Beeswarm.svelte';
-	import Key from '../../components/Key.svelte';
 
 	import data from '../../data/us-senate.csv';
 
@@ -12,7 +12,7 @@
 	const zKey = 'gender';
 
 	const seriesNames = new Set();
-	const seriesColors = ['#000', '#00e047'];
+	const seriesColors = ['#ffcc00', '#000'];
 
 	const dataTransformed = data.map(d => {
 		seriesNames.add(d[zKey]);
@@ -37,14 +37,24 @@
 		x={xKey}
 		z={zKey}
 		zScale={scaleOrdinal()}
-		zDomain={seriesNames}
+		zDomain={Array.from(seriesNames)}
 		zRange={seriesColors}
 		data={dataTransformed}
 	>
-		<Key/>
+		
 		<Svg>
-			<!-- <AxisX/> -->
-			<Beeswarm/>
+			<AxisX/>
+			<Beeswarm
+				r="7"
+				spacing=".5"
+				xStrength=".95"
+				yStrength=".075"
+			/>
 		</Svg>
+
+		<Html pointerEvents={false}>
+			<Key shape="circle" />
+		</Html>
+
 	</LayerCake>
 </div>
