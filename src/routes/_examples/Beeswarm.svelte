@@ -6,9 +6,9 @@
 	import Beeswarm from '../../components/Beeswarm.svelte';
 	import Key from '../../components/Key.svelte';
 
-	import data from '../../data/us-house.csv';
+	import data from '../../data/us-senate.csv';
 
-	const xKey = 'entered_office';
+	const xKey = 'date_of_birth';
 	const zKey = 'gender';
 
 	const seriesNames = new Set();

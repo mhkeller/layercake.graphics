@@ -4,7 +4,7 @@
 
 	const { data, xGet, height, zGet } = getContext('LayerCake');
 
-	const r = 3;
+	const r = 7;
 	const pad = .5;
 
 	$: simulation = forceSimulation()
@@ -16,11 +16,11 @@
 	let positions = []
 
 	$: {
-        const forceData = $data.map((d) => ({ ...d }));
+		const forceData = $data.map((d) => ({ ...d }));
 		
 		simulation.nodes(forceData);
-        simulation.restart();
-        simulation.stop();
+		simulation.restart();
+		simulation.stop();
 
 		for (var i = 0; i < 120; ++i) simulation.tick();
 

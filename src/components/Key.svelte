@@ -10,16 +10,16 @@
 		display: flex;
 	}
 	.key-item {
-		margin-right: 7px;
+		margin-right: 14px;
 	}
 	.chip {
 		display: inline-block;
-		width: 10px;
-		height: 10px;
+		width: 12px;
+		height: 12px;
 	}
 	.name {
 		display: inline;
-		font-size: 12px;
+		font-size: 14px;
 	}
 </style>
 
