@@ -12,7 +12,7 @@
 	const zKey = 'gender';
 
 	const seriesNames = new Set();
-	const seriesColors = ['#ffcc00', '#000'];
+	const seriesColors = ['#fc0', '#000'];
 
 	const dataTransformed = data.map(d => {
 		seriesNames.add(d[zKey]);
