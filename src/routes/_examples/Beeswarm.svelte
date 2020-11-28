@@ -16,11 +16,11 @@
 
 	const dataTransformed = data.map(d => {
 		seriesNames.add(d[zKey]);
-		
+
 		return {
-        	[zKey]: d[zKey],
-        	[xKey]: +d[xKey].split('-')[0]
-    	}
+			[zKey]: d[zKey],
+			[xKey]: +d[xKey].split('-')[0]
+		}
 	})
 
 </script>
@@ -41,11 +41,11 @@
 		zRange={seriesColors}
 		data={dataTransformed}
 	>
-		
+
 		<Svg>
 			<AxisX/>
 			<Beeswarm
-				r={7}
+				r={6}
 				spacing={0.5}
 				xStrength={0.95}
 				yStrength={0.075}
