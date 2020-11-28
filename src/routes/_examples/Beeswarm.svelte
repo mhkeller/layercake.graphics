@@ -32,7 +32,7 @@
 	}
 </style>
 
-<div class="chart-container">
+<div class='chart-container'>
 	<LayerCake
 		x={xKey}
 		z={zKey}
@@ -45,15 +45,15 @@
 		<Svg>
 			<AxisX/>
 			<Beeswarm
-				r="7"
-				spacing=".5"
-				xStrength=".95"
-				yStrength=".075"
+				r='7'
+				spacing='0.5'
+				xStrength='0.95'
+				yStrength='0.075'
 			/>
 		</Svg>
 
 		<Html pointerEvents={false}>
-			<Key shape="circle" />
+			<Key shape='circle' />
 		</Html>
 
 	</LayerCake>

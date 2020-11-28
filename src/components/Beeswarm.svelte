@@ -10,9 +10,9 @@
 	export let yStrength;
 
 	$: simulation = forceSimulation()
-		.force("x", forceX().x(d => $xGet(d)).strength(xStrength))
-		.force("y", forceY().y($height / 2).strength(yStrength))
-		.force("collide", forceCollide(r + spacing))
+		.force('x', forceX().x(d => $xGet(d)).strength(xStrength))
+		.force('y', forceY().y($height / 2).strength(yStrength))
+		.force('collide', forceCollide(r + spacing))
 		.stop();
 
 	let positions = [];
@@ -34,15 +34,15 @@
 
 </script>
 
-<g class="bee-group">
+<g class='bee-group'>
 	{#each positions as p}
 		<circle
-			fill="{$zGet(p)}"
-			stroke="#fff"
-			stroke-width="{spacing/2}"
-			cx="{p.x}"
-			cy="{p.y}" 
-			r="{r}"
+			fill='{$zGet(p)}'
+			stroke='#fff'
+			stroke-width='{spacing/2}'
+			cx='{p.x}'
+			cy='{p.y}'
+			r='{r}'
 			/>
 	{/each}
 </g>

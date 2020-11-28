@@ -1,7 +1,10 @@
 <script>
 	import { getContext } from 'svelte';
 
-	export let shape;
+	/* --------------------------------------------
+	 * Can be: "circle", "line" or leave it empty to be a square
+	 */
+	export let shape = undefined;
 
 	const { zDomain, zScale } = getContext('LayerCake');
 
@@ -24,7 +27,7 @@
 		border-radius: 50%;
 	}
 	.chip__line:after {
-		content: "";
+		content: '';
 		position: absolute;
 		border-width: 3px;
 		width: 14px;
@@ -37,17 +40,17 @@
 	}
 </style>
 
-<div class="key">
+<div class='key'>
 	{#each $zDomain as item}
-	<div class="key-item">
+	<div class='key-item'>
 		<div 
-			class="chip chip__{shape}" 
-			style="background: { 
+			class='chip chip__{shape}'
+			style='background: { 
 				shape == 'line' ? 
-				`linear-gradient(-45deg, #ffffff 40%, ${$zScale(item)} 41%, ${$zScale(item)} 59%, #ffffff 60%)`
-				: $zScale(item)};"
+				`linear-grawdient(-45deg, #ffffff 40%, ${$zScale(item)} 41%, ${$zScale(item)} 59%, #ffffff 60%)`
+				: $zScale(item)};'
 		></div>
-		<div class="name">{item.toUpperCase()}</div>
+		<div class='name'>{item.toUpperCase()}</div>
 	</div>
 	{/each}
 </div>
