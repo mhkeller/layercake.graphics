@@ -29,8 +29,9 @@
       <CirclePack
         idKey={idKey}
         valueKey={valueKey}
-				fill='#ff00cc50'
-				stroke='#b96daa'
+				fill='#ff00cc'
+				stroke='#9f0080'
+				textColor="#61004e"
       />
 		</Html>
 	</LayerCake>

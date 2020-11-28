@@ -28,6 +28,7 @@
 				circlePadding={5}
 				sortBy={(a, b) => b.depth - a.depth}
 				labelVisibilityThreshold={r => false}
+				stroke="#00bbff"
       />
 		</Html>
 	</LayerCake>
