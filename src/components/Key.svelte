@@ -7,7 +7,7 @@
 
 </script>
 
-<style lang="scss">
+<style>
 	.key {
 		display: flex;
 	}
