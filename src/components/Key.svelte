@@ -46,8 +46,8 @@
 		<div 
 			class='chip chip__{shape}'
 			style='background: { 
-				shape == 'line' ? 
-				`linear-grawdient(-45deg, #ffffff 40%, ${$zScale(item)} 41%, ${$zScale(item)} 59%, #ffffff 60%)`
+				shape == `line` ? 
+				`linear-gradient(-45deg, #ffffff 40%, ${$zScale(item)} 41%, ${$zScale(item)} 59%, #ffffff 60%)`
 				: $zScale(item)};'
 		></div>
 		<div class='name'>{item.toUpperCase()}</div>

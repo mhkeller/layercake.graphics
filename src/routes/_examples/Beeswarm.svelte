@@ -45,10 +45,10 @@
 		<Svg>
 			<AxisX/>
 			<Beeswarm
-				r='7'
-				spacing='0.5'
-				xStrength='0.95'
-				yStrength='0.075'
+				r={7}
+				spacing={0.5}
+				xStrength={0.95}
+				yStrength={0.075}
 			/>
 		</Svg>
 
