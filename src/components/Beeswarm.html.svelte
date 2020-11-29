@@ -18,7 +18,7 @@
 
 	$: simulation = forceSimulation(nodes)
 		.force('x', forceX().x(d => $xGet(d)).strength(xStrength))
-		.force('y', forceY().y($height / 2).strength(yStrength))
+		.force('y', forceY().y(50).strength(yStrength))
 		.force('collide', forceCollide(radius + spacing))
 		.stop();
 
@@ -36,14 +36,13 @@
 	{#each simulation.nodes() as node}
 		<div
 			class='bee'
-			stroke-width='{spacing/2}'
 			style='
-				left:{node.x}px;
-				top: {node.y}px; 
-				width: {radius*2}px; 
-				height: {radius*2}px; 
-				background: {$zGet(node)}; 
-				border-width: {spacing/2};
+				left:{node.x}%;
+				top: {node.y}%;
+				width: {radius*2}px;
+				height: {radius*2}px;
+				background: {$zGet(node)};
+				border-width: {spacing/2}px;
 				'
 			/>
 	{/each}
@@ -53,6 +52,7 @@
 	.bee {
 		position: absolute;
 		border-color: #fff;
+		border-style: solid;
 		border-radius: 50%;
 	}
 </style>

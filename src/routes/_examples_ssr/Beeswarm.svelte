@@ -35,6 +35,7 @@
 <div class='chart-container'>
 	<LayerCake
 		ssr={true}
+		percentRange={true}
 		x={xKey}
 		z={zKey}
 		zScale={scaleOrdinal()}
