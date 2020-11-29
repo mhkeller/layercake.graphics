@@ -32,15 +32,27 @@
 	}
 </script>
 
-<g class='bee-group'>
+<div class='bee-group'>
 	{#each simulation.nodes() as node}
-		<circle
-			fill='{$zGet(node)}'
-			stroke='#fff'
+		<div
+			class='bee'
 			stroke-width='{spacing/2}'
-			cx='{node.x}'
-			cy='{node.y}'
-			r='{radius}'
+			style='
+				left:{node.x}px;
+				top: {node.y}px; 
+				width: {radius*2}px; 
+				height: {radius*2}px; 
+				background: {$zGet(node)}; 
+				border-width: {spacing/2};
+				'
 			/>
 	{/each}
-</g>
+</div>
+
+<style>
+	.bee {
+		position: absolute;
+		border-color: #fff;
+		border-radius: 50%;
+	}
+</style>
