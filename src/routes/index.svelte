@@ -178,6 +178,7 @@
 	}
 	#server-side {
 		padding-top: 65px;
+		font-weight: bold;
 	}
 </style>
 
