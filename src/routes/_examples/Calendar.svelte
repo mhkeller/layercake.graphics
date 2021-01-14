@@ -4,7 +4,7 @@
 
 	import CalendarMonth from '../../components/CalendarMonth.svelte';
 
-	// This example loads csv data as json using rollup-plugin-dsv
+	// This example loads csv data as json using @rollup/plugin-dsv
 	import dates from '../../data/dates.csv';
 
 	const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

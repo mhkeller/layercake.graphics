@@ -5,7 +5,7 @@
 	import Radar from '../../components/Radar.svelte';
 	import AxisRadial from '../../components/AxisRadial.svelte';
 
-	// This example loads csv data as json using rollup-plugin-dsv
+	// This example loads csv data as json using @rollup/plugin-dsv
 	import data from '../../data/radarScores.csv';
 
 	const seriesNames = Object.keys(points[0]).filter(d => d !== 'name');

@@ -3,7 +3,7 @@
 
 	import CirclePack from '../../components/CirclePack.html.svelte';
 
-	// This example loads csv data as json using rollup-plugin-dsv
+	// This example loads csv data as json using @rollup/plugin-dsv
 	import data from '../../data/fruitGroups.csv';
 
 	const idKey = 'fruit';

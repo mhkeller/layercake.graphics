@@ -7,7 +7,7 @@
 	import AxisY from '../../components/AxisY.svelte';
 	import Brush from '../../components/Brush.svelte';
 
-	// This example loads csv data as json using rollup-plugin-dsv
+	// This example loads csv data as json using @rollup/plugin-dsv
 	import data from '../../data/points.csv';
 
 	let brushExtents = [null, null];

@@ -10,7 +10,7 @@
 	import Labels from '../../components/Labels.svelte';
 	import SharedTooltip from '../../components/SharedTooltip.percent-range.svelte';
 
-	// This example loads csv data as json using rollup-plugin-dsv
+	// This example loads csv data as json using @rollup/plugin-dsv
 	import data from '../../data/fruit.csv';
 
 	/* --------------------------------------------
