@@ -9,6 +9,7 @@
 	import AxisY from '../../components/AxisY.svelte';
 	import AreaStacked from '../../components/AreaStacked.svelte';
 
+	// This example loads csv data as json using rollup-plugin-dsv
 	import data from '../../data/fruit.csv';
 
 	const xKey = 'month';

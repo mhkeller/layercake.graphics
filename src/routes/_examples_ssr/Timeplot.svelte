@@ -7,6 +7,7 @@
 	import AxisY from '../../components/AxisY.html.svelte';
 	import Scatter from '../../components/Scatter.html.svelte';
 
+	// This example loads csv data as json using rollup-plugin-dsv
 	import data from '../../data/days.csv';
 
 	const xKey = 'seconds';

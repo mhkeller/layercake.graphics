@@ -3,7 +3,8 @@
 
 	import CirclePack from '../../components/CirclePack.html.svelte';
 
-  import data from '../../data/familyTree.csv';
+	// This example loads csv data as json using rollup-plugin-dsv
+	import data from '../../data/familyTree.csv';
 
 	const idKey = 'name';
 	const parentKey = 'parent';

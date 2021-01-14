@@ -10,6 +10,7 @@
 	import Labels from '../../components/Labels.svelte';
 	import SharedTooltip from '../../components/SharedTooltip.svelte';
 
+	// This example loads csv data as json using rollup-plugin-dsv
 	import data from '../../data/fruit.csv';
 
 	/* --------------------------------------------
