@@ -3,7 +3,7 @@
 	import { scaleCanvas } from 'layercake';
 	import { geoPath } from 'd3-geo';
 
-	const { data, width, height } = getContext('LayerCake');
+	const { data, width, height, zGet } = getContext('LayerCake');
 
 	const { ctx } = getContext('canvas');
 
@@ -25,14 +25,16 @@
 			scaleCanvas($ctx, $width, $height);
 			$ctx.clearRect(0, 0, $width, $height);
 
-			$ctx.beginPath();
-			// Set the context here since setting it in `$: geoPath` is a circular reference
-			geoPathFn.context($ctx);
 			features.features.forEach(feature => {
+				$ctx.beginPath();
+				// Set the context here since setting it in `$: geoPath` is a circular reference
+				geoPathFn.context($ctx);
 				geoPathFn(feature);
+
 				$ctx.fillStyle = '#fff';
 				// $ctx.fillStyle = $zGet(feature.properties); // Use this if making a choropleth
 				$ctx.fill();
+
 				$ctx.lineWidth = 1;
 				$ctx.strokeStyle = '#ccc';
 				$ctx.stroke();
