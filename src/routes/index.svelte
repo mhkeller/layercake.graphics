@@ -178,6 +178,8 @@
 	}
 	#server-side {
 		padding-top: 65px;
+	}
+	#server-side h2 {
 		font-weight: bold;
 	}
 </style>
