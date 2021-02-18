@@ -16,7 +16,7 @@
 	// Create a flat array of objects that LayerCake can use to measure
 	// extents for the color scale
 	const flatData = geojson.features.map(d => d.properties);
-	const colors = ['#feedde','#fdbe85','#fd8d3c','#e6550d','#a63603'];
+	const colors = ['#ffdecc', '#ffc09c', '#ffa06b', '#ff7a33'];
 </script>
 
 <style>
@@ -31,7 +31,7 @@
 		ssr={true}
 		position='absolute'
 		data={geojson}
-		z='AREA'
+		z='FOO'
 		zScale={scaleQuantize()}
 		zRange={colors}
 		{flatData}
