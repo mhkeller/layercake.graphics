@@ -1,5 +1,5 @@
 <script>
-	import { afterUpdate } from 'svelte';
+	// import { afterUpdate } from 'svelte';
 	export let open;
 	export let activeGuideSection = undefined;
 	export let sections = [];

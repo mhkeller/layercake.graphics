@@ -2,6 +2,9 @@
 	import { LayerCake, Svg, Canvas } from 'layercake';
 	import { feature } from 'topojson';
 	import { geoAlbersUsa } from 'd3-geo';
+	import { scaleQuantize } from 'd3-scale';
+
+	// For a map example with a tooltip, check out https://layercake.graphics/example/MapSvg
 
 	import MapSvg from '../../components/Map.svg.svelte';
 	import MapCanvas from '../../components/Map.canvas.svelte';
@@ -9,6 +12,11 @@
 	import usStates from '../../data/us-states.topojson.js';
 
 	const geojson = feature(usStates, usStates.objects.collection);
+
+	// Create a flat array of objects that LayerCake can use to measure
+	// extents for the color scale
+	const flatData = geojson.features.map(d => d.properties);
+	const colors = ['#feedde','#fdbe85','#fd8d3c','#e6550d','#a63603'];
 </script>
 
 <style>
@@ -21,6 +29,10 @@
 <div class="chart-container">
 	<LayerCake
 		data={geojson}
+		z='AREA'
+		zScale={scaleQuantize()}
+		zRange={colors}
+		{flatData}
 	>
 		<Canvas>
 			<MapCanvas

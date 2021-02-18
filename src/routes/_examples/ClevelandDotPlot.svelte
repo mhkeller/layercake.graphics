@@ -47,9 +47,7 @@
 			<AxisY
 				gridlines={false}
 			/>
-			<ClevelandDotPlot
-				{seriesColors}
-			/>
+			<ClevelandDotPlot/>
 		</Svg>
 	</LayerCake>
 </div>
