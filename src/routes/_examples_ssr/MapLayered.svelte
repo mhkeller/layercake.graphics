@@ -11,6 +11,8 @@
 
 	import usStates from '../../data/us-states.topojson.js';
 
+	const zKey = 'FOO';
+
 	const geojson = feature(usStates, usStates.objects.collection);
 	const aspectRatio = 2.63;
 
@@ -29,9 +31,9 @@
 
 <div class="chart-container" style="padding-bottom:{100 / aspectRatio}%">
 	<LayerCake
-		position={'absolute'}
+		position='absolute'
 		data={geojson}
-		z='FOO'
+		z={zKey}
 		zScale={scaleQuantize()}
 		zRange={colors}
 		{flatData}
@@ -47,7 +49,7 @@
 		position='absolute'
 		ssr={true}
 		data={geojson}
-		z='FOO'
+		z={zKey}
 		zScale={scaleQuantize()}
 		zRange={colors}
 		{flatData}
