@@ -29,6 +29,13 @@
 </script>
 
 <style>
+	/*
+		The wrapper div needs to have an explicit width and height in CSS.
+		It can also be a flexbox child or CSS grid element.
+		The point being it needs dimensions since the <LayerCake> element will
+		expand to fill it.
+		The width is being set inline-below.
+	*/
 	.chart-container {
 		display: inline-block;
 		position: relative;

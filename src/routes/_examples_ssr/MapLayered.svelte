@@ -23,13 +23,20 @@
 </script>
 
 <style>
+	/*
+		The wrapper div needs to have an explicit width and height in CSS.
+		It can also be a flexbox child or CSS grid element.
+		The point being it needs dimensions since the <LayerCake> element will
+		expand to fill it.
+		The height is being set inline with `padding-bottom` using the aspect ratio trick below.
+	*/
 	.chart-container {
 		position: relative;
 		width: 100%;
 	}
 </style>
 
-<div class="chart-container" style="padding-bottom:{100 / aspectRatio}%">
+<div class="chart-container" style="padding-bottom:{100 / aspectRatio}%;">
 	<LayerCake
 		position='absolute'
 		data={geojson}
