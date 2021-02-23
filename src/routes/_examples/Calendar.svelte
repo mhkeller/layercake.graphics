@@ -34,7 +34,7 @@
 		It can also be a flexbox child or CSS grid element.
 		The point being it needs dimensions since the <LayerCake> element will
 		expand to fill it.
-		The width is being set inline-below.
+		The width is being set inline below.
 	*/
 	.chart-container {
 		display: inline-block;
