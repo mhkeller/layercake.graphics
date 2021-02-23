@@ -45,8 +45,8 @@
 
 	$: pages = [data.main]
 		.concat(data.components)
-		.concat(data.modules)
 		.concat(data.componentModules)
+		.concat(data.modules)
 		.concat(data.componentComponents)
 		.concat(data.jsons)
 		.concat(data.csvs);

@@ -19,7 +19,7 @@ function getJsonPaths (example) {
 function getJsPaths (example) {
 	const match = example.match(/\.\/.+\.js('|")/gm);
 	if (match) {
-		return match.map(d => d.replace('../../', ''));
+		return match.map(d => d.replace('../../', '').replace(/('|")/g, ''));
 	}
 	return [];
 }
