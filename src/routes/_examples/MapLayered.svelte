@@ -1,6 +1,6 @@
 <script>
 	import { LayerCake, Svg, Canvas } from 'layercake';
-	import { feature } from 'topojson';
+	import { feature } from 'topojson-client';
 	import { geoAlbersUsa } from 'd3-geo';
 	import { scaleQuantize } from 'd3-scale';
 
