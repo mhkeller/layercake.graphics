@@ -49,6 +49,12 @@ The `App.svelte` file in this example is your main Svelte component. You can ren
 </script>
 
 <style>
+  /*
+    The wrapper div needs to have an explicit width and height in CSS.
+    It can also be a flexbox child or CSS grid element.
+    The point being it needs dimensions since the <LayerCake> element will
+    expand to fill it.
+  */
   .chart-container {
     width: 100%;
     height: 300px;
@@ -99,6 +105,12 @@ Within the `LayerCake` component, you'll want to add at least one layout compone
 </script>
 
 <style>
+	/*
+		The wrapper div needs to have an explicit width and height in CSS.
+		It can also be a flexbox child or CSS grid element.
+		The point being it needs dimensions since the <LayerCake> element will
+		expand to fill it.
+	*/
   .chart-container {
     width: 100%;
     height: 300px;
@@ -153,6 +165,12 @@ Here's an example starting with a similar `App.svelte` file to the example above
 </script>
 
 <style>
+	/*
+		The wrapper div needs to have an explicit width and height in CSS.
+		It can also be a flexbox child or CSS grid element.
+		The point being it needs dimensions since the <LayerCake> element will
+		expand to fill it.
+	*/
   .chart-container {
     width: 100%;
     height: 300px;
@@ -242,6 +260,12 @@ Here's an example that doesn't set any properties on the `LayerCake` component:
 </script>
 
 <style>
+	/*
+		The wrapper div needs to have an explicit width and height in CSS.
+		It can also be a flexbox child or CSS grid element.
+		The point being it needs dimensions since the <LayerCake> element will
+		expand to fill it.
+	*/
   .chart-container {
     width: 100%;
     width: 300px;

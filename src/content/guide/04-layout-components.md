@@ -13,6 +13,12 @@ Here are examples using the four layout components: HTML, Svg, ScaledSvg, Canvas
 </script>
 
 <style>
+  /*
+  	The wrapper div needs to have an explicit width and height in CSS.
+  	It can also be a flexbox child or CSS grid element.
+  	The point being it needs dimensions since the <LayerCake> element will
+  	expand to fill it.
+  */
   .chart-container {
     width: 100%;
     height: 300px;
@@ -37,6 +43,12 @@ Here are examples using the four layout components: HTML, Svg, ScaledSvg, Canvas
 </script>
 
 <style>
+  /*
+    The wrapper div needs to have an explicit width and height in CSS.
+    It can also be a flexbox child or CSS grid element.
+    The point being it needs dimensions since the <LayerCake> element will
+    expand to fill it.
+  */
   .chart-container {
     width: 100%;
     height: 300px;
@@ -64,6 +76,12 @@ It's often used in conjunction with props `ssr={true}` and `percentRange={true}`
 </script>
 
 <style>
+	/*
+		The wrapper div needs to have an explicit width and height in CSS.
+		It can also be a flexbox child or CSS grid element.
+		The point being it needs dimensions since the <LayerCake> element will
+		expand to fill it.
+	*/
   .chart-container {
     width: 100%;
     height: 300px;
@@ -94,6 +112,12 @@ It's often used in conjunction with props `ssr={true}` and `percentRange={true}`
 </script>
 
 <style>
+	/*
+		The wrapper div needs to have an explicit width and height in CSS.
+		It can also be a flexbox child or CSS grid element.
+		The point being it needs dimensions since the <LayerCake> element will
+		expand to fill it.
+	*/
   .chart-container {
     width: 100%;
     height: 300px;
@@ -158,6 +182,12 @@ Here's an example showing a scatter plot.
 </script>
 
 <style>
+	/*
+		The wrapper div needs to have an explicit width and height in CSS.
+		It can also be a flexbox child or CSS grid element.
+		The point being it needs dimensions since the <LayerCake> element will
+		expand to fill it.
+	*/
   .chart-container {
     width: 100%;
     height: 300px;
