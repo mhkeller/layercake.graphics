@@ -8,8 +8,16 @@ function cleanContents (str) {
 	return str.replace(/\t/g, '  ').trim();
 }
 
+function getJsonPaths (example) {
+	const match = example.match(/\.\/.+\.json/gm);
+	if (match) {
+		return match.map(d => d.replace('../../', ''));
+	}
+	return [];
+}
+
 function getJsPaths (example) {
-	const match = example.match(/\.\/.+\.js/gm);
+	const match = example.match(/\.\/.+\.js('|")/gm);
 	if (match) {
 		return match.map(d => d.replace('../../', ''));
 	}
@@ -87,6 +95,14 @@ export function get(req, res, next) {
 			};
 		});
 
+	const jsons = getJsonPaths(example)
+		.map(d => {
+			return {
+				title: d.replace('../', ''),
+				contents: cleanContents(fs.readFileSync(d.replace('../', 'src/'), 'utf-8'))
+			};
+		});
+
 	const csvs = getCsvPaths(example)
 		.map(d => {
 			return {
@@ -120,7 +136,8 @@ export function get(req, res, next) {
 		modules,
 		componentModules,
 		componentComponents,
-		csvs
+		csvs,
+		jsons,
 	};
 
 	res.writeHead(200, {
