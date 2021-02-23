@@ -9,7 +9,8 @@
 	import MapSvg from '../../components/Map.svg.svelte';
 	import MapCanvas from '../../components/Map.canvas.svelte';
 
-	import usStates from '../../data/us-states.topojson.js';
+	// This example loads json data as json using @rollup/plugin-json
+	import usStates from '../../data/us-states.topojson.json';
 
 	const zKey = 'FOO';
 

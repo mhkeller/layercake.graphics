@@ -8,7 +8,8 @@
 	import Map from '../../components/Map.svg.svelte';
 	import Tooltip from '../../components/Tooltip.svelte';
 
-	import usStates from '../../data/us-states.topojson.js';
+	// This example loads json data as json using @rollup/plugin-json
+	import usStates from '../../data/us-states.topojson.json';
 
 	const geojson = feature(usStates, usStates.objects.collection);
 
