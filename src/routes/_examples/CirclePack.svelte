@@ -39,6 +39,8 @@
 				fill='#ff00cc'
 				stroke='#9f0080'
 				textColor="#61004e"
+				textStroke="1"
+				textStrokeColor="#ffdbf8"
       />
 		</Html>
 	</LayerCake>
