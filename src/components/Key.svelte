@@ -2,12 +2,20 @@
 	import { getContext } from 'svelte';
 
 	/* --------------------------------------------
-	 * Can be: "circle", "line" or leave it empty to be a square
+	 * Can be: "circle", "line" or "square"
 	 */
-	export let shape = undefined;
+	export let shape = 'square';
+
+	/* --------------------------------------------
+	 * Capitalize the series name: `true` or `false`
+	 */
+	export let capitalize = true;
 
 	const { zDomain, zScale } = getContext('LayerCake');
 
+	function cap (str) {
+		return str.replace(/^\w/, d => d.toUpperCase());
+	}
 </script>
 
 <style>
@@ -47,11 +55,11 @@
 		<div
 			class='chip chip__{shape}'
 			style='background: {
-				shape == `line` ?
+				shape === `line` ?
 				`linear-gradient(-45deg, #ffffff 40%, ${$zScale(item)} 41%, ${$zScale(item)} 59%, #ffffff 60%)`
 				: $zScale(item)};'
 		></div>
-		<div class='name'>{item.replace(/^\w/, d => d.toUpperCase())}</div>
+		<div class='name'>{capitalize === true ? cap(item) : item}</div>
 	</div>
 	{/each}
 </div>
