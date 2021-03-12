@@ -176,7 +176,7 @@ export default function () {
 
 			// Nicer formatting for function calls and args
 			while ((match = pattern.exec(html))) {
-				const formatted = match[2].replace(/((\w+)\.)?(\w+)\((.+)?\)/, (m, $1, $2, $3, $4) => {
+				const formatted = match[2].replace(/((\w+)\.)?(\w+)\((.+)?\)/, (m, $1, $2, $3, $4 = '') => {
 					if ($1) return `<span class="function">${$1}</span>${$3}<span class="call">(<span class="arguments">${$4}</span>)</span>`;
 					return m.replace(`(${$4})`, `<span class="call">(<span class="arguments">${$4}</span>)</span>`);
 				});

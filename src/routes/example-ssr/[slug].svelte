@@ -43,7 +43,13 @@
 		return hljs.highlight(ext, str).value;
 	}
 
-	$: pages = [data.main].concat(data.components).concat(data.modules).concat(data.componentModules).concat(data.componentComponents).concat(data.csvs);
+	$: pages = [data.main]
+		.concat(data.components)
+		.concat(data.componentModules)
+		.concat(data.modules)
+		.concat(data.componentComponents)
+		.concat(data.jsons)
+		.concat(data.csvs);
 
 	const exampleLookup = new Map();
 	examples.forEach(exmpl => {

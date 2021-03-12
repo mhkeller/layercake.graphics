@@ -3,7 +3,7 @@
 	import { geoPath } from 'd3-geo';
 	import { raise } from 'layercake';
 
-	const { data, width, height } = getContext('LayerCake');
+	const { data, width, height, zGet } = getContext('LayerCake');
 
 	/* --------------------------------------------
 	 * Require a D3 projection function
@@ -14,6 +14,13 @@
 	 * Optional aspect ratio
 	 */
 	export let fixedAspectRatio = undefined;
+
+	/* --------------------------------------------
+	 * Allow for custom styling
+	 */
+	export let fill = undefined; // The fill will be determined by the scale, unless this prop is set
+	export let stroke = '#333';
+	export let strokeWidth = 0.5;
 
 	/* --------------------------------------------
 	 * Add this optional export in case you want to plot only a subset of the features
@@ -33,12 +40,6 @@
 
 	$: geoPathFn = geoPath(projectionFn);
 
-	function fillRandom(random) {
-		const colors = ['#ffdecc', '#ffc09c', '#ffa06b', '#ff7a33'];
-		const index = Math.round(random * (colors.length - 1));
-		return colors[index];
-	}
-
 	function handleMousemove(feature) {
 		return function handleMousemoveFn(e) {
 			raise(this);
@@ -57,7 +58,9 @@
 	{#each features as feature}
 		<path
 			class="feature-path"
-			fill="{fillRandom(Math.random())}"
+			fill="{fill || $zGet(feature.properties)}"
+			stroke={stroke}
+			stroke-width={strokeWidth}
 			d="{geoPathFn(feature)}"
 			on:mouseover={(e) => dispatch('mousemove', { e, props: feature.properties })}
 			on:mousemove={handleMousemove(feature)}
@@ -66,10 +69,10 @@
 </g>
 
 <style>
-	.feature-path {
+	/* .feature-path {
 		stroke: #333;
 		stroke-width: 0.5px;
-	}
+	} */
 	.feature-path:hover {
 		stroke: #000;
 		stroke-width: 2px;

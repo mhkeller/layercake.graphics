@@ -38,6 +38,12 @@
 	input {
 		margin-right: 7px;
 	}
+	/*
+		The wrapper div needs to have an explicit width and height in CSS.
+		It can also be a flexbox child or CSS grid element.
+		The point being it needs dimensions since the <LayerCake> element will
+		expand to fill it.
+	*/
 	.chart-container {
 		position: relative;
 		display: inline-block;
