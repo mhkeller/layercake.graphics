@@ -6,6 +6,7 @@
 	import AxisX from '../../components/AxisX.svelte';
 	import Beeswarm from '../../components/Beeswarm.svelte';
 
+	// This example loads csv data as json using @rollup/plugin-dsv
 	import data from '../../data/us-senate.csv';
 
 	const xKey = 'date_of_birth';
@@ -26,6 +27,12 @@
 </script>
 
 <style>
+	/*
+		The wrapper div needs to have an explicit width and height in CSS.
+		It can also be a flexbox child or CSS grid element.
+		The point being it needs dimensions since the <LayerCake> element will
+		expand to fill it.
+	*/
 	.chart-container {
 		width: 100%;
 		height: 100%;
