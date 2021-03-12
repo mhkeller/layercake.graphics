@@ -16,7 +16,6 @@ import Calendar from './_examples_ssr/Calendar.svelte';
 import Timeplot from './_examples_ssr/Timeplot.svelte';
 import Brush from './_examples_ssr/Brush.svelte';
 import SyncedBrush from './_examples_ssr/SyncedBrush.svelte';
-import Beeswarm from './_examples_ssr/Beeswarm.svelte';
 
 export default [
 	{ replPath: 'ac23120460b1409a9e1e6fd328b63b64?version=3.17.3', title: 'Line + area', slug: 'Line', component: Line },
@@ -37,5 +36,4 @@ export default [
 	{ replPath: '82b6e8a37e9f4eaa8140498c1b1f490d?version=3.17.3', title: 'Small multiples (animated domain transition)', slug: 'SmallMultiples', component: SmallMultiples },
 	{ replPath: '7b692f97938f4bc2a79d62d5ccdbb02d?version=3.30.0', title: 'Brush', slug: 'Brush', component: Brush },
 	{ replPath: '1868bf7315654558894580f43ddeace8?version=3.30.0', title: 'Synced brush', slug: 'SyncedBrush', component: SyncedBrush },
-	{ replPath: '9d0e23f494f645b4a9623c46474462f6?version=3.30.0', title: 'Beeswarm', slug: 'Beeswarm', component: Beeswarm },
 ];
