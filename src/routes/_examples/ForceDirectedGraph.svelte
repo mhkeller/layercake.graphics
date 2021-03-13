@@ -7,6 +7,7 @@
 
 	import data from '../../data/miserables.json';
 
+	const xKey = 'id';
 	const zKey = 'group';
 
 	const seriesNames = new Set();
@@ -32,6 +33,7 @@
 <div class="chart-container">
 	<LayerCake
 		data={data}
+		x={xKey}
 		z={zKey}
 		zScale={scaleOrdinal()}
 		zDomain={Array.from(seriesNames)}

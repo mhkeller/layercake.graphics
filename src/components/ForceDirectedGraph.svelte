@@ -4,12 +4,14 @@
 	import {
 		forceSimulation,
 		forceLink,
+		forceCollide,
 		forceManyBody,
 		forceCenter
 	} from 'd3-force';
 
-	const { data, width, height, zGet } = getContext('LayerCake');
+	const { data, width, height, zGet, x } = getContext('LayerCake');
 
+	export let linkDistance = 30;
 	export let nodeRadius = 5;
 	/* --------------------------------------------
 	 * Set a manual color, otherwise it will default to using the zScale
@@ -25,9 +27,12 @@
 	$: nodes = $data.nodes.map(d => Object.create(d));
 
 	$: simulation = forceSimulation(nodes)
-		.force('link', forceLink(links).id(d => d.id))
+		.force('link', forceLink(links).id($x).distance(linkDistance))
 		.force('charge', forceManyBody())
 		.force('center', forceCenter($width / 2, $height / 2))
+		// .force('collision', forceCollide().radius(function(d) {
+		// 	return d.radius
+		// }))
 		.on('tick', simulationUpdate);
 
 	// $: {
@@ -38,6 +43,7 @@
 	// 		simulation.tick();
 	// 	}
 	// }
+
 	function simulationUpdate () {
 		simulation.tick();
 		nodes = [...nodes];
@@ -53,7 +59,7 @@
 					x2='{link.target.x}'
 					y2='{link.target.y}'
 				>
-					<title>{link.source.id}</title>
+					<title>{$x(link.source)}</title>
 				</line>
 			</g>
 		{/each}
@@ -69,6 +75,6 @@
 			cx='{point.x}'
 			cy='{point.y}'
 		>
-    	<title>{point.id}</title>
+    	<title>{$x(point)}</title>
 		</circle>
 	{/each}
