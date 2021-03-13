@@ -10,6 +10,7 @@
 	export let spacing = 0.5;
 	export let xStrength = 0.95;
 	export let yStrength = 0.075;
+	export let strokeColor = '#fff';
 
 	let radius = r;
 	$: {
@@ -18,7 +19,7 @@
 
 	$: simulation = forceSimulation(nodes)
 		.force('x', forceX().x(d => $xGet(d)).strength(xStrength))
-		.force('y', forceY().y(50).strength(yStrength))
+		.force('y', forceY().y($height / 2).strength(yStrength))
 		.force('collide', forceCollide(radius + spacing))
 		.stop();
 
@@ -37,12 +38,13 @@
 		<div
 			class='bee'
 			style='
-				left:{node.x}%;
-				top: {node.y}%;
-				width: {radius*2}px;
-				height: {radius*2}px;
+				left:{node.x}px;
+				top: {node.y}px;
+				width: {radius * 2}px;
+				height: {radius * 2}px;
 				background: {$zGet(node)};
-				border-width: {spacing/2}px;
+				border-width: {spacing / 2}px;
+				border-color: {strokeColor};
 				'
 			/>
 	{/each}
@@ -51,8 +53,8 @@
 <style>
 	.bee {
 		position: absolute;
-		border-color: #fff;
 		border-style: solid;
 		border-radius: 50%;
+		transform: translate(-50%, -50%);
 	}
 </style>

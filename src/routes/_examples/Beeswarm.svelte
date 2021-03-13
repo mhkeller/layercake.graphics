@@ -5,6 +5,7 @@
 	import Key from '../../components/Key.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import Beeswarm from '../../components/Beeswarm.svelte';
+	import BeeswarmHtml from '../../components/Beeswarm.html.svelte';
 
 	// This example loads csv data as json using @rollup/plugin-dsv
 	import data from '../../data/us-senate.csv';

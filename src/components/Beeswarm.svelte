@@ -10,6 +10,7 @@
 	export let spacing = 0.5;
 	export let xStrength = 0.95;
 	export let yStrength = 0.075;
+	export let strokeColor = '#fff';
 
 	let radius = r;
 	$: {
@@ -36,8 +37,8 @@
 	{#each simulation.nodes() as node}
 		<circle
 			fill='{$zGet(node)}'
-			stroke='#fff'
-			stroke-width='{spacing/2}'
+			stroke='{strokeColor}'
+			stroke-width='{spacing / 2}'
 			cx='{node.x}'
 			cy='{node.y}'
 			r='{radius}'
