@@ -1,10 +1,19 @@
 <script>
 	import { LayerCake, Svg } from 'layercake';
+	import { scaleOrdinal } from 'd3-scale';
+	import { schemeCategory10 } from 'd3-scale-chromatic';
 
 	import ForceDirectedGraph from '../../components/ForceDirectedGraph.svelte';
 
 	import data from '../../data/miserables.json';
 
+	const zKey = 'group';
+
+	const seriesNames = new Set();
+
+	data.nodes.forEach(d => {
+		seriesNames.add(d[zKey]);
+	});
 </script>
 
 <style>
@@ -23,6 +32,10 @@
 <div class="chart-container">
 	<LayerCake
 		data={data}
+		z={zKey}
+		zScale={scaleOrdinal()}
+		zDomain={Array.from(seriesNames)}
+		zRange={schemeCategory10}
 	>
 		<Svg>
 			<ForceDirectedGraph/>

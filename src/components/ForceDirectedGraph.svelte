@@ -8,10 +8,13 @@
 		forceCenter
 	} from 'd3-force';
 
-	const { data, width, height } = getContext('LayerCake');
+	const { data, width, height, zGet } = getContext('LayerCake');
 
 	export let nodeRadius = 5;
-	export let nodeColor = '#000';
+	/* --------------------------------------------
+	 * Set a manual color, otherwise it will default to using the zScale
+	 */
+	export let nodeColor = undefined;
 	export let linkColor = '#999';
 	export let linkOpacity = 0.6;
 	export let nodeStroke = '1';
@@ -60,7 +63,7 @@
     <circle
 			class='node'
 			r={nodeRadius}
-			fill={nodeColor}
+			fill={nodeColor || $zGet(point)}
 			stroke={nodeStroke}
 			strokeColor={nodeStrokeColor}
 			cx='{point.x}'
