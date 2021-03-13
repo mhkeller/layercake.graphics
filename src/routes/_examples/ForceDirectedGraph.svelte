@@ -4,7 +4,6 @@
 	import { schemeCategory10 } from 'd3-scale-chromatic';
 
 	import ForceDirectedGraph from '../../components/ForceDirectedGraph.svelte';
-	import Key from '../../components/Key.svelte';
 
 	import data from '../../data/miserables.json';
 
@@ -43,9 +42,5 @@
 		<Svg>
 			<ForceDirectedGraph/>
 		</Svg>
-
-		<Html pointerEvents={false}>
-			<Key shape='circle' />
-		</Html>
 	</LayerCake>
 </div>

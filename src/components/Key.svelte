@@ -14,7 +14,7 @@
 	const { zDomain, zScale } = getContext('LayerCake');
 
 	function cap (str) {
-		return str.replace(/^\w/, d => d.toUpperCase());
+		return String(str).replace(/^\w/, d => d.toUpperCase());
 	}
 </script>
 
