@@ -46,7 +46,7 @@ export default [
 	{ replPath: '0f7f35ffe2f14a25860772897f7a0b5c?version=3.24.0', title: 'Sankey', slug: 'Sankey', component: Sankey },
 	{ replPath: '4e7a8affd4724d03b33493c85e50471c?version=3.30.0', title: 'Brush', slug: 'Brush', component: Brush },
 	{ replPath: '0eaf387a0a564971865fb6176f959940?version=3.30.0', title: 'Synced brush', slug: 'SyncedBrush', component: SyncedBrush },
-	{ replPath: '9d0e23f494f645b4a9623c46474462f6?version=3.30.0', title: 'Beeswarm', slug: 'Beeswarm', component: Beeswarm },
+	{ replPath: '9d0e23f494f645b4a9623c46474462f6?version=3.30.0', title: 'Beeswarm', slug: 'Beeswarm', component: Beeswarm }
 	// { replPath: '', title: 'Force-directed graph', slug: 'ForceDirectedGraph', component: ForceDirectedGraph },
 ];
 
