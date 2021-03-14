@@ -1,4 +1,5 @@
 <script>
+	// Adapted from here: https://observablehq.com/@d3/beeswarm
 	import { LayerCake, Svg, Html } from 'layercake';
 	import { format } from 'd3-format';
 	import { scaleOrdinal } from 'd3-scale';
