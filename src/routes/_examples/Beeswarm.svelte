@@ -57,6 +57,7 @@
 			<AxisX
 				baseline={true}
 				formatTick={addCommas}
+				tickMarks={true}
 			/>
 			<Beeswarm
 				r={4}

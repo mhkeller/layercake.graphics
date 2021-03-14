@@ -4,6 +4,7 @@
 	const { width, height, xScale, yScale, yRange } = getContext('LayerCake');
 
 	export let gridlines = true;
+	export let tickMarks = false;
 	export let formatTick = d => d;
 	export let baseline = false;
 	export let snapTicks = false;
@@ -39,7 +40,10 @@
 	{#each tickVals as tick, i}
 		<g class='tick tick-{ tick }' transform='translate({$xScale(tick)},{$yRange[0]})'>
 			{#if gridlines !== false}
-				<line y1='{$height * -1}' y2='0' x1='0' x2='0'></line>
+				<line class="gridline" y1='{$height * -1}' y2='0' x1='0' x2='0'></line>
+			{/if}
+			{#if tickMarks === true}
+				<line class="tick-mark" y1='{0}' y2='{6}' x1='0' x2='0'></line>
 			{/if}
 			<text
 				x="{xTick || isBandwidth ? $xScale.bandwidth() / 2 : 0 }"
@@ -70,6 +74,7 @@
 		fill: #666;
 	}
 
+	.tick .tick-mark,
 	.baseline {
 		stroke-dasharray: 0;
 	}
