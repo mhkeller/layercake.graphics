@@ -22,6 +22,7 @@ import Brush from './_examples/Brush.svelte';
 import SyncedBrush from './_examples/SyncedBrush.svelte';
 import Beeswarm from './_examples/Beeswarm.svelte';
 import ForceDirectedGraph from './_examples/ForceDirectedGraph.svelte';
+import ForceLayout from './_examples/ForceLayout.svelte';
 
 export default [
 	{ replPath: 'ad32f9f301484d0cace82272126e9d09?version=3.17.3', title: 'Line + area', slug: 'Line', component: Line },
@@ -47,6 +48,7 @@ export default [
 	{ replPath: '4e7a8affd4724d03b33493c85e50471c?version=3.30.0', title: 'Brush', slug: 'Brush', component: Brush },
 	{ replPath: '0eaf387a0a564971865fb6176f959940?version=3.30.0', title: 'Synced brush', slug: 'SyncedBrush', component: SyncedBrush },
 	{ replPath: '9d0e23f494f645b4a9623c46474462f6?version=3.30.0', title: 'Beeswarm', slug: 'Beeswarm', component: Beeswarm },
-	{ replPath: '', title: 'Force-directed graph', slug: 'ForceDirectedGraph', component: ForceDirectedGraph },
+	// { replPath: '', title: 'Force-directed graph', slug: 'ForceDirectedGraph', component: ForceDirectedGraph },
+	{ replPath: '', title: 'Force layout', slug: 'ForceLayout', component: ForceLayout },
 ];
 
