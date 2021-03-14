@@ -14,7 +14,7 @@
 
 	let radius = r;
 	$: {
-		radius = $width < 400 ? r / 2 : r;
+		radius = $width < 400 ? r / 1.25 : r;
 	}
 
 	$: simulation = forceSimulation(nodes)
