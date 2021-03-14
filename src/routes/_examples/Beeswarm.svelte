@@ -53,7 +53,7 @@
 			<AxisX/>
 			<Beeswarm
 				r={6}
-				spacing={0.5}
+				stokeWidth={0}
 				xStrength={0.95}
 				yStrength={0.075}
 			/>

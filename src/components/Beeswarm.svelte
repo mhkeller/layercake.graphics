@@ -7,9 +7,9 @@
 	const nodes = $data.map((d) => ({ ...d }));
 
 	export let r = 4;
-	export let spacing = 0.5;
 	export let xStrength = 0.95;
 	export let yStrength = 0.075;
+	export let strokeWidth = 1;
 	export let strokeColor = '#fff';
 
 	let radius = r;
@@ -20,7 +20,7 @@
 	$: simulation = forceSimulation(nodes)
 		.force('x', forceX().x(d => $xGet(d)).strength(xStrength))
 		.force('y', forceY().y($height / 2).strength(yStrength))
-		.force('collide', forceCollide(radius + spacing))
+		.force('collide', forceCollide(radius))
 		.stop();
 
 	$: {
@@ -38,7 +38,7 @@
 		<circle
 			fill='{$zGet(node)}'
 			stroke='{strokeColor}'
-			stroke-width='{spacing / 2}'
+			stroke-width='{strokeWidth}'
 			cx='{node.x}'
 			cy='{node.y}'
 			r='{radius}'
