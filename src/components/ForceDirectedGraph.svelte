@@ -4,15 +4,20 @@
 	import {
 		forceSimulation,
 		forceLink,
-		forceCollide,
 		forceManyBody,
 		forceCenter
 	} from 'd3-force';
 
 	const { data, width, height, zGet, x } = getContext('LayerCake');
 
+	/* --------------------------------------------
+	 * Here are some values to play with, but most every force layout
+	 * is going be unique and this component will need to be customized
+	 * See more: https://github.com/d3/d3-force/blob/master/README.md
+	 */
 	export let linkDistance = 30;
 	export let nodeRadius = 5;
+	export let manyBodyStrength = -30;
 	/* --------------------------------------------
 	 * Set a manual color, otherwise it will default to using the zScale
 	 */
@@ -22,33 +27,44 @@
 	export let nodeStroke = '1';
 	export let nodeStrokeColor = '#fff';
 	export let showLinks = true;
+	export let ticks = 150;
 
-	$: links = $data.links.map(d => Object.create(d));
-	$: nodes = $data.nodes.map(d => Object.create(d));
+	let nodes = $data.nodes.slice();
+	let links = $data.links.slice();
 
-	$: simulation = forceSimulation(nodes)
-		.force('link', forceLink(links).id($x).distance(linkDistance))
-		.force('charge', forceManyBody())
+	$: simulation = forceSimulation($data.nodes)
+		.force('link', forceLink($data.links).id($x).distance(linkDistance))
+		.force('charge', forceManyBody().strength(manyBodyStrength))
 		.force('center', forceCenter($width / 2, $height / 2))
-		// .force('collision', forceCollide().radius(function(d) {
-		// 	return d.radius
-		// }))
-		.on('tick', simulationUpdate);
+		// .on('tick', simulationUpdate)
+		.stop();
 
-	// $: {
-	// 	for ( var i = 0,
-	// 		n = Math.ceil(Math.log(simulation.alphaMin()) / Math.log(1 - simulation.alphaDecay()));
-	// 		i < n;
-	// 		++i ) {
-	// 		simulation.tick();
-	// 	}
-	// }
+		// $: {
+		// 	for ( let i = 0; i < ticks; i += 1 ) {
+		// 		requestAnimationFrame(() => {
+		// 			simulation.tick();
+		// 			nodes = [...nodes];
+		// 			links = [...links];
+		// 		});
+		// 	}
+		// }
 
-	function simulationUpdate () {
+	function simulationUpdate (i) {
 		simulation.tick();
 		nodes = [...nodes];
 		links = [...links];
+		if (i >= ticks) {
+			simulation.stop();
+		} else {
+			requestAnimationFrame(() => {
+				simulationUpdate(++i);
+			});
+		}
 	}
+
+	$: if (simulation) {
+		simulationUpdate(0);
+	};
 </script>
 	{#if showLinks === true}
 		{#each links as link}
@@ -65,13 +81,13 @@
 		{/each}
 	{/if}
 
-	{#each simulation.nodes() as point}
+	{#each nodes as point}
     <circle
 			class='node'
 			r={nodeRadius}
 			fill={nodeColor || $zGet(point)}
-			stroke={nodeStroke}
-			strokeColor={nodeStrokeColor}
+			stroke-width={nodeStroke}
+			stroke={nodeStrokeColor}
 			cx='{point.x}'
 			cy='{point.y}'
 		>

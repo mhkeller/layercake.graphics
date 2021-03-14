@@ -40,7 +40,11 @@
 		zRange={schemeCategory10}
 	>
 		<Svg>
-			<ForceDirectedGraph/>
+			<ForceDirectedGraph
+				linkDistance={5}
+				manyBodyStrength={-20}
+				ticks={100}
+			/>
 		</Svg>
 	</LayerCake>
 </div>
