@@ -2,7 +2,7 @@
 	import { LayerCake, Svg, Html } from 'layercake';
 	import { scaleOrdinal, scaleBand } from 'd3-scale';
 
-	import ForceLayout from '../../components/ForceLayout.svelte';
+	import ForceLayout from '../../components/CirclePackForce.svelte';
 
 	import data from '../../data/dots.json';
 

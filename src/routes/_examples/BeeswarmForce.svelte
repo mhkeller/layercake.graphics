@@ -4,7 +4,7 @@
 
 	import Key from '../../components/Key.svelte';
 	import AxisX from '../../components/AxisX.svelte';
-	import Beeswarm from '../../components/Beeswarm.svelte';
+	import Beeswarm from '../../components/BeeswarmForce.svelte';
 
 	// This example loads csv data as json using @rollup/plugin-dsv
 	import data from '../../data/us-senate.csv';
@@ -53,7 +53,7 @@
 			<AxisX/>
 			<Beeswarm
 				r={6}
-				stokeWidth={0}
+				strokeWidth={1}
 				xStrength={0.95}
 				yStrength={0.075}
 			/>
