@@ -70,7 +70,7 @@
 	>
 		<Svg>
 			<ForceLayout
-				manyBodyStrength={1}
+				manyBodyStrength={3}
 				ticks={100}
 				groupBy={JSON.parse(groupBy)}
 				nodeStrokeColor='#000'
