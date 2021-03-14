@@ -1,20 +1,29 @@
 <script>
 	import { LayerCake, Svg, Html } from 'layercake';
-	import { scaleOrdinal } from 'd3-scale';
-	import { schemeCategory10 } from 'd3-scale-chromatic';
+	import { scaleOrdinal, scaleBand } from 'd3-scale';
 
 	import ForceLayout from '../../components/ForceLayout.svelte';
 
-	import data from '../../data/miserables.json';
+	import data from '../../data/dots.json';
 
-	const xKey = 'id';
-	const zKey = 'group';
+	const xKey = 'category';
+	const rKey = 'value';
+	const zKey = 'category';
 
-	const seriesNames = new Set();
+	let groupBy = 'true';
 
-	data.nodes.forEach(d => {
-		seriesNames.add(d[zKey]);
+	const seriesNameSet = new Set();
+	const seriesColors = ['#f0c', '#0cf', '#fc0'];
+
+	data.forEach(d => {
+		seriesNameSet.add(d[zKey]);
 	});
+
+	/* --------------------------------------------
+	 * Convert this to an array so we can use it in our scales
+	 */
+	const seriesNames = [...seriesNameSet];
+
 </script>
 
 <style>
@@ -28,22 +37,43 @@
 		width: 100%;
 		height: 100%;
 	}
+	.input-container {
+		margin-bottom: 7px;
+	}
+	label {
+		cursor: pointer;
+	}
+	input {
+		position: relative;
+		top: -2px;
+		margin-right: 7px;
+	}
 </style>
+
+<div class="input-container">
+	<label><input type="radio" bind:group={groupBy} value="true"/>Group by category</label>
+	<label><input type="radio" bind:group={groupBy} value="false"/>Clump together</label>
+</div>
 
 <div class="chart-container">
 	<LayerCake
 		data={data}
 		x={xKey}
+		r={rKey}
 		z={zKey}
+		xScale={scaleBand()}
+		xDomain={seriesNames}
+		rRange={[3, 12]}
 		zScale={scaleOrdinal()}
-		zDomain={Array.from(seriesNames)}
-		zRange={schemeCategory10}
+		zDomain={seriesNames}
+		zRange={seriesColors}
 	>
 		<Svg>
 			<ForceLayout
-				linkDistance={5}
-				manyBodyStrength={-20}
+				manyBodyStrength={1}
 				ticks={100}
+				groupBy={JSON.parse(groupBy)}
+				nodeStrokeColor='#000'
 			/>
 		</Svg>
 	</LayerCake>

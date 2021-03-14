@@ -1,6 +1,6 @@
 <script>
 	// Based on this example https://observablehq.com/@d3/force-directed-graph
-	import { onMount, getContext } from 'svelte';
+	import { getContext } from 'svelte';
 	import {
 		forceSimulation,
 		forceLink,
@@ -24,13 +24,12 @@
 	export let nodeColor = undefined;
 	export let linkColor = '#999';
 	export let linkOpacity = 0.6;
-	export let nodeStroke = '1';
 	export let nodeStrokeColor = '#fff';
-	export let showLinks = true;
+	export let nodeStrokeWidth = 1;
 	export let ticks = 150;
 
-	let nodes = $data.nodes.slice();
-	let links = $data.links.slice();
+	let nodes = $data.nodes;
+	let links = $data.links;
 
 	$: simulation = forceSimulation($data.nodes)
 		.force('link', forceLink($data.links).id($x).distance(linkDistance))
@@ -66,27 +65,25 @@
 		simulationUpdate(0);
 	};
 </script>
-	{#if showLinks === true}
-		{#each links as link}
-			<g stroke='{linkColor}' stroke-opacity='{linkOpacity}'>
-				<line
-					x1='{link.source.x}'
-					y1='{link.source.y}'
-					x2='{link.target.x}'
-					y2='{link.target.y}'
-				>
-					<title>{$x(link.source)}</title>
-				</line>
-			</g>
-		{/each}
-	{/if}
+	{#each links as link}
+		<g stroke='{linkColor}' stroke-opacity='{linkOpacity}'>
+			<line
+				x1='{link.source.x}'
+				y1='{link.source.y}'
+				x2='{link.target.x}'
+				y2='{link.target.y}'
+			>
+				<title>{$x(link.source)}</title>
+			</line>
+		</g>
+	{/each}
 
 	{#each nodes as point}
     <circle
 			class='node'
 			r={nodeRadius}
 			fill={nodeColor || $zGet(point)}
-			stroke-width={nodeStroke}
+			stroke-width={nodeStrokeWidth}
 			stroke={nodeStrokeColor}
 			cx='{point.x}'
 			cy='{point.y}'
