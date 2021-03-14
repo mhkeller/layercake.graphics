@@ -14,6 +14,7 @@
 
 	let radius = r;
 	$: {
+		// Adjust this as needed for breakpoints
 		radius = $width < 400 ? r / 1.25 : r;
 	}
 

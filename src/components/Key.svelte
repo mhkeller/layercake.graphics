@@ -7,6 +7,11 @@
 	export let shape = 'square';
 
 	/* --------------------------------------------
+	 * Can be "start", "center" or "end"
+	 */
+	export let align = 'start';
+
+	/* --------------------------------------------
 	 * Pass in lookup values
 	 */
 	export let lookup = undefined;
@@ -24,7 +29,7 @@
 
 	function displayName (val) {
 		if (lookup) {
-			return lookup[val];
+			return lookup[val] || val;
 		}
 		return capitalize === true ? cap(val) : val;
 	}
@@ -61,7 +66,7 @@
 	}
 </style>
 
-<div class='key'>
+<div class='key' style="justify-content: {align}">
 	{#each $zDomain as item}
 	<div class='key-item'>
 		<div
