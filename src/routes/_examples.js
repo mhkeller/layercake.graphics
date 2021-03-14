@@ -49,6 +49,6 @@ export default [
 	{ replPath: '0eaf387a0a564971865fb6176f959940?version=3.30.0', title: 'Synced brush', slug: 'SyncedBrush', component: SyncedBrush },
 	{ replPath: '9d0e23f494f645b4a9623c46474462f6?version=3.30.0', title: 'Beeswarm', slug: 'Beeswarm', component: Beeswarm },
 	// { replPath: '', title: 'Force-directed graph', slug: 'ForceDirectedGraph', component: ForceDirectedGraph },
-	{ replPath: '', title: 'Force layout', slug: 'ForceLayout', component: ForceLayout },
+	{ replPath: '47ad2361c651481294a4955234cf6213?version=3.35.0', title: 'Force layout', slug: 'ForceLayout', component: ForceLayout },
 ];
 
