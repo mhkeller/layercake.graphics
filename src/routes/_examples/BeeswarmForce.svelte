@@ -11,6 +11,7 @@
 
 	const xKey = 'date_of_birth';
 	const zKey = 'gender';
+	const titleKey = 'name';
 
 	const seriesNames = new Set();
 	const seriesColors = ['#fc0', '#000'];
@@ -19,6 +20,7 @@
 		seriesNames.add(d[zKey]);
 
 		return {
+			[titleKey]: d[titleKey],
 			[zKey]: d[zKey],
 			[xKey]: +d[xKey].split('-')[0]
 		}
@@ -47,6 +49,9 @@
 		zDomain={Array.from(seriesNames)}
 		zRange={seriesColors}
 		data={dataTransformed}
+		custom={{
+			getTitle: d => d[titleKey]
+		}}
 	>
 
 		<Svg>

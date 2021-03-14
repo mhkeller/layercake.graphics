@@ -2,7 +2,7 @@
 	import { getContext } from 'svelte';
 	import { forceSimulation, forceX, forceY, forceCollide } from 'd3-force';
 
-	const { data, xGet, width, height, zGet } = getContext('LayerCake');
+	const { data, xGet, width, height, zGet, custom } = getContext('LayerCake');
 
 	const nodes = $data.map((d) => ({ ...d }));
 
@@ -43,6 +43,8 @@
 			cx='{node.x}'
 			cy='{node.y}'
 			r='{radius}'
-			/>
+		>
+			<title>{$custom.getTitle(node)}</title>
+		</circle>
 	{/each}
 </g>
