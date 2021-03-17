@@ -13,6 +13,8 @@
 	const zKey = 'gender';
 	const titleKey = 'name';
 
+	const r = 6;
+
 	const seriesNames = new Set();
 	const seriesColors = ['#fc0', '#000'];
 
@@ -52,12 +54,13 @@
 		custom={{
 			getTitle: d => d[titleKey]
 		}}
+		let:width
 	>
 
 		<Svg>
 			<AxisX/>
 			<Beeswarm
-				r={6}
+				r={width < 400 ? r / 1.25 : r}
 				strokeWidth={1}
 				xStrength={0.95}
 				yStrength={0.075}

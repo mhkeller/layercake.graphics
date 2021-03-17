@@ -1,21 +1,14 @@
 <script>
 	import { getContext } from 'svelte';
 
-	const { data, xGet, zGet, padding, width, height, config, custom } = getContext('LayerCake');
+	const { data, xGet, zGet, padding, height, config, custom } = getContext('LayerCake');
 
 	export let r = 3;
 	export let strokeWidth = 0;
 	export let strokeColor = '#fff';
 	export let spacing = 1.5;
 
-	let radius = r;
-	$: {
-		// Adjust this as needed for breakpoints
-		radius = $width < 400 ? r / 1.6 : r;
-	}
-
-	$: circles = dodge($data, { rds: radius * 2 + spacing + strokeWidth, x: $xGet });
-
+	$: circles = dodge($data, { rds: r * 2 + spacing + strokeWidth, x: $xGet });
 
 	function dodge(data, { rds = 1, x = d => d } = {}) {
 	  const radius2 = rds ** 2;
@@ -71,9 +64,9 @@
 				border-color:{strokeColor};
 				border-width:{strokeWidth};
 				left:{d.x}px;
-				top:{$height - $padding.bottom - radius - spacing - strokeWidth / 2 - d.y}px;
-				width:{radius * 2}px;
-				height:{radius * 2}px;
+				top:{$height - $padding.bottom - r - spacing - strokeWidth / 2 - d.y}px;
+				width:{r * 2}px;
+				height:{r * 2}px;
 			"
 		>
 			<title>{$custom.getTitle(d)}</title>

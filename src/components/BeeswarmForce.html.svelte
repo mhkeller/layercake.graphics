@@ -2,7 +2,7 @@
 	import { getContext } from 'svelte';
 	import { forceSimulation, forceX, forceY, forceCollide } from 'd3-force';
 
-	const { data, xGet, width, height, zGet, custom } = getContext('LayerCake');
+	const { data, xGet, height, zGet, custom } = getContext('LayerCake');
 
 	const nodes = $data.map((d) => ({ ...d }));
 
@@ -12,16 +12,10 @@
 	export let yStrength = 0.075;
 	export let strokeColor = '#fff';
 
-	let radius = r;
-	$: {
-		// Adjust this as needed for breakpoints
-		radius = $width < 400 ? r / 1.25 : r;
-	}
-
 	$: simulation = forceSimulation(nodes)
 		.force('x', forceX().x(d => $xGet(d)).strength(xStrength))
 		.force('y', forceY().y($height / 2).strength(yStrength))
-		.force('collide', forceCollide(radius + strokeWidth / 2))
+		.force('collide', forceCollide(r + strokeWidth / 2))
 		.stop();
 
 	$: {
@@ -41,8 +35,8 @@
 			style='
 				left:{node.x}px;
 				top: {node.y}px;
-				width: {radius * 2}px;
-				height: {radius * 2}px;
+				width: {r * 2}px;
+				height: {r * 2}px;
 				background: {$zGet(node)};
 				border-width: {strokeWidth}px;
 				border-color: {strokeColor};

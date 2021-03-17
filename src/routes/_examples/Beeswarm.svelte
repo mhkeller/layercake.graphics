@@ -15,6 +15,8 @@
 	const zKey = 'Origin';
 	const titleKey = 'Name';
 
+	const r = 4;
+
 	const seriesNames = new Set();
 	const seriesColors = ['#ccc', '#fc0', '#000'];
 
@@ -52,6 +54,7 @@
 		zRange={seriesColors}
 		data={dataTransformed}
 		custom={{ getTitle: d => d.data.title }}
+		let:width
 	>
 
 		<Svg>
@@ -61,7 +64,7 @@
 				tickMarks={true}
 			/>
 			<Beeswarm
-				r={4}
+				r={width < 400 ? r / 1.6 : r}
 				spacing={1}
 			/>
 		</Svg>
