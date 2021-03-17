@@ -24,6 +24,8 @@
 	 */
 	const seriesNames = [...seriesNameSet];
 
+	let manyBodyStrength = 3;
+	let xStrength = 0.1
 </script>
 
 <style>
@@ -36,9 +38,6 @@
 	.chart-container {
 		width: 100%;
 		height: 100%;
-	}
-	.input-container {
-		margin-bottom: 7px;
 	}
 	label {
 		cursor: pointer;
@@ -70,8 +69,8 @@
 	>
 		<Svg>
 			<ForceLayout
-				manyBodyStrength={4}
-				ticks={150}
+				{manyBodyStrength}
+				{xStrength}
 				groupBy={JSON.parse(groupBy)}
 				nodeStrokeColor='#000'
 			/>

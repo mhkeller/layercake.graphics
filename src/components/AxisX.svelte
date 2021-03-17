@@ -1,7 +1,7 @@
 <script>
 	import { getContext } from 'svelte';
 
-	const { width, height, xScale, yScale, yRange } = getContext('LayerCake');
+	const { width, height, xScale, yRange } = getContext('LayerCake');
 
 	export let gridlines = true;
 	export let tickMarks = false;

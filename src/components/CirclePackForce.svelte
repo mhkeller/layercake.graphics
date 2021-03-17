@@ -8,7 +8,7 @@
 		forceCenter,
 	} from 'd3-force';
 
-	const { data, width, height, xScale, xGet, rGet, zGet, custom } = getContext('LayerCake');
+	const { data, width, height, xScale, xGet, rGet, zGet } = getContext('LayerCake');
 
 	/* --------------------------------------------
 	 * Here are some values to play with, but most every force layout
@@ -16,48 +16,46 @@
 	 * See more: https://github.com/d3/d3-force/blob/master/README.md
 	 */
 	export let manyBodyStrength = 5;
+	export let xStrength = 0.1;
 	/* --------------------------------------------
 	 * Set a manual color, otherwise it will default to using the zScale
 	 */
 	export let nodeColor = undefined;
 	export let nodeStrokeWidth = 1;
 	export let nodeStrokeColor = '#fff';
-	export let ticks = 150;
 	export let groupBy = true;
 
 	/* --------------------------------------------
 	 * Make a copy because the simulation will alter the objects
 	 */
-	const copiedData = $data.map((d) => ({ ...d }));
+	const initialNodes = $data.map((d) => ({ ...d }));
 
-	$: nodes = copiedData;
+	const simulation = forceSimulation(initialNodes)
 
-	$: simulation = forceSimulation(copiedData) // if you pass nodes in here, it leads to a very expensive loop
-		.force('charge', forceManyBody().strength(manyBodyStrength))
-		.force('x', forceX().x(d => {
-			return groupBy === true ? $xGet(d) + $xScale.bandwidth() / 2 : $width / 2;
-		}))
-		.force('collision', forceCollide().radius(d => {
-			return $rGet(d) + nodeStrokeWidth / 2; // Divide this by two because an svg stroke is drawn halfway out
-		}))
-		.force('center', forceCenter($width / 2, $height / 2))
-		.stop();
+	let nodes = [];
 
-	function simulationUpdate (i) {
-		simulation.tick();
-		nodes = [...nodes];
-		if (i >= ticks) {
-			simulation.stop();
-		} else {
-			requestAnimationFrame(() => {
-				simulationUpdate(++i);
-			});
-		}
+	simulation.on("tick", () => {
+		nodes = simulation.nodes()
+	})
+
+	/* ----------------------------------------------
+	 * When variables change, set forces and restart the simulation
+	 */
+	$: {
+		simulation
+			.force('x', forceX().x(d => {
+				return groupBy === true ? $xGet(d) + $xScale.bandwidth() / 2 : $width / 2;
+			}).strength(xStrength))
+			.force('center', forceCenter($width / 2, $height / 2))
+			.force('charge', forceManyBody().strength(manyBodyStrength))
+			.force('collision', forceCollide().radius(d => {
+				return $rGet(d) + nodeStrokeWidth / 2; // Divide this by two because an svg stroke is drawn halfway out
+			}))
+			.force('center', forceCenter($width / 2, $height / 2))
+			.alpha(1)
+			.restart()
 	}
 
-	$: if (simulation) {
-		simulationUpdate(0);
-	};
 </script>
 	{#each nodes as point}
     <circle
