@@ -7,7 +7,7 @@
 </script>
 
 <script>
-	import Nav from '../components/Nav.svelte';
+	import Nav from '../site-components/Nav.svelte';
 
 	export let segment;
 	export let sections;

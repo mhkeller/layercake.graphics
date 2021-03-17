@@ -8,7 +8,7 @@
 
 <script>
 	import { afterUpdate } from 'svelte';
-	import GuideContents from '../../components/GuideContents.svelte';
+	import GuideContents from '../../site-components/GuideContents.svelte';
 
 	export let sections;
 

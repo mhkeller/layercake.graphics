@@ -1,7 +1,7 @@
 <script>
 	import { goto, stores } from '@sapper/app';
 
-	import GuideContents from './GuideContents.svelte';
+	import GuideContents from '../site-components/GuideContents.svelte';
 	import examples from '../routes/_examples.js';
 	import examplesSsr from '../routes/_examples_ssr.js';
 
