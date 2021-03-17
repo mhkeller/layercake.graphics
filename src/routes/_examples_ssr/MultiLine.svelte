@@ -83,6 +83,7 @@
 				ticks={data.map(d => d[xKey]).sort((a, b) => a - b)}
 				formatTick={formatTickX}
 				snapTicks={true}
+				tickMarks={true}
 			/>
 			<AxisY
 				baseline={true}

@@ -70,6 +70,7 @@
 		<Html>
 			<AxisX
 				formatTick={formatTickX}
+				tickMarks={true}
 			/>
 			<AxisY
 				baseline={true}

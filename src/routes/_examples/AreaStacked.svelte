@@ -68,6 +68,7 @@
 		<Svg>
 			<AxisX
 				formatTick={formatTickX}
+				tickMarks={true}
 			/>
 			<AxisY
 				formatTick={formatTickY}

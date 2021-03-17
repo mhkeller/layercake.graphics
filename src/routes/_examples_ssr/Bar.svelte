@@ -31,7 +31,7 @@
 	<LayerCake
 		ssr={true}
 		percentRange={true}
-		padding={{ top: 0, right: 20, bottom: 20, left: 30 }}
+		padding={{ top: 0, right: 20, bottom: 20, left: 35 }}
 		x='value'
 		y='year'
 		yScale={scaleBand().paddingInner([0.05]).round(true)}
