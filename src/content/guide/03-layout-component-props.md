@@ -25,6 +25,46 @@ The WebGL Component accepts:
 
 * [contextAttributes](guide#contextattributes-1) `Object`
 
+Each layout component also export an `element` prop that you can bind to and represents the HTML element that wraps the layout component. These are also available as slot props.
+
+* In the `Html` component, `element` equals the `<div>` tag.
+* In the `Svg` component, `element` equals the `<svg>` tag.
+* In the `ScaledSvg` component, `element` equals the `<svg>` tag.
+* In the `Canvas` component, `element` equals the `<canvas>` tag.
+* In the `WebGL` component, `element` equals the `<canvas>` tag.
+
+The `Canvas` and the `WebGL` components also export a `context` variable that you can bind to and is also available as a slot prop.
+
+* In the `Canvas` component, `context` equals `element.getContext('2d')`.
+* In the `WebGL` component, `context` equals `element.getContext('webgl')`.
+
+```html
+<script>
+ let svgElement;
+ let canvasElement;
+ let canvasContext
+</script>
+
+<LayerCake ...>
+  <Svg
+    bind:element={svgElement}
+    let:element
+  >
+    {console.log(svgElement === element)} 
+  </Svg>
+  
+  <Canvas
+    bind:element={canvasElement}
+    bind:context={canvasContext}
+    let:element
+    let:context
+  >
+    {console.log(canvasElement === element)} 
+    {console.log(canvasContext === context)} 
+  </Canvas>
+</LayerCake>
+```
+
 ### zIndex `Number|String`
 
 This lets you fine-tune your layering and is useful if you want your layers to build in a certain order but have a different appearance than their DOM order.

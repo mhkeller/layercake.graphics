@@ -12,6 +12,21 @@ These are the props you can set on the `LayerCake` component itself. You set the
 </LayerCake>
 ```
 
+The component also exports an `element` prop that represents the main wrapper, in case you need to access it for some reason. It also exposes this as a slot prop.
+
+```html
+<script>
+  let mainElement;
+</script>
+
+<LayerCake
+  bind:element={mainElement}
+  let:element
+>
+  {console.log(mainElement === element)}
+</LayerCake>
+```
+
 ### data `Array`
 
 A list of data items. If this is not a flat data array of objects, you'll also need to set [flatData](/guide#flatdata).
