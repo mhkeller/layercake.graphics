@@ -28,3 +28,5 @@ For example:
   import Svg from './layercake/src/layouts/Svg.svelte';
 	// etc...
 </script>
+
+> Copying Layer Cake's layout components into your library is actually a great way to add any additional customizations or functionality while maintaining compatibility with the rest of the library's API. You can use any of the built-in layout components as a starting point for something more complex, if need be.
