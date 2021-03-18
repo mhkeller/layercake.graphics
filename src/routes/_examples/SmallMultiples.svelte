@@ -37,8 +37,6 @@
 		cursor: pointer;
 	}
 	input {
-		position: relative;
-		top: -2px;
 		margin-right: 7px;
 	}
 	/*
