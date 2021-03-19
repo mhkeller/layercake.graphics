@@ -148,7 +148,7 @@ console.log(extents);
 
 ### uniques(data: `Array`[, accessor: `String|Function`, transform: `Boolean`])
 
-A function to get the unique values from a list. If **accessor** is specified, the uniqueness will be compared using that and, by default, the values in the returned list of unique values will be values returned by the accessor. Accessor can also be the string name of the key. Pass `false` to the **transform** argument if you want to return the original elements, which will be the first one that appears for every unique value.
+A function to get the unique values from a list. If **accessor** is specified, the uniqueness will be compared using that and, by default, the values in the returned list of unique values will be values returned by the accessor. Accessor can also be the string name of the key. Pass `false` to the **transform** argument if you want to return the original elements, which will be the first one that appears for every unique value. The default for **transform** is `true`.
 
 This is different from Underscore's [uniq](https://underscorejs.org/#uniq) because that function doesn't return the transformed value.
 

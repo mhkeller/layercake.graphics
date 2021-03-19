@@ -107,7 +107,7 @@ export function get(req, res, next) {
 		.map(d => {
 			return {
 				title: d.replace('../', ''),
-				contents: cleanContents(fs.readFileSync(d.replace('../', 'src/'), 'utf-8'))
+				contents: cleanContents(fs.readFileSync(d.replace('./../', 'src/'), 'utf-8'))
 			};
 		});
 

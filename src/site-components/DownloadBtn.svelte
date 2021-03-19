@@ -1,5 +1,6 @@
 <script>
 	import { toAuto } from 'do-not-zip';
+	import { uniques } from 'layercake';
 
 	import downloadBlob from '../modules/downloadBlob.js';
 
@@ -65,7 +66,8 @@
 			path: `src/App.svelte`,
 			data: data.main.contents
 		});
-		downloadBlob(toAuto(files.filter(Boolean)), `layercake-${ssr ? 'ssr-' : ''}${slug}.zip`);
+		const filteredFiles = uniques(files.filter(Boolean), 'path', false);
+		downloadBlob(toAuto(filteredFiles), `layercake-${ssr ? 'ssr-' : ''}${slug}.zip`);
 		downloading = false;
 	}
 </script>
