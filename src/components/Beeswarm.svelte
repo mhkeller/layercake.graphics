@@ -1,7 +1,7 @@
 <script>
 	import { getContext } from 'svelte';
 
-	const { data, xGet, zGet, padding, height, config, custom } = getContext('LayerCake');
+	const { data, xGet, zGet, height, config, custom } = getContext('LayerCake');
 
 	export let r = 3;
 	export let strokeWidth = 0;
@@ -62,7 +62,7 @@
 			stroke='{strokeColor}'
 			stroke-width='{strokeWidth}'
 			cx='{d.x}'
-			cy='{$height - $padding.bottom - r - spacing - strokeWidth / 2 - d.y}'
+			cy='{$height - r - spacing - strokeWidth / 2 - d.y}'
 			r='{r}'
 		>
 			<title>{$custom.getTitle(d)}</title>

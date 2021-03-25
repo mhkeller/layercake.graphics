@@ -45,6 +45,7 @@
 
 <div class='chart-container'>
 	<LayerCake
+		padding={{bottom: 15}}
 		x={xKey}
 		z={zKey}
 		zScale={scaleOrdinal()}
