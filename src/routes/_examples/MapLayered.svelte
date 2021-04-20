@@ -31,11 +31,11 @@
 	const labelLookup = new Map();
 
 	stateData.forEach(d => {
-		dataLookup.set(d[joinKey], d)
+		dataLookup.set(d[joinKey], d);
 	});
 
 	stateLabels.forEach(d => {
-		labelLookup.set(d[joinKey], d)
+		labelLookup.set(d[joinKey], d);
 	});
 
 	geojson.features.forEach(d => {

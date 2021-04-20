@@ -5,14 +5,32 @@
 	import { scaleQuantize } from 'd3-scale';
 	import { format } from 'd3-format';
 
-	import Map from '../../components/Map.svg.svelte';
+	import MapSvg from '../../components/Map.svg.svelte';
 	import Tooltip from '../../components/Tooltip.svelte';
 
 	// This example loads json data as json using @rollup/plugin-json
 	import usStates from '../../data/us-states.topojson.json';
+	import stateData from '../../data/us-states-data.json';
+
+	const colorKey = 'myValue';
+	/* --------------------------------------------
+	 * Create lookups to more easily join our data
+	 */
+	const joinKey = 'name';
+	const dataLookup = new Map();
 
 	const geojson = feature(usStates, usStates.objects.collection);
 	const projection = geoAlbersUsa();
+
+	stateData.forEach(d => {
+		dataLookup.set(d[joinKey], d);
+	});
+
+	geojson.features.forEach(d => {
+		// This will overwrite any existing keys on d.properties
+		// so watch out for any name collision
+		Object.assign(d.properties, dataLookup.get(d.properties[joinKey]));
+	});
 
 	let evt;
 	let hideTooltip = true;
@@ -23,8 +41,6 @@
 	const colors = ['#ffdecc', '#ffc09c', '#ffa06b', '#ff7a33'];
 
 	const addCommas = format(',');
-
-
 </script>
 
 <style>
@@ -43,13 +59,13 @@
 <div class="chart-container">
 	<LayerCake
 		data={geojson}
-		z='FOO'
+		z={colorKey}
 		zScale={scaleQuantize()}
 		zRange={colors}
 		{flatData}
 	>
 		<Svg>
-			<Map
+			<MapSvg
 				{projection}
 				on:mousemove={event => evt = hideTooltip= event}
 				on:mouseout={() => hideTooltip = true}
