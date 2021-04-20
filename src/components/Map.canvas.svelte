@@ -25,7 +25,7 @@
 	 */
 	export let features = $data;
 
-	$: projectionFn = projection()
+	$: projectionFn = projection
 		.fitSize([$width, $height], $data);
 
 	$: geoPathFn = geoPath(projectionFn);

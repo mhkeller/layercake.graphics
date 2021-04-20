@@ -22,6 +22,8 @@
 	const colors = ['#ffdecc', '#ffc09c', '#ffa06b', '#ff7a33'];
 
 	const addCommas = format(',');
+
+	const projection = geoAlbersUsa();
 </script>
 
 <style>
@@ -47,7 +49,7 @@
 	>
 		<Svg>
 			<Map
-				projection={geoAlbersUsa}
+				{projection}
 				on:mousemove={event => evt = hideTooltip= event}
 				on:mouseout={() => hideTooltip = true}
 			/>

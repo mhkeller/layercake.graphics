@@ -11,7 +11,7 @@
 
 	export let features = $data.features;
 
-	$: projectionFn = projection()
+	$: projectionFn = projection
 		.fitSize([$width, $height], $data);
 </script>
 

@@ -44,12 +44,12 @@
 		Object.assign(d.properties, labelLookup.get(d.properties[joinKey]));
 	});
 
-	console.log(geojson.features)
-
 	// Create a flat array of objects that LayerCake can use to measure
 	// extents for the color scale
 	const flatData = geojson.features.map(d => d.properties);
 	const colors = ['#ffdecc', '#ffc09c', '#ffa06b', '#ff7a33'];
+
+	const projection = geoAlbersUsa();
 </script>
 
 <style>
@@ -79,13 +79,13 @@
 	>
 		<Canvas>
 			<MapCanvas
-				projection={geoAlbersUsa}
+				{projection}
 			/>
 		</Canvas>
 
 		<Svg>
 			<MapSvg
-				projection={geoAlbersUsa}
+				{projection}
 				features={geojson.features.slice(40, 50)}
 			/>
 		</Svg>
@@ -94,7 +94,7 @@
 			pointerEvents={false}
 		>
 			<MapLabels
-				projection={geoAlbersUsa}
+				{projection}
 				features={[...geojson.features.slice(0, 50), geojson.features[0]]}
 			/>
 		</Html>
