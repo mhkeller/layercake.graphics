@@ -16,7 +16,6 @@
 
 <g class="map-labels">
 {#each features as feature}
-{console.log(feature.properties, $custom.getLabelCoordinates(feature))}
 	<text
 		class="map-label"
 		x="{projection($custom.getLabelCoordinates(feature))[0]}"
