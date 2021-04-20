@@ -12,6 +12,7 @@
 	import usStates from '../../data/us-states.topojson.json';
 
 	const geojson = feature(usStates, usStates.objects.collection);
+	const projection = geoAlbersUsa();
 
 	let evt;
 	let hideTooltip = true;
@@ -23,7 +24,7 @@
 
 	const addCommas = format(',');
 
-	const projection = geoAlbersUsa();
+
 </script>
 
 <style>

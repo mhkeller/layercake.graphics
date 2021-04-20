@@ -21,6 +21,7 @@
 	const labelNameKey = 'abbr';
 
 	const geojson = feature(usStates, usStates.objects.collection);
+	const projection = geoAlbersUsa();
 
 	/* --------------------------------------------
 	 * Create lookups to more easily join our data
@@ -48,8 +49,6 @@
 	// extents for the color scale
 	const flatData = geojson.features.map(d => d.properties);
 	const colors = ['#ffdecc', '#ffc09c', '#ffa06b', '#ff7a33'];
-
-	const projection = geoAlbersUsa();
 </script>
 
 <style>

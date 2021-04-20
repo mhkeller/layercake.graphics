@@ -13,6 +13,7 @@
 
 	const geojson = feature(usStates, usStates.objects.collection);
 	const aspectRatio = 2.63;
+	const projection = geoAlbersUsa();
 
 	// Create a flat array of objects that LayerCake can use to measure
 	// extents for the color scale
@@ -49,7 +50,7 @@
 		>
 			<Map
 				fixedAspectRatio={aspectRatio}
-				projection={geoAlbersUsa}
+				{projection}
 			/>
 		</ScaledSvg>
 	</LayerCake>
