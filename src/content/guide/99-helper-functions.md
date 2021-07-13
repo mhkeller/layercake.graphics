@@ -106,17 +106,17 @@ Such as in the [Scatter canvas](/example/Scatter) example:
 </script>
 ```
 
-### calcExtents(flatData: `Array`, fields: `Array`)
+### calcExtents(flatData: `Array`, fields: `Object`)
 
-Calculate the extents of any of the keys specified in **fields**, which is an array of objects with `field` and `accessor` keys, representing the field name (x, y, r) and an accessor function.
+Calculate the extents of any of the keys specified in **fields**, which is an object whose keys represent the name of the dimension (`x`, `y`, `z` or `r`) and whose values are an accessor function.
 
 For example, calculating the extents for the x and y fields, which are in the data as `myX` and `myY` would look like this:
 
 ```js
-const extents = calcExtents(flatData, [
-  {field: 'x', accessor: d => d.myX },
-  {field: 'y', accessor: d => d.myY }
-]);
+const extents = calcExtents(flatData, {
+  x: d => d.myX,
+  y: d => d.myY
+});
 
 console.log(extents);
 /*
@@ -132,11 +132,11 @@ Returns an object whose keys are the field names specified as the first item in 
 You can also return an array if you have an object with keys where each one is more logically associated with the min or the max like this:
 
 ```js
-const timeData = [{start: 0, end: 1}, {start: -10000, end: 0}];
+const timeData = [{ start: 0, end: 1 }, { start: -10000, end: 0 }];
 
-const extents = calcExtents(timeData, [
-  { field: 'y', accessor: d => [d.start, d.end] }
-]);
+const extents = calcExtents(timeData, {
+  y: d => [d.start, d.end]
+});
 
 console.log(extents);
 /*

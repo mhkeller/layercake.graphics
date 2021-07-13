@@ -4,17 +4,17 @@ title: Computed context values
 
 In addition to the values you set on the LayerCake component, additional properties are computed and exposed on the context.
 
-### activeGetters `Array`
+### activeGetters `Object`
 
-A list containing an object for each key that is set. This used internally but it's exposed here in case it's useful.
+An object that has a key for each dimension of data you have provided an accessor key for and a value that is the accessor function. This used internally but it's exposed here in case it's useful.
 
 ```js
-[
-  { field: 'x', accessor: '<function>' },
-  { field: 'y', accessor: '<function>' },
-  { field: 'z', accessor: '<function>' },
-  { field: 'r', accessor: '<function>' }
-]
+{
+  x: '<function>',
+  y: '<function>',
+  z: '<function>',
+  r: '<function>
+}
 ```
 
 ### aspectRatio `Number`
