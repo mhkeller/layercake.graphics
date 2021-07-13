@@ -7,10 +7,10 @@
 	/* --------------------------------------------
 	 * Grab the extents of the full dataset
 	 */
-	const extentGetters = [
-		{ field: 'x', accessor: d => d.x },
-		{ field: 'y', accessor: d => d.y }
-	];
+	const extentGetters = {
+		x: d => d.x,
+		y: d => d.y
+	};
 
 	const fullExtents = calcExtents(flatten(pointSeries), extentGetters);
 
