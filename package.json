@@ -2,6 +2,7 @@
   "name": "layercake.graphics",
   "description": "layercake.graphics",
   "version": "0.3.0",
+  "license": "MIT",
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",
