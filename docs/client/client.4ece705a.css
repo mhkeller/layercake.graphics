@@ -22,6 +22,7 @@ svg.svelte-6sm8ei{position:absolute;width:100%;height:100%;overflow:visible}svg.
 .bg.svelte-19xh5jy{position:absolute;top:0;right:0;bottom:0;left:0}
 .tooltip.svelte-15whgyn{position:absolute;font-size:13px;pointer-events:none;border:1px solid #ccc;background:rgba(255, 255, 255, 0.85);transform:translate(-50%, -100%);padding:5px;z-index:15;pointer-events:none}.line.svelte-15whgyn{position:absolute;top:0;bottom:0;width:1px;border-left:1px dotted #666;pointer-events:none}.tooltip.svelte-15whgyn,.line.svelte-15whgyn{transition:left 250ms ease-out, top 250ms ease-out}.title.svelte-15whgyn{font-weight:bold}.key.svelte-15whgyn{color:#999}
 .chart-container.svelte-xrhe6m{width:100%;height:100%}
+.map-label.svelte-owygw9{position:absolute;text-align:center;font-size:10px;color:#999;transform:translate(-50%, -50%)}
 .chart-container.svelte-xrhe6m{width:100%;height:100%}
 .chart-container.svelte-xrhe6m{width:100%;height:100%}
 .chart-container.svelte-xrhe6m{width:100%;height:100%}
