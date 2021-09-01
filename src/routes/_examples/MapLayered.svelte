@@ -92,11 +92,10 @@
 		<Html
 			pointerEvents={false}
 		>
-		<!-- WORK IN PROGRESS -->
-			<!-- <MapLabels
+			<MapLabels
 				{projection}
 				features={[...geojson.features.slice(0, 50), geojson.features[0]]}
-			/> -->
+			/>
 		</Html>
 	</LayerCake>
 </div>
