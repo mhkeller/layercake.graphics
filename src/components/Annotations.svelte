@@ -1,6 +1,4 @@
 <script>
-	import { setContext, onMount } from 'svelte';
-
 	const vals = ['top', 'right', 'bottom', 'left'];
 
 	export let annotations = [];
