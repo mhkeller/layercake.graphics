@@ -125,9 +125,7 @@ The ScaledSvg component has two custom props: `fixedAspectRatio` and `viewBox`. 
     ssr={true}
     percentRange={true}
   >
-    <ScaledSvg
-      fixedAspectRatio={16/9} <!-- Optional fixed aspect ratio -->
-    >
+    <ScaledSvg fixedAspectRatio={16/9}> <!-- Optional fixed aspect ratio -->
     </ScaledSvg>
   </LayerCake>
 </div>
