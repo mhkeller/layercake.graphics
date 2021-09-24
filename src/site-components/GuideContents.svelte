@@ -41,8 +41,8 @@
 		font-weight: 700;
 		color: #333;
 		font-size: 1.2rem;
-		margin: 0 0 0.15em 0;
-		line-height: 1.5rem;
+		margin: 0 0 0.25em 0;
+		line-height: 1.25em;
 	}
 
 	.subsection {
@@ -52,7 +52,8 @@
 		font-size: 1em;
 		margin: 0;
 		padding-top: 0.075em;
-		padding-bottom: 0.075em;
+		padding-bottom: 0.5em;
+		line-height: 1em;
 	}
 
 	.section.active, .subsection.active {

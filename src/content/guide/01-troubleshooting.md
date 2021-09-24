@@ -10,13 +10,11 @@ Inspect the DOM tree with your browser's dev tools and look at what width and he
 
 Also take a look in the console for any warnings – LayerCake should warn you if any of the dimensions are zero or negative.
 
-### The chart doesn't show up inside of svelte-scroller
+### The chart is a very small square
 
-There is [an open issue](https://github.com/sveltejs/svelte-scroller/issues/13) on svelte-scroller about that library adding a hardcoded width of `0` to the background container. Try setting more of a manual width on your wrapper div so that it isn't dependent on what that library is doing.
+This is likely due to some other JavaScript error on the page. A small rectangle of a chart, probably 100x100 means that the server-side rendering was able to bake elements onto the page, but something short-circuited the JavaScript. Check for other console errors that halted the JavaScript process.
 
 ### The library isn't building properly
-
-Build tools are confusing and seem to be [constantly in flux](https://github.com/mhkeller/layercake/issues/41)! If you run into issues, there's a workaround.
 
 Layer Cake is *almost entirely* a basic Svelte component. The exception is the [index.js](https://github.com/mhkeller/layercake/blob/bc13c6c38d54abc16d20ef37878fa707bf48a3bf/src/index.js) file, which is an esm module. This file, though, is non-essential to how the library works and is just a pointer for the rest of the library's imports. If you copy Layer Cake's source into your project directly and import the individual components, it should build just like any other Svelte component in your project.
 
