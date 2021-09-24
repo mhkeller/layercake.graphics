@@ -66,7 +66,7 @@ This lets you fine-tune your layering and is useful if you want your layers to b
 ```html
 <LayerCake ...>
   <Svg
-    zIndex=2
+    zIndex={2}
   >
   </Svg>
 </LayerCake>
