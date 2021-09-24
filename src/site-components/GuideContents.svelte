@@ -52,8 +52,8 @@
 		font-size: 1em;
 		margin: 0;
 		padding-top: 0.075em;
-		padding-bottom: 0.5em;
-		line-height: 1em;
+		padding-bottom: 0.4em;
+		line-height: 1.25em;
 	}
 
 	.section.active, .subsection.active {
