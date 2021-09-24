@@ -2,7 +2,15 @@
 title: Layout components
 ---
 
-Here are examples using the four layout components: HTML, Svg, ScaledSvg, Canvas and WebGL containers.
+Layer Cake comes with layout components that provide HTML, Svg, ScaledSvg, Canvas and WebGL containers for your custom components.
+
+You must wrap your chart components in these layout components for them to appear properly scaled. For Html and Svg components, they create a `<div>` and `<g>`, respectively.
+
+The Canvas and WebGL layout components also create canvas contexts that are then available on the LayerCake context object.
+
+Each of these components also takes props. See the next section [Layout component props](/guide#layout-component-props) for more info.
+
+Here are the four layout components: HTML, Svg, ScaledSvg, Canvas and WebGL containers.
 
 ### Html
 
@@ -35,6 +43,8 @@ Here are examples using the four layout components: HTML, Svg, ScaledSvg, Canvas
 ```
 
 ### Svg
+
+The SVG layout component also accepts a `viewBox` prop. See the [Layout component props](/guide#layout-component-props) section for more information.
 
 ```html
 <!-- { filename: 'App.svelte' } -->
@@ -70,13 +80,14 @@ This component also has a [named slot](https://svelte.dev/docs#slot_name) for ad
   <LayerCake ...>
     <Svg>
 
+      <!-- Add your defs in a named slot here -->
       <svelte:fragment slot="defs">
         <linearGradient id="myGradient" gradientTransform="rotate(90)">
           <stop offset="20%" stop-color="gold" />
           <stop offset="90%" stop-color="red" />
         </linearGradient>
       </svelte:fragment>
-      
+
     </Svg>
   </LayerCake>
 </div>
@@ -86,7 +97,9 @@ This component also has a [named slot](https://svelte.dev/docs#slot_name) for ad
 
 Use this when you want to render SVGs server side, using Rich Harris's [Pancake technique](https://dev.to/richharris/a-new-technique-for-making-responsive-javascript-free-charts-gmp).
 
-It's often used in conjunction with props `ssr={true}` and `percentRange={true}`.
+It's often used in conjunction with props `ssr={true}` and `percentRange={true}`. 
+
+The ScaledSvg component has two custom props: `fixedAspectRatio` and `viewBox`. See the [Layout component props](/guide#layout-component-props) section for more information.
 
 ```html
 <!-- { filename: 'App.svelte' } -->
@@ -107,7 +120,7 @@ It's often used in conjunction with props `ssr={true}` and `percentRange={true}`
   }
 </style>
 
-<div class="chart-container"
+<div class="chart-container">
   <LayerCake
     ssr={true}
     percentRange={true}
@@ -127,6 +140,7 @@ This component also has a [named slot](https://svelte.dev/docs#slot_name) for ad
   <LayerCake ...>
     <Svg>
 
+      <!-- Add your defs in a named slot here -->
       <svelte:fragment slot="defs">
         <linearGradient id="myGradient" gradientTransform="rotate(90)">
           <stop offset="20%" stop-color="gold" />

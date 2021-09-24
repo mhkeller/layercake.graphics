@@ -2,13 +2,7 @@
 title: Layout component props
 ---
 
-Layer Cake comes with layout components that provide HTML, Svg, ScaledSvg, Canvas and WebGL containers for your custom components.
-
-You must wrap your chart components in these layout components for them to appear properly scaled. For Html and Svg components, they create a `<div>` and `<g>`, respectively, that is the main element that accounts for any applied margin.
-
-The Canvas and WebGL layout components do the same and also create the canvas contexts that are then available on the LayerCake context object.
-
-All layout components take the following props:
+All layout components accept the following props:
 
 * [zIndex](guide#zindex-1) `Number|String`
 * [pointerEvents](guide#pointerevents-1) `Boolean`
