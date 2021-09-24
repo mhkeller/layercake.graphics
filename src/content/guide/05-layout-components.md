@@ -63,6 +63,23 @@ Here are examples using the four layout components: HTML, Svg, ScaledSvg, Canvas
 </div>
 ```
 
+This component also has a [named slot](https://svelte.dev/docs#slot_name) for adding elements into the SVG `<defs>` field.
+
+```html
+<div class="chart-container">
+  <LayerCake ...>
+    <Svg>
+      <svelte:fragment slot="defs">
+        <linearGradient id="myGradient" gradientTransform="rotate(90)">
+          <stop offset="20%" stop-color="gold" />
+          <stop offset="90%" stop-color="red" />
+        </linearGradient>
+      </svelte:fragment>
+    </Svg>
+  </LayerCake>
+</div>
+```
+
 ### ScaledSvg
 
 Use this when you want to render SVGs server side, using Rich Harris's [Pancake technique](https://dev.to/richharris/a-new-technique-for-making-responsive-javascript-free-charts-gmp).
@@ -97,6 +114,23 @@ It's often used in conjunction with props `ssr={true}` and `percentRange={true}`
       fixedAspectRatio={16/9} <!-- Optional fixed aspect ratio -->
     >
     </ScaledSvg>
+  </LayerCake>
+</div>
+```
+
+This component also has a [named slot](https://svelte.dev/docs#slot_name) for adding elements into the SVG `<defs>` field.
+
+```html
+<div class="chart-container">
+  <LayerCake ...>
+    <Svg>
+      <svelte:fragment slot="defs">
+        <linearGradient id="myGradient" gradientTransform="rotate(90)">
+          <stop offset="20%" stop-color="gold" />
+          <stop offset="90%" stop-color="red" />
+        </linearGradient>
+      </svelte:fragment>
+    </Svg>
   </LayerCake>
 </div>
 ```

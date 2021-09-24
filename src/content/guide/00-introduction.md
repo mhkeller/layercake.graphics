@@ -74,7 +74,7 @@ The `App.svelte` file in this example is your main Svelte component. You can ren
 
 > Each of the [chart examples](https://layercake.graphics) can be downloaded or edited live in the browser by clicking on the "Download" or "Edit" buttons, respectively.
 
-### Layout components
+### Using layout components
 
 Within the `LayerCake` component, you'll want to add at least one layout component, kind of like a wrapper. It can be `Svg`, `Html`, `Canvas` or `WebGL`. Within any of these is where you'll put your own custom layer components. Here's an example with a few different layout elements working together.
 
