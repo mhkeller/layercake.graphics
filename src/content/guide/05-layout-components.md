@@ -69,12 +69,14 @@ This component also has a [named slot](https://svelte.dev/docs#slot_name) for ad
 <div class="chart-container">
   <LayerCake ...>
     <Svg>
+
       <svelte:fragment slot="defs">
         <linearGradient id="myGradient" gradientTransform="rotate(90)">
           <stop offset="20%" stop-color="gold" />
           <stop offset="90%" stop-color="red" />
         </linearGradient>
       </svelte:fragment>
+      
     </Svg>
   </LayerCake>
 </div>
@@ -124,12 +126,14 @@ This component also has a [named slot](https://svelte.dev/docs#slot_name) for ad
 <div class="chart-container">
   <LayerCake ...>
     <Svg>
+
       <svelte:fragment slot="defs">
         <linearGradient id="myGradient" gradientTransform="rotate(90)">
           <stop offset="20%" stop-color="gold" />
           <stop offset="90%" stop-color="red" />
         </linearGradient>
       </svelte:fragment>
+
     </Svg>
   </LayerCake>
 </div>
