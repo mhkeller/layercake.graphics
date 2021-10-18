@@ -89,13 +89,14 @@
 			/>
 		</Svg>
 
-		<Html
+		<!-- Work in progress -->
+		<!-- <Html
 			pointerEvents={false}
 		>
 			<MapLabels
 				{projection}
 				features={[...geojson.features.slice(0, 50), geojson.features[0]]}
 			/>
-		</Html>
+		</Html> -->
 	</LayerCake>
 </div>
