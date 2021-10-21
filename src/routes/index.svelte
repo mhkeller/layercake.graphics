@@ -25,7 +25,7 @@
 		width: 100%;
 		height: 500px;
 	}
-</style>
+<\/style>
 
 <div class="chart-container">
 	<LayerCake
@@ -46,8 +46,8 @@
 		<Html>
 			<Labels/>
 		</Html>
-	</LayerCake>
-</div>`.trim().replace(/\t/g, '  ');
+	<\/LayerCake>
+<\/div>`.trim().replace(/\t/g, '  ');
 
 </script>
 
