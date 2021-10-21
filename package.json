@@ -1,0 +1,53 @@
+{
+  "name": "layercake.graphics",
+  "description": "layercake.graphics",
+  "version": "3.0.0",
+  "scripts": {
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "preview": "svelte-kit preview",
+    "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
+    "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
+    "preexport": "npm run update_template && npm run build",
+    "update_template": "sh ./scripts/update_template.sh"
+  },
+  "devDependencies": {
+    "@rollup/plugin-dsv": "^2.0.2",
+    "@sveltejs/kit": "next",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-svelte3": "^3.2.1",
+    "prettier": "^2.4.1",
+    "prettier-plugin-svelte": "^2.4.0",
+    "svelte": "^3.42.6"
+  },
+  "type": "module",
+  "dependencies": {
+    "d3-array": "^3.1.1",
+    "d3-collection": "^1.0.7",
+    "d3-delaunay": "^6.0.2",
+    "d3-dsv": "^1.2.0",
+    "d3-force": "^3.0.0",
+    "d3-format": "^3.0.1",
+    "d3-geo": "^3.0.1",
+    "d3-hierarchy": "^3.0.1",
+    "d3-quadtree": "^3.0.1",
+    "d3-sankey": "^0.12.3",
+    "d3-scale": "^4.0.2",
+    "d3-scale-chromatic": "^3.0.0",
+    "d3-shape": "^3.0.1",
+    "d3-time": "^3.0.0",
+    "d3-time-format": "^4.0.0",
+    "do-not-zip": "^1.0.0",
+    "emoji-regex": "^8.0.0",
+    "golden-fleece": "^1.0.9",
+    "highlight.js": "^11.3.1",
+    "html-minifier": "^4.0.0",
+    "indian-ocean": "^4.0.2",
+    "layercake": "^5.0.0",
+    "marked": "^3.0.7",
+    "regl": "^2.1.0",
+    "topojson-client": "^3.1.0",
+    "yootils": "^0.3.1"
+  }
+}
