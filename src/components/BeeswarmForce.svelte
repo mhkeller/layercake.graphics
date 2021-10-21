@@ -12,23 +12,23 @@
 	export let strokeWidth = 1;
 	export let strokeColor = '#fff';
 
-	$: simulation = forceSimulation(nodes)
-		.force('x', forceX().x(d => $xGet(d)).strength(xStrength))
-		.force('y', forceY().y($height / 2).strength(yStrength))
-		.force('collide', forceCollide(r))
-		.stop();
+	// $: simulation = forceSimulation(nodes)
+	// 	.force('x', forceX().x(d => $xGet(d)).strength(xStrength))
+	// 	.force('y', forceY().y($height / 2).strength(yStrength))
+	// 	.force('collide', forceCollide(r))
+	// 	.stop();
 
-	$: {
-		for ( var i = 0,
-			n = Math.ceil(Math.log(simulation.alphaMin()) / Math.log(1 - simulation.alphaDecay()));
-			i < n;
-			++i ) {
-			simulation.tick();
-		}
-	}
+	// $: {
+	// 	for ( var i = 0,
+	// 		n = Math.ceil(Math.log(simulation.alphaMin()) / Math.log(1 - simulation.alphaDecay()));
+	// 		i < n;
+	// 		++i ) {
+	// 		simulation.tick();
+	// 	}
+	// }
 </script>
 
-<g class='bee-group'>
+<!-- <g class='bee-group'>
 	{#each simulation.nodes() as node}
 		<circle
 			fill='{$zGet(node)}'
@@ -41,4 +41,4 @@
 			<title>{$custom.getTitle(node)}</title>
 		</circle>
 	{/each}
-</g>
+</g> -->

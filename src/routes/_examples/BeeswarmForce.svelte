@@ -4,30 +4,29 @@
 
 	import Key from '../../components/Key.svelte';
 	import AxisX from '../../components/AxisX.svelte';
-	import Beeswarm from '../../components/BeeswarmForce.svelte';
+	// import Beeswarm from '../../components/BeeswarmForce.svelte';
 
 	// This example loads csv data as json using @rollup/plugin-dsv
 	import data from '../../data/us-senate.csv';
 
-	const xKey = 'date_of_birth';
-	const zKey = 'gender';
-	const titleKey = 'name';
+	// const xKey = 'date_of_birth';
+	// const zKey = 'gender';
+	// const titleKey = 'name';
 
-	const r = 6;
+	// const r = 6;
 
-	const seriesNames = new Set();
-	const seriesColors = ['#fc0', '#000'];
+	// const seriesNames = new Set();
+	// const seriesColors = ['#fc0', '#000'];
 
-	const dataTransformed = data.map(d => {
-		seriesNames.add(d[zKey]);
+	// const dataTransformed = data.map(d => {
+	// 	seriesNames.add(d[zKey]);
 
-		return {
-			[titleKey]: d[titleKey],
-			[zKey]: d[zKey],
-			[xKey]: +d[xKey].split('-')[0]
-		}
-	})
-
+	// 	return {
+	// 		[titleKey]: d[titleKey],
+	// 		[zKey]: d[zKey],
+	// 		[xKey]: +d[xKey].split('-')[0]
+	// 	}
+	// })
 </script>
 
 <style>
@@ -44,8 +43,8 @@
 </style>
 
 <div class='chart-container'>
-	<LayerCake
-		padding={{bottom: 15}}
+	<!-- <LayerCake
+		padding={{ bottom: 15 }}
 		x={xKey}
 		z={zKey}
 		zScale={scaleOrdinal()}
@@ -72,5 +71,5 @@
 			<Key shape='circle' />
 		</Html>
 
-	</LayerCake>
+	</LayerCake> -->
 </div>

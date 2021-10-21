@@ -69,6 +69,7 @@
 				{projection}
 				on:mousemove={event => evt = hideTooltip= event}
 				on:mouseout={() => hideTooltip = true}
+				on:blur={() => hideTooltip = true}
 			/>
 		</Svg>
 

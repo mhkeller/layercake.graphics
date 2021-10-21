@@ -1,12 +1,20 @@
 <script context="module">
-	export async function get({ params, fetch, error }) {
-		// the `slug` parameter is available because
-		// this file is called [slug].svelte
-		const res = await fetch(`example-ssr/${params.slug}.json`);
+	export async function get({ page, fetch, error }) {
+		const { slug } = page.params;
+		console.log('slug', slug);
+		const res = await fetch(`example-ssr/${slug}.json`);
 		const data = await res.json();
 
+		console.log('data', data);
+
 		if (res.status === 200) {
-			return { slug: params.slug, data, active: 'index' };
+			return {
+				props: {
+					slug,
+					data,
+					active: 'index'
+				}
+			};
 		} else {
 			error(res.status, data.message);
 		}
@@ -307,7 +315,7 @@
 			></div>
 			{#each pages as page}
 				<div class="contents" style="display: {active === cleanTitle(page.title) ? 'block' : 'none'};">
-					<pre>{@html highlight(page.title, { language: page.contents })}</pre>
+					<pre>{@html highlight(page.contents, page.title)}</pre>
 				</div>
 			{/each}
 		</div>

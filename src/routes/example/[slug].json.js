@@ -54,6 +54,8 @@ export function get({ params }) {
 	// this file is called [slug].json.js
 	const { slug } = params;
 
+	console.log('fetching', slug);
+
 	const examplePath = `src/routes/_examples/${slug}.svelte`;
 
 	if (!fs.existsSync(examplePath)) {
@@ -140,6 +142,8 @@ export function get({ params }) {
 		csvs,
 		jsons,
 	};
+
+	console.log('response', response);
 
 	return {
 		status: 200,

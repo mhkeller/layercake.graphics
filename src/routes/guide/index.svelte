@@ -1,6 +1,6 @@
 <script context="module">
-	export async function preload({ params, query }) {
-		return this.fetch(`api/guide`).then(r => r.json()).then(sections => {
+	export async function load({ fetch }) {
+		return fetch(`api/guide`).then(r => r.json()).then(sections => {
 			return { sections };
 		});
 	}

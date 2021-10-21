@@ -12,7 +12,6 @@
     "update_template": "sh ./scripts/update_template.sh"
   },
   "devDependencies": {
-    "@rollup/plugin-dsv": "^2.0.2",
     "@sveltejs/kit": "next",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
@@ -23,6 +22,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@rollup/plugin-dsv": "^2.0.2",
     "d3-array": "^3.1.1",
     "d3-collection": "^1.0.7",
     "d3-delaunay": "^6.0.2",

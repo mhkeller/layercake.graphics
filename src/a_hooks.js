@@ -21,6 +21,7 @@ const minification_options = {
 };
 
 export async function handle({ request, resolve }) {
+	console.log('handling')
   const response = await resolve(request);
 
   if (prerendering && response.headers['content-type'] === 'text/html') {

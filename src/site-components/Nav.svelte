@@ -14,7 +14,8 @@
 	$: slug = path.replace(/\/$/, '').split('/').pop();
 	$: type = path.split('/')[1];
 
-	$: console.log('slug', slug)
+	$:console.log('path in nav', path);
+	$:console.log('slug in nav', slug);
 
 	let basePath = '/';
 	let open = false;
@@ -25,7 +26,7 @@
 
 	function loadPage () {
 		open = false;
-		goto(this.value || '/');
+		goto(path);
 	}
 
 	function toggleOpen () {
@@ -301,23 +302,23 @@
 <div class='{open ? "open" : "closed"} mousecatcher' on:click="{() => open = false}"></div>
 <div class='container'>
 	<span class="menu-link {open ? "menu-open" : "menu-closed"}" on:click='{toggleOpen}'>{open ? 'Close' : 'Menu'}</span>
-	<a href='.' sveltekit:prefetch class='logo'>Layer Cake</a>
+	<a href='/' sveltekit:prefetch class='logo'>Layer Cake</a>
 </div>
 
 <ul class="dropdown">
 	<li>
 		<!-- svelte-ignore a11y-no-onchange -->
-		<select on:change={loadPage} value="{$page.path}">
-			<option selected="{!slug}" value="">All</option>
+		<select on:change={loadPage} bind:value="{$page.path}">
+			<option value="/">All</option>
 			<!-- <option class="header" disabled></option> -->
 			<option class="header" disabled>Client-side</option>
 			{#each examples.slice().sort((a, b) => a.title < b.title ? -1 : 1) as example}
-				<option value="example/{example.slug}" selected="{type === 'example' && slug === example.slug}">{slimName(example.title)}</option>
+				<option value="example/{example.slug}">{slimName(example.title)}</option>
 			{/each}
 			<!-- <option class="header" disabled></option> -->
 			<option class="header" disabled>Server-side</option>
 			{#each examplesSsr.slice().sort((a, b) => a.title < b.title ? -1 : 1) as example}
-				<option value="example-ssr/{example.slug}" selected="{type === 'example-ssr' && slug === example.slug}">{slimName(example.title)}</option>
+				<option value="example-ssr/{example.slug}">{slimName(example.title)}</option>
 			{/each}
 		</select>
 	</li>

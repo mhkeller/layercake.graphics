@@ -34,5 +34,10 @@
 </style>
 
 {#each uniquePoints as point, i}
-	<path class="voronoi-cell" d={voronoi.renderCell(i)} on:mouseover="{log(point)}"></path>
+	<path
+		class="voronoi-cell"
+		d={voronoi.renderCell(i)}
+		on:mouseover="{log(point)}"
+		on:focus="{log(point)}"
+	></path>
 {/each}

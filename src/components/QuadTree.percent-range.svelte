@@ -52,6 +52,7 @@
 	class="bg"
 	on:mousemove="{findItem}"
 	on:mouseout="{() => visible = false}"
+	on:blur="{() => visible = false}"
 ></div>
 <slot
 	x={xGetter(found) || 0}
