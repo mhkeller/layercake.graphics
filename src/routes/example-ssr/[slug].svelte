@@ -1,5 +1,5 @@
 <script context="module">
-	export async function get({ page, fetch, error }) {
+	export async function load({ page, fetch, error }) {
 		const { slug } = page.params;
 		console.log('slug', slug);
 		const res = await fetch(`example-ssr/${slug}.json`);
