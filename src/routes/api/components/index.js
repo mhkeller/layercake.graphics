@@ -6,7 +6,7 @@ const componentsPath = 'src/components';
 export function get (req, res) {
 	let json;
 	const components = fs.readdirSync(componentsPath)
-		.filter(d => d.endsWith('.svelte'))
+		.filter(d => d.endsWith('.svelte') && !d.toLowerCase().includes('wrapper'));
 		// .map(d => {
 		// 	return {
 		// 		name: d,

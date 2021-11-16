@@ -6,7 +6,7 @@
 	import { format } from 'd3-format';
 
 	import MapSvg from '../../components/Map.svg.svelte';
-	import Tooltip from '../../components/Tooltip.svelte';
+	import Tooltip from '../../components/Tooltip.html.svelte';
 
 	// This example loads json data as json using @rollup/plugin-json
 	import usStates from '../../data/us-states.topojson.json';

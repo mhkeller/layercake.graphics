@@ -5,7 +5,7 @@
 	import Column from '../../components/Column.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
-	import Annotations from '../../components/Annotations.svelte';
+	import Annotations from '../../components/Annotations.html.svelte';
 	import Arrows from '../../components/Arrows.svelte';
 	import ArrowheadDef from '../../components/ArrowheadDef.svelte';
 

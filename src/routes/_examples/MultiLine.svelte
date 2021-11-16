@@ -7,8 +7,8 @@
 	import MultiLine from '../../components/MultiLine.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import AxisY from '../../components/AxisY.svelte';
-	import Labels from '../../components/Labels.svelte';
-	import SharedTooltip from '../../components/SharedTooltip.svelte';
+	import Labels from '../../components/Labels.html.svelte';
+	import SharedTooltip from '../../components/SharedTooltip.html.svelte';
 
 	// This example loads csv data as json using @rollup/plugin-dsv
 	import data from '../../data/fruit.csv';

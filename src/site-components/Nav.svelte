@@ -263,7 +263,10 @@
 			padding: 0 1em;
 		}
 
-		.primary li:first-child::after {
+		.primary li:last-child::after {
+			content: '';
+		}
+		.primary li::after {
 			position: absolute;
 			top: -2px;
 			right: -3px;
@@ -323,6 +326,7 @@
 
 <nav bind:this={nav} class='{open ? "open" : "closed"}'>
 	<ul class='primary'>
+		<li><a rel='prefetch' class='{segment === "components" ? "active" : ""}' href='components' on:click='{() => open = false}'>Component gallery</a></li>
 		<li><a rel='prefetch' class='{segment === "guide" ? "active" : ""}' href='guide' on:click='{() => open = false}'>Guide</a></li>
 		<li><a href='https://github.com/mhkeller/layercake'>GitHub</a></li>
 	</ul>

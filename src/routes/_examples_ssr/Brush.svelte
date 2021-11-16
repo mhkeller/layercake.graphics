@@ -5,7 +5,7 @@
 	import Area from '../../components/Area.svelte';
 	import AxisX from '../../components/AxisX.html.svelte';
 	import AxisY from '../../components/AxisY.html.svelte';
-	import Brush from '../../components/Brush.svelte';
+	import Brush from '../../components/Brush.html.svelte';
 
 	// This example loads csv data as json using @rollup/plugin-dsv
 	import data from '../../data/points.csv';

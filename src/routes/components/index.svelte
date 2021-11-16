@@ -9,14 +9,34 @@
 </script>
 
 <script>
+	import { groupBy } from 'underscore';
+
 	export let components;
 
-	const axisComponents = components.filter(d => {
-		return d.toLowerCase().includes('axis');
+	function getClasses(name) {
+		// console.log(name)
+		const parts = name.split('.').filter(d => d !== 'svelte');
+		// console.log('here');
+		parts.shift();
+		if (parts.length === 0) return ['svg'];
+		return parts;
+	}
+
+	const componentData = components.map(d => {
+		return {
+			name: d,
+			// Don't group by percent-range
+			group: getClasses(d).filter(d => d !== 'percent-range')[0]
+		};
 	});
 
-	const annotationComponents = components.filter(d => {
-		const dl = d.toLowerCase()
+	const axisComponents = componentData.filter(d => {
+		const dl = d.name.toLowerCase()
+		return dl.includes('axis');
+	});
+
+	const annotationComponents = componentData.filter(d => {
+		const dl = d.name.toLowerCase();
 		return dl.includes('annotation')
 			|| dl.includes('arrow')
 			|| dl.includes('key')
@@ -24,22 +44,22 @@
 			|| dl.includes('tooltip')
 	});
 
-	const interactionComponents = components.filter(d => {
-		const dl = d.toLowerCase()
+	const interactionComponents = componentData.filter(d => {
+		const dl = d.name.toLowerCase()
 		return dl.includes('quad')
 			|| dl.includes('vornoi');
 	});
 
-	const mapComponents = components.filter(d => {
-		const dl = d.toLowerCase()
+	const mapComponents = componentData.filter(d => {
+		const dl = d.name.toLowerCase()
 		return dl.includes('map');
 	});
 
-	const chartComponents = components.filter(d => {
-		return !interactionComponents.includes(d)
-			&& !annotationComponents.includes(d)
-			&& !axisComponents.includes(d)
-			&& !mapComponents.includes(d)
+	const chartComponents = componentData.filter(d => {
+		return !interactionComponents.map(d => d.name).includes(d.name)
+			&& !annotationComponents.map(d => d.name).includes(d.name)
+			&& !axisComponents.map(d => d.name).includes(d.name)
+			&& !mapComponents.map(d => d.name).includes(d.name)
 	});
 
 	const componentGroups = [
@@ -52,18 +72,12 @@
 	];
 
 	function formatName(name) {
-		// const svelteless = name.replace('.svelte', '')
-		// return svelteless.replace('.', ', ');
-		return name.split('.')[0]
+		return name.split('.')[0];
 	}
 
-	function getClass(name) {
-		if (name.includes('.svg')) return 'svg';
-		if (name.includes('.html')) return 'html';
-		if (name.includes('.canvas')) return 'canvas';
-		if (name.includes('.webgl')) return 'webgl';
-		if (name.includes('.percent-range')) return 'html percent-range';
-		return 'svg';
+	function formatSubgroup(subgroup) {
+		if (subgroup == 'canvas') return 'Canvas';
+		return subgroup.toUpperCase();
 	}
 </script>
 
@@ -86,10 +100,15 @@
 	{#each componentGroups as componentGroup}
 		<h3>{componentGroup.name}</h3>
 		<div class="component-blocks">
-			{#each componentGroup.components as component}
-				<a class="component-block" href="/components/{component}" rel=prefetch>
-					<div class="component-name {getClass(component)}" ><span>{formatName(component)}</span> <span class="label">{getClass(component)}</span></div>
-				</a>
+			{#each Object.entries(groupBy(componentGroup.components, d => d.group)) as [subgroup, items]}
+				<h4>{formatSubgroup(subgroup)}</h4>
+				<div class="subgroup-blocks">
+					{#each items as item}
+						<a class="component-block" href="/components/{item.name}" rel=prefetch>
+							<div class="component-name" ><span>{formatName(item.name)}</span> {@html getClasses(item.name).map(d => `<span class="label ${d}">${d}</span>`).join('')}</div>
+						</a>
+					{/each}
+				</div>
 			{/each}
 		</div>
 	{/each}
@@ -129,7 +148,12 @@
 		font-weight: bold;
 	}
 
-	.component-blocks {
+	h4 {
+		display: block;
+		padding: 7px 0;
+	}
+
+	.subgroup-blocks {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
@@ -154,35 +178,40 @@
 		text-decoration: underline;
 	}
 
-	.component-name .label {
+	.component-name {
+		white-space: nowrap;
+	}
+
+	.component-blocks :global(.label) {
 		padding: 0 4px;
 		display: inline-block;
 		border-radius: 2px;
 		font-size: 0.9em;
-		margin-left: 7px;
+		margin-left: 3px;
+		text-transform: uppercase;
 	}
 
-	.component-name.svg .label {
+	.component-blocks :global(.label.svg) {
 		background-color: #f0c;
 		color: #fff;
 	}
 
-	.component-name.html .label {
+	.component-blocks :global(.label.html) {
 		background-color: #fc0;
 		color: #000;
 	}
 
-	.component-name.webgl .label {
+	.component-blocks :global(.label.webgl) {
 		background-color: #0cf;
 		color: #fff;
 	}
 
-	.component-name.percent-range .label {
+	.component-blocks :global(.label.percent-range) {
 		background-color: #c0f;
 		color: #fff;
 	}
 
-	.component-name.canvas .label {
+	.component-blocks :global(.label.canvas) {
 		background-color: #cf0;
 		color: #000;
 	}

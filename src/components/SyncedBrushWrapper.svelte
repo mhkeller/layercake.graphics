@@ -5,7 +5,7 @@
 	import Area from './Area.svelte';
 	import AxisX from './AxisX.svelte';
 	import AxisY from './AxisY.svelte';
-	import Brush from './Brush.svelte';
+	import Brush from './Brush.html.svelte';
 
 	export let min = null;
 	export let max = null;
