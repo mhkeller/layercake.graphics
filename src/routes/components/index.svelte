@@ -11,6 +11,8 @@
 <script>
 	import { groupBy } from 'underscore';
 
+	import svelteComponents from '../_components.js';
+
 	export let components;
 
 	function getClasses(name) {
@@ -107,6 +109,11 @@
 					{#each items as item}
 						<a class="component-block" href="/components/{item.name}" rel=prefetch>
 							<div class="component-name" ><span>{formatName(item.name)}</span> {@html getClasses(item.name).map(d => `<span class="label ${d}">${d}</span>`).join('')}</div>
+							<div class="chart-container">
+								{#if svelteComponents.find(d => d.title === item.name)}
+									<svelte:component this={svelteComponents.find(d => d.title === item.name).component}/>
+								{/if}
+							</div>
 						</a>
 					{/each}
 				</div>
@@ -162,13 +169,14 @@
 	}
 
 	.component-block {
-		display: block;
 		width: 28%;
 		margin-bottom: 28px;
 		height: 200px;
 		background-color: #fff;
 		box-shadow: 0 0 12px #ccc;
 		padding: 14px;
+		display: flex;
+		flex-direction: column;
 	}
 
 	a.component-block {
@@ -214,6 +222,10 @@
 	.component-blocks :global(.label.canvas) {
 		background-color: #cf0;
 		color: #000;
+	}
+
+	.chart-container {
+		flex: 1;
 	}
 
 	@media (min-width: 768px) {
