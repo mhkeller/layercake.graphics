@@ -76,6 +76,7 @@
 	}
 
 	function formatSubgroup(subgroup) {
+		if (subgroup == 'webgl') return 'WebGL';
 		if (subgroup == 'canvas') return 'Canvas';
 		return subgroup.toUpperCase();
 	}
