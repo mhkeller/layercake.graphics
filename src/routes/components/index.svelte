@@ -188,7 +188,6 @@
 		border-radius: 2px;
 		font-size: 0.9em;
 		margin-left: 3px;
-		text-transform: uppercase;
 	}
 
 	.component-blocks :global(.label.svg) {
