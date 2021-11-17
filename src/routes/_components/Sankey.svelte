@@ -1,17 +1,9 @@
 <script>
 	import { LayerCake, Svg } from 'layercake';
 
-	import Line from '../../components/Line.svelte';
+	import Sankey from '../../components/Sankey.svelte';
 
-	// This example loads csv data as json using @rollup/plugin-dsv
-	import data from '../../data/points.csv';
-
-	const xKey = 'myX';
-	const yKey = 'myY';
-
-	data.forEach(d => {
-		d[yKey] = +d[yKey];
-	});
+	import data from '../../data/sankey-data.js';
 </script>
 
 <style>
@@ -30,12 +22,13 @@
 <div class="chart-container">
 	<LayerCake
 		padding={{ top: 10 }}
-		x={xKey}
-		y={yKey}
-		data={data}
+		{data}
 	>
 		<Svg>
-			<Line/>
+			<Sankey
+				colorNodes={d => '#00bbff'}
+				colorLinks={d => '#00bbff35'}
+			/>
 		</Svg>
 	</LayerCake>
 </div>

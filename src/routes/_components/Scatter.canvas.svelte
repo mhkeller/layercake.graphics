@@ -1,7 +1,7 @@
 <script>
-	import { LayerCake, Svg } from 'layercake';
+	import { LayerCake, Svg, Canvas } from 'layercake';
 
-	import Line from '../../components/Line.svelte';
+	import ScatterCanvas from '../../components/Scatter.canvas.svelte';
 
 	// This example loads csv data as json using @rollup/plugin-dsv
 	import data from '../../data/points.csv';
@@ -12,6 +12,9 @@
 	data.forEach(d => {
 		d[yKey] = +d[yKey];
 	});
+
+	const r = 3;
+	const padding = 10;
 </script>
 
 <style>
@@ -32,10 +35,15 @@
 		padding={{ top: 10 }}
 		x={xKey}
 		y={yKey}
+		xPadding={[padding, padding]}
+		yPadding={[padding, padding]}
 		data={data}
 	>
-		<Svg>
-			<Line/>
-		</Svg>
+		<Canvas>
+			<ScatterCanvas
+				r={r}
+				fill={'#0cf'}
+			/>
+		</Canvas>
 	</LayerCake>
 </div>

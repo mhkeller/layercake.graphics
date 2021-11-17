@@ -1,7 +1,7 @@
 <script>
 	import { LayerCake, Svg } from 'layercake';
 
-	import Line from '../../components/Line.svelte';
+	import Voronoi from '../../components/Voronoi.svelte';
 
 	// This example loads csv data as json using @rollup/plugin-dsv
 	import data from '../../data/points.csv';
@@ -35,7 +35,7 @@
 		data={data}
 	>
 		<Svg>
-			<Line/>
+			<Voronoi stroke='#000'/>
 		</Svg>
 	</LayerCake>
 </div>

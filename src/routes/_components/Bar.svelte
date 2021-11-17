@@ -1,16 +1,17 @@
 <script>
 	import { LayerCake, Svg } from 'layercake';
+	import { scaleBand } from 'd3-scale';
 
-	import Line from '../../components/Line.svelte';
+	import Bar from '../../components/Bar.svelte';
 
 	// This example loads csv data as json using @rollup/plugin-dsv
-	import data from '../../data/points.csv';
+	import data from '../../data/groups.csv';
 
-	const xKey = 'myX';
-	const yKey = 'myY';
+	const xKey = 'value';
+	const yKey = 'year';
 
 	data.forEach(d => {
-		d[yKey] = +d[yKey];
+		d[xKey] = +d[xKey];
 	});
 </script>
 
@@ -32,10 +33,13 @@
 		padding={{ top: 10 }}
 		x={xKey}
 		y={yKey}
+		yScale={scaleBand().paddingInner([0.05]).round(true)}
+		yDomain={['1979', '1980', '1981', '1982', '1983']}
+		xDomain={[0, null]}
 		data={data}
 	>
 		<Svg>
-			<Line/>
+			<Bar/>
 		</Svg>
 	</LayerCake>
 </div>

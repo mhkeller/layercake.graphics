@@ -1,17 +1,23 @@
 <script>
 	import { LayerCake, Svg } from 'layercake';
 
-	import Line from '../../components/Line.svelte';
+	import AxisRadial from '../../components/AxisRadial.svelte';
 
 	// This example loads csv data as json using @rollup/plugin-dsv
-	import data from '../../data/points.csv';
+	import data from '../../data/radarScores.csv';
 
-	const xKey = 'myX';
-	const yKey = 'myY';
+	const seriesKey = 'name';
+	const xKey = ['fastball', 'change', 'slider', 'cutter', 'curve'];
+
+	const seriesNames = Object.keys(data[0]).filter(d => d !== seriesKey);
 
 	data.forEach(d => {
-		d[yKey] = +d[yKey];
+		seriesNames.forEach(name => {
+			d[name] = +d[name];
+		});
 	});
+
+	const padding = 40;
 </script>
 
 <style>
@@ -29,13 +35,14 @@
 
 <div class="chart-container">
 	<LayerCake
-		padding={{ top: 10 }}
+		padding={{ top: padding, right: padding, bottom: padding, left: padding}}
 		x={xKey}
-		y={yKey}
+		xDomain={[0, 10]}
+		xRange={({ height }) => [0, height / 2]}
 		data={data}
 	>
 		<Svg>
-			<Line/>
+			<AxisRadial/>
 		</Svg>
 	</LayerCake>
 </div>

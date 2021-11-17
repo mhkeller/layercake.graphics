@@ -112,6 +112,8 @@
 							<div class="chart-container">
 								{#if svelteComponents.find(d => d.title === item.name)}
 									<svelte:component this={svelteComponents.find(d => d.title === item.name).component}/>
+								{:else}
+									{item.name}
 								{/if}
 							</div>
 						</a>

@@ -5,6 +5,8 @@
 
 	const { data, xGet, yGet, width, height } = getContext('LayerCake');
 
+	export let stroke = undefined;
+
 	function log (point) {
 		console.log(point, point.data);
 	}
@@ -34,5 +36,10 @@
 </style>
 
 {#each uniquePoints as point, i}
-	<path class="voronoi-cell" d={voronoi.renderCell(i)} on:mouseover="{log(point)}"></path>
+	<path
+		style="{stroke ? `stroke:${stroke};` : ''}"
+		class="voronoi-cell"
+		d={voronoi.renderCell(i)}
+		on:mouseover="{log(point)}"
+	></path>
 {/each}

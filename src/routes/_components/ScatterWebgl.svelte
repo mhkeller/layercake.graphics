@@ -1,13 +1,16 @@
 <script>
-	import { LayerCake, Svg } from 'layercake';
+	import { LayerCake, WebGL } from 'layercake';
 
-	import Line from '../../components/Line.svelte';
+	import ScatterWebGL from '../../components/Scatter.webgl.svelte';
 
 	// This example loads csv data as json using @rollup/plugin-dsv
 	import data from '../../data/points.csv';
 
 	const xKey = 'myX';
 	const yKey = 'myY';
+
+	const diameter = 6;
+	const padding = 6;
 
 	data.forEach(d => {
 		d[yKey] = +d[yKey];
@@ -32,10 +35,14 @@
 		padding={{ top: 10 }}
 		x={xKey}
 		y={yKey}
+		xPadding={[padding, padding]}
+		yPadding={[padding, padding]}
 		data={data}
 	>
-		<Svg>
-			<Line/>
-		</Svg>
+		<WebGL>
+			<ScatterWebGL
+				{diameter}
+			/>
+		</WebGL>
 	</LayerCake>
 </div>
