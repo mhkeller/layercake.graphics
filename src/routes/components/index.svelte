@@ -167,15 +167,17 @@
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
-		column-gap: 28px;
+		column-gap: 24px;
 	}
 
 	.component-block {
+		position: relative;
 		width: 28%;
 		margin-bottom: 28px;
 		height: 200px;
 		background-color: #fff;
 		box-shadow: 0 0 12px #ccc;
+		border: 1px solid #ccc;
 		padding: 14px;
 		display: flex;
 		flex-direction: column;
@@ -187,6 +189,10 @@
 
 	a.component-block:hover .component-name > span {
 		text-decoration: underline;
+	}
+
+	a.component-block:hover {
+		border: 1px solid #aaa;
 	}
 
 	.component-name {
@@ -227,6 +233,7 @@
 	}
 
 	.chart-container {
+		position: relative;
 		flex: 1;
 	}
 

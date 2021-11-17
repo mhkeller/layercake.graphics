@@ -34,6 +34,8 @@
 		expand to fill it.
 	*/
 	.brush-container {
+		position: absolute;
+		bottom: 0;
 		width: 100%;
 		height: 20%;
 	}
@@ -41,7 +43,7 @@
 
 <div class="brush-container">
 	<LayerCake
-		padding={{ top: 5 }}
+		padding={{ top: 0 }}
 		x={xKey}
 		y={yKey}
 		yDomain={[0, null]}

@@ -17,7 +17,7 @@
 		});
 	});
 
-	const padding = 40;
+	const padding = 35;
 </script>
 
 <style>

@@ -3,7 +3,7 @@
 	import { format } from 'd3-format';
 	import { scaleOrdinal } from 'd3-scale';
 
-	import Key from '../../components/Key.svelte';
+	import Key from '../../components/Key.html.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import Beeswarm from '../../components/Beeswarm.svelte';
 

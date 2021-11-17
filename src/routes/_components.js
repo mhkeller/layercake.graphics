@@ -1,3 +1,6 @@
+/* --------------------------------------------
+ * Normal components
+ */
 import Area from './_components/Area.svelte';
 import AreaStacked from './_components/AreaStacked.svelte';
 import AxisRadial from './_components/AxisRadial.svelte';
@@ -27,6 +30,16 @@ import ScatterSvg from './_components/Scatter.svg.svelte';
 import ScatterWebgl from './_components/ScatterWebgl.svelte';
 import Voronoi from './_components/Voronoi.svelte';
 
+/* --------------------------------------------
+ * HTML components
+ */
+import AxisXHtml from './_components_ssr/AxisX.html.svelte';
+import AxisYHtml from './_components_ssr/AxisY.html.svelte';
+import CirclePackHtml from './_components_ssr/CirclePack.html.svelte';
+import ScatterHtml from './_components_ssr/Scatter.html.svelte';
+import ClevelandDotPlotHtml from './_components_ssr/ClevelandDotPlot.html.svelte';
+import Key from './_components_ssr/Key.html.svelte';
+
 export default [
 	{ title: 'Area.svelte', component: Area },
 	{ title: 'AreaStacked.svelte', component: AreaStacked },
@@ -37,7 +50,7 @@ export default [
 	{ title: 'BarStacked.svelte', component: BarStacked },
 	{ title: 'Beeswarm.svelte', component: Beeswarm },
 	{ title: 'BeeswarmForce.svelte', component: BeeswarmForce },
-	{ title: 'Brush.svelte', component: Brush },
+	{ title: 'Brush.html.svelte', component: Brush },
 	{ title: 'CalendarMonth.svelte', component: Calendar },
 	{ title: 'CirclePack.svelte', component: CirclePack },
 	{ title: 'CirclePackForce.svelte', component: CirclePackForce },
@@ -56,4 +69,13 @@ export default [
 	{ title: 'Scatter.svg.svelte', component: ScatterSvg },
 	{ title: 'Scatter.webgl.svelte', component: ScatterWebgl },
 	{ title: 'Voronoi.svelte', component: Voronoi },
+
+	// HTML
+	{ title: 'AxisX.html.svelte', component: AxisXHtml },
+	{ title: 'AxisY.html.svelte', component: AxisYHtml },
+	{ title: 'CirclePack.html.svelte', component: CirclePackHtml },
+	{ title: 'Scatter.html.svelte', component: ScatterHtml },
+	{ title: 'ClevelandDotPlot.html.svelte', component: ClevelandDotPlotHtml },
+	{ title: 'Key.html.svelte', component: Key },
+
 ];

@@ -2,7 +2,7 @@
 	import { LayerCake, Svg, Html } from 'layercake';
 	import { scaleOrdinal } from 'd3-scale';
 
-	import Key from '../../components/Key.svelte';
+	import Key from '../../components/Key.html.svelte';
 	import AxisX from '../../components/AxisX.svelte';
 	import Beeswarm from '../../components/BeeswarmForce.svelte';
 

@@ -23,6 +23,8 @@
 
 	const { zDomain, zScale } = getContext('LayerCake');
 
+	$: console.log('domain', $zDomain);
+
 	function cap (val) {
 		return String(val).replace(/^\w/, d => d.toUpperCase());
 	}
@@ -68,15 +70,15 @@
 
 <div class='key' style="justify-content: {align === 'end' ? 'flex-end': align};">
 	{#each $zDomain as item}
-	<div class='key-item'>
-		<div
-			class='chip chip__{shape}'
-			style='background: {
-				shape === `line` ?
-				`linear-gradient(-45deg, #ffffff 40%, ${$zScale(item)} 41%, ${$zScale(item)} 59%, #ffffff 60%)`
-				: $zScale(item)};'
-		></div>
-		<div class='name'>{displayName(item)}</div>
-	</div>
+		<div class='key-item'>
+			<div
+				class='chip chip__{shape}'
+				style='background: {
+					shape === `line` ?
+					`linear-gradient(-45deg, #ffffff 40%, ${$zScale(item)} 41%, ${$zScale(item)} 59%, #ffffff 60%)`
+					: $zScale(item)};'
+			></div>
+			<div class='name'>{displayName(item)}</div>
+		</div>
 	{/each}
 </div>

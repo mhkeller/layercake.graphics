@@ -37,7 +37,6 @@
 		<Svg>
 			<AxisX
 				baseline={true}
-				ticks={4}
 			/>
 		</Svg>
 	</LayerCake>

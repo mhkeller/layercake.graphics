@@ -1,10 +1,7 @@
 <script>
-	import { LayerCake, ScaledSvg, Html } from 'layercake';
+	import { LayerCake, Html } from 'layercake';
 
-	import Line from '../../components/Line.svelte';
-	import Area from '../../components/Area.svelte';
-	import AxisX from '../../components/AxisX.html.svelte';
-	import AxisY from '../../components/AxisY.html.svelte';
+	import Scatter from '../../components/Scatter.html.svelte';
 
 	// This example loads csv data as json using @rollup/plugin-dsv
 	import data from '../../data/points.csv';
@@ -15,6 +12,12 @@
 	data.forEach(d => {
 		d[yKey] = +d[yKey];
 	});
+
+	const r = 4.5;
+	const padding = 2.5;
+	const fill = '#fff';
+	const stroke = '#0cf';
+	const strokeWidth = 1.5;
 </script>
 
 <style>
@@ -34,21 +37,22 @@
 	<LayerCake
 		ssr={true}
 		percentRange={true}
-		padding={{ right: 10, bottom: 20, left: 25 }}
+		padding={{ top: 10 }}
 		x={xKey}
-		y={d => d[yKey]}
-		yDomain={[0, null]}
+		y={yKey}
+		xPadding={[padding, padding]}
+		yPadding={[padding, padding]}
 		data={data}
 	>
+
 		<Html>
-			<AxisX/>
-			<AxisY
-				ticks={4}
+			<Scatter
+				{r}
+				{fill}
+				{stroke}
+				{strokeWidth}
 			/>
 		</Html>
-		<ScaledSvg>
-			<Line/>
-			<Area/>
-		</ScaledSvg>
+
 	</LayerCake>
 </div>
