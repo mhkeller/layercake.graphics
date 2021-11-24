@@ -1,19 +1,7 @@
-<script context="module">
-	export async function preload({ params, query }) {
-		return this.fetch(`api/components`)
-			.then(r => r.json())
-			.then(components => {
-				return { components };
-			});
-	}
-</script>
-
 <script>
-	import { groupBy } from 'underscore';
+	import { groupBy, sortBy } from 'underscore';
 
 	import svelteComponents from '../_components.js';
-
-	export let components;
 
 	function getClasses(name) {
 		// console.log(name)
@@ -24,54 +12,67 @@
 		return parts;
 	}
 
-	const componentData = components.map(d => {
+	const componentGroups = svelteComponents.map(d => {
 		return {
-			name: d,
-			// Don't group by percent-range
-			group: getClasses(d).filter(d => d !== 'percent-range')[0]
+			name: `${d.name.replace(/^\w/, w => w.toUpperCase())} components`,
+			components: sortBy(d.components, 'slug').map(({ name, slug, component }) => {
+				const classes = getClasses(slug);
+				return {
+					name,
+					slug,
+					component,
+					classes,
+					group: classes.filter(d => d !== 'percent-range')[0]
+				 }
+			})
 		};
+		// return {
+		// 	name: d,
+		// 	// Don't group by percent-range
+		// 	group: getClasses(d).filter(d => d !== 'percent-range')[0]
+		// };
 	});
 
-	const axisComponents = componentData.filter(d => {
-		const dl = d.name.toLowerCase()
-		return dl.includes('axis');
-	});
+	// const axisComponents = componentData.filter(d => {
+	// 	const dl = d.name.toLowerCase()
+	// 	return dl.includes('axis');
+	// });
 
-	const annotationComponents = componentData.filter(d => {
-		const dl = d.name.toLowerCase();
-		return dl.includes('annotation')
-			|| dl.includes('arrow')
-			|| dl.includes('key')
-			|| (dl.includes('label') && !dl.includes('map'))
-			|| dl.includes('tooltip')
-	});
+	// const annotationComponents = componentData.filter(d => {
+	// 	const dl = d.name.toLowerCase();
+	// 	return dl.includes('annotation')
+	// 		|| dl.includes('arrow')
+	// 		|| dl.includes('key')
+	// 		|| (dl.includes('label') && !dl.includes('map'))
+	// 		|| dl.includes('tooltip')
+	// });
 
-	const interactionComponents = componentData.filter(d => {
-		const dl = d.name.toLowerCase()
-		return dl.includes('quad')
-			|| dl.includes('vornoi');
-	});
+	// const interactionComponents = componentData.filter(d => {
+	// 	const dl = d.name.toLowerCase()
+	// 	return dl.includes('quad')
+	// 		|| dl.includes('vornoi');
+	// });
 
-	const mapComponents = componentData.filter(d => {
-		const dl = d.name.toLowerCase()
-		return dl.includes('map');
-	});
+	// const mapComponents = componentData.filter(d => {
+	// 	const dl = d.name.toLowerCase()
+	// 	return dl.includes('map');
+	// });
 
-	const chartComponents = componentData.filter(d => {
-		return !interactionComponents.map(d => d.name).includes(d.name)
-			&& !annotationComponents.map(d => d.name).includes(d.name)
-			&& !axisComponents.map(d => d.name).includes(d.name)
-			&& !mapComponents.map(d => d.name).includes(d.name)
-	});
+	// const chartComponents = componentData.filter(d => {
+	// 	return !interactionComponents.map(d => d.name).includes(d.name)
+	// 		&& !annotationComponents.map(d => d.name).includes(d.name)
+	// 		&& !axisComponents.map(d => d.name).includes(d.name)
+	// 		&& !mapComponents.map(d => d.name).includes(d.name)
+	// });
 
-	const componentGroups = [
-		{ name: 'Axis components', components: axisComponents },
-		{ name: 'Chart components', components: chartComponents },
-		{ name: 'Map components', components: mapComponents },
-		{ name: 'Interaction components', components: interactionComponents },
-		{ name: 'Annotation components', components: annotationComponents },
-		// { name: 'Community components', components: [] },
-	];
+	// const componentGroups = [
+	// 	{ name: 'Axis components', components: axisComponents },
+	// 	{ name: 'Chart components', components: chartComponents },
+	// 	{ name: 'Map components', components: mapComponents },
+	// 	{ name: 'Interaction components', components: interactionComponents },
+	// 	{ name: 'Annotation components', components: annotationComponents },
+	// 	// { name: 'Community components', components: [] },
+	// ];
 
 	function formatName(name) {
 		return name.split('.')[0];
@@ -107,11 +108,11 @@
 				<h4>{formatSubgroup(subgroup)}</h4>
 				<div class="subgroup-blocks">
 					{#each items as item}
-						<a class="component-block" href="/components/{item.name}" rel=prefetch>
-							<div class="component-name" ><span>{formatName(item.name)}</span> {@html getClasses(item.name).map(d => `<span class="label ${d}">${d}</span>`).join('')}</div>
+						<a class="component-block" href="/components/{item.slug}" rel=prefetch>
+							<div class="component-name" ><span>{item.name || formatName(item.slug)}</span> {@html item.classes.map(d => `<span class="label ${d}">${d}</span>`).join('')}</div>
 							<div class="chart-container">
-								{#if svelteComponents.find(d => d.title === item.name)}
-									<svelte:component this={svelteComponents.find(d => d.title === item.name).component}/>
+								{#if item.component}
+									<svelte:component this={item.component}/>
 								{:else}
 									{item.name}
 								{/if}
