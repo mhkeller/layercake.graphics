@@ -63,6 +63,7 @@
 
 <div class="chart-container">
 	<LayerCake
+		padding={{ top: 10 }}
 		data={geojson}
 		z={colorKey}
 		zScale={scaleQuantize()}

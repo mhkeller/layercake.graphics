@@ -85,6 +85,12 @@
 	}
 </script>
 
+<svelte:head>
+	<title>LayerCake - Component gallery</title>
+	<meta name="og:title" content="Layer Cake — Component gallery">
+	<meta name="twitter:title" content="Layer Cake — Component gallery">
+</svelte:head>
+
 <sidebar>
 	<ul>
 		{#each componentGroups as componentGroup}

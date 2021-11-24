@@ -17,7 +17,6 @@
 	$:columnHeight = d => {
 		return $height - $yGet(d);
 	};
-
 </script>
 
 {#each $data as d, i}

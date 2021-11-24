@@ -9,7 +9,9 @@ import AxisY from './_components/AxisY.svelte';
 import Bar from './_components/Bar.svelte';
 import BarStacked from './_components/BarStacked.svelte';
 import Beeswarm from './_components/Beeswarm.svelte';
+import BeeswarmHtml from './_components/Beeswarm.html.svelte';
 import BeeswarmForce from './_components/BeeswarmForce.svelte';
+import BeeswarmForceHtml from './_components/BeeswarmForce.html.svelte';
 import Brush from './_components/Brush.svelte';
 import Calendar from './_components/Calendar.svelte';
 import CirclePack from './_components/CirclePack.svelte';
@@ -23,6 +25,8 @@ import ColumnStacked from './_components/ColumnStacked.svelte';
 import Line from './_components/Line.svelte';
 import MapSvg from './_components/Map.svg.svelte';
 import MapCanvas from './_components/Map.canvas.svelte';
+import MapPoints from './_components/MapPoints.svelte';
+import MapPointsHtml from './_components/MapPoints.html.svelte';
 import MultiLine from './_components/MultiLine.svelte';
 import Radar from './_components/Radar.svelte';
 import Sankey from './_components/Sankey.svelte';
@@ -53,8 +57,9 @@ export default [
 			{ slug: 'Bar.svelte', component: Bar },
 			{ slug: 'BarStacked.svelte', component: BarStacked },
 			{ slug: 'Beeswarm.svelte', component: Beeswarm },
+			{ slug: 'Beeswarm.html.svelte', component: BeeswarmHtml },
 			{ slug: 'BeeswarmForce.svelte', component: BeeswarmForce },
-			{ slug: 'BeeswarmForce.html.svelte', component: '' },
+			{ slug: 'BeeswarmForce.html.svelte', component: BeeswarmForceHtml },
 			// { slug: 'CalendarMonth.svelte', component: Calendar },
 			{ slug: 'CirclePack.svelte', component: CirclePack },
 			{ slug: 'CirclePack.html.svelte', component: CirclePackHtml },
@@ -63,7 +68,6 @@ export default [
 			{ slug: 'ClevelandDotPlot.svelte', component: ClevelandDotPlot },
 			{ slug: 'ClevelandDotPlot.html.svelte', component: ClevelandDotPlotHtml },
 			{ slug: 'Column.svelte', component: Column },
-			{ slug: 'ColumnLinear.svelte', component: '' },
 			{ slug: 'ColumnStacked.svelte', component: ColumnStacked },
 			// { slug: 'ForceDirectedGraph.svelte', component: ForceDirectedGraph },
 			{ slug: 'Line.svelte', component: Line },
@@ -79,7 +83,8 @@ export default [
 		components: [
 			{ slug: 'Map.svg.svelte', component: MapSvg },
 			{ slug: 'Map.canvas.svelte', component: MapCanvas },
-			{ slug: 'MapPoints.svelte', component: '' },
+			{ slug: 'MapPoints.svelte', component: MapPoints },
+			{ slug: 'MapPoints.html.svelte', component: MapPointsHtml },
 			{ slug: 'MapLabels.html.svelte', component: '' },
 			{ slug: 'MapLabels.svg.svelte', component: '' },
 		] },

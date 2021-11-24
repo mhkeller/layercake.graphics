@@ -8,28 +8,28 @@
 	 */
 	export let projection;
 
-	export let pointsData = [];
-	export let r = 5;
+	export let features = [];
+	export let r = 3;
+	export let fill = 'yellow';
+	export let stroke = '#000';
+	export let strokeWidth = 1;
+	export let opacity = 1;
 
-	$: projection = projection()
+	$: projectionFn = projection
 		.fitSize([$width, $height], $data);
 </script>
 
 <g class="points">
-{#each pointsData as d}
+{#each features as d}
+	<!-- To scale the circle by size, set r to `$rGet(d.properties)` -->
 	<circle
-		cx={projection(d)[0]}
-		cy={projection(d)[1]}
+		cx={projectionFn(d.geometry.coordinates)[0]}
+		cy={projectionFn(d.geometry.coordinates)[1]}
 		r="{r}"
-	>
-	</circle>
+		fill="{fill}"
+		stroke="{stroke}"
+		stroke-width="{strokeWidth}"
+		opacity="{opacity}"
+	/>
 {/each}
 </g>
-
-<style>
-	circle {
-		fill: #000;
-		stroke: #fff;
-		stroke-width: 1;
-	}
-</style>
