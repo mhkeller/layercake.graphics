@@ -114,7 +114,7 @@
 								{#if item.component}
 									<svelte:component this={item.component}/>
 								{:else}
-									{item.name}
+									{item.slug}
 								{/if}
 							</div>
 						</a>

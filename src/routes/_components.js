@@ -16,6 +16,7 @@ import CirclePack from './_components/CirclePack.svelte';
 import CirclePackForce from './_components/CirclePackForce.svelte';
 import CirclePackNested from './_components/CirclePackNested.svelte';
 import ClevelandDotPlot from './_components/ClevelandDotPlot.svelte';
+import ClevelandDotPlotHtml from './_components/ClevelandDotPlot.html.svelte';
 import Column from './_components/Column.svelte';
 import ColumnStacked from './_components/ColumnStacked.svelte';
 // import ForceDirectedGraph from './_components/ForceDirectedGraph.svelte';
@@ -30,14 +31,10 @@ import ScatterSvg from './_components/Scatter.svg.svelte';
 import ScatterWebgl from './_components/ScatterWebgl.svelte';
 import Voronoi from './_components/Voronoi.svelte';
 
-/* --------------------------------------------
- * HTML components
- */
 import AxisXHtml from './_components_ssr/AxisX.html.svelte';
 import AxisYHtml from './_components_ssr/AxisY.html.svelte';
 import CirclePackHtml from './_components_ssr/CirclePack.html.svelte';
 import ScatterHtml from './_components_ssr/Scatter.html.svelte';
-import ClevelandDotPlotHtml from './_components_ssr/ClevelandDotPlot.html.svelte';
 import Key from './_components_ssr/Key.html.svelte';
 
 export default [
@@ -63,8 +60,8 @@ export default [
 			{ slug: 'CirclePack.html.svelte', component: CirclePackHtml },
 			{ slug: 'CirclePackForce.svelte', component: CirclePackForce },
 			{ slug: 'CirclePackNested.svelte', component: CirclePackNested },
-			{ slug: 'ClevelandDotPlot.html.svelte', component: '' },
 			{ slug: 'ClevelandDotPlot.svelte', component: ClevelandDotPlot },
+			{ slug: 'ClevelandDotPlot.html.svelte', component: ClevelandDotPlotHtml },
 			{ slug: 'Column.svelte', component: Column },
 			{ slug: 'ColumnLinear.svelte', component: '' },
 			{ slug: 'ColumnStacked.svelte', component: ColumnStacked },
@@ -77,7 +74,6 @@ export default [
 			{ slug: 'Scatter.svg.svelte', component: ScatterSvg },
 			{ slug: 'Scatter.webgl.svelte', component: ScatterWebgl },
 			{ slug: 'Scatter.html.svelte', component: ScatterHtml },
-			{ slug: 'ClevelandDotPlot.html.svelte', component: ClevelandDotPlotHtml },
 		] },
 	{ name: 'map',
 		components: [

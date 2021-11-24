@@ -2,7 +2,7 @@
 	import { LayerCake, Html } from 'layercake';
 	import { scaleBand, scaleOrdinal } from 'd3-scale';
 
-	import ClevelandDotPlot from '../../components/ClevelandDotPlot.html.svelte';
+	import ClevelandDotPlot from '../../components/ClevelandDotPlot.percent-range.html.svelte';
 	import AxisX from '../../components/AxisX.html.svelte';
 	import AxisY from '../../components/AxisY.html.svelte';
 

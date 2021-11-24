@@ -1,6 +1,5 @@
 <script>
 	import { getContext } from 'svelte';
-	import { scaleOrdinal } from 'd3-scale';
 
 	const { data, xGet, yGet, zScale, yScale, config } = getContext('LayerCake');
 
