@@ -1,18 +1,19 @@
 <script>
-	import { LayerCake, Svg, Canvas, Html } from 'layercake';
+	import { LayerCake, Svg } from 'layercake';
 	import { feature } from 'topojson-client';
 	import { geoAlbersUsa } from 'd3-geo';
-	import { scaleQuantize } from 'd3-scale';
 
-	// For a map example with a tooltip, check out https://layercake.graphics/example/MapSvg
-
-	import MapCanvas from '../../components/Map.canvas.svelte';
+	import MapSvg from '../../components/Map.svg.svelte';
+	import MapLabels from '../../components/MapLabels.svg.svelte';
 
 	// This example loads json data as json using @rollup/plugin-json
 	import usStates from '../../data/us-states.topojson.json';
+	import usStateLabels from '../../data/us-states-labels.json';
 
 	const geojson = feature(usStates, usStates.objects.collection);
 	const projection = geoAlbersUsa();
+
+	const hideList = ['CT', 'DC', 'DE', 'MA', 'MD', 'NH', 'NJ', 'RI', 'VT' ];
 </script>
 
 <style>
@@ -32,11 +33,20 @@
 	<LayerCake
 		padding={{ top: 10 }}
 		data={geojson}
+		custom={{
+			getLabelCoordinates: d => d.center,
+			getLabelName: d => d.abbr
+		}}
 	>
-		<Canvas>
-			<MapCanvas
+		<Svg>
+			<MapSvg
+				fill='#fff'
 				{projection}
 			/>
-		</Canvas>
+			<MapLabels
+				{projection}
+				features={usStateLabels.filter(d => !hideList.includes(d.abbr))}
+			/>
+		</Svg>
 	</LayerCake>
 </div>

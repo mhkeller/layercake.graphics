@@ -1,1 +1,410 @@
-[{"name":"Alabama","abbr":"TK","center":[-86.67,32.61]},{"name":"Alaska","abbr":"TK","center":[-152,65]},{"name":"Arizona","abbr":"TK","center":[-111.93,34.16]},{"name":"Arkansas","abbr":"TK","center":[-92.13,34.75]},{"name":"California","abbr":"TK","center":[-119.27,37.27]},{"name":"Colorado","abbr":"TK","center":[-105.54,38.99]},{"name":"Connecticut","abbr":"TK","center":[-72.75,41.51]},{"name":"Delaware","abbr":"TK","center":[-75.42,39.14]},{"name":"District of Columbia","abbr":"TK","center":[-77.02,38.89]},{"name":"Florida","abbr":"TK","center":[-83.84,27.77]},{"name":"Georgia","abbr":"TK","center":[-83.21,32.67]},{"name":"Hawaii","abbr":"TK","center":[-157.53,20.57]},{"name":"Idaho","abbr":"TK","center":[-114.14,45.49]},{"name":"Illinois","abbr":"TK","center":[-89.51,39.74]},{"name":"Indiana","abbr":"TK","center":[-86.41,39.76]},{"name":"Iowa","abbr":"TK","center":[-93.37,41.94]},{"name":"Kansas","abbr":"TK","center":[-98.32,38.49]},{"name":"Kentucky","abbr":"TK","center":[-85.78,37.82]},{"name":"Louisiana","abbr":"TK","center":[-91.52,31.01]},{"name":"Maine","abbr":"TK","center":[-69.03,45.26]},{"name":"Maryland","abbr":"TK","center":[-77.27,38.81]},{"name":"Massachusetts","abbr":"TK","center":[-71.71,42.06]},{"name":"Michigan","abbr":"TK","center":[-86.41,44.93]},{"name":"Minnesota","abbr":"TK","center":[-93.41,46.44]},{"name":"Mississippi","abbr":"TK","center":[-89.87,32.58]},{"name":"Missouri","abbr":"TK","center":[-92.42,38.30]},{"name":"Montana","abbr":"TK","center":[-110.04,46.68]},{"name":"Nebraska","abbr":"TK","center":[-99.67,41.50]},{"name":"Nevada","abbr":"TK","center":[-117.01,38.50]},{"name":"New Hampshire","abbr":"TK","center":[-71.62,44.00]},{"name":"New Jersey","abbr":"TK","center":[-74.72,40.14]},{"name":"New Mexico","abbr":"TK","center":[-106.02,34.16]},{"name":"New York","abbr":"TK","center":[-75.82,42.75]},{"name":"North Carolina","abbr":"TK","center":[-79.91,35.21]},{"name":"North Dakota","abbr":"TK","center":[-100.30,47.46]},{"name":"Ohio","abbr":"TK","center":[-82.65,40.19]},{"name":"Oklahoma","abbr":"TK","center":[-98.72,35.30]},{"name":"Oregon","abbr":"TK","center":[-120.51,44.13]},{"name":"Pennsylvania","abbr":"TK","center":[-77.59,40.99]},{"name":"Rhode Island","abbr":"TK","center":[-71.49,41.58]},{"name":"South Carolina","abbr":"TK","center":[-80.93,33.61]},{"name":"South Dakota","abbr":"TK","center":[-100.24,44.21]},{"name":"Tennessee","abbr":"TK","center":[-85.98,35.83]},{"name":"Texas","abbr":"TK","center":[-100.06,31.17]},{"name":"Utah","abbr":"TK","center":[-111.55,39.49]},{"name":"Vermont","abbr":"TK","center":[-72.46,43.87]},{"name":"Virginia","abbr":"TK","center":[-79.44,38.00]},{"name":"Washington","abbr":"TK","center":[-120.81,47.27]},{"name":"West Virginia","abbr":"TK","center":[-80.16,38.91]},{"name":"Wisconsin","abbr":"TK","center":[-89.85,44.78]},{"name":"Wyoming","abbr":"TK","center":[-107.55,43.00]}]
+[
+	{
+		"name": "Alabama",
+		"abbr": "AL",
+		"center": [
+			-86.67,
+			32.58
+		]
+	},
+	{
+		"name": "Alaska",
+		"abbr": "AK",
+		"center": [
+			-152,
+			65
+		]
+	},
+	{
+		"name": "Arizona",
+		"abbr": "AZ",
+		"center": [
+			-111.4,
+			34.16
+		]
+	},
+	{
+		"name": "Arkansas",
+		"abbr": "AR",
+		"center": [
+			-92.48,
+			34.75
+		]
+	},
+	{
+		"name": "California",
+		"abbr": "CA",
+		"center": [
+			-119.27,
+			36
+		]
+	},
+	{
+		"name": "Colorado",
+		"abbr": "CO",
+		"center": [
+			-105.54,
+			38.3
+		]
+	},
+	{
+		"name": "Connecticut",
+		"abbr": "CT",
+		"center": [
+			-72.75,
+			41.3
+		]
+	},
+	{
+		"name": "Delaware",
+		"abbr": "DE",
+		"center": [
+			-75.42,
+			39.14
+		]
+	},
+	{
+		"name": "District of Columbia",
+		"abbr": "DC",
+		"center": [
+			-77.02,
+			38.89
+		]
+	},
+	{
+		"name": "Florida",
+		"abbr": "FL",
+		"center": [
+			-81.3,
+			27.77
+		]
+	},
+	{
+		"name": "Georgia",
+		"abbr": "GA",
+		"center": [
+			-83.21,
+			31.8
+		]
+	},
+	{
+		"name": "Hawaii",
+		"abbr": "HI",
+		"center": [
+			-157.53,
+			20.57
+		]
+	},
+	{
+		"name": "Idaho",
+		"abbr": "ID",
+		"center": [
+			-114.5,
+			43.5
+		]
+	},
+	{
+		"name": "Illinois",
+		"abbr": "IL",
+		"center": [
+			-89.2,
+			39.74
+		]
+	},
+	{
+		"name": "Indiana",
+		"abbr": "IN",
+		"center": [
+			-86.2,
+			39.76
+		]
+	},
+	{
+		"name": "Iowa",
+		"abbr": "IA",
+		"center": [
+			-93.37,
+			41.4
+		]
+	},
+	{
+		"name": "Kansas",
+		"abbr": "KS",
+		"center": [
+			-98.32,
+			38.1
+		]
+	},
+	{
+		"name": "Kentucky",
+		"abbr": "KY",
+		"center": [
+			-84.35,
+			37.1
+		]
+	},
+	{
+		"name": "Louisiana",
+		"abbr": "LA",
+		"center": [
+			-92.3,
+			29.9
+		]
+	},
+	{
+		"name": "Maine",
+		"abbr": "ME",
+		"center": [
+			-69.03,
+			45.26
+		]
+	},
+	{
+		"name": "Maryland",
+		"abbr": "MD",
+		"center": [
+			-77.27,
+			38.81
+		]
+	},
+	{
+		"name": "Massachusetts",
+		"abbr": "MA",
+		"center": [
+			-71.71,
+			42.06
+		]
+	},
+	{
+		"name": "Michigan",
+		"abbr": "MI",
+		"center": [
+			-84.7,
+			42.3
+		]
+	},
+	{
+		"name": "Minnesota",
+		"abbr": "MN",
+		"center": [
+			-94.5,
+			46.44
+		]
+	},
+	{
+		"name": "Mississippi",
+		"abbr": "MS",
+		"center": [
+			-89.7,
+			32.58
+		]
+	},
+	{
+		"name": "Missouri",
+		"abbr": "MO",
+		"center": [
+			-92.42,
+			37.5
+		]
+	},
+	{
+		"name": "Montana",
+		"abbr": "MT",
+		"center": [
+			-110.04,
+			46.68
+		]
+	},
+	{
+		"name": "Nebraska",
+		"abbr": "NE",
+		"center": [
+			-99.67,
+			41.0
+		]
+	},
+	{
+		"name": "Nevada",
+		"abbr": "NV",
+		"center": [
+			-116.6,
+			38.7
+		]
+	},
+	{
+		"name": "New Hampshire",
+		"abbr": "NH",
+		"center": [
+			-71.62,
+			44
+		]
+	},
+	{
+		"name": "New Jersey",
+		"abbr": "NJ",
+		"center": [
+			-74.72,
+			40.14
+		]
+	},
+	{
+		"name": "New Mexico",
+		"abbr": "NM",
+		"center": [
+			-106.02,
+			34.16
+		]
+	},
+	{
+		"name": "New York",
+		"abbr": "NY",
+		"center": [
+			-75.1,
+			42.3
+		]
+	},
+	{
+		"name": "North Carolina",
+		"abbr": "NC",
+		"center": [
+			-79.91,
+			35.21
+		]
+	},
+	{
+		"name": "North Dakota",
+		"abbr": "ND",
+		"center": [
+			-100.3,
+			47.46
+		]
+	},
+	{
+		"name": "Ohio",
+		"abbr": "OH",
+		"center": [
+			-82.65,
+			40.19
+		]
+	},
+	{
+		"name": "Oklahoma",
+		"abbr": "OK",
+		"center": [
+			-98.72,
+			35.3
+		]
+	},
+	{
+		"name": "Oregon",
+		"abbr": "OR",
+		"center": [
+			-120.51,
+			44.13
+		]
+	},
+	{
+		"name": "Pennsylvania",
+		"abbr": "PA",
+		"center": [
+			-77.59,
+			40.99
+		]
+	},
+	{
+		"name": "Rhode Island",
+		"abbr": "RI",
+		"center": [
+			-71.49,
+			41.58
+		]
+	},
+	{
+		"name": "South Carolina",
+		"abbr": "SC",
+		"center": [
+			-80.93,
+			33.61
+		]
+	},
+	{
+		"name": "South Dakota",
+		"abbr": "SD",
+		"center": [
+			-100.24,
+			44.21
+		]
+	},
+	{
+		"name": "Tennessee",
+		"abbr": "TN",
+		"center": [
+			-85.98,
+			35.83
+		]
+	},
+	{
+		"name": "Texas",
+		"abbr": "TX",
+		"center": [
+			-100.06,
+			31.17
+		]
+	},
+	{
+		"name": "Utah",
+		"abbr": "UT",
+		"center": [
+			-111.55,
+			39.49
+		]
+	},
+	{
+		"name": "Vermont",
+		"abbr": "VT",
+		"center": [
+			-72.46,
+			43.87
+		]
+	},
+	{
+		"name": "Virginia",
+		"abbr": "VA",
+		"center": [
+			-79.44,
+			38
+		]
+	},
+	{
+		"name": "Washington",
+		"abbr": "WA",
+		"center": [
+			-120.81,
+			47.27
+		]
+	},
+	{
+		"name": "West Virginia",
+		"abbr": "WV",
+		"center": [
+			-80.16,
+			38.91
+		]
+	},
+	{
+		"name": "Wisconsin",
+		"abbr": "WI",
+		"center": [
+			-89.85,
+			44.78
+		]
+	},
+	{
+		"name": "Wyoming",
+		"abbr": "WY",
+		"center": [
+			-107.55,
+			43
+		]
+	}
+]

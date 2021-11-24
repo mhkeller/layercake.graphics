@@ -10,23 +10,23 @@
 
 	export let features = $data.features;
 
-	$: projection = projection()
+	$: projection = projection
 		.fitSize([$width, $height], $data);
 </script>
 
 <g class="map-labels">
-{#each features as feature}
+{#each features as d}
 	<text
 		class="map-label"
-		x="{projection($custom.getLabelCoordinates(feature))[0]}"
-		y="{projection($custom.getLabelCoordinates(feature))[1]}"
-	>{$custom.getLabelName(feature)}</text>
+		x="{projection($custom.getLabelCoordinates(d))[0]}"
+		y="{projection($custom.getLabelCoordinates(d))[1]}"
+	>{$custom.getLabelName(d)}</text>
 {/each}
 </g>
 
 <style>
 	.map-label {
-		position: absolute;
-		text-align: center;
+		font-size: 9px;
+		text-anchor: middle;
 	}
 </style>
