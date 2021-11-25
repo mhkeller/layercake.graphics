@@ -1,12 +1,11 @@
 <script>
+	import { afterUpdate } from 'svelte';
 	import { groupBy, sortBy } from 'underscore';
 
 	import svelteComponents from '../_components.js';
 
 	function getClasses(name) {
-		// console.log(name)
 		const parts = name.split('.').filter(d => d !== 'svelte');
-		// console.log('here');
 		parts.shift();
 		if (parts.length === 0) return ['svg'];
 		return parts;
@@ -26,53 +25,7 @@
 				 }
 			})
 		};
-		// return {
-		// 	name: d,
-		// 	// Don't group by percent-range
-		// 	group: getClasses(d).filter(d => d !== 'percent-range')[0]
-		// };
 	});
-
-	// const axisComponents = componentData.filter(d => {
-	// 	const dl = d.name.toLowerCase()
-	// 	return dl.includes('axis');
-	// });
-
-	// const annotationComponents = componentData.filter(d => {
-	// 	const dl = d.name.toLowerCase();
-	// 	return dl.includes('annotation')
-	// 		|| dl.includes('arrow')
-	// 		|| dl.includes('key')
-	// 		|| (dl.includes('label') && !dl.includes('map'))
-	// 		|| dl.includes('tooltip')
-	// });
-
-	// const interactionComponents = componentData.filter(d => {
-	// 	const dl = d.name.toLowerCase()
-	// 	return dl.includes('quad')
-	// 		|| dl.includes('vornoi');
-	// });
-
-	// const mapComponents = componentData.filter(d => {
-	// 	const dl = d.name.toLowerCase()
-	// 	return dl.includes('map');
-	// });
-
-	// const chartComponents = componentData.filter(d => {
-	// 	return !interactionComponents.map(d => d.name).includes(d.name)
-	// 		&& !annotationComponents.map(d => d.name).includes(d.name)
-	// 		&& !axisComponents.map(d => d.name).includes(d.name)
-	// 		&& !mapComponents.map(d => d.name).includes(d.name)
-	// });
-
-	// const componentGroups = [
-	// 	{ name: 'Axis components', components: axisComponents },
-	// 	{ name: 'Chart components', components: chartComponents },
-	// 	{ name: 'Map components', components: mapComponents },
-	// 	{ name: 'Interaction components', components: interactionComponents },
-	// 	{ name: 'Annotation components', components: annotationComponents },
-	// 	// { name: 'Community components', components: [] },
-	// ];
 
 	function formatName(name) {
 		return name.split('.')[0];
@@ -82,6 +35,64 @@
 		if (subgroup == 'webgl') return 'WebGL';
 		if (subgroup == 'canvas') return 'Canvas';
 		return subgroup.toUpperCase();
+	}
+
+	function slugify(name) {
+		return name.toLowerCase().split(' ')[0];
+	}
+
+	let container;
+	let positions = [];
+	let lastId = 'introduction';
+	let activeSection;
+
+	let anchors = [];
+	afterUpdate(() => {
+		if (typeof window !== 'undefined') {
+			anchors = container.querySelectorAll('[id]');
+			lastId = window.location.hash.slice(1);
+			activeSection = lastId;
+
+			onresize();
+			onscroll();
+
+			window.addEventListener('scroll', onscroll, true);
+			window.addEventListener('resize', onresize, true);
+
+			// wait for fonts to load...
+			const timeouts = [
+				setTimeout(onresize, 1000),
+				setTimeout(onresize, 5000)
+			];
+		}
+	});
+
+	function onresize () {
+		if (container) {
+			const { top } = container.getBoundingClientRect();
+			positions = [].map.call(anchors, anchor => {
+				return anchor.getBoundingClientRect().top - top;
+			});
+		}
+	}
+
+	function onscroll () {
+		const top = -window.scrollY;
+
+		let i = anchors.length;
+		while (i--) {
+			if (positions[i] + top < 100) {
+				const anchor = anchors[i];
+				const { id } = anchor;
+
+				if (id !== lastId) {
+					activeSection = id;
+					// this.fire('scroll', id);
+					lastId = id;
+				}
+				return;
+			}
+		}
 	}
 </script>
 
@@ -96,19 +107,19 @@
 		{#each componentGroups as componentGroup}
 			<li>
 				<a
-					class='section'
-					href='/components#'
+					class='section {activeSection === slugify(componentGroup.name) ? 'active' : ''}'
+					href='/components#{slugify(componentGroup.name)}'
 				>{componentGroup.name}</a>
 			</li>
 		{/each}
 	</ul>
 </sidebar>
 
-<div id="container">
+<div id="container" bind:this={container}>
 	<h2>Components</h2>
 
 	{#each componentGroups as componentGroup}
-		<h3>{componentGroup.name}</h3>
+		<h3 id="{slugify(componentGroup.name)}">{componentGroup.name}</h3>
 		<div class="component-blocks">
 			{#each Object.entries(groupBy(componentGroup.components, d => d.group)) as [subgroup, items]}
 				<h4>{formatSubgroup(subgroup)}</h4>
@@ -153,6 +164,10 @@
 		box-sizing: border-box;
 	}
 
+	.section.active {
+		font-weight: bold;
+	}
+
 	h2 {
 		padding: 4rem 0 0 0;
 		margin: -3rem 0 1.05rem 0;
@@ -163,6 +178,7 @@
 
 	h3 {
 		font-weight: bold;
+		padding-top: 3.5em;
 	}
 
 	h4 {
