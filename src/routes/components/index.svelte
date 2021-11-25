@@ -43,8 +43,8 @@
 
 	let container;
 	let positions = [];
-	let lastId = 'introduction';
-	let activeSection;
+	let lastId = 'axis';
+	let activeSection = 'axis';
 
 	let anchors = [];
 	afterUpdate(() => {
@@ -52,6 +52,8 @@
 			anchors = container.querySelectorAll('[id]');
 			lastId = window.location.hash.slice(1);
 			activeSection = lastId;
+
+			console.log('active', activeSection, lastId);
 
 			onresize();
 			onscroll();
@@ -106,6 +108,7 @@
 	<ul>
 		{#each componentGroups as componentGroup}
 			<li>
+				<!-- {console.log(activeSection, slugify(componentGroup.name))} -->
 				<a
 					class='section {activeSection === slugify(componentGroup.name) ? 'active' : ''}'
 					href='/components#{slugify(componentGroup.name)}'
@@ -116,10 +119,10 @@
 </sidebar>
 
 <div id="container" bind:this={container}>
-	<h2>Components</h2>
+	<h2 id="axis">Components</h2>
 
 	{#each componentGroups as componentGroup}
-		<h3 id="{slugify(componentGroup.name)}">{componentGroup.name}</h3>
+		<h3 id="{slugify(componentGroup.name) !== 'axis' ? slugify(componentGroup.name) : ''}">{componentGroup.name}</h3>
 		<div class="component-blocks">
 			{#each Object.entries(groupBy(componentGroup.components, d => d.group)) as [subgroup, items]}
 				<h4>{formatSubgroup(subgroup)}</h4>
@@ -164,8 +167,25 @@
 		box-sizing: border-box;
 	}
 
+	sidebar ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	a.section {
+		text-decoration: none;
+		display: block;
+		color: #727272;
+		font-size: 1em;
+		margin: 0;
+		padding-top: 0.075em;
+		padding-bottom: 0.4em;
+		line-height: 1.25em;
+	}
+
 	.section.active {
-		font-weight: bold;
+		color: #ff3e00;
 	}
 
 	h2 {
