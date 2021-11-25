@@ -5,13 +5,13 @@
 	import CalendarMonth from '../../components/CalendarMonth.svelte';
 
 	// This example loads csv data as json using @rollup/plugin-dsv
-	import dates from '../../data/dates.csv';
+	import dates from '../../data/dates-april.csv';
 
 	const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-	const datesTransformed = dates.map(row => {
-		row.date = new Date(row.timestring);
-		return row;
+	const datesTransformed = dates.map(d => {
+		d.date = new Date(d.timestring);
+		return d;
 	});
 
 	const gutter = 10;
@@ -55,11 +55,11 @@
 {#each sortedData as month, i}
 	<div
 		class="chart-container"
-		style="width:calc({100 / sortedData.length}% - {gutter}px);{i === 0 ? `margin-right:${gutter * 2}px` : ''}"
+		style="width:calc({80 / sortedData.length}% - {gutter}px);{i === 0 ? `margin-right:${gutter * 2}px` : ''}"
 		data-month="{monthNames[+month.key + 1]}"
 	>
 		<LayerCake
-			padding={{ top: 1, right: 1, bottom: 1, left: 1 }}
+			padding={{ right: 20 }}
 			x='key'
 			r={d => d.values.length}
 			data={month.values}

@@ -65,7 +65,7 @@ export default [
 			{ slug: 'Beeswarm.html.svelte', component: BeeswarmHtml },
 			{ slug: 'BeeswarmForce.svelte', component: BeeswarmForce },
 			{ slug: 'BeeswarmForce.html.svelte', component: BeeswarmForceHtml },
-						// { slug: 'CalendarMonth.svelte', component: Calendar },
+			{ slug: 'CalendarMonth.svelte', component: Calendar },
 			{ slug: 'CirclePack.svelte', component: CirclePack },
 			{ slug: 'CirclePack.html.svelte', component: CirclePackHtml },
 			{ slug: 'CirclePackForce.svelte', component: CirclePackForce },
