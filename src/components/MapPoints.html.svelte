@@ -15,7 +15,7 @@
 	export let strokeWidth = 1;
 	export let opacity = 1;
 
-	$: projection = projection
+	$: projectionFn = projection
 		.fitSize([$width, $height], $data);
 </script>
 
@@ -24,8 +24,8 @@
 	<div
 		class="point"
 		style="
-			top: {projection(d.geometry.coordinates)[1]}px;
-			left: {projection(d.geometry.coordinates)[0]}px;
+			top: {projectionFn(d.geometry.coordinates)[1]}px;
+			left: {projectionFn(d.geometry.coordinates)[0]}px;
 			width: {r * 2}px;
 			height: {r * 2}px;
 			border-width: {strokeWidth}px;

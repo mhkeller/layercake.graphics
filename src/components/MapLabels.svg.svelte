@@ -10,7 +10,7 @@
 
 	export let features = $data.features;
 
-	$: projection = projection
+	$: projectionFn = projection
 		.fitSize([$width, $height], $data);
 </script>
 
@@ -18,8 +18,8 @@
 {#each features as d}
 	<text
 		class="map-label"
-		x="{projection($custom.getLabelCoordinates(d))[0]}"
-		y="{projection($custom.getLabelCoordinates(d))[1]}"
+		x="{projectionFn($custom.getLabelCoordinates(d))[0]}"
+		y="{projectionFn($custom.getLabelCoordinates(d))[1]}"
 	>{$custom.getLabelName(d)}</text>
 {/each}
 </g>

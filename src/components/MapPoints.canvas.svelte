@@ -1,42 +1,40 @@
 <script>
 	import { getContext } from 'svelte';
+	import { scaleCanvas } from 'layercake';
 
 	const { data, width, height } = getContext('LayerCake');
+
+	const { ctx } = getContext('canvas');
 
 	/* --------------------------------------------
 	 * Require a D3 projection function
 	 */
 	export let projection;
 
-	export let pointsData = [];
-	export let r = 5;
-	export let fill = '#fff';
+	export let features = [];
+	export let r = 3.5;
+	export let fill = 'yellow';
 	export let stroke = '#000';
 	export let strokeWidth = 1;
 
-	$: projection = projection()
+	$: projectionFn = projection
 		.fitSize([$width, $height], $data);
-</script>
 
-<div class="points">
-{#each pointsData as d}
-	<div
-		class="point"
-		style="
-			top: {projection(d)[1]};
-			left: {projection(d)[0]};
-			width: {r * 2};
-			border-width: {strokeWidth}px;
-			border-color: {stroke};
-			background-color: {fill};
-		"
-	>
-	</div>
-{/each}
-</div>
+	$: {
+		if ($ctx) {
+			scaleCanvas($ctx, $width, $height);
+			$ctx.clearRect(0, 0, $width, $height);
 
-<style>
-	.point {
-		border-radius: 50%;
+			features.forEach(d => {
+				$ctx.beginPath();
+				const coordinates = projectionFn(d.geometry.coordinates);
+				$ctx.arc(coordinates[0], coordinates[1], r, 0, 2 * Math.PI, false);
+				$ctx.fillStyle = fill;
+				$ctx.fill();
+				$ctx.lineWidth = strokeWidth;
+				$ctx.strokeStyle = stroke;
+				$ctx.stroke();
+			});
+		}
 	}
-</style>
+</script>
