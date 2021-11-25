@@ -36,6 +36,7 @@ import ScatterCanvas from './_components/Scatter.canvas.svelte';
 import ScatterSvg from './_components/Scatter.svg.svelte';
 import ScatterWebgl from './_components/ScatterWebgl.svelte';
 import Voronoi from './_components/Voronoi.svelte';
+import Labels from './_components/Labels.html.svelte';
 
 import AxisXHtml from './_components_ssr/AxisX.html.svelte';
 import AxisYHtml from './_components_ssr/AxisY.html.svelte';
@@ -103,6 +104,6 @@ export default [
 	{ name: 'annotation',
 		components: [
 			// { slug: 'Key.html.svelte', component: Key },
-			// { slug: 'Labels.html.svelte', component: '' },
+			{ slug: 'Labels.html.svelte', component: Labels },
 		] }
 ];
