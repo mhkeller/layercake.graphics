@@ -51,7 +51,7 @@
 		if (typeof window !== 'undefined') {
 			anchors = container.querySelectorAll('[id]');
 			lastId = window.location.hash.slice(1);
-			activeSection = lastId;
+			activeSection = lastId || 'axis';
 
 			console.log('active', activeSection, lastId);
 
@@ -119,10 +119,10 @@
 </sidebar>
 
 <div id="container" bind:this={container}>
-	<h2 id="axis">Components</h2>
+	<h2>Components</h2>
 
 	{#each componentGroups as componentGroup}
-		<h3 id="{slugify(componentGroup.name) !== 'axis' ? slugify(componentGroup.name) : ''}">{componentGroup.name}</h3>
+		<h3 id="{slugify(componentGroup.name)}">{componentGroup.name}</h3>
 		<div class="component-blocks">
 			{#each Object.entries(groupBy(componentGroup.components, d => d.group)) as [subgroup, items]}
 				<h4>{formatSubgroup(subgroup)}</h4>
@@ -200,6 +200,11 @@
 		font-weight: bold;
 		padding-top: 3.5em;
 	}
+
+	/* h3#axis {
+		padding-top: 4.5em;
+		top: -1em;
+	} */
 
 	h4 {
 		display: block;
