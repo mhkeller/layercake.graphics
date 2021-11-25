@@ -2,11 +2,12 @@
 	export async function preload({ params, query }) {
 		// the `slug` parameter is available because
 		// this file is called [slug].svelte
-		const res = await this.fetch(`example/${params.slug}.json`);
+		const { slug } = params;
+		const res = await this.fetch(`components/${slug}.json`);
 		const data = await res.json();
 
 		if (res.status === 200) {
-			return { slug: params.slug, data, active: 'index' };
+			return { slug, data };
 		} else {
 			this.error(res.status, data.message);
 		}
@@ -17,11 +18,11 @@
 	import marked from 'marked';
 	import hljs from 'highlight.js';
 
-	import DownloadBtn from '../../site-components/DownloadBtn.svelte';
+	import DownloadComponentBtn from '../../site-components/DownloadComponentBtn.svelte';
 	import hljsDefineSvelte from '../../modules/hljsDefineSvelte.js';
-	import cleanTitle from '../../modules/cleanTitle.js';
+	// import cleanTitle from '../../modules/cleanTitle.js';
 
-	import examples from '../_examples.js';
+	import components from '../_components.js';
 
 	hljs.registerLanguage('svelte', hljsDefineSvelte);
 	hljsDefineSvelte(hljs);
@@ -29,37 +30,34 @@
 	export let slug;
 	export let data;
 
-	export let active = 'index';
+	$: console.log('slug', slug)
+	$: console.log('data', data)
 
 	const renderer = new marked.Renderer();
 	function markdownToHtml (text) {
 		return marked(text, { renderer });
 	}
 
-	function highlight (str, title) {
-		const parts = title.split('.');
+	function highlight (str, slug) {
+		const parts = slug.split('.');
 		let ext = parts[parts.length - 1];
 		if (ext === 'csv') ext = 'diff'
 		return hljs.highlight(ext, str).value;
 	}
 
-	$: pages = [data.main]
-		.concat(data.components)
-		.concat(data.componentModules)
-		.concat(data.modules)
-		.concat(data.componentComponents)
-		.concat(data.jsons)
-		.concat(data.csvs);
+	$: pages = [data.main];
 
-	const exampleLookup = new Map();
-	examples.forEach(exmpl => {
-		exampleLookup.set(exmpl.slug, exmpl);
+	const lookup = new Map();
+	components.flatMap(d => d.components).forEach(d => {
+		lookup.set(d.slug, d);
 	});
 
-	$: example = exampleLookup.get(slug);
+	$: component = lookup.get(slug);
+
+	$: console.log(component);
 
 	function copyToClipboard () {
-		const text = pages.filter(d => cleanTitle(d.title) === active)[0].contents;
+		const text = pages[0].contents;
 		if (window.clipboardData && window.clipboardData.setData) {
 			return window.clipboardData.setData('Text', text);
 		} else if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
@@ -196,9 +194,8 @@
 		display: block;
 	}
 
-	.edit-repl {
+	/* .edit-repl {
 		text-decoration: none !important;
-		/* font-size: 12px; */
 		text-transform: lowercase;
 		font-family: monospace;
 		color: rgba(0,0,0,0.5);
@@ -214,7 +211,7 @@
 	.edit-repl:hover {
 		text-decoration: underline;
 		color: #ff3e00;
-	}
+	} */
 
 	.copy:before {
 		content: 'Copy to clipboard';
@@ -254,21 +251,21 @@
 </style>
 
 <svelte:head>
-	<title>{example.title}</title>
+	<title>{component.slug}</title>
 	<link rel='stylesheet' href='hljs.css'>
 </svelte:head>
 
 <div class="main">
-	<h1>{example.title}<a class="edit-repl" href="https://svelte.dev/repl/{example.replPath}" target="_blank" rel="nofollow">Edit</a></h1>
+	<h1>{component.slug}</h1>
 
 	<div class="chart-hero">
-		<svelte:component this={example.component} />
+		<svelte:component this={component.component} />
 	</div>
 
 	<div class="download">
-		<DownloadBtn
+		<DownloadComponentBtn
 			{data}
-			slug='{slug}'
+			{slug}
 		/>
 	</div>
 
@@ -282,9 +279,8 @@
 		<ul id="page-nav">
 			{#each pages as page}
 				<li
-					class="tab {active === cleanTitle(page.title) ? 'active' : ''}"
-					on:click="{() => active = cleanTitle(page.title)}"
-				>{page.title}</li>
+					class="tab active"
+				>{page.slug}</li>
 			{/each}
 		</ul>
 		<div id="contents-container">
@@ -293,11 +289,10 @@
 				on:click={copyToClipboard}
 			></div>
 			{#each pages as page}
-				<div class="contents" style="display: {active === cleanTitle(page.title) ? 'block' : 'none'};">
-					<pre>{@html highlight(page.contents, page.title)}</pre>
+				<div class="contents" style="display: block;">
+					<pre>{@html highlight(page.contents, page.slug)}</pre>
 				</div>
 			{/each}
 		</div>
 	</div>
-
 </div>
