@@ -35,7 +35,9 @@
 		data={data}
 	>
 		<Svg>
-			<Line/>
+			<Line
+				stroke='#de63fd'
+			/>
 		</Svg>
 	</LayerCake>
 </div>

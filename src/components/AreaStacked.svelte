@@ -1,6 +1,5 @@
 <script>
 	import { area } from 'd3-shape';
-	import { scaleOrdinal } from 'd3-scale';
 
 	import { getContext } from 'svelte';
 

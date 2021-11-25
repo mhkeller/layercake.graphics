@@ -2,6 +2,7 @@
  * Normal components
  */
 import Area from './_components/Area.svelte';
+import AreaD3 from './_components/Area-D3.svelte';
 import AreaStacked from './_components/AreaStacked.svelte';
 import AxisRadial from './_components/AxisRadial.svelte';
 import AxisX from './_components/AxisX.svelte';
@@ -23,6 +24,7 @@ import Column from './_components/Column.svelte';
 import ColumnStacked from './_components/ColumnStacked.svelte';
 // import ForceDirectedGraph from './_components/ForceDirectedGraph.svelte';
 import Line from './_components/Line.svelte';
+import LineD3 from './_components/Line-D3.svelte';
 import MapSvg from './_components/Map.svg.svelte';
 import MapCanvas from './_components/Map.canvas.svelte';
 import MapPoints from './_components/MapPoints.svelte';
@@ -58,6 +60,7 @@ export default [
 	{ name: 'chart',
 		components: [
 			{ slug: 'Area.svelte', component: Area },
+			{ slug: 'Area-D3.svelte', component: AreaD3 },
 			{ slug: 'AreaStacked.svelte', component: AreaStacked },
 			{ slug: 'Bar.svelte', component: Bar },
 			{ slug: 'BarStacked.svelte', component: BarStacked },
@@ -76,6 +79,7 @@ export default [
 			{ slug: 'ColumnStacked.svelte', component: ColumnStacked },
 			// // { slug: 'ForceDirectedGraph.svelte', component: ForceDirectedGraph },
 			{ slug: 'Line.svelte', component: Line },
+			{ slug: 'Line-D3.svelte', component: LineD3 },
 			{ slug: 'MultiLine.svelte', component: MultiLine },
 			{ slug: 'Radar.svelte', component: Radar },
 			{ slug: 'Sankey.svelte', component: Sankey },

@@ -1,7 +1,8 @@
 <script>
 	import { LayerCake, Svg } from 'layercake';
+	import { curveCardinal } from 'd3-shape';
 
-	import Area from '../../components/Area.svelte';
+	import Area from '../../components/Area-D3.svelte';
 
 	// This example loads csv data as json using @rollup/plugin-dsv
 	import data from '../../data/points.csv';
@@ -36,7 +37,8 @@
 	>
 		<Svg>
 			<Area
-				fill="#ff7ac7"
+				fill="#f0c"
+				curve={curveCardinal}
 			/>
 		</Svg>
 	</LayerCake>
