@@ -112,5 +112,5 @@ export default [
 			{ slug: 'Key.html.svelte', component: Key },
 			{ slug: 'Labels.html.svelte', component: Labels },
 			{ slug: 'GroupLabels.html.svelte', component: GroupLabels },
-		] }
+		]}
 ];
