@@ -13,7 +13,7 @@
 	const geojson = feature(usStates, usStates.objects.collection);
 	const projection = geoAlbersUsa();
 
-	const hideList = ['CT', 'DC', 'DE', 'MA', 'MD', 'NH', 'NJ', 'RI', 'VT' ];
+	const hideList = ['CT', 'DC', 'DE', 'MA', 'MD', 'NH', 'NJ', 'RI', 'VT', 'WV' ];
 </script>
 
 <style>
