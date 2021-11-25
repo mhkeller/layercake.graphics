@@ -16,14 +16,14 @@
 </script>
 
 <div class="map-labels">
-{#each features as feature}
+{#each features as d}
 	<div
 		class="map-label"
 		style="
-			left: {projectionFn($custom.getLabelCoordinates(feature))[0]}px;
-			top: {projectionFn($custom.getLabelCoordinates(feature))[1]}px;
+			left: {projectionFn($custom.getLabelCoordinates(d))[0]}px;
+			top: {projectionFn($custom.getLabelCoordinates(d))[1]}px;
 		"
-	>{$custom.getLabelName(feature)}</div>
+	>{$custom.getLabelName(d)}</div>
 {/each}
 </div>
 
@@ -32,7 +32,8 @@
 		position: absolute;
 		text-align: center;
 		font-size: 10px;
-		color: #999;
+		color: #333;
+		margin-top: -3px; /* To match the SVG labels, it needs a slight tweak */
 		transform: translate(-50%, -50%);
 	}
 </style>

@@ -1,10 +1,10 @@
 <script>
-	import { LayerCake, Svg } from 'layercake';
+	import { LayerCake, Html, /*, Svg */ } from 'layercake';
 	import { feature } from 'topojson-client';
 	import { geoAlbersUsa } from 'd3-geo';
 
 	// import MapSvg from '../../components/Map.svg.svelte';
-	import MapLabels from '../../components/MapLabels.svg.svelte';
+	import MapLabelsHtml from '../../components/MapLabels.html.svelte';
 
 	// This example loads json data as json using @rollup/plugin-json
 	import usStates from '../../data/us-states.topojson.json';
@@ -38,15 +38,17 @@
 			getLabelName: d => d.abbr
 		}}
 	>
-		<Svg>
-			<!-- <MapSvg
+		<!-- <Svg>
+			<MapSvg
 				fill='#fff'
 				{projection}
-			/> -->
-			<MapLabels
+			/>
+		</Svg> -->
+		<Html>
+			<MapLabelsHtml
 				{projection}
 				features={usStateLabels.filter(d => !hideList.includes(d.abbr))}
 			/>
-		</Svg>
+		</Html>
 	</LayerCake>
 </div>

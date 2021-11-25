@@ -26,7 +26,8 @@
 
 <style>
 	.map-label {
-		font-size: 9px;
+		color: #333;
+		font-size: 10px;
 		text-anchor: middle;
 	}
 </style>

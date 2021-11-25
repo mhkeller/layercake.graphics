@@ -28,7 +28,7 @@ import MapCanvas from './_components/Map.canvas.svelte';
 import MapPoints from './_components/MapPoints.svelte';
 import MapPointsHtml from './_components/MapPoints.html.svelte';
 import MapLabels from './_components/MapLabels.svelte';
-// import MapLabelsHtml from './_components/MapLabels.html.svelte';
+import MapLabelsHtml from './_components/MapLabels.html.svelte';
 import MultiLine from './_components/MultiLine.svelte';
 import Radar from './_components/Radar.svelte';
 import Sankey from './_components/Sankey.svelte';
@@ -87,7 +87,7 @@ export default [
 			// { slug: 'Map.canvas.svelte', component: MapCanvas },
 			// { slug: 'MapPoints.svelte', component: MapPoints },
 			// { slug: 'MapPoints.html.svelte', component: MapPointsHtml },
-			// { slug: 'MapLabels.html.svelte', component: '' },
+			{ slug: 'MapLabels.html.svelte', component: MapLabelsHtml },
 			{ slug: 'MapLabels.svg.svelte', component: MapLabels },
 		] },
 	{ name: 'interaction',
