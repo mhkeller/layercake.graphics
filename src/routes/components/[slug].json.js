@@ -101,8 +101,6 @@ export function get(req, res, next) {
 		};
 	});
 
-	console.log('used in', usedIn);
-
 	const response = {
 		main,
 		dek,

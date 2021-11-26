@@ -250,12 +250,12 @@
 </style>
 
 <svelte:head>
-	<title>{component.slug}</title>
+	<title>{component.slug} component</title>
 	<link rel='stylesheet' href='hljs.css'>
 </svelte:head>
 
 <div class="main">
-	<h1>{component.slug}</h1>
+	<h1>{component.slug} component</h1>
 
 	<div class="chart-hero">
 		<svelte:component this={component.component} />
