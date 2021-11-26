@@ -189,25 +189,6 @@
 		display: block;
 	}
 
-	/* .edit-repl {
-		text-decoration: none !important;
-		text-transform: lowercase;
-		font-family: monospace;
-		color: rgba(0,0,0,0.5);
-		background-color: #f0f0f0;
-		padding: 2px 5px;
-		margin-left: 7px;
-		font-size: 19px;
-		vertical-align: top;
-		position: relative;
-		top: 4px;
-	}
-
-	.edit-repl:hover {
-		text-decoration: underline;
-		color: #ff3e00;
-	} */
-
 	.copy:before {
 		content: 'Copy to clipboard';
 		position: absolute;

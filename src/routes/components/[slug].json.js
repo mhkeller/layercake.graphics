@@ -1,38 +1,6 @@
 import { readFileSync, existsSync } from 'fs';
 import { readdirFilterSync } from 'indian-ocean';
 
-// function getComponentJsPaths (example) {
-// 	return example.match(/\.\.\/.+\.js/gm);
-// }
-
-// function cleanContents (str) {
-// 	return str.replace(/\t/g, '  ').trim();
-// }
-
-// function getJsonPaths (example) {
-// 	const match = example.match(/\.\/.+\.json/gm);
-// 	if (match) {
-// 		return match.map(d => d.replace('../../', ''));
-// 	}
-// 	return [];
-// }
-
-// function getJsPaths (example) {
-// 	const match = example.match(/\.\/.+\.js('|")/gm);
-// 	if (match) {
-// 		return match.map(d => d.replace('../../', '').replace(/('|")/g, ''));
-// 	}
-// 	return [];
-// }
-
-// function getCsvPaths (example) {
-// 	const match = example.match(/\.\/.+\.csv/gm);
-// 	if (match) {
-// 		return match.map(d => d.replace('../../', ''));
-// 	}
-// 	return [];
-// }
-
 function cleanMain (str) {
 	const cleaned = str
 		.replace(/\t/g, '  ')
@@ -42,13 +10,6 @@ function cleanMain (str) {
 	return cleaned;
 }
 
-// function getComponentPaths (example) {
-// 	const match = example.match(/\.?\.\/.+svelte/gm);
-// 	if (match) {
-// 		return match.map(d => d.replace('../../', ''));
-// 	}
-// 	return [];
-// }
 
 export function get(req, res, next) {
 	// the `slug` parameter is available because
