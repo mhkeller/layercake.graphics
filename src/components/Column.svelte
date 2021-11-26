@@ -1,4 +1,10 @@
 <script>
+	/**
+		Generates an SVG column chart
+		@param {String} [fill=#00e047] – The shape's fill color.
+		@param {String} [stroke=''] – The shape's stroke color.
+		@param {Number} [strokeWidth=0] – The shape's stroke width.
+	*/
 	import { getContext } from 'svelte';
 
 	const { data, xGet, yGet, yRange, xScale } = getContext('LayerCake');

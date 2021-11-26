@@ -1,10 +1,15 @@
 <script>
+	/**
+		Generates an SVG radial scale, useful for radar charts.
+		@param {Number} [lineLengthFactor=1.1] – How far to extend the lines from the circle's center. A value of `1` puts them at the circle's circumference.
+		@param {Number} [labelPlacementFactor=1.25] – How far to place the labels from the circle's center. A value of `1` puts them at the circle's circumference.
+	*/
 	import { getContext } from 'svelte';
 
 	const { width, height, xScale, extents, config } = getContext('LayerCake');
 
-	export let linePaddingFactor = 1.1;
-	export let labelPaddingFactor = 1.25;
+	export let lineLengthFactor = 1.1;
+	export let labelPlacementFactor = 1.25;
 
 	$: max = $xScale(Math.max(...$extents.x));
 
@@ -45,8 +50,8 @@
 		<line
 			x1="0"
 			y1="0"
-			x2="{(max * linePaddingFactor) * Math.cos(angleSlice * i - Math.PI / 2)}"
-			y2="{(max * linePaddingFactor) * Math.sin(angleSlice * i - Math.PI / 2)}"
+			x2="{(max * lineLengthFactor) * Math.cos(angleSlice * i - Math.PI / 2)}"
+			y2="{(max * lineLengthFactor) * Math.sin(angleSlice * i - Math.PI / 2)}"
 			stroke="#ccc"
 			stroke-width="1"
 			fill="none"
@@ -57,6 +62,6 @@
 			dy="0.35em"
 			font-size="12px"
 			text-outline="#fff"
-			transform="translate({(max * labelPaddingFactor) * Math.cos(angleSlice * i - Math.PI / 2)}, {(max * labelPaddingFactor) * Math.sin(angleSlice * i - Math.PI / 2)})">{label}</text>
+			transform="translate({(max * labelPlacementFactor) * Math.cos(angleSlice * i - Math.PI / 2)}, {(max * labelPlacementFactor) * Math.sin(angleSlice * i - Math.PI / 2)})">{label}</text>
 	{/each}
 </g>

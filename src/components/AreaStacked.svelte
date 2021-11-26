@@ -1,4 +1,8 @@
 <script>
+	/**
+		Generates an SVG area shape using the `area` function from d3-shape and sets the color via an ordinal scale in `zScale`.
+	*/
+
 	import { area } from 'd3-shape';
 
 	import { getContext } from 'svelte';

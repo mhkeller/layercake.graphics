@@ -1,4 +1,8 @@
 <script>
+	/**
+		Generates an SVG area shape manually constructing the SVG path
+		@param {String} fill=#ab00d610 – The shape's fill color.
+	*/
 	import { getContext } from 'svelte';
 
 	const { data, xGet, yGet, xScale, yScale, extents } = getContext('LayerCake');

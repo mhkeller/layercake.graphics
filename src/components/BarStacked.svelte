@@ -1,8 +1,10 @@
 <script>
+	/**
+		Generates an SVG stacked bar chart and sets the color via an ordinal scale in `zScale`.
+	*/
 	import { getContext } from 'svelte';
-	import { scaleOrdinal } from 'd3-scale';
 
-	const { data, xGet, yGet, zGet, yScale, custom } = getContext('LayerCake');
+	const { data, xGet, yGet, zGet, yScale } = getContext('LayerCake');
 
 	$: columnWidth = d => {
 		const xVals = $xGet(d);

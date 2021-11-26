@@ -1,4 +1,8 @@
 <script>
+	/**
+		Generates an SVG bar chart
+		@param {String} [fill=#00bbff] – The shape's fill color.
+	*/
 	import { getContext } from 'svelte';
 
 	const { data, xGet, yGet, xScale, yScale } = getContext('LayerCake');
