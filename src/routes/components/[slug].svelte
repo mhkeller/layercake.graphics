@@ -30,9 +30,6 @@
 	export let slug;
 	export let data;
 
-	$: console.log('slug', slug)
-	$: console.log('data', data)
-
 	const renderer = new marked.Renderer();
 	function markdownToHtml (text) {
 		return marked(text, { renderer });
@@ -53,8 +50,6 @@
 	});
 
 	$: component = lookup.get(slug);
-
-	$: console.log(component);
 
 	function copyToClipboard () {
 		const text = pages[0].contents;
@@ -228,6 +223,10 @@
 		transform: translate(0%, -100%);
 	}
 
+	h3 {
+		font-weight: bold;
+	}
+
 	@media (max-width: 750px) {
 		.copy {
 			transform: translate(0, -80%);
@@ -269,11 +268,24 @@
 		/>
 	</div>
 
-	{#if data.dek}
-		<div class="dek">
-			{@html markdownToHtml(data.dek)}
-		</div>
-	{/if}
+	<div class="dek">
+		{@html markdownToHtml(data.dek)}
+		{#if data.usedIn[0].matches.length > 0 || data.usedIn[1].matches.length > 0 }
+			<h3>Used in these{data.usedIn[0].matches.length === 0 && data.usedIn[1].matches.length > 0 ? ' SSR' : ''} examples:</h3>
+			{#each data.usedIn as group}
+				{#if group.matches.length > 0}
+					{#if group.group === 'SSR' && data.usedIn[0].matches.length > 0}
+						<h3>SSR Examples:</h3>
+					{/if}
+					<ul>
+						{#each group.matches as link}
+							<li><a href="{link}" rel="prefetch">{link.split('/').pop()}</a></li>
+						{/each}
+					</ul>
+				{/if}
+			{/each}
+		{/if}
+	</div>
 
 	<div id="pages" class="{data.dek ? 'has-dek' : ''}">
 		<ul id="page-nav">

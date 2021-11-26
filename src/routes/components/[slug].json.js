@@ -1,4 +1,5 @@
-import * as fs from 'fs';
+import { readFileSync, existsSync } from 'fs';
+import { readdirFilterSync } from 'indian-ocean';
 
 // function getComponentJsPaths (example) {
 // 	return example.match(/\.\.\/.+\.js/gm);
@@ -56,7 +57,7 @@ export function get(req, res, next) {
 
 	const componentPath = `src/components/${slug}`;
 
-	if (!fs.existsSync(componentPath)) {
+	if (!existsSync(componentPath)) {
 		res.writeHead(404, {
 			'Content-Type': 'application/json'
 		});
@@ -67,7 +68,7 @@ export function get(req, res, next) {
 		return;
 	}
 
-	const component = fs.readFileSync(componentPath, 'utf-8');
+	const component = readFileSync(componentPath, 'utf-8');
 
 	const fromMain = cleanMain(component);
 
@@ -77,61 +78,35 @@ export function get(req, res, next) {
 	};
 
 	const dekPath = `src/content/components/${slug}.md`;
-	const dek = fs.existsSync(dekPath) ? fs.readFileSync(dekPath, 'utf-8') : '';
+	const dek = existsSync(dekPath) ? readFileSync(dekPath, 'utf-8') : '';
 
-	// const components = getComponentPaths(example)
-	// 	.map(d => {
-	// 		return {
-	// 			title: `./${d}`,
-	// 			contents: cleanContents(fs.readFileSync(`src/${d}`, 'utf-8'))
-	// 		};
-	// 	});
+	const examplePaths = ['src/routes/_examples', 'src/routes/_examples_ssr'];
+	const usedIn = examplePaths.map((d, i) => {
+		return {
+			group: i === 0 ? 'Regular' : 'SSR',
+			matches: readdirFilterSync(d, { fullPath: true })
+				.map(q => {
+					return {
+						path: q,
+						contents: readFileSync(q, 'utf-8')
+					};
+				})
+				.filter(q => {
+					return q.contents.includes(slug);
+				})
+				.map(q => {
+					const name = q.path.split('/').pop().replace('.svelte', '');
+					return `/example${i === 1 ? '-ssr' : ''}/${name}`;
+				})
+		};
+	});
 
-	// const modules = getJsPaths(example)
-	// 	.map(d => {
-	// 		return {
-	// 			title: d.replace('../', ''),
-	// 			contents: cleanContents(fs.readFileSync(d.replace('../', 'src/'), 'utf-8'))
-	// 		};
-	// 	});
-
-	// const jsons = getJsonPaths(example)
-	// 	.map(d => {
-	// 		return {
-	// 			title: d.replace('../', ''),
-	// 			contents: cleanContents(fs.readFileSync(d.replace('../', 'src/'), 'utf-8'))
-	// 		};
-	// 	});
-
-	// const csvs = getCsvPaths(example)
-	// 	.map(d => {
-	// 		return {
-	// 			title: d.replace('../', ''),
-	// 			contents: cleanContents(fs.readFileSync(d.replace('./../', 'src/'), 'utf-8'))
-	// 		};
-	// 	});
-
-	// const componentModulesMatches = getComponentJsPaths(components.map(d => d.contents).join(''));
-	// const componentModules = componentModulesMatches === null ? [] : componentModulesMatches
-	// 	.map(d => {
-	// 		return {
-	// 			title: d.replace('../', './'),
-	// 			contents: cleanContents(fs.readFileSync(d.replace('../', 'src/'), 'utf-8'))
-	// 		};
-	// 	});
-
-	// const componentComponentMatches = getComponentPaths(components.map(d => d.contents).join(''));
-	// const componentComponents = componentComponentMatches === null ? [] : componentComponentMatches
-	// 	.map(d => {
-	// 		return {
-	// 			title: d.replace('./', './components/'),
-	// 			contents: cleanContents(fs.readFileSync(d.replace('./', 'src/components/'), 'utf-8'))
-	// 		};
-	// 	});
+	console.log('used in', usedIn);
 
 	const response = {
 		main,
-		dek
+		dek,
+		usedIn
 	};
 
 	res.writeHead(200, {
