@@ -12,7 +12,7 @@
 		@param {Number} [dxTick=0] – A value that can be added to `xTick` for additional styling.
 		@param {Number} [dyTick=0] – A value that can be added to `yTick` for additional styling.
 	*/
-		import { getContext } from 'svelte';
+	import { getContext } from 'svelte';
 
 	const { width, height, xScale, yRange } = getContext('LayerCake');
 

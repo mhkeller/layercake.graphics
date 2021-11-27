@@ -4,10 +4,11 @@
 	import { timeFormat } from 'd3-time-format';
 	import { timeDay } from 'd3-time';
 
-	export let calcCellSize = d => d;
-	export let seriesColors = ['#fff5cc', '#ffeba9', '#ffe182', '#ffd754', '#ffcc00'];
-
 	const { width, height, data, x, r, extents } = getContext('LayerCake');
+
+	export let calcCellSize = (w, h) => Math.min(w / 7, h / 5);
+;
+	export let seriesColors = ['#fff5cc', '#ffeba9', '#ffe182', '#ffd754', '#ffcc00'];
 
 	const getDayOfWeek = timeFormat('%w');
 	const getWeekOfYear = timeFormat('%U');

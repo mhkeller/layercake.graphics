@@ -1,8 +1,7 @@
 <script>
 	import { getContext } from 'svelte';
-	import { scaleOrdinal } from 'd3-scale';
 
-	const { data, xGet, yGet, zGet, xScale, custom } = getContext('LayerCake');
+	const { data, xGet, yGet, zGet, xScale } = getContext('LayerCake');
 
 	$: columnHeight = d => {
 		const yVals = $yGet(d);

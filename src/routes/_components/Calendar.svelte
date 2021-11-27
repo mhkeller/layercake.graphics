@@ -67,7 +67,6 @@
 			<Svg>
 				<CalendarMonth
 					{seriesColors}
-					calcCellSize={(w, h) => Math.min(w / 7, h / 5)}
 				/>
 			</Svg>
 		</LayerCake>
