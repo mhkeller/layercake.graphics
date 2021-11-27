@@ -1,4 +1,11 @@
 <script>
+	/**
+		Generates an SVG calendar chart
+		@param {Function} [calcCellSize=(w, h) => Math.min(w / 7, h / 5)] – A function with the canvas width and height as arguments and expects a number that will be used as the width and height for each cell. The default will choose a size that fits 7 cells across and five rows top to bottom.
+	*/
+
+	// TODO, change this to use the r scale
+
 	import { getContext } from 'svelte';
 	import { scaleQuantize } from 'd3-scale';
 	import { timeFormat } from 'd3-time-format';
@@ -6,9 +13,8 @@
 
 	const { width, height, data, x, r, extents } = getContext('LayerCake');
 
-	export let calcCellSize = (w, h) => Math.min(w / 7, h / 5);
-;
 	export let seriesColors = ['#fff5cc', '#ffeba9', '#ffe182', '#ffd754', '#ffcc00'];
+	export let calcCellSize = (w, h) => Math.min(w / 7, h / 5);
 
 	const getDayOfWeek = timeFormat('%w');
 	const getWeekOfYear = timeFormat('%U');

@@ -5,7 +5,6 @@
 
 	const { width, height, data } = getContext('LayerCake');
 
-  // export let name = '';
   export let idKey = 'id';
   export let parentKey = undefined;
   export let valueKey = 'value';
