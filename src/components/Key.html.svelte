@@ -1,24 +1,16 @@
 <script>
+	/**
+		Creates a key for ordinal scales on `zScale`.
+		@param {String} [shape='square'] – The shape for each item. Can be 'circle', 'line', or 'square';
+		@param {String} [align='start'] – Sets the CSS flexbox justify-content setting for the box as a whole. Can be 'start', 'center' or 'end'.
+		@param {Object|Function} [lookup] – Either a funtion that takes the value and returns a formatted string, or an object of values. If a given value is not present in a lookup object, it returns the original value.
+		@param {Boolean} [capitalize=true] - Capitalize the first character.
+	*/
 	import { getContext } from 'svelte';
 
-	/* --------------------------------------------
-	 * Can be: "circle", "line" or "square"
-	 */
 	export let shape = 'square';
-
-	/* --------------------------------------------
-	 * Can be "start", "center" or "end"
-	 */
 	export let align = 'start';
-
-	/* --------------------------------------------
-	 * Pass in lookup values
-	 */
 	export let lookup = undefined;
-
-	/* --------------------------------------------
-	 * Capitalize the series name: `true` or `false`
-	 */
 	export let capitalize = true;
 
 	const { zDomain, zScale } = getContext('LayerCake');
@@ -29,7 +21,7 @@
 
 	function displayName (val) {
 		if (lookup) {
-			return lookup[val] || val;
+			return typeof lookup === 'function' ? lookup(val) : (lookup[val] || val);
 		}
 		return capitalize === true ? cap(val) : val;
 	}

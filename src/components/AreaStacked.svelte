@@ -1,6 +1,6 @@
 <script>
 	/**
-		Generates an SVG area shape using the `area` function from d3-shape and sets the color via an ordinal scale in `zScale`.
+		Generates an SVG area shape using the `area` function from d3-shape and sets the color via an ordinal scale in `zScale`. It assumes your data is in a [D3 stack format](https://github.com/d3/d3-shape#stack).
 	*/
 
 	import { area } from 'd3-shape';
