@@ -68,7 +68,7 @@ export function get(req, res, next) {
 
 	const jsdocParsed = doctrine.parse(jsdocString, { unwrap: true, sloppy: true });
 
-	console.log(JSON.stringify(jsdocParsed, null, 2));
+	// console.log(JSON.stringify(jsdocParsed, null, 2));
 	const response = {
 		main,
 		dek,
