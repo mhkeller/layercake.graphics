@@ -241,6 +241,10 @@ ${data.jsdocParsed.tags.map(d => `**${d.name}** ${printTypes(d.type)}|${printDef
 		font-weight: bold;
 	}
 
+	#params-table,
+	#used-in {
+		width: 100%;
+	}
 	#params-table {
 		margin-bottom: 21px;
 	}
@@ -313,9 +317,11 @@ ${data.jsdocParsed.tags.map(d => `**${d.name}** ${printTypes(d.type)}|${printDef
 
 	<div class="dek">
 		{@html markdownToHtml(data.jsdocParsed.description)}
-		<div id="params-table">
-			{@html markdownToHtml(jsdocTable)}
-		</div>
+	</div>
+	<div id="params-table">
+		{@html markdownToHtml(jsdocTable)}
+	</div>
+	<div id="used-in">
 		{#if data.usedIn[0].matches.length > 0 || data.usedIn[1].matches.length > 0 }
 			<h3>Used in these{data.usedIn[0].matches.length === 0 && data.usedIn[1].matches.length > 0 ? ' SSR' : ''} examples:</h3>
 			{#each data.usedIn as group}
