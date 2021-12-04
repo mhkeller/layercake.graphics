@@ -81,7 +81,7 @@
 
 	const jsdocTable = `|Param|Default|Required|Description|
 |-----|-------|--------|-----------|
-${data.jsdocParsed.tags.map(d => `**${d.name}** ${printTypes(d.type)}|${printDefault(d.default)}|${printRequired(d.type)}|${d.description.replace(/(-|–|—)/g, '').trim()}`).join('\n')}
+${data.jsdocParsed.tags.map(d => `**${d.name}** ${printTypes(d.type)}|${printDefault(d.default)}|${printRequired(d.type)}|${d.description.replace(/^(-|–|—)/g, '').trim()}`).join('\n')}
 	`;
 
 	function copyToClipboard () {
