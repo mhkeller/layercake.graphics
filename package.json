@@ -32,6 +32,7 @@
     "d3-time": "^1.1.0",
     "d3-time-format": "^2.3.0",
     "do-not-zip": "^1.0.0",
+    "doctrine": "^3.0.0",
     "emoji-regex": "^8.0.0",
     "golden-fleece": "^1.0.9",
     "highlight.js": "^10.4.1",

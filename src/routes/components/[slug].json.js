@@ -1,5 +1,6 @@
 import { readFileSync, existsSync } from 'fs';
 import { readdirFilterSync } from 'indian-ocean';
+import doctrine from 'doctrine';
 
 function cleanMain (str) {
 	const cleaned = str
@@ -61,10 +62,18 @@ export function get(req, res, next) {
 		};
 	});
 
+	const jsdocString = fromMain.replace('<script>', '')
+		.split('</script>')[0]
+		.split('*/')[0].replace('/**', '').trim();
+
+	const jsdocParsed = doctrine.parse(jsdocString, { unwrap: true, sloppy: true });
+
+	console.log(JSON.stringify(jsdocParsed, null, 2));
 	const response = {
 		main,
 		dek,
-		usedIn
+		usedIn,
+		jsdocParsed
 	};
 
 	res.writeHead(200, {

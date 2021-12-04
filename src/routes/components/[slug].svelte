@@ -51,6 +51,39 @@
 
 	$: component = lookup.get(slug);
 
+	function printTypes(type) {
+		const joinEls = els => els.map(d => `\`${d.name}\``).join(' &vert; ')
+		if (type.name) {
+			return `\`${type.name}\``;
+		}
+		if (type.type.elements) {
+			return `(${joinEls(type.type.elements)})`;
+		}
+		if (type.expression) {
+			if (type.expression.name) {
+				return `\`${type.expression.name}\``;
+			}
+			if (type.expression.elements) {
+				return `(${joinEls(type.expression.elements)})`;
+			}
+		}
+	}
+
+	function printDefault(def) {
+		if (!def) return 'None';
+		return `\`${def}\``;
+	}
+
+	function printRequired(type) {
+		const str = type.type !== 'OptionalType' ? 'yes' : 'no';
+		return `<center>${str}</center>`;
+	}
+
+	const jsdocTable = `|Param|Default|Required|Description|
+|-----|-------|--------|-----------|
+${data.jsdocParsed.tags.map(d => `**${d.name}** ${printTypes(d.type)}|${printDefault(d.default)}|${printRequired(d.type)}|${d.description.replace(/(-|–|—)/g, '').trim()}`).join('\n')}
+	`;
+
 	function copyToClipboard () {
 		const text = pages[0].contents;
 		if (window.clipboardData && window.clipboardData.setData) {
@@ -208,6 +241,35 @@
 		font-weight: bold;
 	}
 
+	#params-table {
+		margin-bottom: 21px;
+	}
+
+	#params-table :global(table) {
+		border-collapse: collapse;
+	}
+	#params-table :global(thead tr) {
+		background: #f6f8fa;
+	}
+	#params-table :global(th:first-child) {
+		border-left-width: 1px;
+	}
+	#params-table :global(th:last-child) {
+		border-right-width: 1px;
+	}
+	#params-table :global(th),
+	#params-table :global(td) {
+		text-align: left;
+		padding: 8px;
+	}
+	#params-table :global(th) {
+		border: 0px solid #ddd;
+		border-top-width: 1px;
+	}
+	#params-table :global(td) {
+		border: 1px solid #ddd;
+	}
+
 	@media (max-width: 750px) {
 		.copy {
 			transform: translate(0, -80%);
@@ -250,7 +312,10 @@
 	</div>
 
 	<div class="dek">
-		{@html markdownToHtml(data.dek)}
+		{@html markdownToHtml(data.jsdocParsed.description)}
+		<div id="params-table">
+			{@html markdownToHtml(jsdocTable)}
+		</div>
 		{#if data.usedIn[0].matches.length > 0 || data.usedIn[1].matches.length > 0 }
 			<h3>Used in these{data.usedIn[0].matches.length === 0 && data.usedIn[1].matches.length > 0 ? ' SSR' : ''} examples:</h3>
 			{#each data.usedIn as group}
