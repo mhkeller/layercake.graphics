@@ -1,6 +1,6 @@
 <script>
 	/**
-		Generates an SVG x-axis
+		Generates an SVG x-axis.
 		@param {Boolean} [gridlines=true] – Extend lines from the ticks into the chart space
 		@param {Boolean} [tickMarks=false] – Show a vertical mark for each tick.
 		@param {Boolean} [baseline=false] – Show a solid line at the bottom.
