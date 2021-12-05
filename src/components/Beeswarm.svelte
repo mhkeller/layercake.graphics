@@ -1,4 +1,11 @@
 <script>
+	/**
+		Generates an SVG Beeswarm chart.
+		@param {Number} [r=3] – The circle radius size in pixels.
+		@param {Number} [strokeWidth=0] – The circle's stroke width in pixels.
+		@param {String} [strokeColor='#fff'] – The circle's stroke color.
+		@param {Number} [spacing=1.5] – Spacing, in pixels, between each circle.
+	*/
 	import { getContext } from 'svelte';
 
 	const { data, xGet, zGet, height, config, custom } = getContext('LayerCake');

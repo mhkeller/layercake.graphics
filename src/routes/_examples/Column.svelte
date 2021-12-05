@@ -7,7 +7,7 @@
 	import AxisY from '../../components/AxisY.svelte';
 	import Annotations from '../../components/Annotations.html.svelte';
 	import Arrows from '../../components/Arrows.svelte';
-	import ArrowheadDef from '../../components/ArrowheadDef.svelte';
+	import ArrowheadMarker from '../../components/ArrowheadMarker.svelte';
 
 	// This example loads csv data as json using @rollup/plugin-dsv
 	import data from '../../data/groups.csv';
@@ -89,7 +89,9 @@
 		</Html>
 
 		<Svg>
-			<ArrowheadDef/>
+			<slot name="def">
+				<ArrowheadMarker/>
+			</slot>
 			<Arrows {annotations}/>
 		</Svg>
 	</LayerCake>
