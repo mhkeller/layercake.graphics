@@ -11,7 +11,7 @@
 	import usStateLabels from '../../data/us-states-labels.json';
 
 	const geojson = feature(usStates, usStates.objects.collection);
-	const projection = geoAlbersUsa();
+	const projection = geoAlbersUsa;
 
 	const hideList = ['CT', 'DC', 'DE', 'MA', 'MD', 'NH', 'NJ', 'RI', 'WV' ];
 </script>

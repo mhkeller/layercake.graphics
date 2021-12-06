@@ -1,7 +1,7 @@
 <script>
 	/**
 		Generates an HTML x-axis, useful for server-side rendered charts.
-		@param {Boolean} [gridlines=true] – Extend lines from the ticks into the chart space
+		@param {Boolean} [gridlines=true] – Extend lines from the ticks into the chart space.
 		@param {Boolean} [tickMarks=false] – Show a vertical mark for each tick.
 		@param {Boolean} [baseline=false] – Show a solid line at the bottom.
 		@param {Boolean} [snapTicks=false] – Instead of centering the text on the first and the last items, align them to the edges of the chart.

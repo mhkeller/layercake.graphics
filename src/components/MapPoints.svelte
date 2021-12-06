@@ -1,4 +1,13 @@
 <script>
+	/**
+		Generates canvas dots onto a map using [d3-geo](https://github.com/d3/d3-geo).
+		@param {Function} projection – A D3 projection function. Pass this in as an uncalled function, e.g. `projection={geoAlbersUsa}`.
+		@param {Array} [features=$data.features] – A list of GeoJSOn features. By default, assumes `$data` is a GeoJSON Feature Collection and uses those features.
+		@param {Number} [r=3.5] – The point's radius.
+		@param {String} [fill='yellow'] – The point's fill color.
+		@param {String} [stroke='#000'] – The point's stroke color.
+		@param {Number} [strokeWidth=1] – The point's stroke width.
+	*/
 	import { getContext } from 'svelte';
 
 	const { data, width, height } = getContext('LayerCake');
@@ -7,15 +16,14 @@
 	 * Require a D3 projection function
 	 */
 	export let projection;
-
-	export let features = [];
-	export let r = 3;
+	export let features = $data.features;
+	export let r = 3.5;
 	export let fill = 'yellow';
 	export let stroke = '#000';
 	export let strokeWidth = 1;
 	export let opacity = 1;
 
-	$: projectionFn = projection
+	$: projectionFn = projection()
 		.fitSize([$width, $height], $data);
 </script>
 

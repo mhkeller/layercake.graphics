@@ -1,8 +1,8 @@
 <script>
 	/**
-		Generates a canvas map  using the `geoPath` function from [d3-geo](https://github.com/d3/d3-geo).
-		@param {Function} projection – A D3 projection function. Pass this in as a called function, e.g. `geoAlbersUsa()`.
-		@param {GeoJsonFeatureCollection} [features=$data] – A GeoJSON feature collection that has an array of features on its `features` key. Use this if you want to draw a subset of the features in `$data` while keeping the zoom on the whole GeoJSON feature set. By default, it plots everything in `$data`.
+		Generates a canvas map using the `geoPath` function from [d3-geo](https://github.com/d3/d3-geo).
+		@param {Function} projection – A D3 projection function. Pass this in as an uncalled function, e.g. `projection={geoAlbersUsa}`.
+		@param {GeoJsonFeatureCollection} [features=$data.features] – A GeoJSON feature collection that has an array of features on its `features` key. Use this if you want to draw a subset of the features in `$data` while keeping the zoom on the whole GeoJSON feature set. By default, it plots everything in `$data`.
 		@param {String} [stroke='#ccc'] – The shape's stroke color.
 		@param {Number} [strokeWidth=1] – The shape's stroke width.
 		@param {String} [fill='#fff'] – The shape's fill color.
@@ -16,12 +16,12 @@
 	const { ctx } = getContext('canvas');
 
 	export let projection;
-	export let stroke = '#ccc'; // TODO change this to be called strokeColor
+	export let stroke = '#ccc';
 	export let strokeWidth = 1;
 	export let fill = '#fff';
 	export let features = $data;
 
-	$: projectionFn = projection
+	$: projectionFn = projection()
 		.fitSize([$width, $height], $data);
 
 	$: geoPathFn = geoPath(projectionFn);

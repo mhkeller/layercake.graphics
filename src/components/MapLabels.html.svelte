@@ -1,17 +1,21 @@
 <script>
+	/**
+		Adds HTML text labels based features in the data or a custom GeoJSON Feature Collection.
+		@param {Function} projection – A D3 projection function. Pass this in as an uncalled function, e.g. `projection={geoAlbersUsa}`.
+		@param {Function} getLabel – An accessor function to get the field to display.
+		@param {Function} [getCoordinates=d => d.geometry.coordinates] – An accessor function to get the `[x, y]` coordinate field. Defaults to a GeoJSON feature format.
+		@param {Array} [features=$data.features] – A list of labels. By default, assumes `$data` is a GeoJSON Feature Collection and uses those features.
+	*/
 	import { getContext } from 'svelte';
-	import * as geo from 'd3-geo';
 
-	const { data, width, height, custom } = getContext('LayerCake');
+	const { data, width, height } = getContext('LayerCake');
 
-	/* --------------------------------------------
-	 * Require a D3 projection function
-	 */
 	export let projection;
-
+	export let getLabel;
+	export let getCoordinates;
 	export let features = $data.features;
 
-	$: projectionFn = projection
+	$: projectionFn = projection()
 		.fitSize([$width, $height], $data);
 </script>
 
@@ -20,10 +24,10 @@
 	<div
 		class="map-label"
 		style="
-			left: {projectionFn($custom.getLabelCoordinates(d))[0]}px;
-			top: {projectionFn($custom.getLabelCoordinates(d))[1]}px;
+			left: {projectionFn(getCoordinates(d))[0]}px;
+			top: {projectionFn(getCoordinates(d))[1]}px;
 		"
-	>{$custom.getLabelName(d)}</div>
+	>{$getLabel(d)}</div>
 {/each}
 </div>
 

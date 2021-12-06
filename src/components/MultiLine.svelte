@@ -1,7 +1,7 @@
 <script>
 	import { getContext } from 'svelte';
 
-	const { data, xGet, yGet, zGet, xScale, yScale, xRange, yRange, xDomain, yDomain } = getContext('LayerCake');
+	const { data, xGet, yGet, zGet } = getContext('LayerCake');
 
 	$: path = values => {
 		return 'M' + values

@@ -9,7 +9,7 @@
 	import usStates from '../../data/us-states.topojson.json';
 
 	const geojson = feature(usStates, usStates.objects.collection);
-	const projection = geoAlbersUsa();
+	const projection = geoAlbersUsa;
 
 	const features = geojson.features.map(d => {
 		return {

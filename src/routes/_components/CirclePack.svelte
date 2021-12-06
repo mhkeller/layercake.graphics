@@ -38,9 +38,9 @@
         valueKey={valueKey}
 				fill='#ff00cc'
 				stroke='#9f0080'
-				textColor="#61004e"
-				textStroke="1"
-				textStrokeColor="#ffdbf8"
+				textColor='#61004e'
+				textStroke='#ffdbf8'
+				textStrokeWidth={1}
       />
 		</Html>
 	</LayerCake>

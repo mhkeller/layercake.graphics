@@ -18,7 +18,7 @@
 
 	const geojson = feature(usStates, usStates.objects.collection);
 	const aspectRatio = 2.63;
-	const projection = geoAlbersUsa();
+	const projection = geoAlbersUsa;
 
 	/* --------------------------------------------
 	 * Create lookups to more easily join our data

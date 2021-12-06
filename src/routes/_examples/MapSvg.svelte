@@ -20,7 +20,7 @@
 	const dataLookup = new Map();
 
 	const geojson = feature(usStates, usStates.objects.collection);
-	const projection = geoAlbersUsa();
+	const projection = geoAlbersUsa;
 
 	stateData.forEach(d => {
 		dataLookup.set(d[joinKey], d);

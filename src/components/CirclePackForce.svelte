@@ -1,4 +1,13 @@
 <script>
+	/**
+		Generates an SVG force simulation using [d3-force](https://github.com/d3/d3-force). The values here are defaults which you will likely have to customize because every force simulation is different.
+		@param {Number} [manyBodyStrength=5] – The value passed into the `.strength` method on `forceManyBody`, which is used as the `'charge'` property on the simulation. See [the documentation](https://github.com/d3/d3-force#manyBody_strength) for more.
+		@param {Number} [xStrength=0.1] – The value passed into the `.strength` method on `forceX`, which is used as the `'x'` property on the simulation. See [the documentation](https://github.com/d3/d3-force#x_strength) for more.
+		@param {String} [nodeColor=undefined] Set a color manually otherwise it will default to the `zScale`.
+		@param {String} [nodeStroke='#fff'] – The circle's stroke color.
+		@param {Number} [nodeStrokeWidth=1] – The circle's stroke width, in pixels.
+		@param {Boolean} [groupBy=true] – Group the nodes by the return value of the x-scale. If `false`, align all the nodes to the canvas center.
+	*/
 	import { getContext } from 'svelte';
 	import {
 		forceSimulation,
@@ -10,19 +19,11 @@
 
 	const { data, width, height, xScale, xGet, rGet, zGet } = getContext('LayerCake');
 
-	/* --------------------------------------------
-	 * Here are some values to play with, but most every force layout
-	 * is going be unique and this component will need to be customized
-	 * See more: https://github.com/d3/d3-force/blob/master/README.md
-	 */
 	export let manyBodyStrength = 5;
 	export let xStrength = 0.1;
-	/* --------------------------------------------
-	 * Set a manual color, otherwise it will default to using the zScale
-	 */
 	export let nodeColor = undefined;
+	export let nodeStroke = '#fff';
 	export let nodeStrokeWidth = 1;
-	export let nodeStrokeColor = '#fff';
 	export let groupBy = true;
 
 	/* --------------------------------------------
@@ -62,8 +63,8 @@
 			class='node'
 			r={$rGet(point)}
 			fill={nodeColor || $zGet(point)}
+			stroke={nodeStroke}
 			stroke-width={nodeStrokeWidth}
-			stroke={nodeStrokeColor}
 			cx='{point.x}'
 			cy='{point.y}'
 		>

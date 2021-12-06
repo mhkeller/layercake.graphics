@@ -3,7 +3,7 @@
 		Generates an HTML Beeswarm chart.
 		@param {Number} [r=3] – The circle radius size in pixels.
 		@param {Number} [strokeWidth=0] – The circle's stroke width in pixels.
-		@param {String} [strokeColor='#fff'] – The circle's stroke color.
+		@param {String} [stroke='#fff'] – The circle's stroke color.
 		@param {Number} [spacing=1.5] – Spacing, in pixels, between each circle.
 	*/
 	import { getContext } from 'svelte';
@@ -12,7 +12,7 @@
 
 	export let r = 3;
 	export let strokeWidth = 0;
-	export let strokeColor = '#fff';
+	export let stroke = '#fff';
 	export let spacing = 1.5;
 
 	$: circles = dodge($data, { rds: r * 2 + spacing + strokeWidth, x: $xGet });
@@ -68,7 +68,7 @@
 			class="bee"
 			style="
 				background:{$zGet(d)};
-				border-color:{strokeColor};
+				border-color:{stroke};
 				border-width:{strokeWidth};
 				left:{d.x}px;
 				top:{$height - r - spacing - strokeWidth / 2 - d.y}px;

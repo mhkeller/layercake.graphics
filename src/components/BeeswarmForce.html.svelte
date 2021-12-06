@@ -3,9 +3,9 @@
 		Generates an HTML Beeswarm chart using a [d3-force simulation](https://github.com/d3/d3-force).
 		@param {Number} [r=4] – The circle radius size in pixels.
 		@param {Number} [strokeWidth=0.5] – The circle's stroke width in pixels.
-		@param {String} [strokeColor='#fff'] – The circle's stroke color.
-		@param {Number} [xStrength=0.95] – The value passed into the `.strength` method on `forceX`. See [the documentation](https://github.com/d3/d3-force#x_strength).
-		@param {Number} [yStrength=0.075] – The value passed into the `.strength` method on `forceY`. See [the documentation](https://github.com/d3/d3-force#y_strength).
+		@param {String} [stroke='#fff'] – The circle's stroke color.
+		@param {Number} [xStrength=0.95] – The value passed into the `.strength` method on `forceX`, which is used as the `'x'` property on the simulation. See [the documentation](https://github.com/d3/d3-force#x_strength) for more.
+		@param {Number} [yStrength=0.075] – The value passed into the `.strength` method on `forceY`, which is used as the `'y'` property on the simulation. See [the documentation](https://github.com/d3/d3-force#y_strength) for more.
 	*/
 	import { getContext } from 'svelte';
 	import { forceSimulation, forceX, forceY, forceCollide } from 'd3-force';
@@ -16,7 +16,7 @@
 
 	export let r = 4;
 	export let strokeWidth = 0.5;
-	export let strokeColor = '#fff';
+	export let stroke = '#fff';
 	export let xStrength = 0.95;
 	export let yStrength = 0.075;
 
@@ -47,7 +47,7 @@
 				height: {r * 2}px;
 				background: {$zGet(node)};
 				border-width: {strokeWidth}px;
-				border-color: {strokeColor};
+				border-color: {stroke};
 				'
 		>
 			<title>{$custom.getTitle(node)}</title>

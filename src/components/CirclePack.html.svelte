@@ -1,4 +1,19 @@
 <script>
+	/**
+		Generates an HTML circle pack chart using [d3-hierarchy](https://github.com/d3/d3-hierarchy).
+		@param {String} [idKey='id'] - TK
+		@param {String} [parentKey=undefined] - TK
+		@param {String} [valueKey='value'] - TK
+		@param {Function} [labelVisibilityThreshold=r => r > 25] - By default, only show the text inside a circle if its radius exceeds a certain size. Provide your own function for different behavior.
+		@param {String} [fill='#fff'] - The circle's fill color.
+		@param {String} [stroke='#999'] - The circle's stroke color.
+		@param {Number} [strokeWidth=1] - The circle's stroke width, in pixels.
+		@param {String} [textColor='#333'] - The label text color.
+		@param {String} [textStroke='#000'] - The label text's stroke color.
+		@param {Number} [textStrokeWidth=0] - The label text's stroke width, in pixels.
+		@param {Function} [sortBy=(a, b) => b.value - a.value] - The order in which circle's are drawn. Sorting on the `depth` key is also a popular choice.
+		@param {Number} [spacing=0] - Whitespace padding between each circle, in pixels.
+		*/
 	import { stratify, pack, hierarchy } from 'd3-hierarchy'
 	import { getContext } from 'svelte';
 	import { format } from 'd3-format';
@@ -11,12 +26,12 @@
   export let labelVisibilityThreshold = r => r > 25;
   export let fill = '#fff';
 	export let stroke = '#999';
+	export let strokeWidth = 1;
 	export let textColor = '#333';
-	export let textStroke = 0;
-	export let textStrokeColor = '#000';
+	export let textStrokeWidth = 0;
+	export let textStroke = '#000';
 	export let sortBy = (a, b) => b.value - a.value; // 'depth' is also a popular choice
-
-  export let circlePadding = 0;
+  export let spacing = 0;
 
   /* --------------------------------------------
    * This component will automatically group your data
@@ -41,7 +56,7 @@
 
 	$: packer = pack()
 		.size([$width, $height])
-		.padding(circlePadding);
+		.padding(spacing);
 
 	$: stratified = stratifier(dataset);
 
@@ -68,17 +83,17 @@
     >
 			<div
 				class="circle"
-				style="left:{d.x}px;top:{d.y}px;width:{d.r * 2}px;height:{d.r * 2}px;background-color:{fill};border: 1px solid {stroke};"
+				style="left:{d.x}px;top:{d.y}px;width:{d.r * 2}px;height:{d.r * 2}px;background-color:{fill};border: {strokeWidth}px solid {stroke};"
 			/>
 				<div
 					class="text-group"
 					style="
 						color:{textColor};
 						text-shadow:
-							-{textStroke}px -{textStroke}px 0 {textStrokeColor},
-							{textStroke}px -{textStroke}px 0 {textStrokeColor},
-							-{textStroke}px {textStroke}px 0 {textStrokeColor},
-							{textStroke}px {textStroke}px 0 {textStrokeColor};
+							-{textStrokeWidth}px -{textStrokeWidth}px 0 {textStroke},
+							{textStrokeWidth}px -{textStrokeWidth}px 0 {textStroke},
+							-{textStrokeWidth}px {textStrokeWidth}px 0 {textStroke},
+							{textStrokeWidth}px {textStrokeWidth}px 0 {textStroke};
 						left:{d.x}px;
 						top:{d.y - (labelVisibilityThreshold(d.r) ? 0 : (d.r + 4))}px;
 					"
@@ -123,6 +138,9 @@
   .circle-group[data-visible="false"]:hover .text-group {
 		z-index: 999;
 		display: block !important;
+		/* On hover, set the text color to black and eliminate the shadow */
+		text-shadow: none !important;
+		color: #000 !important;
 	}
 	.circle-group[data-visible="false"]:hover .circle {
 		border-color: #000 !important;

@@ -1,4 +1,12 @@
 <script>
+	/**
+		Generates an SVG map using the `geoPath` function from [d3-geo](https://github.com/d3/d3-geo).
+		@param {Function} projection – A D3 projection function. Pass this in as an uncalled function, e.g. `projection={geoAlbersUsa}`.
+		@param {GeoJsonFeatureCollection} [features=$data.features] – A GeoJSON feature collection that has an array of features on its `features` key. Use this if you want to draw a subset of the features in `$data` while keeping the zoom on the whole GeoJSON feature set. By default, it plots everything in `$data`.
+		@param {String} [stroke='#ccc'] – The shape's stroke color.
+		@param {Number} [strokeWidth=1] – The shape's stroke width.
+		@param {String} [fill='#fff'] – The shape's fill color.
+	*/
 	import { getContext, createEventDispatcher } from 'svelte';
 	import { geoPath } from 'd3-geo';
 	import { raise } from 'layercake';
@@ -19,7 +27,7 @@
 
 	$: fitSizeRange = fixedAspectRatio ? [100, 100 / fixedAspectRatio] : [$width, $height];
 
-	$: projectionFn = projection
+	$: projectionFn = projection()
 		.fitSize(fitSizeRange, $data);
 
 	$: geoPathFn = geoPath(projectionFn);

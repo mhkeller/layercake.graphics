@@ -70,7 +70,7 @@
 				{manyBodyStrength}
 				{xStrength}
 				groupBy={JSON.parse(groupBy)}
-				nodeStrokeColor='#000'
+				nodeStroke='#000'
 			/>
 		</Svg>
 	</LayerCake>

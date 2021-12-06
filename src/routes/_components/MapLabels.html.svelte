@@ -11,7 +11,7 @@
 	import usStateLabels from '../../data/us-states-labels.json';
 
 	const geojson = feature(usStates, usStates.objects.collection);
-	const projection = geoAlbersUsa();
+	const projection = geoAlbersUsa;
 
 	const hideList = ['CT', 'DC', 'DE', 'MA', 'MD', 'NH', 'NJ', 'RI', 'WV' ];
 </script>
@@ -33,10 +33,6 @@
 	<LayerCake
 		padding={{ top: 10 }}
 		data={geojson}
-		custom={{
-			getLabelCoordinates: d => d.center,
-			getLabelName: d => d.abbr
-		}}
 	>
 		<!-- <Svg>
 			<MapSvg
@@ -47,6 +43,8 @@
 		<Html>
 			<MapLabelsHtml
 				{projection}
+				getLabel={d => d.abbr}
+				getCoordinates={d => d.center}
 				features={usStateLabels.filter(d => !hideList.includes(d.abbr))}
 			/>
 		</Html>
