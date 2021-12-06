@@ -1,4 +1,15 @@
 <script>
+	/**
+		Generates an SVG Sankey chart using [d3-sankey](https://github.com/d3/d3-sankey).
+		@param {Function} [colorLinks=d => 'rgba(0, 0, 0, .2)'] – A function to return a color for the links.
+		@param {Function} [colorNodes=d => '#333'] – A function to return a color for each node.
+		@param {Function} [colorText=d => '#263238'] – A function to return a color for each text label.
+		@param {Number} [nodeWidth=5] – The width of each node, in pixels, passed to [`sankey.nodeWidth`](https://github.com/d3/d3-sankey#sankey_nodeWidth).
+		@param {Number} [nodePadding=10] – The padding between nodes, passed to [`sankey.nodePadding`](https://github.com/d3/d3-sankey#sankey_nodePadding).
+		@param {Function} [linkSort=null] – How to sort the links, passed to [`sankey.linkSort`](https://github.com/d3/d3-sankey#sankey_linkSort).
+		@param {Function} [nodeId=d => d.id] – The ID field accessor, passed to [`sankey.nodeId`](https://github.com/d3/d3-sankey#sankey_nodeId).
+		@param {Function} [nodeAlign=d3.sankeyLeft] – An alignment function to position the Sankey blocks. See the [d3-sankey documentation](https://github.com/d3/d3-sankey#alignments) for more.
+	*/
 	import { getContext } from 'svelte';
 	import * as Sankey from 'd3-sankey';
 

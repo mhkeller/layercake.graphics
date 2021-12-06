@@ -1,6 +1,6 @@
 <script>
 	/**
-		Generates HTML text labels for a nested data structure. It places the label near the y-value of the highest x-valued data point. This is useful for labeling the final point in a multi-series line chart, for example. It expects your data to be an array of objects where the `key` field is the label to display and `values` is an array of data objects.
+		Generates HTML text labels for a nested data structure. It places the label near the y-value of the highest x-valued data point. This is useful for labeling the final point in a multi-series line chart, for example. It expects your data to be an array of objects where each has a `key` field that is the label to display and a `values` field that is an array of data objects.
 	*/
   import { getContext } from 'svelte';
   import { max } from 'd3-array';

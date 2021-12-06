@@ -1,4 +1,7 @@
 <script>
+	/**
+		Generates an SVG radar chart.
+	*/
 	import { getContext } from 'svelte';
 	import { line, curveCardinalClosed } from 'd3-shape';
 
@@ -14,8 +17,8 @@
 	$: cx = (circleR, i) => circleR * Math.cos(angleSlice * i - Math.PI / 2)
 	$: cy = (circleR, i) => circleR * Math.sin(angleSlice * i - Math.PI / 2)
 
-	/* The non-D3 line generator way. Use `d={path}` in the template below */
-	// $: path = 'M' + $data
+	/* The non-D3 line generator way. */
+	// $: path = valus => 'M' + values
 	// 	.map(d => {
 	// 		return $rGet(d).map((val, i) => {
 	// 			return [
