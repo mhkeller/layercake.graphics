@@ -1,4 +1,8 @@
 <script>
+	/**
+		Adds SVG swoopy arrows based on a config object.
+		@param {Array} [annotations=[]] – A list of annotation objects. See the [Column](https://layercake.graphics/example/Column) chart example for the schema and options.
+	*/
 	import { getContext, onMount } from 'svelte';
 
 	import { swoopyArrow, getElPosition, parseCssValue } from '../modules/arrowUtils.js';

@@ -4,16 +4,12 @@
 		@param {Function} [calcCellSize=(w, h) => Math.min(w / 7, h / 5)] – A function givn the canvas width and height as arguments and expects a return number that will be used as the width and height for each cell. The default will choose a size that fits seven cells across and five rows top to bottom.
 	*/
 
-	// TODO, change this to use the r scale
-
 	import { getContext } from 'svelte';
-	import { scaleQuantize } from 'd3-scale';
 	import { timeFormat } from 'd3-time-format';
 	import { timeDay } from 'd3-time';
 
-	const { width, height, data, x, r, extents } = getContext('LayerCake');
+	const { width, height, data, x, z, zScale, extents } = getContext('LayerCake');
 
-	export let seriesColors = ['#fff5cc', '#ffeba9', '#ffe182', '#ffd754', '#ffcc00'];
 	export let calcCellSize = (w, h) => Math.min(w / 7, h / 5);
 
 	const getDayOfWeek = timeFormat('%w');
@@ -23,18 +19,14 @@
 		const stringDate = date.toISOString().split('T')[0];
 		const days = $data.filter(d => $x(d) === stringDate)[0];
 		if (days) {
-			return $r(days);
+			return $z(days);
 		}
 		return 0;
 	};
 
-	$: colorScale = scaleQuantize()
-		.domain($extents.r)
-		.range(seriesColors);
-
 	$: fillColor = day => {
 		const n = count(day);
-		return n ? colorScale(n) : '#fff';
+		return n ? $zScale(n) : '#fff';
 	};
 
 	$: cellSize = calcCellSize($width, $height);

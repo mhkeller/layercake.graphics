@@ -1,7 +1,13 @@
 <script>
+	/**
+		Adds text annotations based on a config object that has CSS styles as fields.
+		@param {Array} [annotations=[]] – A list of annotation objects. It expects values of `top`, `right`, `bottom` and `left` whose values are CSS values like `'10px'` or `'5%'` that will be used to absolutely position the text div. See the [Column](https://layercake.graphics/example/Column) chart example for the schema and options.
+		@param {Function} [getText=d => d.text] – An accessor function to get the field to display.
+	*/
 	const vals = ['top', 'right', 'bottom', 'left'];
 
 	export let annotations = [];
+	export let getText = d => d.text;
 
 	$: fillStyle = d => {
 		let style = '';
@@ -20,7 +26,7 @@
 			class="layercake-annotation"
 			data-id="{i}"
 			style="{fillStyle(d)}"
-		>{d.text}</div>
+		>{getText(d)}</div>
 	{/each}
 </div>
 

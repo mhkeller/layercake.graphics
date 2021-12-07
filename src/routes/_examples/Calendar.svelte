@@ -1,6 +1,7 @@
 <script>
 	import { LayerCake, Svg } from 'layercake';
 	import { nest } from 'd3-collection';
+	import { scaleQuantize } from 'd3-scale';
 
 	import CalendarMonth from '../../components/CalendarMonth.svelte';
 
@@ -61,13 +62,13 @@
 		<LayerCake
 			padding={{ top: 1, right: 1, bottom: 1, left: 1 }}
 			x='key'
-			r={d => d.values.length}
+			z={d => d.values.length}
+			zScale={scaleQuantize()}
+			zRange={seriesColors}
 			data={month.values}
 		>
 			<Svg>
-				<CalendarMonth
-					{seriesColors}
-				/>
+				<CalendarMonth/>
 			</Svg>
 		</LayerCake>
 	</div>

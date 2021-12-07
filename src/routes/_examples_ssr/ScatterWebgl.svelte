@@ -12,7 +12,7 @@
 	const xKey = 'myX';
 	const yKey = 'myY';
 
-	const diameter = 6;
+	const r = 3;
 	const padding = 6;
 
 	data.forEach(d => {
@@ -72,7 +72,9 @@
 		data={data}
 	>
 		<WebGL>
-			<ScatterWebGL {diameter}/>
+			<ScatterWebGL
+				{r}
+			/>
 		</WebGL>
 
 		<Html>
