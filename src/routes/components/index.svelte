@@ -53,8 +53,6 @@
 			lastId = window.location.hash.slice(1);
 			activeSection = lastId || 'axis';
 
-			console.log('active', activeSection, lastId);
-
 			onresize();
 			onscroll();
 

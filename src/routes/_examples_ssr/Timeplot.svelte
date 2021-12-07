@@ -76,6 +76,7 @@
 			<Scatter
 				{r}
 				fill={'rgba(255, 204, 0, 0.75)'}
+				strokeWidth={0}
 			/>
 		</Html>
 	</LayerCake>

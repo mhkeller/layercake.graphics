@@ -1,7 +1,11 @@
 <script>
-	import { Delaunay } from 'd3-delaunay';
+	/**
+		Generates a voronoi layer using [d3-delauney](https://github.com/d3/d3-delauney).
+		@param {String} [stroke=undefined] – An optional stroke color, which is likely only useful for testing to make sure the shapes drew correctly.
+	*/
 	import { getContext } from 'svelte';
 	import { uniques } from 'layercake';
+	import { Delaunay } from 'd3-delaunay';
 
 	const { data, xGet, yGet, width, height } = getContext('LayerCake');
 
@@ -30,6 +34,7 @@
 		pointer-events: all;
 	}
 
+	/* Useful to testing but you'll want to disable this for production */
 	.voronoi-cell:hover {
 		stroke: #000;
 	}
@@ -41,5 +46,6 @@
 		class="voronoi-cell"
 		d={voronoi.renderCell(i)}
 		on:mouseover="{log(point)}"
+		on:focus="{log(point)}"
 	></path>
 {/each}

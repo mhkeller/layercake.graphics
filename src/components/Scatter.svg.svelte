@@ -1,21 +1,26 @@
 <script>
+	/**
+		Generates an SVG scatter plot.
+		@param {Number} [r=5] – The circle's radius.
+		@param {String} [fill='#0cf'] – The circle's fill color.
+		@param {String} [stroke='#000'] – The circle's stroke color.
+		@param {Number} [strokeWidth=1] – The circle's stroke width.
+	*/
 	import { getContext } from 'svelte';
 
-	const { data, xGet, yGet, xScale, yScale } = getContext('LayerCake');
+	const { data, xGet, yGet } = getContext('LayerCake');
 
 	export let r = 5;
-	export let fill = '#000';
-	export let stroke = '#0cf';
+	export let fill = '#0cf';
+	export let stroke = '#000';
 	export let strokeWidth = 0;
-	export let dx = 0;
-	export let dy = 0;
 </script>
 
 <g class="scatter-group">
 	{#each $data as d}
 		<circle
-			cx={$xGet(d) + (typeof dx === 'function' ? dx($xScale) : dx)}
-			cy={$yGet(d) + (typeof dy === 'function' ? dy($yScale) : dy)}
+			cx={$xGet(d)}
+			cy={$yGet(d)}
 			{r}
 			{fill}
 			{stroke}

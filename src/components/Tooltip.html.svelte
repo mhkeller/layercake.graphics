@@ -1,4 +1,9 @@
 <script>
+	/**
+		Generates a hover tooltip. It creates a slot with an exposed variable via `let:detail` that contains information about the event. Use the slot to populate the body of the tooltip using the exposed variable `detail`.
+		@param {Object} evt – A svelte event created via [`dispatch`](https://svelte.dev/docs#createEventDispatcher) with event information under `evt.detail.e`.
+		@param {Number} [offset=35] – A negative y-offset from the hover point, in pixels.
+	*/
   export let evt = {};
   export let offset = 35;
 </script>

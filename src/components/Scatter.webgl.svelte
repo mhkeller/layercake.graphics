@@ -1,11 +1,26 @@
 <script>
+	/**
+		Generates a a WebGl scatter plot.
+		@param {Number} [r=5] – The circle's radius.
+		@param {String} [fill='#0cf'] – The circle's fill color.
+	*/
 	import reglWrapper from 'regl';
 	import { getContext } from 'svelte';
-	import { scaleCanvas } from 'layercake';
 
 	const { data, xGet, yGet, width, height } = getContext('LayerCake');
 
-	export let diameter;
+	export let r = 5;
+	export let fill = '#0cf';
+	export let stroke = '#000'; // Not yet implemented
+	// export let strokeWidth = 0;
+
+	function hexToRgbPercent (hex) {
+		let str = hex.replace('#', '');
+		if (str.length === 3) {
+			str = str[0] + str[0] + str[1] + str[1] + str[2] + str[2];
+		}
+		return str.match(/.{1,2}/g).map(d => parseInt(d, 16) / 255);
+	}
 
 	const { gl } = getContext('gl');
 
@@ -35,7 +50,6 @@
 				extensions: ['oes_standard_derivatives']
 			});
 
-			// console.log('rendering', regl);
 			regl.clear({
 				color: [0, 0, 0, 0],
 				depth: 1
@@ -114,9 +128,9 @@
 					}
 				},
 				uniforms: {
-					fill_color: [0.6705882352941176, 0, 0.8392156862745098],
+					fill_color: hexToRgbPercent(fill),
 					// stroke_color: [0.6705882352941176, 0, 0.8392156862745098],
-					stroke_color: [0, 0, 0],
+					stroke_color: hexToRgbPercent(stroke),
 					// FYI: there is a helper method for grabbing
 					// values out of the context as well.
 					// These uniforms are used in our fragment shader to
@@ -142,7 +156,7 @@
 			});
 
 			draw({
-				pointWidth: diameter,
+				pointWidth: r * 2,
 				points: $data
 			});
 		}

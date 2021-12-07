@@ -1,9 +1,9 @@
 <script>
 	/**
-		Generates a scatter plot.
+		Generates a canvas scatter plot.
 		@param {Number} [r=5] – The circle's radius.
-		@param {String} [fill='#000'] – The circle's fill color.
-		@param {String} [stroke='#0cf'] – The circle's stroke color.
+		@param {String} [fill='#0cf'] – The circle's fill color.
+		@param {String} [stroke='#000'] – The circle's stroke color.
 		@param {Number} [strokeWidth=1] – The circle's stroke width.
 	*/
 	import { getContext } from 'svelte';
@@ -14,8 +14,8 @@
 	const { ctx } = getContext('canvas');
 
 	export let r = 5;
-	export let fill = '#000';
-	export let stroke = '#0cf';
+	export let fill = '#0cf';
+	export let stroke = '#000';
 	export let strokeWidth = 1;
 
 	$: {
@@ -35,11 +35,11 @@
 			$data.forEach(d => {
 				$ctx.beginPath();
 				$ctx.arc($xGet(d), $yGet(d), r, 0, 2 * Math.PI, false);
-				$ctx.fillStyle = fill;
-				$ctx.fill();
 				$ctx.lineWidth = strokeWidth;
 				$ctx.strokeStyle = stroke;
 				$ctx.stroke();
+				$ctx.fillStyle = fill;
+				$ctx.fill();
 			});
 		}
 	}

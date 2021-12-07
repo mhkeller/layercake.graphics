@@ -1,14 +1,19 @@
 <script>
+	/**
+		Generates an HTML scatter plot. This component can also work if the x- or y-scale is ordinal, i.e. it has a `.bandwidth` method. See the [timeplot chart](https://layercake.graphics/example/Timeplot) for an example.
+		@param {Number} [r=5] – The circle's radius.
+		@param {String} [fill='#0cf'] – The circle's fill color.
+		@param {String} [stroke='#000'] – The circle's stroke color.
+		@param {Number} [strokeWidth=1] – The circle's stroke width.
+	*/
 	import { getContext } from 'svelte';
 
 	const { data, xGet, yGet, xScale, yScale } = getContext('LayerCake');
 
 	export let r = 5;
-	export let fill = '#000';
-	export let stroke = '#0cf';
-	export let strokeWidth = 0;
-	// export let dx = 0;
-	// export let dy = 0;
+	export let fill = '#0cf';
+	export let stroke = '#000';
+	export let strokeWidth = 1;
 </script>
 
 <div class="scatter-group">
