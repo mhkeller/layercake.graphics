@@ -43,9 +43,9 @@
 		<Html>
 			<MapLabelsHtml
 				{projection}
+				features={usStateLabels.filter(d => !hideList.includes(d.abbr))}
 				getLabel={d => d.abbr}
 				getCoordinates={d => d.center}
-				features={usStateLabels.filter(d => !hideList.includes(d.abbr))}
 			/>
 		</Html>
 	</LayerCake>

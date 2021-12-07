@@ -71,10 +71,6 @@
 		zScale={scaleQuantize()}
 		zRange={colors}
 		{flatData}
-		custom={{
-			getLabelCoordinates: feature => feature.properties[labelCoordinatesKey],
-			getLabelName: feature => feature.properties[labelNameKey]
-		}}
 	>
 		<Canvas>
 			<MapCanvas
@@ -96,6 +92,8 @@
 			<MapLabels
 				{projection}
 				features={[...geojson.features.slice(0, 50), geojson.features[0]]}
+				getCoordinates={feature => feature.properties[labelCoordinatesKey]}
+				getName={feature => feature.properties[labelNameKey]}
 			/>
 		</Html> -->
 	</LayerCake>

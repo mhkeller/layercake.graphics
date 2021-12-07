@@ -33,10 +33,6 @@
 	<LayerCake
 		padding={{ top: 10 }}
 		data={geojson}
-		custom={{
-			getLabelCoordinates: d => d.center,
-			getLabelName: d => d.abbr
-		}}
 	>
 		<Svg>
 			<!-- <MapSvg
@@ -46,6 +42,8 @@
 			<MapLabels
 				{projection}
 				features={usStateLabels.filter(d => !hideList.includes(d.abbr))}
+				getCoordinates={d => d.center}
+				getLabel={d => d.abbr}
 			/>
 		</Svg>
 	</LayerCake>

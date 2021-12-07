@@ -27,7 +27,7 @@
 			left: {projectionFn(getCoordinates(d))[0]}px;
 			top: {projectionFn(getCoordinates(d))[1]}px;
 		"
-	>{$getLabel(d)}</div>
+	>{getLabel(d)}</div>
 {/each}
 </div>
 
