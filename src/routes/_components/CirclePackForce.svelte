@@ -39,7 +39,18 @@
 		width: 100%;
 		height: 100%;
 	}
+	label {
+		cursor: pointer;
+	}
+	input {
+		margin-right: 7px;
+	}
 </style>
+
+<div class="input-container">
+	<label><input type="radio" bind:group={groupBy} value="true"/>GroupBy `true`</label>
+	<label><input type="radio" bind:group={groupBy} value="false"/>GroupBy `false`</label>
+</div>
 
 <div class="chart-container">
 	<LayerCake

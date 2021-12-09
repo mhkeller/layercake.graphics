@@ -1,8 +1,11 @@
 <script>
-	import { LayerCake, Html } from 'layercake';
-	import { timeParse } from 'd3-time-format';
+	import { LayerCake, Svg, Html } from 'layercake';
+	import { scaleOrdinal } from 'd3-scale';
+	import { timeParse, timeFormat } from 'd3-time-format';
+	import { format, precisionFixed } from 'd3-format';
 
-	import GroupLabels from '../../components/GroupLabels.html.svelte';
+	import MultiLine from '../../components/MultiLine.svelte';
+	import Labels from '../../components/GroupLabels.html.svelte';
 
 	// This example loads csv data as json using @rollup/plugin-dsv
 	import data from '../../data/fruit.csv';
@@ -15,6 +18,7 @@
 	const zKey = 'key';
 
 	const seriesNames = Object.keys(data[0]).filter(d => d !== xKey);
+	const seriesColors = ['#ffe4b8', '#ffb3c0', '#ff7ac7', '#ff00cc'];
 
 	const parseDate = timeParse('%Y-%m-%d');
 
@@ -37,6 +41,9 @@
 	const flatten = data => data.reduce((memo, group) => {
 		return memo.concat(group.values);
 	}, []);
+
+	const formatTickX = timeFormat('%b. %e');
+	const formatTickY = d => format(`.${precisionFixed(d)}s`)(d);
 </script>
 
 <style>
@@ -54,16 +61,23 @@
 
 <div class="chart-container">
 	<LayerCake
-		padding={{ top: 20 }}
+		padding={{ top: 7, right: 10 }}
 		x={xKey}
 		y={yKey}
 		z={zKey}
 		yDomain={[0, null]}
+		zScale={scaleOrdinal()}
+		zDomain={seriesNames}
+		zRange={seriesColors}
 		flatData={flatten(dataLong)}
 		data={dataLong}
 	>
+		<Svg>
+			<MultiLine/>
+		</Svg>
+
 		<Html>
-			<GroupLabels/>
+			<Labels/>
 		</Html>
 	</LayerCake>
 </div>

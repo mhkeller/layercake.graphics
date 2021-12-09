@@ -36,6 +36,9 @@
 		width: 100%;
 		height: 100%;
 	}
+	.padding {
+		margin: 20px 0;
+	}
 </style>
 
 <div class="chart-container">
@@ -51,7 +54,15 @@
 	>
 		<Html>
 			<Key
-				shape='circle'
+				shape='square'
+			/>
+			<div class="padding"></div>
+			<Key
+			shape='circle'
+			/>
+			<div class="padding"></div>
+			<Key
+				shape='line'
 			/>
 		</Html>
 	</LayerCake>

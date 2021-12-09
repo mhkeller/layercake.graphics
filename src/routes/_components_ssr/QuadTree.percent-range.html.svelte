@@ -46,7 +46,7 @@
 	<LayerCake
 		ssr={true}
 		percentRange={true}
-		padding={{ top: 5, right: 5, bottom: 20, left: 25 }}
+		padding={{ top: 20 }}
 		x={xKey}
 		y={yKey}
 		xPadding={[padding, padding]}

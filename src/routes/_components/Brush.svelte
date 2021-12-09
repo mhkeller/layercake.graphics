@@ -33,17 +33,38 @@
 		The point being it needs dimensions since the <LayerCake> element will
 		expand to fill it.
 	*/
+	.chart-container {
+		width: 100%;
+		height: 80%;
+	}
 	.brush-container {
-		position: absolute;
-		bottom: 0;
 		width: 100%;
 		height: 20%;
 	}
 </style>
 
+<div class="chart-container">
+	<LayerCake
+		padding={{ top: 20, bottom: 20 }}
+		x={xKey}
+		y={yKey}
+		yDomain={[0, null]}
+		data={brushedData}
+	>
+		<Svg>
+			<Line
+				stroke='#00e047'
+			/>
+			<Area
+				fill='#00e04710'
+			/>
+		</Svg>
+	</LayerCake>
+</div>
+
 <div class="brush-container">
 	<LayerCake
-		padding={{ top: 0 }}
+		padding={{ top: 5 }}
 		x={xKey}
 		y={yKey}
 		yDomain={[0, null]}
