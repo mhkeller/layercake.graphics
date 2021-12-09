@@ -36,7 +36,7 @@
 <div class='axis x-axis' class:snapTicks>
 	{#each tickVals as tick, i}
 		{#if gridlines !== false}
-			<div class="gridline" style='left:{$xScale(tick)}%;top: -{$padding.top}px;bottom: 0;'></div>
+			<div class="gridline" style='left:{$xScale(tick)}%;top: 0px;bottom: 0;'></div>
 		{/if}
 		{#if tickMarks === true}
 			<div class="tick-mark" style='left:{$xScale(tick) + (isBandwidth ? $xScale.bandwidth() / 2 : 0)}%;height:6px;bottom: -6px;'></div>

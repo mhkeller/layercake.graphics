@@ -126,8 +126,8 @@
 				<h4>{formatSubgroup(subgroup)}</h4>
 				<div class="subgroup-blocks">
 					{#each items as item}
-						<a class="component-block" href="/components/{item.slug}" rel=prefetch>
-							<div class="component-name" ><span>{item.name || formatName(item.slug)}</span> {@html item.classes.map(d => `<span class="label ${d}">${d}</span>`).join('')}</div>
+						<div class="component-block">
+							<div class="component-name" ><span><a href="/components/{item.slug}" rel=prefetch>{item.name || formatName(item.slug)}</a></span> {@html item.classes.map(d => `<span class="label ${d}">${d}</span>`).join('')}</div>
 							<div class="chart-container">
 								{#if item.component}
 									<svelte:component this={item.component}/>
@@ -135,7 +135,7 @@
 									{item.slug}
 								{/if}
 							</div>
-						</a>
+						</div>
 					{/each}
 				</div>
 			{/each}
@@ -186,6 +186,15 @@
 		color: #ff3e00;
 	}
 
+	a.section.active:hover {
+		cursor: default;
+		text-decoration: none;
+	}
+
+	.section:hover {
+		text-decoration: underline;
+	}
+
 	h2 {
 		padding: 4rem 0 0 0;
 		margin: -3rem 0 1.05rem 0;
@@ -217,7 +226,6 @@
 	}
 
 	.component-block {
-		position: relative;
 		width: 28%;
 		margin-bottom: 28px;
 		height: 200px;
@@ -229,16 +237,9 @@
 		flex-direction: column;
 	}
 
-	a.component-block {
-		text-decoration: none;
-	}
-
-	a.component-block:hover .component-name > span {
-		text-decoration: underline;
-	}
-
-	a.component-block:hover {
-		border: 1px solid #aaa;
+	.component-block a:hover {
+		color: underline;
+		color: #ff3e00;
 	}
 
 	.component-name {

@@ -2,6 +2,8 @@
  * Normal components
  */
 import Area from './_components/Area.svelte';
+import Annotations from './_components/Annotations.html.svelte';
+import AnnotationsData from './_components/AnnotationsData.html.svelte';
 import AreaD3 from './_components/Area-D3.svelte';
 import AreaStacked from './_components/AreaStacked.svelte';
 import AxisRadial from './_components/AxisRadial.svelte';
@@ -109,8 +111,10 @@ export default [
 		] },
 	{ name: 'annotation',
 		components: [
+			{ slug: 'Annotations.html.svelte', component: Annotations },
+			{ slug: 'AnnotationsData.html.svelte', component: AnnotationsData },
 			{ slug: 'Key.html.svelte', component: Key },
 			{ slug: 'Labels.html.svelte', component: Labels },
 			{ slug: 'GroupLabels.html.svelte', component: GroupLabels },
-		]}
+		] }
 ];
