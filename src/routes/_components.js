@@ -3,6 +3,7 @@
  */
 import Area from './_components/Area.svelte';
 import Annotations from './_components/Annotations.html.svelte';
+import Arrows from './_components/Arrows.svelte';
 import AnnotationsData from './_components/AnnotationsData.html.svelte';
 import AreaD3 from './_components/Area-D3.svelte';
 import AreaStacked from './_components/AreaStacked.svelte';
@@ -43,12 +44,17 @@ import ScatterWebgl from './_components/ScatterWebgl.svelte';
 import Voronoi from './_components/Voronoi.svelte';
 import Labels from './_components/Labels.html.svelte';
 import GroupLabels from './_components/GroupLabels.html.svelte';
+import Tooltip from './_components/Tooltip.html.svelte';
+import SharedTooltip from './_components/SharedTooltip.html.svelte';
+import SharedTooltipPercentRange from './_components_ssr/SharedTooltip.percent-range.html.svelte';
 
 import AxisXHtml from './_components_ssr/AxisX.html.svelte';
 import AxisYHtml from './_components_ssr/AxisY.html.svelte';
 import CirclePackHtml from './_components_ssr/CirclePack.html.svelte';
 import ScatterHtml from './_components_ssr/Scatter.html.svelte';
 import Key from './_components_ssr/Key.html.svelte';
+import QuadTree from './_components/QuadTree.html.svelte';
+import QuadTreePercentRange from './_components_ssr/QuadTree.percent-range.html.svelte';
 
 export default [
 	{ name: 'axis',
@@ -104,15 +110,17 @@ export default [
 		components: [
 			{ slug: 'Voronoi.svelte', component: Voronoi },
 			{ slug: 'Brush.html.svelte', component: Brush },
-			// { slug: 'Quadtree.html.svelte', component: '' },
-			// { slug: 'Quadtree.percent-range.html.svelte', component: '' },
-			// { slug: 'SharedTooltip.html.svelte', component: '' },
-			// { slug: 'SharedTooltip.percent-range.html.svelte', component: '' },
+			{ slug: 'Quadtree.html.svelte', component: QuadTree },
+			{ slug: 'Quadtree.percent-range.html.svelte', component: QuadTreePercentRange },
+			{ slug: 'Tooltip.html.svelte', component: Tooltip },
+			{ slug: 'SharedTooltip.html.svelte', component: SharedTooltip },
+			{ slug: 'SharedTooltip.percent-range.html.svelte', component: SharedTooltipPercentRange },
 		] },
 	{ name: 'annotation',
 		components: [
 			{ slug: 'Annotations.html.svelte', component: Annotations },
 			{ slug: 'AnnotationsData.html.svelte', component: AnnotationsData },
+			{ slug: 'Arrows.svelte', component: Arrows },
 			{ slug: 'Key.html.svelte', component: Key },
 			{ slug: 'Labels.html.svelte', component: Labels },
 			{ slug: 'GroupLabels.html.svelte', component: GroupLabels },

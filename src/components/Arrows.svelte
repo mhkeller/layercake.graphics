@@ -1,13 +1,17 @@
 <script>
 	/**
-		Adds SVG swoopy arrows based on a config object.
+		Adds SVG swoopy arrows based on a config object. It attaches arrows to divs, which are created by another component such as [Annotations.html.svelte](https://layercake.graphics/components/Annotations.html.svelte).
 		@param {Array} [annotations=[]] – A list of annotation objects. See the [Column](https://layercake.graphics/example/Column) chart example for the schema and options.
+		@param {String} [annotationClass='.layercake-annotation'] – The class name of the text annotation divs.
+		@param {String} [containerClass='.chart-container'] – The class name / CSS selector of the parent element of the `<LayerCake>` component. This is used to crawl the DOM for the text annotations.
 	*/
 	import { getContext, onMount } from 'svelte';
 
 	import { swoopyArrow, getElPosition, parseCssValue } from '../modules/arrowUtils.js';
 
 	export let annotations = [];
+	export let containerClass = '.chart-container';
+	export let annotationClass = '.layercake-annotation';
 
 	let container;
 
@@ -39,8 +43,8 @@
 	// otherwise it won't find anything
 	onMount(() => {
 		annotationEls = Array.from(
-			container.closest('.chart-container')
-				.querySelectorAll('.layercake-annotation')
+			container.closest(containerClass)
+				.querySelectorAll(annotationClass)
 		);
 	});
 
@@ -81,7 +85,7 @@
 		};
 	}
 
-	$: if (annotationEls) d = setPath($width, $height);
+	$: if (annotationEls && annotationEls.length) d = setPath($width, $height);
 </script>
 
 <g bind:this={container}>

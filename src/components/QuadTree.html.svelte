@@ -31,6 +31,8 @@
 		const xLayerKey = `layer${x.toUpperCase()}`;
 		const yLayerKey = `layer${y.toUpperCase()}`;
 
+		console.log('evt', evt[xLayerKey], evt[yLayerKey]);
+
 		found = finder.find(evt[xLayerKey], evt[yLayerKey], searchRadius) || {};
 		visible = Object.keys(found).length > 0;
 	}

@@ -1,6 +1,6 @@
 <script>
 	/**
-		Creates an interaction layer (in HTML) using [d3-quadtree](https://github.com/d3/d3-quadtree) to find the nearest datapoint to the mouse. This component creates a slot that exposes variables `x`, `y`, `found` (the found datapoint), `visible` (a Boolean whether any data was found) and `e` (the event object).
+		Creates an interaction layer (in HTML) using [d3-quadtree](https://github.com/d3/d3-quadtree) to find the nearest datapoint to the mouse. This component creates a slot that exposes variables `x`, `y`, `found` (the found datapoint), `visible` (a Boolean whether any data was found) and `e` (the event object). This component works with a percent range so the `x` and `y` values coming back will be percentages.
 
 		The quadtree searches across both the x and y dimensions at the same time. But if you want to only search across one, set the `x` and `y` props to the same value. For example, the [shared tooltip component](https://layercake.graphics/components/SharedTooltip.html.svelte) sets `y='x'` since it's nicer behavior to only pick up on the nearest x-value.
 		@param {String} [searchRadius=undefined] – The number of pixels to search around the mouse's location. This is the third argument passed to [`quadtree.find`](https://github.com/d3/d3-quadtree#quadtree_find) and by default a value of `undefined` means an unlimited range.
@@ -28,11 +28,11 @@
 	function findItem (evt) {
 		e = evt;
 
-		const xLayer = `layer${x.toUpperCase()}`;
-		const yLayer = `layer${y.toUpperCase()}`;
+		const xLayerKey = `layer${x.toUpperCase()}`;
+		const yLayerKey = `layer${y.toUpperCase()}`;
 
-		const xLayerVal = (evt[xLayer] / (x === 'x' ? $width : $height)) * 100;
-		const yLayerVal = (evt[yLayer] / (y === 'y' ? $height : $width)) * 100;
+		const xLayerVal = (evt[xLayerKey] / (x === 'x' ? $width : $height)) * 100;
+		const yLayerVal = (evt[yLayerKey] / (y === 'y' ? $height : $width)) * 100;
 
 		found = finder.find(xLayerVal, yLayerVal, searchRadius) || {};
 
