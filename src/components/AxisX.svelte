@@ -9,8 +9,6 @@
 		@param {Number|Array|Function} [ticks] – If this is a number, it passes that along to the [d3Scale.ticks](https://github.com/d3/d3-scale) function. If this is an array, hardcodes the ticks to those values. If it's a function, passes along the default tick values and expects an array of tick values in return. If nothing, it uses the default ticks supplied by the D3 function.
 		@param {Number} [xTick=0] – TK
 		@param {Number} [yTick=16] – The distance from the baseline to place each tick value.
-		@param {Number} [dxTick=0] – A value that can be added to `xTick` for additional styling.
-		@param {Number} [dyTick=0] – A value that can be added to `yTick` for additional styling.
 	*/
 	import { getContext } from 'svelte';
 
@@ -24,8 +22,6 @@
 	export let ticks = undefined;
 	export let xTick = undefined;
 	export let yTick = 16;
-	export let dxTick = 0;
-	export let dyTick = 0;
 
 	$: isBandwidth = typeof $xScale.bandwidth === 'function';
 
@@ -61,8 +57,8 @@
 			<text
 				x="{xTick || isBandwidth ? $xScale.bandwidth() / 2 : 0}"
 				y='{yTick}'
-				dx='{dxTick}'
-				dy='{dyTick}'
+				dx=''
+				dy=''
 				text-anchor='{textAnchor(i)}'>{formatTick(tick)}</text>
 		</g>
 	{/each}
