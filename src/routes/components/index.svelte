@@ -127,8 +127,8 @@
 				<div class="subgroup-blocks">
 					{#each items as item}
 						<div class="component-block">
-							<div class="component-name" ><span><a href="/components/{item.slug}" rel=prefetch>{item.name || formatName(item.slug)}</a></span> {@html item.classes.map(d => `<span class="label ${d}">${d}</span>`).join('')}</div>
-							<div class="chart-container">
+							<div class="component-name" ><span><a href="/components/{item.slug}" rel=prefetch>{item.name || formatName(item.slug)}</a></span> {@html item.classes.map(d => `<span class="label ${d}">${d.replace('percent-', '%-')}</span>`).join('')}</div>
+							<div class="block-container">
 								{#if item.component}
 									<svelte:component this={item.component}/>
 								{:else}
@@ -161,7 +161,7 @@
 		width: 100%;
 		tab-size: 2;
 		margin-top: -7rem;
-		padding: 7em 2em 2em 2em;
+		padding: 7em 0 2em 2em;
 		box-sizing: border-box;
 	}
 
@@ -218,23 +218,60 @@
 		padding: 7px 0;
 	}
 
-	.subgroup-blocks {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		column-gap: 24px;
-	}
-
 	.component-block {
 		width: 28%;
-		margin-bottom: 28px;
+		margin-bottom: 21px;
+		margin-right: 21px;
 		height: 200px;
 		background-color: #fff;
 		box-shadow: 0 0 12px #ccc;
 		border: 1px solid #ccc;
 		padding: 14px;
-		display: flex;
-		flex-direction: column;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.component-block:nth-child(3),
+	.component-block:nth-child(6),
+	.component-block:nth-child(9),
+	.component-block:nth-child(12),
+	.component-block:nth-child(15),
+	.component-block:nth-child(18),
+	.component-block:nth-child(21) {
+		margin-right: 0;
+	}
+
+	@media (max-width: 1150px) {
+		.component-block {
+			width: 43%;
+		}
+		.component-block:nth-child(3),
+		.component-block:nth-child(6),
+		.component-block:nth-child(9),
+		.component-block:nth-child(12),
+		.component-block:nth-child(15),
+		.component-block:nth-child(18),
+		.component-block:nth-child(21) {
+			margin-right: 21px;
+		}
+		.component-block:nth-child(even) {
+			margin-right: 0 !important;
+		}
+	}
+
+	@media (max-width: 860px) {
+		.component-block {
+			width: 40%;
+		}
+	}
+
+	@media (max-width: 800px) {
+		.component-block {
+			width: 85%;
+		}
+		#container {
+			padding-right: 1em;
+		}
 	}
 
 	.component-block a:hover {
@@ -279,9 +316,10 @@
 		color: #000;
 	}
 
-	.chart-container {
+	.block-container {
 		position: relative;
-		flex: 1;
+		width: 100%;
+		height: calc(100% - 24px);
 	}
 
 	@media (min-width: 768px) {
@@ -291,7 +329,7 @@
 
 		#container {
 			padding-left: 15em;
-			padding-right: 8em;
+			/* padding-right: 8em; */
 		}
 	}
 
