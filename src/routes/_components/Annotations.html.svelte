@@ -5,12 +5,12 @@
 
 	const annotations = [
 		{
-			text: 'Example annotation...',
+			text: 'CSS-based annotation...',
 			top: '10%',
 			left: '15%'
 		},
 		{
-			text: 'Another one...',
+			text: '...and another one',
 			right: '18%',
 			bottom: '10%'
 		}
