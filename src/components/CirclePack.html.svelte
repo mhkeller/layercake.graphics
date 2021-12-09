@@ -1,9 +1,9 @@
 <script>
 	/**
 		Generates an HTML circle pack chart using [d3-hierarchy](https://github.com/d3/d3-hierarchy).
-		@param {String} [idKey='id'] - TK
-		@param {String} [parentKey=undefined] - TK
-		@param {String} [valueKey='value'] - TK
+		@param {String} [idKey='id'] - The key on each object where the id value lives.
+		@param {String} [parentKey=undefined] - Set this if you want to define one parent circle. This will give you a [nested](https://layercake.graphics/example/CirclePackNested) graphic versus a [grouping of circles](https://layercake.graphics/example/CirclePack).
+		@param {String} [valueKey='value'] - The key on each object where the data value lives.
 		@param {Function} [labelVisibilityThreshold=r => r > 25] - By default, only show the text inside a circle if its radius exceeds a certain size. Provide your own function for different behavior.
 		@param {String} [fill='#fff'] - The circle's fill color.
 		@param {String} [stroke='#999'] - The circle's stroke color.
