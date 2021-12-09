@@ -50,7 +50,6 @@ import SharedTooltipPercentRange from './_components_ssr/SharedTooltip.percent-r
 
 import AxisXHtml from './_components_ssr/AxisX.html.svelte';
 import AxisYHtml from './_components_ssr/AxisY.html.svelte';
-import CirclePackHtml from './_components_ssr/CirclePack.html.svelte';
 import ScatterHtml from './_components_ssr/Scatter.html.svelte';
 import Key from './_components_ssr/Key.html.svelte';
 import QuadTree from './_components/QuadTree.html.svelte';
@@ -77,12 +76,10 @@ export default [
 			{ slug: 'BeeswarmForce.svelte', component: BeeswarmForce },
 			{ slug: 'BeeswarmForce.html.svelte', component: BeeswarmForceHtml },
 			{ slug: 'CalendarMonth.svelte', component: Calendar },
-			{ slug: 'CirclePack.svelte', component: CirclePack },
-			{ slug: 'CirclePack.html.svelte', component: CirclePackHtml },
+			{ slug: 'CirclePack.html.svelte', component: CirclePack },
 			{ slug: 'CirclePackForce.svelte', component: CirclePackForce },
-			{ slug: 'CirclePackNested.svelte', component: CirclePackNested },
 			{ slug: 'ClevelandDotPlot.svelte', component: ClevelandDotPlot },
-			{ slug: 'ClevelandDotPlot.html.svelte', component: ClevelandDotPlotHtml },
+			{ slug: 'ClevelandDotPlot.percent-range.html.svelte', component: ClevelandDotPlotHtml },
 			{ slug: 'Column.svelte', component: Column },
 			{ slug: 'ColumnStacked.svelte', component: ColumnStacked },
 			// // { slug: 'ForceDirectedGraph.svelte', component: ForceDirectedGraph },
