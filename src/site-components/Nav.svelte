@@ -227,7 +227,7 @@
 
 		.dropdown {
 			top: 1rem;
-			left: 50%;
+			left: 40%;
 			transform: translate(-50%, 0);
 			right: auto;
 		}
