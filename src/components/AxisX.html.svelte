@@ -1,13 +1,13 @@
 <script>
 	/**
-		Generates an HTML x-axis, useful for server-side rendered charts.
+		Generates an HTML x-axis, useful for server-side rendered charts.  This component is also configured to detect if your x-scale is an ordinal scale. If so, it will place the markers in the middle of the bandwidth.
 		@param {Boolean} [gridlines=true] – Extend lines from the ticks into the chart space.
 		@param {Boolean} [tickMarks=false] – Show a vertical mark for each tick.
 		@param {Boolean} [baseline=false] – Show a solid line at the bottom.
 		@param {Boolean} [snapTicks=false] – Instead of centering the text on the first and the last items, align them to the edges of the chart.
 		@param {Function} [formatTick=d => d] – A function that passes the current tick value and expects a nicely formatted value in return.
 		@param {Number|Array|Function} [ticks] – If this is a number, it passes that along to the [d3Scale.ticks](https://github.com/d3/d3-scale) function. If this is an array, hardcodes the ticks to those values. If it's a function, passes along the default tick values and expects an array of tick values in return. If nothing, it uses the default ticks supplied by the D3 function.
-		@param {Number} [yTick=7] – The distance from the baseline to place each tick value.
+		@param {Number} [yTick=7] – The distance from the baseline to place each tick value, in pixels.
 	*/
 	import { getContext } from 'svelte';
 

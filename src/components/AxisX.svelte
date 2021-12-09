@@ -1,6 +1,6 @@
 <script>
 	/**
-		Generates an SVG x-axis.
+		Generates an SVG x-axis. This component is also configured to detect if your x-scale is an ordinal scale. If so, it will place the markers in the middle of the bandwidth.
 		@param {Boolean} [gridlines=true] – Extend lines from the ticks into the chart space
 		@param {Boolean} [tickMarks=false] – Show a vertical mark for each tick.
 		@param {Boolean} [baseline=false] – Show a solid line at the bottom.
@@ -20,7 +20,7 @@
 	export let snapTicks = false;
 	export let formatTick = d => d;
 	export let ticks = undefined;
-	export let xTick = undefined;
+	export let xTick = 0;
 	export let yTick = 16;
 
 	$: isBandwidth = typeof $xScale.bandwidth === 'function';

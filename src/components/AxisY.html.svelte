@@ -1,17 +1,25 @@
 <script>
+	/**
+		Generates an HTML y-axis.
+		@param {Boolean} [gridlines=true] – Extend lines from the ticks into the chart space
+		@param {Boolean} [tickMarks=false] – Show a vertical mark for each tick.
+		@param {Boolean} [baseline=false] – Show a solid line at the bottom.
+		@param {Function} [formatTick=d => d] – A function that passes the current tick value and expects a nicely formatted value in return.
+		@param {Number|Array|Function} [ticks=4] – If this is a number, it passes that along to the [d3Scale.ticks](https://github.com/d3/d3-scale) function. If this is an array, hardcodes the ticks to those values. If it's a function, passes along the default tick values and expects an array of tick values in return.
+		@param {Number} [xTick=-4] – How far over to position the text marker.
+		@param {Number} [yTick=-1] – How far up and down to position the text marker.
+	*/
 	import { getContext } from 'svelte';
 
 	const { padding, xRange, yScale } = getContext('LayerCake');
 
-	export let ticks = 4;
-	export let tickMarks = false;
 	export let gridlines = true;
+	export let tickMarks = false;
 	export let baseline = false;
 	export let formatTick = d => d;
+	export let ticks = 4;
 	export let xTick = -4;
-	export let yTick = 2;
-	// export let dxTick = 0;
-	// export let dyTick = -4;
+	export let yTick = -1;
 	// export let textAnchor = 'start';
 
 	$: isBandwidth = typeof $yScale.bandwidth === 'function';
@@ -39,7 +47,7 @@
 			<div
 				class="text"
 				style='
-					top:{yTick - 3}px;
+					top:{yTick}px;
 					left:{isBandwidth ? ($padding.left + xTick - 4) : 0}px;
 					transform: translate({isBandwidth ? '-100%' : 0}, {isBandwidth ? -50 - Math.floor($yScale.bandwidth() / -2) : '-100'}%);
 				'
