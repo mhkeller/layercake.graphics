@@ -64,7 +64,10 @@ export function get(req, res, next) {
 
 	const jsdocString = fromMain.replace('<script>', '')
 		.split('</script>')[0]
-		.split('*/')[0].replace('/**', '').trim();
+		.split('*/')[0]
+		.replace('/**', '')
+		.replace(/@type/g, '@param')
+		.trim();
 
 	const jsdocParsed = doctrine.parse(jsdocString, { unwrap: true, sloppy: true });
 
