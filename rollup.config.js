@@ -1,6 +1,6 @@
-import resolve from 'rollup-plugin-node-resolve';
+import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
-import commonjs from 'rollup-plugin-commonjs';
+import commonjs from '@rollup/plugin-commonjs';
 import svelte from 'rollup-plugin-svelte';
 import babel from 'rollup-plugin-babel';
 import dsv from '@rollup/plugin-dsv';
@@ -28,9 +28,11 @@ export default {
 
 
 			svelte({
-				dev,
-				hydratable: true,
-				emitCss: true
+				compilerOptions: {
+					dev,
+					hydratable: true
+					// emitCss: true
+				}
 			}),
 			resolve({
 				browser: true,
@@ -74,8 +76,11 @@ export default {
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
 			svelte({
-				generate: 'ssr',
-				dev
+				compilerOptions: {
+					dev,
+					generate: 'ssr',
+					hydratable: true
+				}
 			}),
 			resolve({
 				dedupe
