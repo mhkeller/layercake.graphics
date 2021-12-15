@@ -1,9 +1,9 @@
 <script>
 	/**
 		Generates an SVG column chart
-		@param {String} [fill='#00e047'] – The shape's fill color.
-		@param {String} [stroke='#000'] – The shape's stroke color.
-		@param {Number} [strokeWidth=0] – The shape's stroke width.
+		@type {String} [fill='#00e047'] – The shape's fill color.
+		@type {String} [stroke='#000'] – The shape's stroke color.
+		@type {Number} [strokeWidth=0] – The shape's stroke width.
 	*/
 	import { getContext } from 'svelte';
 

@@ -1,11 +1,11 @@
 <script>
 	/**
 		Generates an SVG Beeswarm chart using a [d3-force simulation](https://github.com/d3/d3-force).
-		@param {Number} [r=4] – The circle radius size in pixels.
-		@param {Number} [strokeWidth=1] – The circle's stroke width in pixels.
-		@param {String} [stroke='#fff'] – The circle's stroke color.
-		@param {Number} [xStrength=0.95] – The value passed into the `.strength` method on `forceX`. See [the documentation](https://github.com/d3/d3-force#x_strength).
-		@param {Number} [yStrength=0.075] – The value passed into the `.strength` method on `forceY`. See [the documentation](https://github.com/d3/d3-force#y_strength).
+		@type {Number} [r=4] – The circle radius size in pixels.
+		@type {Number} [strokeWidth=1] – The circle's stroke width in pixels.
+		@type {String} [stroke='#fff'] – The circle's stroke color.
+		@type {Number} [xStrength=0.95] – The value passed into the `.strength` method on `forceX`. See [the documentation](https://github.com/d3/d3-force#x_strength).
+		@type {Number} [yStrength=0.075] – The value passed into the `.strength` method on `forceY`. See [the documentation](https://github.com/d3/d3-force#y_strength).
 	*/
 	import { getContext } from 'svelte';
 	import { forceSimulation, forceX, forceY, forceCollide } from 'd3-force';

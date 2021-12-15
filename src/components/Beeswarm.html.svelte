@@ -1,10 +1,10 @@
 <script>
 	/**
 		Generates an HTML Beeswarm chart.
-		@param {Number} [r=3] – The circle radius size in pixels.
-		@param {Number} [strokeWidth=0] – The circle's stroke width in pixels.
-		@param {String} [stroke='#fff'] – The circle's stroke color.
-		@param {Number} [spacing=1.5] – Spacing, in pixels, between each circle.
+		@type {Number} [r=3] – The circle radius size in pixels.
+		@type {Number} [strokeWidth=0] – The circle's stroke width in pixels.
+		@type {String} [stroke='#fff'] – The circle's stroke color.
+		@type {Number} [spacing=1.5] – Spacing, in pixels, between each circle.
 	*/
 	import { getContext } from 'svelte';
 

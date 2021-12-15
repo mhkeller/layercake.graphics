@@ -1,11 +1,11 @@
 <script>
 	/**
 		Generates a tooltip that works on multiseries datasets, like multiline charts. It creates a tooltip showing the name of the series and the current value. This version uses percentages so you can use it to render server-side. It finds the nearest data point using the [QuadTree.percent-range.html.svelte](https://layercake.graphics/components/QuadTree.percent-range.html.svelte) component.
-    @param {Function} [formatTitle=d => d] – A function to format the tooltip title, which is `$config.x`.
-    @param {Function} [formatKey=d => titleCase(d)] – A function to format the series name.
-    @param {Function} [formatValue=d => isNaN(+d) ? d : commas(d)] – A function to format the value.
-    @param {Array} [dataset=$data] – The dataset to work off of. You can pass something custom in here in case you don't want to use the main data or it's in a strange format.
-    @param {Number} [offset=20] – A negative y-offset from the hover point, in pixels.
+    @type {Function} [formatTitle=d => d] – A function to format the tooltip title, which is `$config.x`.
+    @type {Function} [formatKey=d => titleCase(d)] – A function to format the series name.
+    @type {Function} [formatValue=d => isNaN(+d) ? d : commas(d)] – A function to format the value.
+    @type {Array} [dataset=$data] – The dataset to work off of. You can pass something custom in here in case you don't want to use the main data or it's in a strange format.
+    @type {Number} [offset=20] – A negative y-offset from the hover point, in pixels.
     */
   import { getContext } from 'svelte';
   import { format } from 'd3-format';

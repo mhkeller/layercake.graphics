@@ -1,8 +1,8 @@
 <script>
 	/**
 		Generates a a WebGl scatter plot.
-		@param {Number} [r=5] – The circle's radius.
-		@param {String} [fill='#0cf'] – The circle's fill color.
+		@type {Number} [r=5] – The circle's radius.
+		@type {String} [fill='#0cf'] – The circle's fill color.
 	*/
 	import reglWrapper from 'regl';
 	import { getContext } from 'svelte';

@@ -1,8 +1,8 @@
 <script>
 	/**
 		Adds a brush component to create a range between 0 and 1. Bind to the `min` and `max` props to use them in other components. See the [brushable example](https://layercake.graphcics/example/Brush) for use.
-		@param {Number} min – The brush's min value.
-		@param {Number} max – The brush's max value.
+		@type {Number} min – The brush's min value.
+		@type {Number} max – The brush's max value.
 	*/
 	import { clamp } from 'yootils';
 

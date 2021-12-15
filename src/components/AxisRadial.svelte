@@ -1,8 +1,8 @@
 <script>
 	/**
 		Generates an SVG radial scale, useful for radar charts.
-		@param {Number} [lineLengthFactor=1.1] – How far to extend the lines from the circle's center. A value of `1` puts them at the circle's circumference.
-		@param {Number} [labelPlacementFactor=1.25] – How far to place the labels from the circle's center. A value of `1` puts them at the circle's circumference.
+		@type {Number} [lineLengthFactor=1.1] – How far to extend the lines from the circle's center. A value of `1` puts them at the circle's circumference.
+		@type {Number} [labelPlacementFactor=1.25] – How far to place the labels from the circle's center. A value of `1` puts them at the circle's circumference.
 	*/
 	import { getContext } from 'svelte';
 

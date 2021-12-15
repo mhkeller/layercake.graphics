@@ -1,9 +1,9 @@
 <script>
 	/**
 		Adds SVG swoopy arrows based on a config object. It attaches arrows to divs, which are created by another component such as [Annotations.html.svelte](https://layercake.graphics/components/Annotations.html.svelte).
-		@param {Array} [annotations=[]] – A list of annotation objects. See the [Column](https://layercake.graphics/example/Column) chart example for the schema and options.
-		@param {String} [annotationClass='.layercake-annotation'] – The class name of the text annotation divs.
-		@param {String} [containerClass='.chart-container'] – The class name / CSS selector of the parent element of the `<LayerCake>` component. This is used to crawl the DOM for the text annotations.
+		@type {Array} [annotations=[]] – A list of annotation objects. See the [Column](https://layercake.graphics/example/Column) chart example for the schema and options.
+		@type {String} [annotationClass='.layercake-annotation'] – The class name of the text annotation divs.
+		@type {String} [containerClass='.chart-container'] – The class name / CSS selector of the parent element of the `<LayerCake>` component. This is used to crawl the DOM for the text annotations.
 	*/
 	import { getContext, onMount } from 'svelte';
 

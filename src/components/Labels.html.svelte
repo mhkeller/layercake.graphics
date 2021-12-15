@@ -1,9 +1,9 @@
 <script>
 	/**
 		Adds HTML text labels based on a given list.
-		@param {List} labels – An array of objects that contain a field containing text label and data fields.
-		@param {String} [stroke=''] – The shape's stroke color.
-		@param {Number} [strokeWidth=0] – The shape's stroke width.
+		@type {List} labels – An array of objects that contain a field containing text label and data fields.
+		@type {String} [stroke=''] – The shape's stroke color.
+		@type {Number} [strokeWidth=0] – The shape's stroke width.
 	*/
   import { getContext } from 'svelte';
 

@@ -1,9 +1,9 @@
 <script>
 	/**
 		Adds text annotations that get their x and y placement using the `xScale` and `yScale`.
-		@param {Array} [annotations=[]] – A list of annotation objects.
-		@param {Function} [getText=d => d.text] – An accessor function to get the field to display.
-		@param {Boolean} [percentRange=false] – If `true` will set the `top` and `left` CSS positions to percentages instead of pixels.
+		@type {Array} [annotations=[]] – A list of annotation objects.
+		@type {Function} [getText=d => d.text] – An accessor function to get the field to display.
+		@type {Boolean} [percentRange=false] – If `true` will set the `top` and `left` CSS positions to percentages instead of pixels.
 	*/
 	import { getContext } from 'svelte';
 

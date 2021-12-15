@@ -1,7 +1,7 @@
 <script>
 	/**
 		Generates a voronoi layer using [d3-delauney](https://github.com/d3/d3-delauney).
-		@param {String} [stroke=undefined] – An optional stroke color, which is likely only useful for testing to make sure the shapes drew correctly.
+		@type {String} [stroke=undefined] – An optional stroke color, which is likely only useful for testing to make sure the shapes drew correctly.
 	*/
 	import { getContext } from 'svelte';
 	import { uniques } from 'layercake';

@@ -1,13 +1,13 @@
 <script>
 	/**
 		Generates an HTML y-axis.
-		@param {Boolean} [gridlines=true] – Extend lines from the ticks into the chart space
-		@param {Boolean} [tickMarks=false] – Show a vertical mark for each tick.
-		@param {Boolean} [baseline=false] – Show a solid line at the bottom.
-		@param {Function} [formatTick=d => d] – A function that passes the current tick value and expects a nicely formatted value in return.
-		@param {Number|Array|Function} [ticks=4] – If this is a number, it passes that along to the [d3Scale.ticks](https://github.com/d3/d3-scale) function. If this is an array, hardcodes the ticks to those values. If it's a function, passes along the default tick values and expects an array of tick values in return.
-		@param {Number} [xTick=-4] – How far over to position the text marker.
-		@param {Number} [yTick=-1] – How far up and down to position the text marker.
+		@type {Boolean} [gridlines=true] – Extend lines from the ticks into the chart space
+		@type {Boolean} [tickMarks=false] – Show a vertical mark for each tick.
+		@type {Boolean} [baseline=false] – Show a solid line at the bottom.
+		@type {Function} [formatTick=d => d] – A function that passes the current tick value and expects a nicely formatted value in return.
+		@type {Number|Array|Function} [ticks=4] – If this is a number, it passes that along to the [d3Scale.ticks](https://github.com/d3/d3-scale) function. If this is an array, hardcodes the ticks to those values. If it's a function, passes along the default tick values and expects an array of tick values in return.
+		@type {Number} [xTick=-4] – How far over to position the text marker.
+		@type {Number} [yTick=-1] – How far up and down to position the text marker.
 	*/
 	import { getContext } from 'svelte';
 

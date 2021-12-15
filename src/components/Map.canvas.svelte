@@ -1,11 +1,11 @@
 <script>
 	/**
 		Generates a canvas map using the `geoPath` function from [d3-geo](https://github.com/d3/d3-geo).
-		@param {Function} projection – A D3 projection function. Pass this in as an uncalled function, e.g. `projection={geoAlbersUsa}`.
-		@param {GeoJsonFeatureCollection} [features=$data.features] – A GeoJSON feature collection that has an array of features on its `features` key. Use this if you want to draw a subset of the features in `$data` while keeping the zoom on the whole GeoJSON feature set. By default, it plots everything in `$data`.
-		@param {String} [stroke='#ccc'] – The shape's stroke color.
-		@param {Number} [strokeWidth=1] – The shape's stroke width.
-		@param {String} [fill='#fff'] – The shape's fill color.
+		@type {Function} projection – A D3 projection function. Pass this in as an uncalled function, e.g. `projection={geoAlbersUsa}`.
+		@type {GeoJsonFeatureCollection} [features=$data.features] – A GeoJSON feature collection that has an array of features on its `features` key. Use this if you want to draw a subset of the features in `$data` while keeping the zoom on the whole GeoJSON feature set. By default, it plots everything in `$data`.
+		@type {String} [stroke='#ccc'] – The shape's stroke color.
+		@type {Number} [strokeWidth=1] – The shape's stroke width.
+		@type {String} [fill='#fff'] – The shape's fill color.
 	*/
 	import { getContext } from 'svelte';
 	import { scaleCanvas } from 'layercake';

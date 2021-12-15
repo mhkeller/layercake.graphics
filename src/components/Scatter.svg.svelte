@@ -1,10 +1,10 @@
 <script>
 	/**
 		Generates an SVG scatter plot.
-		@param {Number} [r=5] – The circle's radius.
-		@param {String} [fill='#0cf'] – The circle's fill color.
-		@param {String} [stroke='#000'] – The circle's stroke color.
-		@param {Number} [strokeWidth=1] – The circle's stroke width.
+		@type {Number} [r=5] – The circle's radius.
+		@type {String} [fill='#0cf'] – The circle's fill color.
+		@type {String} [stroke='#000'] – The circle's stroke color.
+		@type {Number} [strokeWidth=1] – The circle's stroke width.
 	*/
 	import { getContext } from 'svelte';
 

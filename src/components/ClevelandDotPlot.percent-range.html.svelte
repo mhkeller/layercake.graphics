@@ -1,7 +1,7 @@
 <script>
 	/**
 		Generates an HTML Cleveland dot plot, also known as a lollipop-chart.
-		@param {Number} [r=5] – The circle radius.
+		@type {Number} [r=5] – The circle radius.
 	*/
 	import { getContext } from 'svelte';
 

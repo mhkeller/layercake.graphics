@@ -1,12 +1,12 @@
 <script>
 	/**
 		Generates canvas dots onto a map using [d3-geo](https://github.com/d3/d3-geo).
-		@param {Function} projection – A D3 projection function. Pass this in as an uncalled function, e.g. `projection={geoAlbersUsa}`.
-		@param {Array} [features=$data.features] – A list of GeoJSOn features. By default, assumes `$data` is a GeoJSON Feature Collection and uses those features.
-		@param {Number} [r=3.5] – The point's radius.
-		@param {String} [fill='yellow'] – The point's fill color.
-		@param {String} [stroke='#000'] – The point's stroke color.
-		@param {Number} [strokeWidth=1] – The point's stroke width.
+		@type {Function} projection – A D3 projection function. Pass this in as an uncalled function, e.g. `projection={geoAlbersUsa}`.
+		@type {Array} [features=$data.features] – A list of GeoJSOn features. By default, assumes `$data` is a GeoJSON Feature Collection and uses those features.
+		@type {Number} [r=3.5] – The point's radius.
+		@type {String} [fill='yellow'] – The point's fill color.
+		@type {String} [stroke='#000'] – The point's stroke color.
+		@type {Number} [strokeWidth=1] – The point's stroke width.
 	*/
 	import { getContext } from 'svelte';
 
