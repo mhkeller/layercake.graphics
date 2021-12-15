@@ -150,6 +150,7 @@ ${data.jsdocParsed.tags.map(d => `**${d.name}** ${printTypes(d.type)}|${printDef
 		width: calc(100% - 80px);
 	}
 
+	#used-in :global(a:hover),
 	.dek :global(p a) {
 		color: #ff3e00;
 		text-decoration: none;
