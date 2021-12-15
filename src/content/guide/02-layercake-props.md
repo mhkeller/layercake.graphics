@@ -37,7 +37,7 @@ A list of data items. If this is not a flat data array of objects, you'll also n
 >
 ```
 
-### x `String|Function|Array`
+### x `String|Function|Number|Array`
 
 The key in each row of data that corresponds to the x-field. This can be a string or an accessor function. This property gets converted to a function when you access it through the context.
 
@@ -89,15 +89,15 @@ The x- and y-accessors would then look like this:
 
 Calls to `x(dataRow)` in this scenario will return the two-value array. Calls to `xGet(dataRow)` will return a two-value array, mapped through the [xScale](/guide#xscale).
 
-### y `String|Function|Array`
+### y `String|Function|Number|Array`
 
 Same as [x](/guide#x) but for the y dimension.
 
-### z `String|Function|Array`
+### z `String|Function|Number|Array`
 
 Same as [x](/guide#x) but for the z dimension.
 
-### r `String|Function|Array`
+### r `String|Function|Number|Array`
 
 Same as [x](/guide#x) but for the r dimension.
 
@@ -159,26 +159,26 @@ Same as [xDomain](/guide#xdomain) but for the r scale.
 
 ### xReverse `Boolean=false`
 
-Reverse the default x domain. By default this is `false` and the domain is `[0, width]`.
+Reverse the default x range. By default this is `false` and the range is `[0, width]`.
 
 This is ignored if you set [xRange](/guide#xRange).
 
 ### yReverse `Boolean=true`
 
-Reverse the default y domain. By default this is `true` and the domain is `[height, 0]`.
-Reverse the default x domain. By default this is `false` and the domain is `[0, width]`.
+Reverse the default y range. By default this is `true` and the range is `[height, 0]`.
+Reverse the default x range. By default this is `false` and the range is `[0, width]`.
 
 This is ignored if you set [yRange](/guide#yRange).
 
 ### zReverse `Boolean=false`
 
-Reverse the default z domain. By default this is `false` and the domain is `[0, width]`.
+Reverse the default z range. By default this is `false` and the range is `[0, width]`.
 
 This is ignored if you set [zRange](/guide#zRange).
 
 ### rReverse `Boolean=false`
 
-Reverse the default r domain. By default this is `false` and the domain is `[1, 25]`.
+Reverse the default r range. By default this is `false` and the range is `[1, 25]`.
 
 This is ignored if you set [rRange](/guide#rRange).
 
