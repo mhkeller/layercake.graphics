@@ -160,7 +160,6 @@ Often you want to get the x value from a row in your data and scale it like so: 
 
 Why use this? Hard coding key names into your components makes them less reusable. By using the [x](/guide#x), [y](/guide#y), [z](/guide#z) and [z](/guide#z) accessors, you can use the same component across projects. Or, you can use the same component to render different fields from one dataset across separate charts in the same project, say using small multiples. You can use the same component and just alter the accessor.
 
-
 Here are a few examples to show how it working and what it's equivalent to:
 
 ```html
