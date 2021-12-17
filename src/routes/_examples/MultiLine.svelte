@@ -27,6 +27,8 @@
 
 	/* --------------------------------------------
 	 * Create a "long" format that is a grouped series of data points
+	 * Layer Cake uses this data structure and the key names
+	 * set in xKey, yKey and zKey to map your data into each scale.
 	 */
 	const dataLong = seriesNames.map(key => {
 		return {
