@@ -37,7 +37,7 @@
     "golden-fleece": "^1.0.9",
     "highlight.js": "^10.4.1",
     "indian-ocean": "^4.0.2",
-    "marked": "^0.8.0",
+    "marked": "^4.0.10",
     "polka": "next",
     "regl": "^1.3.13",
     "sirv": "^0.4.0",
