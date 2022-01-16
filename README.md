@@ -1,9 +1,9 @@
 LayerCake.graphics
 ===
 
-> website and guide for [LayerCake](https://github.com/mhkeller/LayerCake)
+> the old website and guide for [LayerCake](https://github.com/mhkeller/LayerCake). the website is now kept in the [layercake repo](https://github.com/mhkeller/layercak) itself
 
-### 🍰 [Visit the site](https://layercake.graphics) 🍰
+### 🍰 Visit the site: https://layercake.graphics 🍰
 
 ## Dev
 
